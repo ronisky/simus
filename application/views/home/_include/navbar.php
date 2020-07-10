@@ -216,7 +216,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="indicator">
+                                    <!-- <div class="indicator">
                                         <a href="#" class="indicator__button" data-open="offcanvas-cart">
                                             <span class="indicator__area">
                                                 <svg width="20px" height="20px">
@@ -234,7 +234,7 @@
                                             </span>
                                         </a>
 
-                                    </div>
+                                    </div> -->
 
                                     <div class="indicator indicator--trigger--click">
 

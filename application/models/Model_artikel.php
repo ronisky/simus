@@ -2,40 +2,43 @@
 class Model_artikel extends CI_model
 {
 
-    function kategori_utama()
+    function tag_artikel()
     {
-        return $this->db->query("SELECT * FROM tb_blog_kategori where sidebar != '0' ORDER BY sidebar ASC");
+        return $this->db->query("SELECT * FROM tb_blog_tag ORDER BY id_tag DESC");
     }
 
-    function kategori_content($id, $dari, $sampai)
+    function tag_artikel_tambah()
     {
-        return $this->db->query("SELECT * FROM tb_blog_artikel where id_kategori='$id' ORDER BY id_artikel DESC LIMIT $dari,$sampai");
+        $datadb = array(
+            'nama_tag' => $this->db->escape_str($this->input->post('a')),
+            'username' => $this->session->username,
+            'tag_seo' => seo_title($this->input->post('a')),
+            'count' => '0'
+        );
+        $this->db->insert('tb_blog_tag', $datadb);
     }
 
-    function semua_artikel($start, $limit)
+    function tag_artikel_edit($id)
     {
-        return $this->db->query("SELECT * FROM tb_blog_artikel ORDER BY id_artikel DESC LIMIT $start,$limit");
+        return $this->db->query("SELECT * FROM tb_blog_tag where id_tag='$id'");
     }
 
-    function artikel_detail($id)
+    function tag_artikel_update()
     {
-        return $this->db->query("SELECT * FROM tb_blog_artikel a LEFT JOIN tb_pengguna b ON a.username=b.username LEFT JOIN tb_blog_kategori c ON a.id_kategori=c.id_kategori where a.id_artikel='" . $this->db->escape_str($id) . "' OR a.judul_seo='" . $this->db->escape_str($id) . "'");
+        $datadb = array(
+            'nama_tag' => $this->db->escape_str($this->input->post('a')),
+            'username' => $this->session->username,
+            'tag_seo' => seo_title($this->input->post('a'))
+        );
+        $this->db->where('id_tag', $this->input->post('id'));
+        $this->db->update('tb_blog_tag', $datadb);
     }
 
-    function artikel_dibaca_update($id)
+    function tag_artikel_delete($id)
     {
-        return $this->db->query("UPDATE tb_blog_artikel SET dibaca=dibaca+1 where id_artikel='" . $this->db->escape_str($id) . "' OR judul_seo='" . $this->db->escape_str($id) . "'");
+        return $this->db->query("DELETE FROM tb_blog_tag where id_tag='$id'");
     }
 
-    function detail_kategori($id, $limit)
-    {
-        return $this->db->query("SELECT * FROM tb_blog_artikel where id_kategori='" . $this->db->escape_str($id) . "' ORDER BY id_artikel DESC LIMIT $limit");
-    }
-
-    function list_artikel()
-    {
-        return $this->db->query("SELECT * FROM tb_blog_artikel ORDER BY id_artikel DESC");
-    }
 
     function kategori_artikel()
     {
@@ -77,44 +80,18 @@ class Model_artikel extends CI_model
         return $this->db->query("DELETE FROM tb_blog_kategori where id_kategori='$id'");
     }
 
-
-
-    function tag_artikel()
+    function list_artikel()
     {
-        return $this->db->query("SELECT * FROM tb_blog_tag ORDER BY id_tag DESC");
+        return $this->db->query("SELECT * FROM tb_blog_artikel ORDER BY id_artikel DESC");
     }
 
-    function tag_artikel_tambah()
-    {
-        $datadb = array(
-            'nama_tag' => $this->db->escape_str($this->input->post('a')),
-            'username' => $this->session->username,
-            'tag_seo' => seo_title($this->input->post('a')),
-            'count' => '0'
-        );
-        $this->db->insert('tb_blog_tag', $datadb);
-    }
 
-    function tag_artikel_edit($id)
-    {
-        return $this->db->query("SELECT * FROM tb_blog_tag where id_tag='$id'");
-    }
 
-    function tag_artikel_update()
-    {
-        $datadb = array(
-            'nama_tag' => $this->db->escape_str($this->input->post('a')),
-            'username' => $this->session->username,
-            'tag_seo' => seo_title($this->input->post('a'))
-        );
-        $this->db->where('id_tag', $this->input->post('id'));
-        $this->db->update('tb_blog_tag', $datadb);
-    }
 
-    function tag_artikel_delete($id)
-    {
-        return $this->db->query("DELETE FROM tb_blog_tag where id_tag='$id'");
-    }
+
+
+
+
 
     function list_artikel_tambah()
     {
@@ -125,10 +102,10 @@ class Model_artikel extends CI_model
         $this->load->library('upload', $config);
         $this->upload->do_upload('gbr');
         $hasil = $this->upload->data();
-        if ($this->session->level == 'kontributor') {
-            $status = 'N';
-        } else {
+        if ($this->session->level == 1) {
             $status = 'Y';
+        } else {
+            $status = 'N';
         }
         if ($this->input->post('tag') != '') {
             $tag_seo = $this->input->post('tag');
@@ -176,27 +153,6 @@ class Model_artikel extends CI_model
         $this->db->insert('tb_blog_artikel', $datadb);
     }
 
-    function list_artikel_cepat()
-    {
-        if ($this->session->level == 'kontributor') {
-            $status = 'N';
-        } else {
-            $status = 'Y';
-        }
-        $datadb = array(
-            'id_kategori' => '0',
-            'username' => $this->session->username,
-            'judul' => $this->db->escape_str($this->input->post('a')),
-            'judul_seo' => seo_title($this->input->post('a')),
-            'isi_artikel' => $this->db->escape_str($this->input->post('b')),
-            'hari' => hari_ini(date('w')),
-            'tanggal' => date('Y-m-d'),
-            'jam' => date('H:i:s'),
-            'dibaca' => '0',
-            'status' => $status
-        );
-        $this->db->insert('tb_blog_artikel', $datadb);
-    }
 
     function list_artikel_edit($id)
     {
@@ -268,5 +224,25 @@ class Model_artikel extends CI_model
     function list_artikel_delete($id)
     {
         return $this->db->query("DELETE FROM tb_blog_artikel where id_artikel='$id'");
+    }
+
+    function semua_artikel($start, $limit)
+    {
+        return $this->db->query("SELECT * FROM tb_blog_artikel ORDER BY id_artikel DESC LIMIT $start,$limit");
+    }
+
+    function artikel_detail($id)
+    {
+        return $this->db->query("SELECT * FROM tb_blog_artikel a LEFT JOIN tb_pengguna b ON a.username=b.username LEFT JOIN tb_blog_kategori c ON a.id_kategori=c.id_kategori where a.id_artikel='" . $this->db->escape_str($id) . "' OR a.judul_seo='" . $this->db->escape_str($id) . "'");
+    }
+
+    function artikel_dibaca_update($id)
+    {
+        return $this->db->query("UPDATE tb_blog_artikel SET dibaca=dibaca+1 where id_artikel='" . $this->db->escape_str($id) . "' OR judul_seo='" . $this->db->escape_str($id) . "'");
+    }
+
+    function detail_kategori($id, $limit)
+    {
+        return $this->db->query("SELECT * FROM tb_blog_artikel where id_kategori='" . $this->db->escape_str($id) . "' ORDER BY id_artikel DESC LIMIT $limit");
     }
 }

@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>&copy; <?= date('Y') ?> <a href="https://zamanet.com" target="_BLANK">Zamanet</a></strong>
+    <strong>&copy; <?= date('Y') ?> <a href="https://zamanet.com" target="_BLANK">Museum Monumen Perjuangan Rakyat Jawa Barat</a></strong>
     <div class="float-right d-none d-sm-inline-block">
 
     </div>
@@ -68,7 +68,16 @@
     $('.datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
+
+    function setDatePicker() {
+        $(".datepicker").datetimepicker({
+            format: "YYYY-MM-DD",
+            useCurrent: false
+        })
+    }
 </script>
+
 
 <script>
     $(document).ready(function() {

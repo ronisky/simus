@@ -16,7 +16,7 @@
                   <tr>
                     <th style='width:5%'>No</th>
                     <th>Judul</th>
-                    <th>Tgl</th>
+                    <th>Tgl Posting</th>
                     <th style='width:10%'>Aksi</th>
                   </tr>
                 </thead>
@@ -24,10 +24,10 @@
                   <?php
                   $no = 1;
                   foreach ($record->result_array() as $row) {
-                    $tgl_posting = tgl_indo($row['tgl']);
+                    $tgl_artikel = tgl_indo($row['tgl']);
                     echo "<tr><td>$no</td>
                               <td>$row[judul_berita]</td>
-                              <td>$tgl_posting</td>
+                              <td>$tgl_artikel</td>
                               <td><center>
                                 <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/lihat_newsletter/$row[id_berita]'>Lihat</a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_berita]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>

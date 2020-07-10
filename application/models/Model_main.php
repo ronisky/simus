@@ -253,7 +253,7 @@ class Model_main extends CI_model
     {
         $datadb = array(
             'keterangan' => $this->input->post('a'),
-            'tanggal_posting' => date('Y-m-d')
+            'tanggal_artikel' => date('Y-m-d')
         );
         $this->db->where('id_keterangan', 1);
         $this->db->update('t_keterangan', $datadb);

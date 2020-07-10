@@ -9,7 +9,7 @@
         </a>
       </li>
 
-      <!-- <li class="nav-item has-treeview mt-1">
+      <li class="nav-item has-treeview mt-1">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-th-large fa-fw"></i>
           <p>
@@ -62,7 +62,7 @@
           </li>
 
         </ul>
-      </li> -->
+      </li>
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
@@ -77,21 +77,21 @@
           <li class="nav-item">
             <a href="<?= base_url('admin/artikel') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Artikel</p>
+              <p>Postingan</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="<?= base_url('admin/kategori_artikel') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Kategori Artikel</p>
+              <p>Kategori </p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="<?= base_url('admin/tag_artikel') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Tag Artikel</p>
+              <p>Tag </p>
             </a>
           </li>
 
@@ -203,7 +203,7 @@
           <li class="nav-item">
             <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Artikel</p>
+              <p>Laporan Postingan</p>
             </a>
           </li>
         </ul>
@@ -228,14 +228,42 @@
       <li class="nav-item user-panel">
         <p></p>
       </li>
+      <li class="nav-item user-panel">
+        <p></p>
+      </li>
 
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user fa-fw"></i>
+          <p>
+            Profile
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/profile') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>My Profile</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/password') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Password</p>
+            </a>
+          </li>
+        </ul>
+      </li>
     <?php } ?>
     <!-- /. Admin  -->
 
     <!-- Koordinator  -->
     <?php if ($this->session->userdata('level') == 2) { ?>
       <li class="nav-item">
-        <a href="<?= base_url('admin/home') ?>" class="nav-link">
+        <a href="<?= base_url('koordinator/home') ?>" class="nav-link">
           <i class="fas fa-tachometer-alt fa-fw nav-icon"></i>
           <p>Dasboard</p>
         </a>
@@ -252,7 +280,7 @@
         <ul class="nav nav-treeview">
 
           <li class="nav-item">
-            <a href="<?= base_url('admin/users') ?>" class="nav-link">
+            <a href="<?= base_url('koordinator/users') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Manajemen Pengguna</p>
             </a>
@@ -262,19 +290,36 @@
       </li>
 
       <li class="nav-item user-panel">
-        <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
-          <i class="fas fa-file-alt fa-fw nav-icon"></i>
-          <p>Laporan</p>
-        </a>
+        <p></p>
+      </li>
+      <li class="nav-item user-panel">
+        <p></p>
       </li>
 
-      <li class="nav-item mt-2">
-        <a href="<?= base_url('admin/edit_user/') . $this->session->username ?>" class="nav-link">
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-user fa-fw"></i>
           <p>
-            Ubah Profil
+            Profile
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/profile') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>My Profile</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/password') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Password</p>
+            </a>
+          </li>
+        </ul>
       </li>
     <?php } ?>
     <!-- /. Koordinator  -->
@@ -288,20 +333,70 @@
         </a>
       </li>
 
-      <li class="nav-item user-panel">
-        <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
           <i class="fas fa-file-alt fa-fw nav-icon"></i>
-          <p>Laporan</p>
-        </a>
-      </li>
-
-      <li class="nav-item mt-2">
-        <a href="<?= base_url('admin/edit_user/') . $this->session->username ?>" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
           <p>
-            Ubah Profil
+            Laporan
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Postingan</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Berita</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Pengguna</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item user-panel">
+        <p></p>
+      </li>
+      <li class="nav-item user-panel">
+        <p></p>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user fa-fw"></i>
+          <p>
+            Profile
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/profile') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>My Profile</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/password') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Password</p>
+            </a>
+          </li>
+        </ul>
       </li>
     <?php } ?>
     <!-- /. Resepsionis  -->
@@ -345,30 +440,84 @@
               <p>Tag Event</p>
             </a>
           </li>
+        </ul>
+      </li>
 
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="fas fa-file-alt fa-fw nav-icon"></i>
+          <p>
+            Laporan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Postingan</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Berita</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Pengguna</p>
+            </a>
+          </li>
         </ul>
       </li>
 
       <li class="nav-item user-panel">
-        <a href="<?= base_url('penata/laporan') ?>" class="nav-link">
-          <i class="fas fa-file-alt fa-fw nav-icon"></i>
-          <p>Laporan</p>
-        </a>
+        <p></p>
       </li>
-
       <li class="nav-item user-panel">
         <p></p>
-
-      <?php } ?>
-      <!-- /. Penata Pameran  -->
-
-      <li class="nav-item mt-1">
-        <a href="javascript:void(0)" class="nav-link" onclick="logout()">
-          <i class="nav-icon fas fa-sign-out-alt fa-fw"></i>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user fa-fw"></i>
           <p>
-            Keluar
+            Profile
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('penata/profile') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>My Profile</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('penata/password') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Password</p>
+            </a>
+          </li>
+        </ul>
       </li>
 
+    <?php } ?>
+    <!-- /. Penata Pameran  -->
+
+    <li class="nav-item mt-1">
+      <a href="javascript:void(0)" class="nav-link" onclick="logout()">
+        <i class="nav-icon fas fa-sign-out-alt fa-fw"></i>
+        <p>
+          Keluar
+        </p>
+      </a>
+    </li>
 </nav>

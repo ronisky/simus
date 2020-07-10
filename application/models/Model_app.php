@@ -204,4 +204,10 @@ class Model_app extends CI_model
     {
         return $this->db->insert('tb_kdregis', $data);
     }
+
+    function alamat_update($id, $data)
+    {
+        $this->db->where('id_alamat', $id);
+        $this->db->update('tb_alamat', $data);
+    }
 }

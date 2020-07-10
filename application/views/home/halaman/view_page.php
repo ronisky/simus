@@ -1,4 +1,4 @@
-<?php $tanggal = tgl_indo($record['tgl_posting']); ?>
+<?php $tanggal = tgl_indo($record['tgl_artikel']); ?>
 
 <div class="row">
     <div class="col-12">

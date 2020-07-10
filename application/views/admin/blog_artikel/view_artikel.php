@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Artikel</h3>
+              <h3 class="card-title">Postingan</h3>
               <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_artikel'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tulis Artikle</a>
             </div>
 
@@ -14,7 +14,7 @@
                 <thead>
                   <tr>
                     <th style='width:5%'>No</th>
-                    <th>Judul Berita</th>
+                    <th>Judul Postingan</th>
                     <th>Tgl Posting</th>
                     <th style="width: 10%">Aksi</th>
                   </tr>
@@ -23,7 +23,7 @@
                   <?php
                   $no = 1;
                   foreach ($record->result_array() as $row) {
-                    $tgl_posting = tgl_indo($row['tanggal']);
+                    $tgl_artikel = tgl_indo($row['tanggal']);
                     if ($row['status'] == 'Y') {
                       $status = '<span style="color:green">Published</span>';
                     } else {
@@ -31,7 +31,7 @@
                     }
                     echo "<tr><td>$no</td>
                               <td>$row[judul]</td>
-                              <td>$tgl_posting</td>
+                              <td>$tgl_artikel</td>
                               <td>
                                 <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_artikel/$row[id_artikel]'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_artikel]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>

@@ -54,19 +54,15 @@
                     <br>
                     <?php
                     if ($row['jenis_kelamin'] == 'Laki-laki') { ?>
-
                       <div class="form-check-inline single-ship">
                         <input class="mr-2" type='radio' value='Laki-laki' name='d' checked> Laki-laki
                         <input class="mr-2 ml-5" type='radio' value='Perempuan' name='d'> Perempuan
                       </div>
-
                     <?php } else { ?>
-
                       <div class="form-check-inline single-ship">
                         <input type='radio' value='Laki-laki' name='d'> &nbsp; Laki-laki
                         <input class="ml-3" type='radio' value='Perempuan' name='d' checked> &nbsp; Perempuan
                       </div>
-
                     <?php }
                     ?>
 

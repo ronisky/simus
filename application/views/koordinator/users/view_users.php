@@ -5,36 +5,55 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Supplier</h3>
-              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_supplier'); ?>'>Tambah Supplier</a>
+              <h3 class="card-title">Manajemen Pengguna</h3>
             </div>
-
+            <div class="col-md-12 mt-3 mx-3">
+            </div>
             <div class="card-body">
+              <?= $this->session->flashdata('message') ?>
               <table id="table1" class="table table-sm table-borderless display nowrap" style="width:100%">
+
                 <thead>
                   <tr>
-                    <th style="width: 5%">No</th>
-                    <th>Nama Supplier</th>
-                    <th>Kontak Person</th>
-                    <th>No. Telp</th>
+                    <th style='width:20px'>No</th>
+                    <th>Username</th>
+                    <th>Nama Lengkap</th>
                     <th>Email</th>
-                    <th style="width: 10%">Aksi</th>
+                    <th>Foto</th>
+                    <th>Level</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $no = 1;
                   foreach ($record as $row) {
-                    echo "<tr><td>$no</td>
-                              <td>$row[nama_supplier]</td>
-                              <td>$row[kontak_person]</td>
-                              <td>$row[no_telpon]</td>
-                              <td>$row[alamat_email]</td>
-                              <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_supplier/$row[id_supplier]'><i class='fas fa-edit fa-fw'></i></a>
-                                <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_supplier]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
-                             </td>
-                          </tr>";
+                    if ($row['foto'] == '') {
+                      $foto = 'default.jpg';
+                    } else {
+                      $foto = $row['foto'];
+                    }
+
+                    if ($row['level'] == 1) {
+                      $lv = 'Administrator';
+                    } elseif ($row['level'] == 2) {
+                      $lv = 'Koordinator';
+                    } elseif ($row['level'] == 3) {
+                      $lv = 'Resepsionis';
+                    } else {
+                      $lv = 'Penata Pameran';
+                    }
+
+                  ?>
+
+                    <tr>
+                      <td><?= $no; ?></td>
+                      <td><?= $row['username'] ?></td>
+                      <td><?= $row['nama_lengkap'] ?></td>
+                      <td><?= $row['email'] ?></td>
+                      <td><img style='border:1px solid #cecece' width='40px' class='img-circle' src='<?= base_url('assets/images/user/') . $foto ?>'></td>
+                      <td><?= $lv; ?></td>
+                    </tr>
+                  <?php
                     $no++;
                   }
                   ?>
@@ -66,7 +85,7 @@
     }).then((result) => {
       if (result.value) {
         $.ajax({
-          url: site_url + 'admin/delete_supplier/' + data_id,
+          url: site_url + 'admin/delete_user/' + data_id,
           type: "POST",
           dataType: "JSON",
           success: function(data) {
@@ -77,7 +96,7 @@
               showConfirmButton: false,
               timer: 1500
             }).then(() => {
-              location.reload();
+              location.reload()
             })
           },
           error: function(jqXHR, textStatus, errorThrown) {

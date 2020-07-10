@@ -7,7 +7,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">Laporan Artikel</h3>
+                            <h3 class="card-title">Laporan Postingan</h3>
                         </div>
 
                         <div class="card-body">
@@ -31,7 +31,7 @@
                                     </tr>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th>Judul Artikel</th>
+                                        <th>Judul Postingan</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
