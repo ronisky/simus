@@ -10,9 +10,7 @@
             <div class="col-md-12 mt-3 mx-3">
             </div>
             <div class="card-body">
-              <?= $this->session->flashdata('message') ?>
               <table id="table1" class="table table-sm table-borderless display nowrap" style="width:100%">
-
                 <thead>
                   <tr>
                     <th style='width:20px'>No</th>
@@ -37,9 +35,11 @@
                       $lv = 'Administrator';
                     } elseif ($row['level'] == 2) {
                       $lv = 'Koordinator';
-                    } elseif ($row['level'] == 3) {
+                    }
+                    elseif ($row['level'] == 3) {
                       $lv = 'Resepsionis';
-                    } else {
+                    }
+                    else {
                       $lv = 'Penata Pameran';
                     }
 
@@ -67,45 +67,3 @@
     </div>
   </section>
 </div>
-
-<script>
-  function confirmation(ev) {
-    ev.preventDefault();
-    var data_id = ev.currentTarget.getAttribute('data-id');
-    var currentLocation = window.location;
-    Swal.fire({
-      title: 'Konfirmasi Hapus Data',
-      text: "Apakah Anda ingin menghapus data ini?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Ya, Hapus',
-      cancelButtonText: 'Batal',
-    }).then((result) => {
-      if (result.value) {
-        $.ajax({
-          url: site_url + 'admin/delete_user/' + data_id,
-          type: "POST",
-          dataType: "JSON",
-          success: function(data) {
-            Swal.fire({
-              title: 'Dihapus!',
-              text: 'Data berhasil dihapus',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 1500
-            }).then(() => {
-              location.reload()
-            })
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.debug(jqXHR);
-            console.debug(textStatus);
-            console.debug(errorThrown);
-          },
-        });
-      }
-    })
-  }
-</script>

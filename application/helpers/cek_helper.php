@@ -61,14 +61,6 @@ function favicon()
     return $fav['favicon'];
 }
 
-function cek_session_reseller()
-{
-    $ci = &get_instance();
-    $session = $ci->session->userdata('level');
-    if ($session != 'reseller') {
-        redirect(base_url());
-    }
-}
 
 function title()
 {

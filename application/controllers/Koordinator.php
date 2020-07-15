@@ -43,7 +43,7 @@ class Koordinator extends CI_Controller
 
     function users()
     {
-        $data['title'] = 'Manajemen Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->db->query("SELECT * FROM tb_pengguna ORDER BY level ASC,username ASC")->result_array();
         $this->template->load('template/template', 'koordinator/users/view_users', $data);
     }
@@ -182,5 +182,11 @@ class Koordinator extends CI_Controller
                 redirect('koordinator/password');
             }
         }
+    }
+    function saranMasukan()
+    {
+        $data['title'] = 'Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id ASC")->result_array();
+        $this->template->load('template/template', 'koordinator/saranMasukan/view_saran_masukan', $data);
     }
 }

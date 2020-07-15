@@ -804,7 +804,8 @@ class Admin extends CI_Controller
 					'level' => $this->db->escape_str($this->input->post('level')),
 					'foto' => $hasil['file_name'],
 				);
-			} elseif ($hasil['file_name'] == '' and $this->input->post('b') != '') {
+			}
+			elseif ($hasil['file_name'] == '' and $this->input->post('b') != '') {
 				$data = array(
 					'username' => $this->db->escape_str($this->input->post('a')),
 					'password' => password_hash($this->input->post('b'), PASSWORD_DEFAULT),
@@ -813,7 +814,8 @@ class Admin extends CI_Controller
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
 					'level' => $this->db->escape_str($this->input->post('level'))
 				);
-			} elseif ($hasil['file_name'] != '' and $this->input->post('b') != '') {
+			}
+			elseif ($hasil['file_name'] != '' and $this->input->post('b') != '') {
 				$data = array(
 					'username' => $this->db->escape_str($this->input->post('a')),
 					'password' => password_hash($this->input->post('b'), PASSWORD_DEFAULT),
@@ -850,9 +852,13 @@ class Admin extends CI_Controller
 
 	function users()
 	{
-		$data['title'] = 'Manajemen Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$data['record'] = $this->db->query("SELECT * FROM tb_pengguna ORDER BY level ASC,username ASC")->result_array();
-		$this->template->load('template/template', 'admin/users/view_users', $data);
+		if (!empty($this->session->userdata())) {
+			$data['title'] = 'Manajemen Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+			$data['record'] = $this->db->query("SELECT * FROM tb_pengguna ORDER BY level ASC,username ASC")->result_array();
+			$this->template->load('template/template', 'admin/users/view_users', $data);
+		} else {
+			redirect('admin');
+		}
 	}
 
 	function tambah_user()
@@ -1080,6 +1086,13 @@ class Admin extends CI_Controller
 				redirect('admin/password');
 			}
 		}
+	}
+
+	function saranMasukan()
+	{
+		$data['title'] = 'Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id DESC")->result_array();
+		$this->template->load('template/template', 'admin/saranMasukan/view_saran_masukan', $data);
 	}
 
 	// Laporan

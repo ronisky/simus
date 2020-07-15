@@ -52,13 +52,17 @@ class Penata extends CI_Controller
     // Profile 
     function profile()
     {
-        $id = $this->session->id_pengguna;
-        $data['title'] = 'Profile Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $row = $this->db->get_where('tb_pengguna', "id_pengguna='$id'")->row_array();
-        $data['record'] = $row;
-        $id_alamat = $row['id_alamat'];
-        $data['rows'] = $this->model_app->alamat_konsumen($id_alamat)->row_array();
-        $this->template->load('template/template', 'penata/profile/view_profile', $data);
+        if (!empty($this->session->userdata())) {
+            $id = $this->session->id_pengguna;
+            $data['title'] = 'Profile Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $row = $this->db->get_where('tb_pengguna', "id_pengguna='$id'")->row_array();
+            $data['record'] = $row;
+            $id_alamat = $row['id_alamat'];
+            $data['rows'] = $this->model_app->alamat_konsumen($id_alamat)->row_array();
+            $this->template->load('template/template', 'penata/profile/view_profile', $data);
+        } else {
+            redirect('penata');
+        }
     }
 
     function edit_profile()
@@ -138,50 +142,54 @@ class Penata extends CI_Controller
 
     function password()
     {
-        $id = $this->session->id_pengguna;
-        $pass = $this->input->post('pass');
-        $pass_new = $this->input->post('pass1');
+        if (!empty($this->session->userdata())) {
+            $id = $this->session->id_pengguna;
+            $pass = $this->input->post('pass');
+            $pass_new = $this->input->post('pass1');
 
-        $this->form_validation->set_rules('pass1', 'Password', 'required|trim|min_length[6]', [
-            'min_length' => 'Password terlalu pendek',
-            'required' => 'Password baru wajib diisi'
-        ]);
+            $this->form_validation->set_rules('pass1', 'Password', 'required|trim|min_length[6]', [
+                'min_length' => 'Password terlalu pendek',
+                'required' => 'Password baru wajib diisi'
+            ]);
 
-        $this->form_validation->set_rules('pass2', 'Password', 'required|trim|matches[pass1]', [
-            'matches' => 'Password tidak sama',
-            'required' => 'Konfirmasi password baru wajib diisi'
-        ]);
+            $this->form_validation->set_rules('pass2', 'Password', 'required|trim|matches[pass1]', [
+                'matches' => 'Password tidak sama',
+                'required' => 'Konfirmasi password baru wajib diisi'
+            ]);
 
-        $this->form_validation->set_rules('pass', 'Password', 'required|trim', [
-            'required' => 'Password saat ini wajib diisi'
-        ]);
+            $this->form_validation->set_rules('pass', 'Password', 'required|trim', [
+                'required' => 'Password saat ini wajib diisi'
+            ]);
 
-        if ($this->form_validation->run() == FALSE) {
+            if ($this->form_validation->run() == FALSE) {
 
-            $data['title'] = 'Ganti Password - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $this->template->load('template/template', 'penata/profile/view_password', $data);
-        } else {
+                $data['title'] = 'Ganti Password - Museum Monumen Perjuangan Rakyat Jawa Barat';
+                $this->template->load('template/template', 'penata/profile/view_password', $data);
+            } else {
 
-            $this->db->from('tb_pengguna');
-            $this->db->where("(tb_pengguna.id_pengguna = '$id')");
-            $user = $this->db->get()->row_array();
+                $this->db->from('tb_pengguna');
+                $this->db->where("(tb_pengguna.id_pengguna = '$id')");
+                $user = $this->db->get()->row_array();
 
-            if (password_verify($pass, $user['password'])) {
-                $data = array('password' => password_hash($pass_new, PASSWORD_DEFAULT));
-                $where = array('id_pengguna' => $id);
-                $this->model_app->update('tb_pengguna', $data, $where);
-                $this->session->set_flashdata('message', '
+                if (password_verify($pass, $user['password'])) {
+                    $data = array('password' => password_hash($pass_new, PASSWORD_DEFAULT));
+                    $where = array('id_pengguna' => $id);
+                    $this->model_app->update('tb_pengguna', $data, $where);
+                    $this->session->set_flashdata('message', '
 				<div class="alert alert-success col-sm-12" role="alert">
             	<center>Profile berhasil diperbaharui</center>
           		</div>');
-                redirect('penata/password');
-            } else {
-                $this->session->set_flashdata('message1', '
+                    redirect('penata/password');
+                } else {
+                    $this->session->set_flashdata('message1', '
 				<div class="alert alert-danger col-sm-12" role="alert">
             	<center>Password salah</center>
 				</div>');
-                redirect('penata/password');
+                    redirect('penata/password');
+                }
             }
+        } else {
+            redirect('penata');
         }
     }
 }

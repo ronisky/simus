@@ -94,7 +94,6 @@
               <p>Tag </p>
             </a>
           </li>
-
         </ul>
       </li>
 
@@ -193,6 +192,24 @@
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-comments fa-fw"></i>
+          <p>
+            Saran dan Masukan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/saranMasukan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Lihat Saran Masukan</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
           <i class="fas fa-file-alt fa-fw nav-icon"></i>
           <p>
             Laporan
@@ -206,16 +223,12 @@
               <p>Laporan Postingan</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Laporan Berita</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -247,8 +260,6 @@
               <p>My Profile</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/password') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -271,21 +282,54 @@
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users fa-fw"></i>
+          <i class="nav-icon fas fa-user fa-fw"></i>
           <p>
             Modul Pengguna
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
-
           <li class="nav-item">
             <a href="<?= base_url('koordinator/users') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Manajemen Pengguna</p>
+              <p>View Pengguna</p>
             </a>
           </li>
+        </ul>
+      </li>
 
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users fa-fw"></i>
+          <p>
+            Modul Pengunjung
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>View Pengunjung</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-comments fa-fw"></i>
+          <p>
+            Saran dan Masukan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/saranMasukan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Lihat Saran Masukan</p>
+            </a>
+          </li>
         </ul>
       </li>
 
@@ -311,8 +355,6 @@
               <p>My Profile</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('koordinator/password') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -335,6 +377,48 @@
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users fa-fw"></i>
+          <p>
+            Modul Pengunjung
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/pengunjung') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Pengunjung Museum</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/reservasi') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Reservasi Kunjungan</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-question-circle fa-fw"></i>
+          <p>
+            Modul F.A.Q
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/faq') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>F.A.Q</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
           <i class="fas fa-file-alt fa-fw nav-icon"></i>
           <p>
             Laporan
@@ -348,16 +432,12 @@
               <p>Laporan Postingan</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Laporan Berita</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -388,8 +468,6 @@
               <p>My Profile</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('resepsionis/password') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -412,32 +490,29 @@
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-          <i class="nav-icon far fa-newspaper fa-fw"></i>
+          <i class="nav-icon fas fa-file-image fa-fw"></i>
           <p>
-            Modul Event
+            Modul Koleksi
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
-
           <li class="nav-item">
             <a href="<?= base_url('penata/event') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Event</p>
+              <p>Koleksi Museum</p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="<?= base_url('penata/kategori_event') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Kategori Event</p>
+              <p>Kategori Koleksi</p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="<?= base_url('admin/tag_event') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Tag Event</p>
+              <p>Pengajuan Koleksi</p>
             </a>
           </li>
         </ul>
@@ -458,16 +533,12 @@
               <p>Laporan Postingan</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Laporan Berita</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -498,8 +569,6 @@
               <p>My Profile</p>
             </a>
           </li>
-        </ul>
-        <ul class="nav nav-treeview">
           <li class="nav-item">
             <a href="<?= base_url('penata/password') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
