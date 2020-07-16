@@ -5,8 +5,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">F.A.Q</h3>
-                            <a class='float-right btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_faq'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Pengguna</a>
+                            <h3 class="card-title">Pengunjung Musuem</h3>
+                            <a class='float-right btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Pengguna</a>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -16,10 +16,17 @@
 
                                 <thead>
                                     <tr>
-                                        <th>Aksi</th>
                                         <th>No</th>
-                                        <th>Pertanyaan</th>
-                                        <th>Jawanan</th>
+                                        <th>Tanggal</th>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Nama</th>
+                                        <th>ID Card</th>
+                                        <th>Kebangsaan</th>
+                                        <th>Wilayah Bagian</th>
+                                        <th>Kota</th>
+                                        <th>Alamat</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -27,14 +34,20 @@
                                     $no = 1;
                                     foreach ($record as $row) { ?>
                                         <tr>
+                                            <td><?= $no; ?></td>
+                                            <td><?= $row['tanggal'] ?></td>
+                                            <td><?= $row['kategori'] ?></td>
+                                            <td><?= $row['jumlah']; ?></td>
+                                            <td><?= $row['nama'] ?></td>
+                                            <td><?= $row['id_card']; ?></td>
+                                            <td><?= $row['kebangsaan'] ?></td>
+                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['kota'] ?></td>
+                                            <td><?= $row['alamat']; ?></td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail Faq' href="<?php echo site_url('resepsionis/edit_faq/') . $row['id_faq']; ?>"><i class="fas fa-edit fa-fw"></i></a>
-
-                                                <button class='btn btn-danger btn-xs' title='Hapus' data-id="<?= $row['id_faq'] ?>" onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
+                                                <button class='btn btn-danger btn-xs' title='Hapus' data-id="<?= $row['id_pengunjung'] ?>" onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
                                             </td>
-                                            <td><?= $no; ?></td>
-                                            <td><?= $row['pertanyaan'] ?></td>
-                                            <td><?= $row['jawaban']; ?></td>
                                         </tr>
                                     <?php
                                         $no++;
@@ -80,7 +93,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: site_url + 'resepsionis/delete_faq/' + data_id,
+                    url: site_url + 'resepsionis/delete_pengunjung/' + data_id,
                     type: "POST",
                     dataType: "JSON",
                     success: function(data) {

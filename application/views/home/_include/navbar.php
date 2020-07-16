@@ -253,7 +253,7 @@
                                                 if (empty($this->session->id_pengguna)) { ?>
 
                                                     <form class="account-menu__form" action="<?= base_url('login') ?>" method="POST">
-                                                        <div class="account-menu__form-title">Masuk ke akun Anda</div>
+                                                        <div class="account-menu__form-title">Masuk untuk petugas</div>
                                                         <div class="form-group">
                                                             <label for="header-signin-email" class="sr-only">Email / Username</label>
                                                             <input name="user_email" id="header-signin-email" type="text" class="form-control form-control-sm" placeholder="Email / Username">
@@ -268,9 +268,9 @@
                                                         <div class="form-group account-menu__form-button">
                                                             <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
                                                         </div>
-                                                        <div class="account-menu__form-link">
+                                                        <!-- <div class="account-menu__form-link">
                                                             <a href="<?= base_url('register') ?>">Buat akun baru</a>
-                                                        </div>
+                                                        </div> -->
                                                     </form>
                                                     <div class="account-menu__divider"></div>
 
@@ -305,14 +305,23 @@
                                                     </a>
                                                     <div class="account-menu__divider"></div>
                                                     <ul class="account-menu__links">
-                                                        <li><a href="<?= base_url('members/edit_profile') ?>">Profil</a></li>
-                                                        <li><a href="<?= base_url('members/riwayat_belanja') ?>">Riwayat Transaksi</a></li>
-                                                        <li><a href="<?= base_url('members/edit_alamat') ?>">Alamat</a></li>
-                                                        <li><a href="<?= base_url('members/password') ?>">Password</a></li>
-                                                    </ul>
-                                                    <div class="account-menu__divider"></div>
-                                                    <ul class="account-menu__links">
-                                                        <li><a href="javascript:void(0)" onclick="logout()">Keluar</a></li>
+                                                        <?php
+                                                        $id = $this->session->id_pengguna;
+                                                        $this->db->where("id_pengguna='$id'");
+                                                        $peng = $this->db->get('tb_pengguna')->row_array();
+                                                        $lv = $peng['level'];
+                                                        if ($lv == 1) {
+                                                            $profile = '<a href=' . base_url('admin/profile') . '>Profil</a>';
+                                                        } elseif ($lv == 2) {
+                                                            $profile = '<a href=' . base_url('koordinator/profile') . '>Profil</a>';
+                                                        } elseif ($lv == 3) {
+                                                            $profile = '<a href=' . base_url('resepsionis/profile') . '>Profil</a>';
+                                                        } else {
+                                                            $profile = '<a href=' . base_url('penata/profile') . '>Profil</a>';
+                                                        }
+                                                        ?>
+                                                        <li><?= $profile; ?></li>
+                                                        <li><a class="mt-2" href="javascript:void(0)" onclick="logout()">Keluar</a></li>
                                                     </ul>
 
                                                 <?php } ?>

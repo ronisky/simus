@@ -271,12 +271,84 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['record'] = $this->db->query("SELECT * FROM tb_faq")->result_array();
+            $data['record'] = $this->db->query("SELECT * FROM tb_pengunjung")->result_array();
             $this->template->load('template/template', 'resepsionis/pengunjung/view_pengunjung', $data);
         } else {
             redirect('resepsionis');
         }
     }
+    function tambah_pengunjung()
+    {
+        if (isset($_POST['submit'])) {
+            $this->form_validation->set_rules('kategori', 'Kategori', 'required|trim', [
+                'required' => 'Kategori wajib diisi'
+            ]);
+            $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim', [
+                'required' => 'Jumlah pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('nama', 'Nama', 'required|trim', [
+                'required' => 'Nama pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('id_card', 'ID Card', 'required|trim', [
+                'required' => 'ID Card pengunjung wajib dipilih'
+            ]);
+            $this->form_validation->set_rules('no_id', 'No ID', 'required|trim', [
+                'required' => 'No. ID Card pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('negara', 'Negara', 'required|trim', [
+                'required' => 'Negara pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('kebangsaan', 'Kebangsaan', 'required|trim', [
+                'required' => 'Kebangsaan pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('kota', 'Kota', 'required|trim', [
+                'required' => 'Kota asal pengunjung wajib diisi'
+            ]);
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim', [
+                'required' => 'Alamat pengunjung wajib diisi'
+            ]);
+
+            if ($this->form_validation->run() == FALSE) {
+                $data['title'] = 'Tambah Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+                $this->template->load('template/template', 'resepsionis/resepsionis/view_tambah_pengunjung', $data);
+            } else {
+                $petugas = $this->session->username;
+                $data = [
+                    'tanggal'       => date('Y-m-d'),
+                    'waktu'         => date('H:i:s'),
+                    'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
+                    'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
+                    'nama'          => htmlspecialchars($this->input->post('nama', true)),
+                    'id_card'       => htmlspecialchars($this->input->post('id_card', true)),
+                    'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
+                    'negara'        => htmlspecialchars($this->input->post('negara', true)),
+                    'kebangsaan'    => htmlspecialchars($this->input->post('kebangsaan', true)),
+                    'kota'          => htmlspecialchars($this->input->post('kota', true)),
+                    'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
+                    'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
+                    'petugas'       => $petugas
+                ];
+
+                $this->model_app->insert('tb_pengunjung', $data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success col-sm-12" role="alert">
+            <center>Data berhasil ditambahkan</center>
+          </div>');
+                redirect(base_url('resepsionis/tambah_pengunjung'));
+            }
+        } else {
+            $data['row'] = $this->db->get_where('tb_pengguna', array('id_pengguna' => $this->session->id_pengguna))->row_array();
+            $data['title'] = 'Tambah Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $this->template->load('template/template', 'resepsionis/pengunjung/view_tambah_pengunjung', $data);
+        }
+    }
+
+    function delete_pengunjung($id)
+    {
+        $where = array('id_pengunjung' => $id);
+        $this->model_app->delete('tb_pengunjung', $where);
+        echo json_encode(array("status" => TRUE));
+    }
+
     function reservasi()
     {
         if (!empty($this->session->userdata())) {
