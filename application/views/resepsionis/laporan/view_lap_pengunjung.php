@@ -7,32 +7,34 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">Laporan Berita</h3>
+                            <h3 class="card-title">Laporan Pengunjung</h3>
                         </div>
 
                         <div class="card-body">
-
-
-
                             <table id="laptabel" class="table table-sm table-borderless" style="width:100%">
-
                                 <thead>
                                     <tr>
                                         <td colspan="2">
                                             <button type='button' class='btn btn-primary btn-xs dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> Pilih Waktu </button>
                                             <div class='dropdown-menu' style='border:1px solid #cecece;'>
-                                                <a class='dropdown-item' href='<?= base_url('admin/laporanBerita/') ?>'>Semua</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_hari') ?>'>Hari Ini</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_minggu') ?>'>7 hari terahir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_bulan') ?>'>30 hari terakhir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_tahun') ?>'>1 tahun terakhir</a>
+                                                <a class='dropdown-item' href='<?= base_url('resepsionis/laporanPengunjung/') ?>'>Semua</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporanPengunjung_hari') ?>'>Hari Ini</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporanPengunjung_minggu') ?>'>7 hari terahir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporanPengunjung_bulan') ?>'>30 hari terakhir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporanPengunjung_tahun') ?>'>1 tahun terakhir</a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th>Judul Berita</th>
                                         <th>Tanggal</th>
+                                        <th>Jam</th>
+                                        <th>Kategori</th>
+                                        <th>Jumlah</th>
+                                        <th>Negara</th>
+                                        <th>Wilayah Bagian</th>
+                                        <th>Kota</th>
+                                        <th>alamat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,8 +43,14 @@
                                     foreach ($record->result_array() as $row) { ?>
                                         <tr>
                                             <td><?= $no ?> </td>
-                                            <td><?= $row['judul_berita'] ?></td>
-                                            <td><?= $row['tgl']; ?></td>
+                                            <td><?= $row['tanggal'] ?></td>
+                                            <td><?= $row['waktu']; ?></td>
+                                            <td><?= $row['kategori'] ?></td>
+                                            <td><?= $row['jumlah']; ?></td>
+                                            <td><?= $row['negara'] ?></td>
+                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['kota'] ?></td>
+                                            <td><?= $row['alamat']; ?></td>
                                         </tr>
                                     <?php
                                         $no++;

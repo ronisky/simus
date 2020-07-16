@@ -21,11 +21,11 @@
                                         <td colspan="2">
                                             <button type='button' class='btn btn-primary btn-xs dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> Pilih Waktu </button>
                                             <div class='dropdown-menu' style='border:1px solid #cecece;'>
-                                                <a class='dropdown-item' href='<?= base_url('admin/laporan/') ?>'>Semua</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporan_hari') ?>'>Hari Ini</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporan_minggu') ?>'>7 hari terahir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporan_bulan') ?>'>30 hari terakhir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporan_tahun') ?>'>1 tahun terakhir</a>
+                                                <a class='dropdown-item' href='<?= base_url('admin/laporanPengguna/') ?>'>Semua</a>
+                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanPengguna_hari') ?>'>Hari Ini</a>
+                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanPengguna_minggu') ?>'>7 hari terahir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanPengguna_bulan') ?>'>30 hari terakhir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanPengguna_tahun') ?>'>1 tahun terakhir</a>
                                             </div>
                                         </td>
                                     </tr>

@@ -368,12 +368,6 @@
 
     <!-- Resepsionis  -->
     <?php if ($this->session->userdata('level') == 3) { ?>
-      <li class="nav-item">
-        <a href="<?= base_url('admin/home') ?>" class="nav-link">
-          <i class="fas fa-tachometer-alt fa-fw nav-icon"></i>
-          <p>Dasboard</p>
-        </a>
-      </li>
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
@@ -427,21 +421,15 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
+            <a href="<?= base_url('resepsionis/laporanPengunjung') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Postingan</p>
+              <p>Laporan Pengunjung</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
+            <a href="<?= base_url('resepsionis/laporanReservasi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Berita</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Pengguna</p>
+              <p>Laporan Reservasi</p>
             </a>
           </li>
         </ul>
@@ -481,12 +469,6 @@
 
     <!-- Penata Pameran  -->
     <?php if ($this->session->userdata('level') == 4) { ?>
-      <li class="nav-item">
-        <a href="<?= base_url('penata/home') ?>" class="nav-link">
-          <i class="fas fa-tachometer-alt fa-fw nav-icon"></i>
-          <p>Dasboard</p>
-        </a>
-      </li>
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">

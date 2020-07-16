@@ -12,7 +12,7 @@
   <!-- Brand Logo -->
   <div class="bg-primary brand-link">
     <a href="">
-      <img src="<?= base_url('assets/images/logo/logomini.png') ?>" alt="Zamanet" class="brand-image img-circle elevation-3 bg-white" style="opacity: .8">
+      <img src="<?= base_url('assets/images/logo/logomini.png') ?>" alt="Simus" class="brand-image img-circle elevation-3 bg-white" style="opacity: .8">
       <span class="brand-text font-weight-light">
         <?php if ($this->session->level == 1) { ?>
           Administrator <?php } elseif ($this->session->level == 2) { ?>

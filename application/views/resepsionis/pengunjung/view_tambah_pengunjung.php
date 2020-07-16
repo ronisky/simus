@@ -90,6 +90,14 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Wilayah Bagian</label>
+                                    <div class="col-sm-6">
+                                        <input type='text' class='form-control' name='wilayah_bagian' placeholder="misal: Jawa Barat" value="<?= set_value('wilayah_bagian'); ?>">
+                                        <?= form_error('wilayah_bagian', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Kota</label>
                                     <div class="col-sm-6">
                                         <input type='text' class='form-control' name='kota' value="<?= set_value('kota'); ?>">

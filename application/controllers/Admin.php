@@ -804,8 +804,7 @@ class Admin extends CI_Controller
 					'level' => $this->db->escape_str($this->input->post('level')),
 					'foto' => $hasil['file_name'],
 				);
-			}
-			elseif ($hasil['file_name'] == '' and $this->input->post('b') != '') {
+			} elseif ($hasil['file_name'] == '' and $this->input->post('b') != '') {
 				$data = array(
 					'username' => $this->db->escape_str($this->input->post('a')),
 					'password' => password_hash($this->input->post('b'), PASSWORD_DEFAULT),
@@ -814,8 +813,7 @@ class Admin extends CI_Controller
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
 					'level' => $this->db->escape_str($this->input->post('level'))
 				);
-			}
-			elseif ($hasil['file_name'] != '' and $this->input->post('b') != '') {
+			} elseif ($hasil['file_name'] != '' and $this->input->post('b') != '') {
 				$data = array(
 					'username' => $this->db->escape_str($this->input->post('a')),
 					'password' => password_hash($this->input->post('b'), PASSWORD_DEFAULT),
@@ -1095,6 +1093,79 @@ class Admin extends CI_Controller
 		$this->template->load('template/template', 'admin/saranMasukan/view_saran_masukan', $data);
 	}
 
+	// Modul Berita
+
+	function newsletter()
+	{
+
+		$data['record'] = $this->model_berita->list_berita();
+		$data['title'] = 'Newsletter - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$this->template->load('template/template', 'admin/subs/view_berita', $data);
+	}
+
+	function tambah_newsletter()
+	{
+
+		if (isset($_POST['submit'])) {
+			$judul = $this->input->post('judul');
+			$isi = $this->input->post('berita');
+
+			$ci = get_instance();
+			$ci->load->library('email');
+			$config = [
+				'protocol'  => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_user' => 'simusmonpera@gmail.com',
+				'smtp_pass' => 'monpera2020',
+				'smtp_port' => 465,
+				'mailtype'  => 'html',
+				'charset'   => 'utf-8',
+				'newline'   => "\r\n"
+			];
+			$ci->email->initialize($config);
+			$ci->email->from('simusmonpera@gmail.com', "Newsletter Museum Monumen Perjuangan Rakyat Jawa Barat");
+			$ci->email->to($this->model_app->emailsend());
+			$ci->email->subject("$judul");
+			$ci->email->message("$isi");
+			$ci->email->send();
+
+			$this->model_berita->list_berita_tambah();
+			redirect('admin/newsletter');
+		} else {
+			$data['title'] = 'Kirim News Letter - Museum Monumen Perjuangan Rakyat Jawa Barat';
+			$this->template->load('template/template', 'admin/subs/view_berita_tambah', $data);
+		}
+	}
+
+	function lihat_newsletter()
+	{
+
+		$data['title'] = 'Detail Berita - Museum Monumen Perjuangan Rakyat Jawa Barat';
+
+		$id = $this->uri->segment(3);
+		$data['rows'] = $this->model_berita->list_berita_edit($id)->row_array();
+		$this->template->load('template/template', 'admin/subs/view_berita_edit', $data);
+	}
+
+	function delete_newsletter($id)
+	{
+		$this->model_berita->list_berita_delete($id);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	function subscriber()
+	{
+		$data['title'] = 'Subscriber - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->db->get_where('tb_subs', "aktif='1'")->result_array();
+		$this->template->load('template/template', 'admin/subs/view_subs', $data);
+	}
+
+	function delete_subs($id)
+	{
+		$this->db->query("DELETE FROM tb_subs where id='$id'");
+		echo json_encode(array("status" => TRUE));
+	}
+
 	// Laporan
 	// Laporan Postingan 
 	function laporan()
@@ -1202,79 +1273,5 @@ class Admin extends CI_Controller
 		$data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
 		$data['record'] = $this->model_laporan->laporanPengguna360();
 		$this->template->load('template/template', 'admin/laporan/view_lap_pengguna', $data);
-	}
-
-
-	// Modul Berita
-
-	function newsletter()
-	{
-
-		$data['record'] = $this->model_berita->list_berita();
-		$data['title'] = 'Newsletter - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$this->template->load('template/template', 'admin/subs/view_berita', $data);
-	}
-
-	function tambah_newsletter()
-	{
-
-		if (isset($_POST['submit'])) {
-			$judul = $this->input->post('judul');
-			$isi = $this->input->post('berita');
-
-			$ci = get_instance();
-			$ci->load->library('email');
-			$config = [
-				'protocol'  => 'smtp',
-				'smtp_host' => 'ssl://smtp.googlemail.com',
-				'smtp_user' => 'simusmonpera@gmail.com',
-				'smtp_pass' => 'monpera2020',
-				'smtp_port' => 465,
-				'mailtype'  => 'html',
-				'charset'   => 'utf-8',
-				'newline'   => "\r\n"
-			];
-			$ci->email->initialize($config);
-			$ci->email->from('simusmonpera@gmail.com', "Newsletter Museum Monumen Perjuangan Rakyat Jawa Barat");
-			$ci->email->to($this->model_app->emailsend());
-			$ci->email->subject("$judul");
-			$ci->email->message("$isi");
-			$ci->email->send();
-
-			$this->model_berita->list_berita_tambah();
-			redirect('admin/newsletter');
-		} else {
-			$data['title'] = 'Kirim News Letter - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$this->template->load('template/template', 'admin/subs/view_berita_tambah', $data);
-		}
-	}
-
-	function lihat_newsletter()
-	{
-
-		$data['title'] = 'Detail Berita - Museum Monumen Perjuangan Rakyat Jawa Barat';
-
-		$id = $this->uri->segment(3);
-		$data['rows'] = $this->model_berita->list_berita_edit($id)->row_array();
-		$this->template->load('template/template', 'admin/subs/view_berita_edit', $data);
-	}
-
-	function delete_newsletter($id)
-	{
-		$this->model_berita->list_berita_delete($id);
-		echo json_encode(array("status" => TRUE));
-	}
-
-	function subscriber()
-	{
-		$data['title'] = 'Subscriber - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$data['record'] = $this->db->get_where('tb_subs', "aktif='1'")->result_array();
-		$this->template->load('template/template', 'admin/subs/view_subs', $data);
-	}
-
-	function delete_subs($id)
-	{
-		$this->db->query("DELETE FROM tb_subs where id='$id'");
-		echo json_encode(array("status" => TRUE));
 	}
 }

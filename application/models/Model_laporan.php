@@ -9,7 +9,8 @@ class Model_laporan extends CI_model
     //     $this->db->order_by('waktu_transaksi', 'asc');
     //     return $this->db->get('tb_toko_penjualan');
     // }
-
+    // Start Laporan Admin 
+    // laporan artikel 
     function laporan()
     {
         return $this->db->query("SELECT * FROM `tb_blog_artikel` ORDER BY tanggal DESC");
@@ -84,7 +85,7 @@ class Model_laporan extends CI_model
         return $this->db->get('tb_berita');
     }
 
-    // Lapran Berita 
+    // Lapran Pengguna 
     function laporanPengguna()
     {
         return $this->db->query("SELECT * FROM `tb_pengguna` ORDER BY tgl_daftar DESC");
@@ -92,32 +93,71 @@ class Model_laporan extends CI_model
     function laporanPengguna1()
     {
         $hari = date('Y-m-d');
-        $this->db->where("id_pengguna='$hari'");
+        $this->db->where("tgl_daftar='$hari'");
         $this->db->order_by('id_pengguna', 'desc');
-        return $this->db->get('tb_berita');
+        return $this->db->get('tb_pengguna');
     }
 
     function laporanPengguna7()
     {
         $hari = date('Y-m-d');
-        $this->db->where("tgl > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
-        $this->db->order_by('tgl', 'asc');
-        return $this->db->get('tb_berita');
+        $this->db->where("tgl_daftar > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->order_by('id_pengguna', 'desc');
+        return $this->db->get('tb_pengguna');
     }
 
     function laporanPengguna30()
     {
         $hari = date('Y-m-d');
-        $this->db->where("tgl > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
-        $this->db->order_by('tgl', 'asc');
-        return $this->db->get('tb_berita');
+        $this->db->where("tgl_daftar > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->order_by('id_pengguna', 'desc');
+        return $this->db->get('tb_pengguna');
     }
 
     function laporanPengguna360()
     {
         $hari = date('Y-m-d');
-        $this->db->where("tgl > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
-        $this->db->order_by('tgl', 'asc');
-        return $this->db->get('tb_berita');
+        $this->db->where("tgl_daftar > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->order_by('id_pengguna', 'desc');
+        return $this->db->get('tb_pengguna');
+    }
+    // End laporan admin 
+
+
+    // Start laporan resepsionis 
+    function laporanPengunjung()
+    {
+        return $this->db->query("SELECT * FROM `tb_pengunjung` ORDER BY tanggal DESC");
+    }
+    function laporanPengunjung1()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal='$hari'");
+        $this->db->order_by('id_pengunjung', 'desc');
+        return $this->db->get('tb_pengunjung');
+    }
+
+    function laporanPengunjung7()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->order_by('id_pengunjung', 'asc');
+        return $this->db->get('tb_pengunjung');
+    }
+
+    function laporanPengunjung30()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->order_by('id_pengunjung', 'asc');
+        return $this->db->get('tb_pengunjung');
+    }
+
+    function laporanPengunjung360()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->order_by('id_pengunjung', 'asc');
+        return $this->db->get('tb_pengunjung');
     }
 }

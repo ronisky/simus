@@ -7,7 +7,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">Laporan Berita</h3>
+                            <h3 class="card-title">Laporan Reservasi</h3>
                         </div>
 
                         <div class="card-body">
@@ -21,17 +21,17 @@
                                         <td colspan="2">
                                             <button type='button' class='btn btn-primary btn-xs dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> Pilih Waktu </button>
                                             <div class='dropdown-menu' style='border:1px solid #cecece;'>
-                                                <a class='dropdown-item' href='<?= base_url('admin/laporanBerita/') ?>'>Semua</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_hari') ?>'>Hari Ini</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_minggu') ?>'>7 hari terahir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_bulan') ?>'>30 hari terakhir</a>
-                                                <a class=' dropdown-item' href='<?= base_url('admin/laporanBerita_tahun') ?>'>1 tahun terakhir</a>
+                                                <a class='dropdown-item' href='<?= base_url('resepsionis/laporan/') ?>'>Semua</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporan_hari') ?>'>Hari Ini</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporan_minggu') ?>'>7 hari terahir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporan_bulan') ?>'>30 hari terakhir</a>
+                                                <a class=' dropdown-item' href='<?= base_url('resepsionis/laporan_tahun') ?>'>1 tahun terakhir</a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th>Judul Berita</th>
+                                        <th>Judul Postingan</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
@@ -41,8 +41,8 @@
                                     foreach ($record->result_array() as $row) { ?>
                                         <tr>
                                             <td><?= $no ?> </td>
-                                            <td><?= $row['judul_berita'] ?></td>
-                                            <td><?= $row['tgl']; ?></td>
+                                            <td><?= $row['judul'] ?></td>
+                                            <td><?= $row['tanggal']; ?></td>
                                         </tr>
                                     <?php
                                         $no++;

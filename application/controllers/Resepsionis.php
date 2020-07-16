@@ -26,7 +26,7 @@ class Resepsionis extends CI_Controller
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Resepsionis - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['grap'] = $this->model_main->grafik_kunjungan();
-            $this->template->load('template/template', 'admin/view_dashboard', $data);
+            $this->template->load('template/template', 'resepsionis/pengunjung/view_pengunjung', $data);
         } else {
             redirect('resepsionis');
         }
@@ -301,6 +301,9 @@ class Resepsionis extends CI_Controller
             $this->form_validation->set_rules('kebangsaan', 'Kebangsaan', 'required|trim', [
                 'required' => 'Kebangsaan pengunjung wajib diisi'
             ]);
+            $this->form_validation->set_rules('wilayah_bagian', 'Wilayah bagian', 'required|trim', [
+                'required' => 'Wilayah bagian pengunjung wajib diisi'
+            ]);
             $this->form_validation->set_rules('kota', 'Kota', 'required|trim', [
                 'required' => 'Kota asal pengunjung wajib diisi'
             ]);
@@ -323,6 +326,7 @@ class Resepsionis extends CI_Controller
                     'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
                     'negara'        => htmlspecialchars($this->input->post('negara', true)),
                     'kebangsaan'    => htmlspecialchars($this->input->post('kebangsaan', true)),
+                    'wilayah_bagian' => htmlspecialchars($this->input->post('wilayah_bagian', true)),
                     'kota'          => htmlspecialchars($this->input->post('kota', true)),
                     'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
                     'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
@@ -358,5 +362,49 @@ class Resepsionis extends CI_Controller
         } else {
             redirect('resepsionis');
         }
+    }
+
+    // Laporan 
+    function laporanPengunjung()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanPengunjung_hari()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung1();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanPengunjung_minggu()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung7();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanPengunjung_bulan()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung30();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanPengunjung_tahun()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung360();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    // Laporan Reservasi 
+    function laporanReservasi()
+    {
+        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanPengunjung();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_reservasi', $data);
     }
 }
