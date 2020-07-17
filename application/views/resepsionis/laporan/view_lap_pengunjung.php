@@ -11,6 +11,9 @@
                         </div>
 
                         <div class="card-body">
+                            <div>
+                            </div>
+                            <label for="">Aksi Tabel</label>
                             <table id="laptabel" class="table table-sm table-borderless" style="width:100%">
                                 <thead>
                                     <tr>

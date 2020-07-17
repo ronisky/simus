@@ -427,9 +427,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('resepsionis/laporanReservasi') ?>" class="nav-link">
+            <a href="<?= base_url('resepsionis/laporanRekapitulasi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Reservasi</p>
+              <p>Rekapitulasi Pengunjung</p>
             </a>
           </li>
         </ul>

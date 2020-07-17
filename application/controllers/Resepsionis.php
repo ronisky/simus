@@ -367,44 +367,839 @@ class Resepsionis extends CI_Controller
     // Laporan 
     function laporanPengunjung()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_laporan->laporanPengunjung();
+        // $data['data'] = $this->db->query("SELECT SUM(jumlah) ASjumlah FROM tb_pengunjung")->result_array;
+        $data['jumlah'] = $this->model_laporan->jumlahPengunjungUmum360();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
 
     function laporanPengunjung_hari()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_laporan->laporanPengunjung1();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
 
     function laporanPengunjung_minggu()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_laporan->laporanPengunjung7();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
 
     function laporanPengunjung_bulan()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_laporan->laporanPengunjung30();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
 
     function laporanPengunjung_tahun()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_laporan->laporanPengunjung360();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
 
-    // Laporan Reservasi 
-    function laporanReservasi()
+    // Laporan Rekapitulasi
+    function laporanRekapitulasi()
     {
-        $data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $data['record'] = $this->model_laporan->laporanPengunjung();
-        $this->template->load('template/template', 'resepsionis/laporan/view_lap_reservasi', $data);
+        $data = array(
+            'title' => 'Laporan Rekapitulasi - Museum Monumen Perjuangan Rakyat Jawa Barat',
+            'jmlPengunjung' => $this->model_laporan->jumlahPengunjung(),
+            'jmlPengunjungTK' => $this->model_laporan->jumlahPengunjungTK(),
+            'jmlPengunjungSD' => $this->model_laporan->jumlahPengunjungSD(),
+            'jmlPengunjungSMP' => $this->model_laporan->jumlahPengunjungSMP(),
+            'jmlPengunjungSMA' => $this->model_laporan->jumlahPengunjungSMA(),
+            'jmlPengunjungUniv' => $this->model_laporan->jumlahPengunjungUniv(),
+            'jmlPengunjungUmum' => $this->model_laporan->jumlahPengunjungUmum(),
+            'jmlPengunjungNusan' => $this->model_laporan->jumlahPengunjungNusan(),
+            'jmlPengunjungManca' => $this->model_laporan->jumlahPengunjungManca()
+        );
+
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_rekapitulasi', $data);
+    }
+
+    function laporanRekapitulasi1()
+    {
+        $data = array(
+            'title' => 'Laporan Rekapitulasi - Museum Monumen Perjuangan Rakyat Jawa Barat',
+
+            'jmlPengunjung1' => $this->model_laporan->jumlahPengunjung1(),
+            'jmlPengunjungTK1' => $this->model_laporan->jumlahPengunjungTK1(),
+            'jmlPengunjungSD1' => $this->model_laporan->jumlahPengunjungSD1(),
+            'jmlPengunjungSMP1' => $this->model_laporan->jumlahPengunjungSMP1(),
+            'jmlPengunjungSMA1' => $this->model_laporan->jumlahPengunjungSMA1(),
+            'jmlPengunjungUniv1' => $this->model_laporan->jumlahPengunjungUniv1(),
+            'jmlPengunjungUmum1' => $this->model_laporan->jumlahPengunjungUmum1(),
+            'jmlPengunjungNusan1' => $this->model_laporan->jumlahPengunjungNusan1(),
+            'jmlPengunjungManca1' => $this->model_laporan->jumlahPengunjungManca1(),
+        );
+
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_rekapitulasi1', $data);
+    }
+
+    function laporanRekapitulasi7()
+    {
+        $data = array(
+            'title' => 'Laporan Rekapitulasi - Museum Monumen Perjuangan Rakyat Jawa Barat',
+            'jmlPengunjung7' => $this->model_laporan->jumlahPengunjung7(),
+            'jmlPengunjungTK7' => $this->model_laporan->jumlahPengunjungTK7(),
+            'jmlPengunjungSD7' => $this->model_laporan->jumlahPengunjungSD7(),
+            'jmlPengunjungSMP7' => $this->model_laporan->jumlahPengunjungSMP7(),
+            'jmlPengunjungSMA7' => $this->model_laporan->jumlahPengunjungSMA7(),
+            'jmlPengunjungUniv7' => $this->model_laporan->jumlahPengunjungUniv7(),
+            'jmlPengunjungUmum7' => $this->model_laporan->jumlahPengunjungUmum7(),
+            'jmlPengunjungNusan7' => $this->model_laporan->jumlahPengunjungNusan7(),
+            'jmlPengunjungManca7' => $this->model_laporan->jumlahPengunjungManca7(),
+        );
+
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_rekapitulasi7', $data);
+    }
+    function laporanRekapitulasi30()
+    {
+        $data = array(
+            'title' => 'Laporan Rekapitulasi - Museum Monumen Perjuangan Rakyat Jawa Barat',
+            'jmlPengunjung30' => $this->model_laporan->jumlahPengunjung30(),
+            'jmlPengunjungTK30' => $this->model_laporan->jumlahPengunjungTK30(),
+            'jmlPengunjungSD30' => $this->model_laporan->jumlahPengunjungSD30(),
+            'jmlPengunjungSMP30' => $this->model_laporan->jumlahPengunjungSMP30(),
+            'jmlPengunjungSMA30' => $this->model_laporan->jumlahPengunjungSMA30(),
+            'jmlPengunjungUniv30' => $this->model_laporan->jumlahPengunjungUniv30(),
+            'jmlPengunjungUmum30' => $this->model_laporan->jumlahPengunjungUmum30(),
+            'jmlPengunjungNusan30' => $this->model_laporan->jumlahPengunjungNusan30(),
+            'jmlPengunjungManca30' => $this->model_laporan->jumlahPengunjungManca30(),
+        );
+
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_rekapitulasi30', $data);
+    }
+    function laporanRekapitulasi360()
+    {
+        $data = array(
+            'title' => 'Laporan Rekapitulasi - Museum Monumen Perjuangan Rakyat Jawa Barat',
+            'jmlPengunjung360' => $this->model_laporan->jumlahPengunjung360(),
+            'jmlPengunjungUmum360' => $this->model_laporan->jumlahPengunjungUmum360(),
+            'jmlPengunjungTK360' => $this->model_laporan->jumlahPengunjungTK360(),
+            'jmlPengunjungSD360' => $this->model_laporan->jumlahPengunjungSD360(),
+            'jmlPengunjungSMP360' => $this->model_laporan->jumlahPengunjungSMP360(),
+            'jmlPengunjungSMA360' => $this->model_laporan->jumlahPengunjungSMA360(),
+            'jmlPengunjungUniv360' => $this->model_laporan->jumlahPengunjungUniv360(),
+            'jmlPengunjungNusan360' => $this->model_laporan->jumlahPengunjungNusan360(),
+            'jmlPengunjungManca360' => $this->model_laporan->jumlahPengunjungManca360(),
+        );
+
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_rekapitulasi360', $data);
+    }
+
+    // Cetak Laporan 
+    function cetak_rekap()
+    {
+        $tk = $this->input->post('tk');
+        $sd = $this->input->post('sd');
+        $smp = $this->input->post('smp');
+        $sma = $this->input->post('sma');
+        $univ = $this->input->post('univ');
+        $umum = $this->input->post('umum');
+        $nusan = $this->input->post('nusan');
+        $manca = $this->input->post('manca');
+        $total = $this->input->post('total');
+        $nama               = "Laporan Rekapitulasi Pengunjung Museum";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $day                = date('d');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Loporan-Rekapitulasi-Pengunjung-Museum";
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('assets/images/logo/logomini.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; ">
+            <div  style="float: left;width: 10%; margin-right: 10%; padding-right: 10px;">
+                <img src="assets/images/logo/logomini.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">REKAPITULASI JUMLAH PENGUNJUNG</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
+                </div>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $day . '' . $bulan . '' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Rekap Pengunjung</p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            text-align :left;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Klasifikasi</th>
+                    <th scope="col">Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung TK / PAUD</td>
+                    <td>' . $tk . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Pengunjung SD</td>
+                    <td>' . $sd . '</td>
+                </tr>
+                <tr> 
+                <td>-</td>
+                    <td>Pengunjung SMP</td>
+                    <td>' . $smp . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung SMA</td>
+                    <td>' . $sma . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Universitas / PT</td>
+                    <td>' . $univ . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Umum</td>
+                    <td>' . $umum . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Nusantara</td>
+                    <td>' . $nusan . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Mancanegara</td>
+                    <td>' . $manca . '</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <th class="text-bold">Total Pengunjung Museum</th>
+                    <th>' . $total . '</th>
+                </tr>
+            </tbody>
+               
+        </table>
+
+        
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Tanda Tanggan </th>
+                    <td width="300px"></td>
+                    <td> Note </td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
+    function cetak_rekap1()
+    {
+        $tk = $this->input->post('tk');
+        $sd = $this->input->post('sd');
+        $smp = $this->input->post('smp');
+        $sma = $this->input->post('sma');
+        $univ = $this->input->post('univ');
+        $umum = $this->input->post('umum');
+        $nusan = $this->input->post('nusan');
+        $manca = $this->input->post('manca');
+        $total = $this->input->post('total');
+        $nama               = "Laporan Rekapitulasi Pengunjung Museum";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $day                = date('d');
+        $cetak              = date('d/m/Y');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Laporan-Rekapitulasi-Pengunjung-Museum-" . $day;
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('assets/images/logo/logomini.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; ">
+            <div  style="float: left;width: 10%; margin-right: 10%; padding-right: 10px;">
+                <img src="assets/images/logo/logomini.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">REKAPITULASI JUMLAH PENGUNJUNG</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
+                </div>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $cetak . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Harian : ' . $day . '' . $nama_bulan . ' ' . $tahun . '</p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            text-align :left;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Klasifikasi</th>
+                    <th scope="col">Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung TK / PAUD</td>
+                    <td>' . $tk . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Pengunjung SD</td>
+                    <td>' . $sd . '</td>
+                </tr>
+                <tr> 
+                <td>-</td>
+                    <td>Pengunjung SMP</td>
+                    <td>' . $smp . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung SMA</td>
+                    <td>' . $sma . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Universitas / PT</td>
+                    <td>' . $univ . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Umum</td>
+                    <td>' . $umum . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Nusantara</td>
+                    <td>' . $nusan . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Mancanegara</td>
+                    <td>' . $manca . '</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <th class="text-bold">Total Pengunjung Museum</th>
+                    <th>' . $total . '</th>
+                </tr>
+            </tbody>
+               
+        </table>
+
+        
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Tanda Tanggan </th>
+                    <td width="300px"></td>
+                    <td> Note </td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
+
+
+    function cetak_rekap30()
+    {
+        $tk = $this->input->post('tk');
+        $sd = $this->input->post('sd');
+        $smp = $this->input->post('smp');
+        $sma = $this->input->post('sma');
+        $univ = $this->input->post('univ');
+        $umum = $this->input->post('umum');
+        $nusan = $this->input->post('nusan');
+        $manca = $this->input->post('manca');
+        $total = $this->input->post('total');
+        $nama               = "Laporan Rekapitulasi Pengunjung Museum";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Laporan-Rekapitulasi-Pengunjung-Museum-" . $nama_bulan;
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('assets/images/logo/logomini.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; ">
+            <div  style="float: left;width: 10%; margin-right: 10%; padding-right: 10px;">
+                <img src="assets/images/logo/logomini.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">REKAPITULASI JUMLAH PENGUNJUNG</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
+                </div>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $cetak . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Bulan : ' . $nama_bulan . ' ' . $tahun . '</p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            text-align :left;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Klasifikasi</th>
+                    <th scope="col">Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung TK / PAUD</td>
+                    <td>' . $tk . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Pengunjung SD</td>
+                    <td>' . $sd . '</td>
+                </tr>
+                <tr> 
+                <td>-</td>
+                    <td>Pengunjung SMP</td>
+                    <td>' . $smp . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung SMA</td>
+                    <td>' . $sma . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Universitas / PT</td>
+                    <td>' . $univ . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Umum</td>
+                    <td>' . $umum . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Nusantara</td>
+                    <td>' . $nusan . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Mancanegara</td>
+                    <td>' . $manca . '</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <th class="text-bold">Total Pengunjung Museum</th>
+                    <th>' . $total . '</th>
+                </tr>
+            </tbody>
+               
+        </table>
+
+        
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Tanda Tanggan </th>
+                    <td width="300px"></td>
+                    <td> Note </td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
+
+    function cetak_rekap360()
+    {
+        $tk = $this->input->post('tk');
+        $sd = $this->input->post('sd');
+        $smp = $this->input->post('smp');
+        $sma = $this->input->post('sma');
+        $univ = $this->input->post('univ');
+        $umum = $this->input->post('umum');
+        $nusan = $this->input->post('nusan');
+        $manca = $this->input->post('manca');
+        $total = $this->input->post('total');
+        $nama               = "Laporan Rekapitulasi Pengunjung Museum";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Laporan-Rekapitulasi-Pengunjung-Museum-" . $tahun;
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
+        $mpdf->SetWatermarkImage('assets/images/logo/logomini.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; ">
+            <div  style="float: left;width: 10%; margin-right: 10%; padding-right: 10px;">
+                <img src="assets/images/logo/logomini.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">REKAPITULASI JUMLAH PENGUNJUNG</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
+                </div>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $cetak . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Tahunan : ' . $tahun . '</p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            text-align :left;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Klasifikasi</th>
+                    <th scope="col">Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung TK / PAUD</td>
+                    <td>' . $tk . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Pengunjung SD</td>
+                    <td>' . $sd . '</td>
+                </tr>
+                <tr> 
+                <td>-</td>
+                    <td>Pengunjung SMP</td>
+                    <td>' . $smp . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung SMA</td>
+                    <td>' . $sma . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Universitas / PT</td>
+                    <td>' . $univ . '</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Pengunjung Umum</td>
+                    <td>' . $umum . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Nusantara</td>
+                    <td>' . $nusan . '</td>
+                </tr>
+                <tr>
+                <td>-</td>
+                    <td>Wisatawan Mancanegara</td>
+                    <td>' . $manca . '</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <th class="text-bold">Total Pengunjung Museum</th>
+                    <th>' . $total . '</th>
+                </tr>
+            </tbody>
+               
+        </table>
+
+        
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Tanda Tanggan </th>
+                    <td width="300px"></td>
+                    <td> Note </td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
     }
 }

@@ -160,4 +160,447 @@ class Model_laporan extends CI_model
         $this->db->order_by('id_pengunjung', 'asc');
         return $this->db->get('tb_pengunjung');
     }
+
+    // Jumlah
+
+    function jumlahPengunjung()
+    {
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjung1()
+    {
+        $hari = date('Y-m-d');
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjung7()
+    {
+        $hari = date('Y-m-d');
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjung30()
+    {
+        $hari = date('Y-m-d');
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjung360()
+    {
+        $hari = date('Y-m-d');
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungUmum()
+    {
+        $kategori = 'Umum';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungUmum1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Umum';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungUmum7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Umum';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungUmum30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Umum';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungUmum360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Umum';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungTK()
+    {
+        $kategori = 'TK';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungTK1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'TK';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungTK7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'TK';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungTK30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'TK';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungTK360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'TK';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungSD()
+    {
+        $kategori = 'SD';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSD1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SD';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSD7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SD';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSD30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SD';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSD360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SD';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungSMP()
+    {
+        $kategori = 'SMP';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungSMP1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMP';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMP7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMP';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMP30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMP';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMP360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMP';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungSMA()
+    {
+        $kategori = 'SMA';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMA1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMA';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMA7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMA';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMA30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMA';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungSMA360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'SMA';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungUniv()
+    {
+        $kategori = 'Universitas';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungUniv1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Universitas';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungUniv7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Universitas';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungUniv30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Universitas';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungUniv360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Universitas';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungManca()
+    {
+        $kategori = 'Mancanegara';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungManca1()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Mancanegara';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungManca7()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Mancanegara';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungManca30()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Mancanegara';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungManca360()
+    {
+        $hari = date('Y-m-d');
+        $kategori = 'Mancanegara';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("kategori='$kategori'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+
+    function jumlahPengunjungNusan()
+    {
+        $negara = 'Indonesia';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("negara='$negara'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungNusan1()
+    {
+        $hari = date('Y-m-d');
+        $negara = 'Indonesia';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal='$hari'");
+        $this->db->where("negara='$negara'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungNusan7()
+    {
+        $hari = date('Y-m-d');
+        $negara = 'Indonesia';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->where("negara='$negara'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungNusan30()
+    {
+        $hari = date('Y-m-d');
+        $negara = 'Indonesia';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->where("negara='$negara'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
+    function jumlahPengunjungNusan360()
+    {
+        $hari = date('Y-m-d');
+        $negara = 'Indonesia';
+        $this->db->select('SUM(jumlah) as jumlah');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->where("negara='$negara'");
+        $this->db->from('tb_pengunjung');
+        return $this->db->get()->row()->jumlah;
+    }
 }

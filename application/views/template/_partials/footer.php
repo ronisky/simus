@@ -138,6 +138,10 @@
     });
 </script>
 
+
+
+
+<!-- Statistik -->
 <?php $this->model_main->kunjungan(); ?>
 </body>
 
