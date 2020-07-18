@@ -1,6 +1,6 @@
 <div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">Grafik Pengunjung Museum</h3>
+        <h3 class="card-title">Grafik Pengunjung Website</h3>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
         <div class="chart">
-            <canvas id="stackedBarChart1" style="height:250px; min-height:250px"></canvas>
+            <canvas id="stackedBarChart" style="height:250px; min-height:250px"></canvas>
         </div>
     </div>
     <!-- /.card-body -->
@@ -18,18 +18,16 @@
 
 <?php
 
-foreach ($grappengunjung->result() as $grap) {
+foreach ($grapweb->result() as $grap) {
     $tanggal[] = $grap->tanggal;
     $jumlah[] = (float) $grap->jumlah;
 }
 
 
 ?>
-
 <script>
     $(function() {
-
-        var stackedBarChartCanvas = $('#stackedBarChart1').get(0).getContext('2d')
+        var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
         var stackedBarChartData = {
             labels: <?php echo json_encode($tanggal); ?>,
             datasets: [{

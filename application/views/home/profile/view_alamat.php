@@ -1,44 +1,33 @@
-<div class="block">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-3 d-flex">
-        <div class="account-nav flex-grow-1">
-          <ul>
-            <li class="account-nav__item"><a href="<?= base_url('members/dashboard') ?>">Dashboard</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/edit_profile') ?>">Ubah Profil</a></li>
-            <li class="account-nav__item account-nav__item--active"><a href="<?= base_url('members/edit_alamat') ?>">Ubah Alamat</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/riwayat_belanja') ?>">Riwayat Transaksi</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/password') ?>">Ganti Password</a></li>
-            <li class="account-nav__item"><a href="javascript:void(0)" onclick="logout()">Keluar</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-12 col-lg-9 mt-4 mt-lg-0">
-        <div class="card">
-          <div class="card-header">
-            <h5>Ubah Alamat</h5>
-          </div>
-          <div class="card-divider"></div>
-          <div class="card-body">
-            <div class="row no-gutters">
-              <div class="col-12 col-lg-7 col-xl-6">
-
-                <form action="<?= base_url('members/edit_alamat') ?>" method="post" enctype="multipart/form-data">
-
-                  <input type="hidden" name="id" value="<?= encrypt_url($row['id_alamat']) ?>">
-
-                  <div class="form-group">
-                    <label>Alamat</label>
+<div class="content-wrapper mt-3">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Ubah Alamat</h3>
+            </div>
+            <?= $this->session->flashdata('message') ?>
+            <form action="<?= base_url('main/edit_alamat') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+              <input type="hidden" name="id" value="<?= encrypt_url($row['id_alamat']) ?>">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Alamat</label>
+                  <div class="col-sm-6">
                     <textarea name="alamat" class="form-control" rows="5" required><?= $row['alamat']; ?></textarea>
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <label>Kecamatan</label>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Kecamatan</label>
+                  <div class="col-sm-6">
                     <input class='form-control' type='text' name='kec' value="<?= $row['kecamatan']; ?>" required>
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <label>Kota / Kabupaten</label>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Kota / Kabupaten</label>
+                  <div class="col-sm-6">
                     <select class='form-control select2' name='kab' required>
                       <option value=''>- Pilih -</option>
                       <?php
@@ -52,24 +41,26 @@
                       ?>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label>Kode Pos</label>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Kode Pos</label>
+                  <div class="col-sm-6">
                     <input class='form-control' min="0" minlength="5" maxlength="7" type='number' name='kode_pos' value='<?= $row['kode_pos']; ?>' required>
                   </div>
+                </div>
 
-
-                  <div class="form-group mt-5 mb-0">
-                    <button class="btn btn-primary" type="submit" name="submit">Simpan</button>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-6">
+                    <button type='submit' name='submit' class='btn btn-primary btn-sm'>Perbarui</button>
+                    <a href='<?= base_url('main/profile'); ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Batal</button></a>
                   </div>
-
-                </form>
-
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>

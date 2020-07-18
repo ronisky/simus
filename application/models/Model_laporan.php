@@ -1,16 +1,6 @@
 <?php
 class Model_laporan extends CI_model
 {
-    // function laporan1()
-    // {
-    //     $hari = date('Y-m-d');
-    //     $this->db->where("proses='3'");
-    //     $this->db->where("waktu_transaksi='$hari'");
-    //     $this->db->order_by('waktu_transaksi', 'asc');
-    //     return $this->db->get('tb_toko_penjualan');
-    // }
-    // Start Laporan Admin 
-    // laporan artikel 
     function laporan()
     {
         return $this->db->query("SELECT * FROM `tb_blog_artikel` ORDER BY tanggal DESC");
@@ -120,6 +110,43 @@ class Model_laporan extends CI_model
         $this->db->where("tgl_daftar > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
         $this->db->order_by('id_pengguna', 'desc');
         return $this->db->get('tb_pengguna');
+    }
+
+    function laporanSaranMasukan()
+    {
+        return $this->db->query("SELECT * FROM `tb_saran_masukan` ORDER BY tanggal DESC");
+    }
+
+    function laporanSaranMasukan1()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal='$hari'");
+        $this->db->order_by('tanggal', 'desc');
+        return $this->db->get('tb_saran_masukan');
+    }
+
+    function laporanSaranMasukan7()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->order_by('tanggal', 'desc');
+        return $this->db->get('tb_saran_masukan');
+    }
+
+    function laporanSaranMasukan30()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->order_by('tanggal', 'desc');
+        return $this->db->get('tb_saran_masukan');
+    }
+
+    function laporanSaranMasukan360()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->order_by('tanggal', 'desc');
+        return $this->db->get('tb_saran_masukan');
     }
     // End laporan admin 
 
@@ -602,5 +629,12 @@ class Model_laporan extends CI_model
         $this->db->where("negara='$negara'");
         $this->db->from('tb_pengunjung');
         return $this->db->get()->row()->jumlah;
+    }
+
+
+    // Penata 
+    function laporanKoleksi()
+    {
+        return $this->db->query("SELECT * FROM tb_koleksi AS k INNER JOIN tb_ukuran_koleksi AS u ON k.id_ukuran = u.id_ukuran ORDER BY tanggal_pencatatan DESC ");
     }
 }

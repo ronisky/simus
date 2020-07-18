@@ -9,66 +9,11 @@
         </a>
       </li>
 
-      <li class="nav-item has-treeview mt-1">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-th-large fa-fw"></i>
-          <p>
-            Modul Toko
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-
-          <li class="nav-item">
-            <a href="<?= base_url('admin/pesanan') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Pesanan</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?= base_url('admin/produk') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Produk</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?= base_url('admin/kategori_produk') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Kategori Produk</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?= base_url('admin/konsumen') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Konsumen</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?= base_url('admin/supplier') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Supplier</p>
-            </a>
-          </li>
-
-          <li class="nav-item mb-1">
-            <a href="<?= base_url('admin/rekening') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Rekening</p>
-            </a>
-          </li>
-
-        </ul>
-      </li>
-
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon far fa-newspaper fa-fw"></i>
           <p>
-            Modul Blog
+            Modul Postingan
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -120,10 +65,8 @@
               <p>Subscriber</p>
             </a>
           </li>
-
         </ul>
       </li>
-
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-globe-asia fa-fw"></i>
@@ -235,6 +178,12 @@
               <p>Laporan Pengguna</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('admin/laporanSaranMasukan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Lap Saran dan Masukan</p>
+            </a>
+          </li>
         </ul>
       </li>
 
@@ -245,29 +194,6 @@
         <p></p>
       </li>
 
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
-          <p>
-            Profile
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('admin/profile') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>My Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/password') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Password</p>
-            </a>
-          </li>
-        </ul>
-      </li>
     <?php } ?>
     <!-- /. Admin  -->
 
@@ -338,30 +264,6 @@
       </li>
       <li class="nav-item user-panel">
         <p></p>
-      </li>
-
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
-          <p>
-            Profile
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('koordinator/profile') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>My Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('koordinator/password') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Password</p>
-            </a>
-          </li>
-        </ul>
       </li>
     <?php } ?>
     <!-- /. Koordinator  -->
@@ -441,29 +343,7 @@
       <li class="nav-item user-panel">
         <p></p>
       </li>
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
-          <p>
-            Profile
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('resepsionis/profile') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>My Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('resepsionis/password') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Password</p>
-            </a>
-          </li>
-        </ul>
-      </li>
+
     <?php } ?>
     <!-- /. Resepsionis  -->
 
@@ -480,21 +360,15 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= base_url('penata/event') ?>" class="nav-link">
+            <a href="<?= base_url('penata/koleksi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Koleksi Museum</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('penata/kategori_event') ?>" class="nav-link">
+            <a href="<?= base_url('penata/kategori_koleksi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Kategori Koleksi</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/tag_event') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Pengajuan Koleksi</p>
             </a>
           </li>
         </ul>
@@ -510,21 +384,9 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= base_url('admin/laporan') ?>" class="nav-link">
+            <a href="<?= base_url('penata/laporanKoleksi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Postingan</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/laporanBerita') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Berita</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/laporanPengguna') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Laporan Pengguna</p>
+              <p>Laporan Koleksi</p>
             </a>
           </li>
         </ul>
@@ -535,34 +397,34 @@
       </li>
       <li class="nav-item user-panel">
         <p></p>
-      </li>
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
-          <p>
-            Profile
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('penata/profile') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>My Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('penata/password') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Password</p>
-            </a>
-          </li>
-        </ul>
       </li>
 
     <?php } ?>
     <!-- /. Penata Pameran  -->
 
+    <li class="nav-item has-treeview">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-user fa-fw"></i>
+        <p>
+          Profile
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="<?= base_url('main/profile') ?>" class="nav-link">
+            <i class="far fa-circle nav-icon text-sm"></i>
+            <p>My Profile</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?= base_url('main/password') ?>" class="nav-link">
+            <i class="far fa-circle nav-icon text-sm"></i>
+            <p>Password</p>
+          </a>
+        </li>
+      </ul>
+    </li>
     <li class="nav-item mt-1">
       <a href="javascript:void(0)" class="nav-link" onclick="logout()">
         <i class="nav-icon fas fa-sign-out-alt fa-fw"></i>

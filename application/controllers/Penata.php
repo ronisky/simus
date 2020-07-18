@@ -7,14 +7,7 @@ class Penata extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_app');
-        $this->load->model('model_main');
-        $this->load->model('model_menu');
-        $this->load->model('model_members');
         $this->load->model('model_laporan');
-        $this->load->model('model_rekening');
-        $this->load->model('model_berita');
-        $this->load->model('model_halaman');
-        $this->load->model('model_artikel');
         cek_session_penata();
     }
 
@@ -22,174 +15,260 @@ class Penata extends CI_Controller
     {
 
         if ($this->session->level == 4) {
-            redirect('penata/home');
+            redirect('penata/koleksi');
         } else {
             redirect('error404');
         }
     }
 
-    function home()
+    function kategori_koleksi()
     {
-        if (!empty($this->session->userdata())) {
 
-            $data['title'] = 'Penata Pameran - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['grap'] = $this->model_main->grafik_kunjungan();
+        $data['title'] = 'Kategori Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
 
-            $this->template->load('template/template', 'admin/view_dashboard', $data);
-        } else {
-            redirect('penata');
-        }
+        $this->template->load('template/template', 'penata/kategori_koleksi/view_kategori_koleksi', $data);
     }
 
-    // Modul event 
-    function event()
+    function tambah_kategori_koleksi()
     {
-        $data['title'] = 'Event - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $data['record'] = $this->model_artikel->list_artikel();
-        $this->template->load('template/template', 'admin/blog_artikel/view_artikel', $data);
-    }
 
-    // Profile 
-    function profile()
-    {
-        if (!empty($this->session->userdata())) {
-            $id = $this->session->id_pengguna;
-            $data['title'] = 'Profile Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $row = $this->db->get_where('tb_pengguna', "id_pengguna='$id'")->row_array();
-            $data['record'] = $row;
-            $id_alamat = $row['id_alamat'];
-            $data['rows'] = $this->model_app->alamat_konsumen($id_alamat)->row_array();
-            $this->template->load('template/template', 'penata/profile/view_profile', $data);
-        } else {
-            redirect('penata');
-        }
-    }
-
-    function edit_profile()
-    {
         if (isset($_POST['submit'])) {
-            $config['upload_path'] = 'assets/images/user/';
-            $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
-            $config['max_size'] = '1000'; // kb
+            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')));
+            $this->model_app->insert('tb_kategori_koleksi', $data);
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Kategori berhasil ditambahkan</center>
+          		</div>');
+            redirect('penata/kategori_koleksi');
+        } else {
+            $data['title'] = 'Tambah Kategori Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $this->template->load('template/template', 'penata/kategori_koleksi/view_kategori_koleksi_tambah', $data);
+        }
+    }
+
+    function edit_kategori_koleksi()
+    {
+        $id = $this->uri->segment(3);
+        if (isset($_POST['submit'])) {
+            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')));
+            $where = array('id_kategori_koleksi' => $this->input->post('id'));
+            $this->model_app->update('tb_kategori_koleksi', $data, $where);
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Kategori berhasil diperbaharui</center>
+          		</div>');
+            redirect('penata/kategori_koleksi');
+        } else {
+            $edit = $this->model_app->edit('tb_kategori_koleksi', array('id_kategori_koleksi' => $id))->row_array();
+            $data = array('rows' => $edit);
+            $data['title'] = 'Ubah Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $this->template->load('template/template', 'penata/kategori_koleksi/view_kategori_koleksi_edit', $data);
+        }
+    }
+
+    function delete_kategori_koleksi($id)
+    {
+        $where = array('id_kategori_koleksi' => $id);
+        $this->model_app->delete('tb_kategori_koleksi', $where);
+        echo json_encode(array("status" => TRUE));
+    }
+
+    function koleksi()
+    {
+        $data['title'] = 'Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_koleksi', 'nama_koleksi', 'ACS');
+        $this->template->load('template/template', 'penata/koleksi/view_koleksi', $data);
+    }
+
+    function tambah_koleksi()
+    {
+
+        if (isset($_POST['submit'])) {
+            $config['upload_path'] = 'assets/images/koleksi/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = '5000'; // kb
             $config['encrypt_name'] = TRUE;
             $this->load->library('upload', $config);
-            $this->upload->do_upload('g');
+            $this->upload->do_upload('foto');
             $hasil = $this->upload->data();
+            if ($hasil['file_name'] == '') {
+                $ukuran = array(
+                    'tinggi'    => htmlspecialchars($this->input->post('tg')),
+                    'panjang'   => htmlspecialchars($this->input->post('pjg')),
+                    'lebar'     => htmlspecialchars($this->input->post('lb')),
+                    'diameter'  => htmlspecialchars($this->input->post('dia')),
+                    'berat'     => htmlspecialchars($this->input->post('br'))
+                );
 
-            if ($hasil['file_name'] != '') {
+                $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
                 $data = array(
-                    'username' => $this->db->escape_str(strip_tags($this->input->post('a'))),
-                    'nama_lengkap' => $this->db->escape_str(strip_tags($this->input->post('b'))),
-                    'email' => $this->db->escape_str(strip_tags($this->input->post('aa'))),
-                    'jenis_kelamin' => $this->db->escape_str($this->input->post('d')),
-                    'tgl_lahir' => $this->db->escape_str($this->input->post('e')),
-                    'no_telp' => $this->db->escape_str(strip_tags($this->input->post('f'))),
-                    'foto' => $hasil['file_name'],
+                    'id_ukuran'             => $this->db->insert_id(),
+                    'id_kategori_koleksi'   => $this->input->post('kategori'),
+                    'nama_pencatat'         => $this->session->username,
+                    'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
+                    'tanggal_pencatatan'    => date('Y-m-d'),
+                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
+                    'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
+                    'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
+                    'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
+                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
                 );
             } else {
+                $ukuran = array(
+                    'tinggi'    => htmlspecialchars($this->input->post('tg')),
+                    'panjang'   => htmlspecialchars($this->input->post('pjg')),
+                    'lebar'     => htmlspecialchars($this->input->post('lb')),
+                    'diameter'  => htmlspecialchars($this->input->post('dia')),
+                    'berat'     => htmlspecialchars($this->input->post('br'))
+                );
+                $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
                 $data = array(
-                    'username' => $this->db->escape_str(strip_tags($this->input->post('a'))),
-                    'nama_lengkap' => $this->db->escape_str(strip_tags($this->input->post('b'))),
-                    'email' => $this->db->escape_str(strip_tags($this->input->post('aa'))),
-                    'jenis_kelamin' => $this->db->escape_str($this->input->post('d')),
-                    'tgl_lahir' => $this->db->escape_str($this->input->post('e')),
-                    'no_telp' => $this->db->escape_str(strip_tags($this->input->post('f')))
+                    'id_ukuran'             => $this->db->insert_id(),
+                    'id_kategori_koleksi'   => $this->input->post('kategori'),
+                    'nama_pencatat'         => $this->session->username,
+                    'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
+                    'tanggal_pencatatan'    => date('Y-m-d'),
+                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
+                    'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
+                    'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
+                    'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
+                    'foto'                => $hasil['file_name'],
+                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
                 );
             }
-            $where = array('username' => $this->input->post('id'));
-            $this->model_app->update('tb_pengguna', $data, $where);
 
+            $this->model_app->insert('tb_koleksi', $data);
             $this->session->set_flashdata('message', '
 				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Profile berhasil diperbaharui</center>
+            	<center>Tambah data berhasil</center>
           		</div>');
-
-            redirect('penata/profile/');
+            redirect('penata/koleksi');
         } else {
-            $data['title'] = 'Ubah Profil Saya';
-            $data['breadcrumb'] = 'Ubah Profil';
-            $data['row'] = $this->model_app->profile_konsumen($this->session->id_pengguna)->row_array();
-            $data['kota'] = $this->model_app->view('tb_kota');
-            $this->template->load('template/template', 'penata/profile/view_profile_edit', $data);
+
+            $data['title'] = 'Tambah Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
+            $this->template->load('template/template', 'penata/koleksi/view_koleksi_tambah', $data);
         }
     }
 
-    function edit_alamat()
+    function edit_koleksi()
     {
-        $row = $this->db->get_where('tb_pengguna', array('id_pengguna' => $this->session->id_pengguna))->row_array();
-        $id_alamat = $row['id_alamat'];
+
+        $id = $this->uri->segment(3);
         if (isset($_POST['submit'])) {
+            $config['upload_path'] = 'assets/images/koleksi/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = '5000'; // kb
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('foto');
+            $hasil = $this->upload->data();
+            if ($hasil['file_name'] == '') {
+                $ukuran = array(
+                    'tinggi'    => htmlspecialchars($this->input->post('tg')),
+                    'panjang'   => htmlspecialchars($this->input->post('pjg')),
+                    'lebar'     => htmlspecialchars($this->input->post('lb')),
+                    'diameter'  => htmlspecialchars($this->input->post('dia')),
+                    'berat'     => htmlspecialchars($this->input->post('br'))
+                );
+                $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
+                $data = array(
+                    'id_ukuran'             => $this->db->insert_id(),
+                    'id_kategori_koleksi'   => $this->input->post('kategori'),
+                    'nama_pencatat'         => $this->session->username,
+                    'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
+                    'tanggal_pencatatan'    => date('Y-m-d'),
+                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
+                    'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
+                    'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
+                    'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
+                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
+                );
+            } else {
+                $ukuran = array(
+                    'tinggi'    => htmlspecialchars($this->input->post('tg')),
+                    'panjang'   => htmlspecialchars($this->input->post('pjg')),
+                    'lebar'     => htmlspecialchars($this->input->post('lb')),
+                    'diameter'  => htmlspecialchars($this->input->post('dia')),
+                    'berat'     => htmlspecialchars($this->input->post('br'))
+                );
+                $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
+                $data = array(
+                    'id_ukuran'             => $this->db->insert_id(),
+                    'id_kategori_koleksi'   => $this->input->post('kategori'),
+                    'nama_pencatat'         => $this->session->username,
+                    'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
+                    'tanggal_pencatatan'    => date('Y-m-d'),
+                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
+                    'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
+                    'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
+                    'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
+                    'foto'                => $hasil['file_name'],
+                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
+                );
 
-            $data = array(
-                'alamat' => $this->db->escape_str(strip_tags($this->input->post('alamat'))),
-                'id_kota' => $this->db->escape_str(strip_tags($this->input->post('kab'))),
-                'kecamatan' => $this->db->escape_str(strip_tags($this->input->post('kec'))),
-                'kode_pos' => $this->db->escape_str(strip_tags($this->input->post('kode_pos')))
-            );
-            $this->model_app->alamat_update(decrypt_url($this->input->post('id')), $data);
+                $query = $this->db->get_where('tb_koleksi', array('id_koleksi' => $this->input->post('id')));
+                $row = $query->row();
+                $gambar = $row->foto;
+                $path = "assets/images/koleksi/";
+                unlink($path . $gambar);
+            }
+
+            $where = array('id_koleksi' => $this->input->post('id'));
+            $this->model_app->update('tb_koleksi', $data, $where);
             $this->session->set_flashdata('message', '
 				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Alamat berhasil diperbaharui</center>
+            	<center>Data berhasil diperbaharui</center>
           		</div>');
-            redirect('penata/profile/');
+            redirect('penata/koleksi');
         } else {
-            $data['title'] = 'Ubah Alamat Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['row'] = $this->db->get_where('tb_alamat', array('id_alamat' => $id_alamat))->row_array();
-            $data['kota'] = $this->model_app->view('tb_kota');
-            $this->template->load('template/template', 'penata/profile/view_alamat', $data);
+
+            $data['title'] = 'Edit - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
+            $data['uk'] = $this->model_app->edit('tb_ukuran_koleksi', array('id_ukuran' => $id))->row_array();
+            $data['rows'] = $this->model_app->edit('tb_koleksi', array('id_koleksi' => $id))->row_array();
+            $this->template->load('template/template', 'penata/koleksi/view_koleksi_edit', $data);
         }
     }
 
-    function password()
+    function detail_koleksi()
     {
-        if (!empty($this->session->userdata())) {
-            $id = $this->session->id_pengguna;
-            $pass = $this->input->post('pass');
-            $pass_new = $this->input->post('pass1');
+        $id = $this->uri->segment(3);
+        $data['title'] = 'Edit - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
+        $data['uk'] = $this->model_app->edit('tb_ukuran_koleksi', array('id_ukuran' => $id))->row_array();
+        $data['rows'] = $this->model_app->edit('tb_koleksi', array('id_koleksi' => $id))->row_array();
+        $this->template->load('template/template', 'penata/koleksi/view_koleksi_detail', $data);
+    }
 
-            $this->form_validation->set_rules('pass1', 'Password', 'required|trim|min_length[6]', [
-                'min_length' => 'Password terlalu pendek',
-                'required' => 'Password baru wajib diisi'
-            ]);
+    function delete_koleksi($id)
+    {
+        $query = $this->db->get_where('tb_koleksi', array('id_koleksi' => $id));
+        $row = $query->row();
+        $gambar = $row->foto;
+        $q = $row->id_ukuran;
+        $path = "assets/images/koleksi/";
+        unlink($path . $gambar);
 
-            $this->form_validation->set_rules('pass2', 'Password', 'required|trim|matches[pass1]', [
-                'matches' => 'Password tidak sama',
-                'required' => 'Konfirmasi password baru wajib diisi'
-            ]);
+        $sql = "DELETE tb_koleksi,Tb_ukuran_koleksi
+        FROM tb_koleksi,Tb_ukuran_koleksi
+        WHERE tb_koleksi.id_ukuran=tb_ukuran_koleksi.id_ukuran
+        AND tb_koleksi.id_ukuran= $q";
 
-            $this->form_validation->set_rules('pass', 'Password', 'required|trim', [
-                'required' => 'Password saat ini wajib diisi'
-            ]);
+        $this->db->query($sql, array($id));
 
-            if ($this->form_validation->run() == FALSE) {
+        echo json_encode(array("status" => TRUE));
+    }
 
-                $data['title'] = 'Ganti Password - Museum Monumen Perjuangan Rakyat Jawa Barat';
-                $this->template->load('template/template', 'penata/profile/view_password', $data);
-            } else {
-
-                $this->db->from('tb_pengguna');
-                $this->db->where("(tb_pengguna.id_pengguna = '$id')");
-                $user = $this->db->get()->row_array();
-
-                if (password_verify($pass, $user['password'])) {
-                    $data = array('password' => password_hash($pass_new, PASSWORD_DEFAULT));
-                    $where = array('id_pengguna' => $id);
-                    $this->model_app->update('tb_pengguna', $data, $where);
-                    $this->session->set_flashdata('message', '
-				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Profile berhasil diperbaharui</center>
-          		</div>');
-                    redirect('penata/password');
-                } else {
-                    $this->session->set_flashdata('message1', '
-				<div class="alert alert-danger col-sm-12" role="alert">
-            	<center>Password salah</center>
-				</div>');
-                    redirect('penata/password');
-                }
-            }
-        } else {
-            redirect('penata');
-        }
+    function laporanKoleksi()
+    {
+        $data['title'] = 'Laporan Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanKoleksi();
+        $this->template->load('template/template', 'penata/laporan/view_lap_koleksi', $data);
     }
 }

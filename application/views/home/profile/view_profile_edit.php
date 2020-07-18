@@ -1,89 +1,96 @@
-<div class="block">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-3 d-flex">
-        <div class="account-nav flex-grow-1">
-          <ul>
-            <li class="account-nav__item"><a href="<?= base_url('members/dashboard') ?>">Dashboard</a></li>
-            <li class="account-nav__item account-nav__item--active"><a href="<?= base_url('members/edit_profile') ?>">Ubah Profil</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/edit_alamat') ?>">Ubah Alamat</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/riwayat_belanja') ?>">Riwayat Transaksi</a></li>
-            <li class="account-nav__item"><a href="<?= base_url('members/password') ?>">Ganti Password</a></li>
-            <li class="account-nav__item"><a href="javascript:void(0)" onclick="logout()">Keluar</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-12 col-lg-9 mt-4 mt-lg-0">
-        <div class="card">
-          <div class="card-header">
-            <h5>Ubah Profil</h5>
-          </div>
-          <div class="card-divider"></div>
-          <div class="card-body">
-            <div class="row no-gutters">
-              <div class="col-12 col-lg-7 col-xl-6">
-
-                <form action="<?= base_url('members/edit_profile') ?>" method="post" enctype="multipart/form-data">
-
-                  <input type="hidden" name="id" value="<?= encrypt_url($row['id_pengguna']) ?>">
-
-                  <div class="form-group">
-                    <label>Email</label>
-                    <input class='email form-control' type='email' name='c' value='<?= $row['email']; ?>' required readonly>
+<div class="content-wrapper mt-3">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Ubah Profile</h3>
+            </div>
+            <?= $this->session->flashdata('message') ?>
+            <form action="<?= base_url('main/edit_profile') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+              <div class="card-body">
+                <input type="hidden" name="id" value="<?= $row['username'] ?>">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-6">
+                    <input type='email' class='form-control' name='aa' value='<?= $row['email'] ?>' readonly='on'>
                   </div>
+                </div>
 
-                  <div class=" form-group">
-                    <label>Username</label>
-                    <input class='form-control' name='aa' type='text' value='<?= $row['username'] ?>' required readonly>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Username</label>
+                  <div class="col-sm-6">
+                    <input type='username' class='form-control' name='a' value='<?= $row['username'] ?>' readonly='on'>
                   </div>
+                </div>
 
-                  <hr>
-
-                  <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input class='form-control' type='text' name='b' value='<?= $row['nama_lengkap']; ?>' required>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Nama Lengkap</label>
+                  <div class="col-sm-6">
+                    <input type='text' class='form-control' name='b' value='<?= $row['nama_lengkap'] ?>'>
                   </div>
-
-                  <div class="form-group">
-                    <label>Tanggal Lahir</label>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                  <?php
+                  if ($row['jenis_kelamin'] == 'Laki-laki') { ?>
+                    <div class="col-sm-6">
+                      <input class="mr-2" type='radio' value='Laki-laki' name='d' checked> Laki-laki
+                      <input class="mr-2 ml-5" type='radio' value='Perempuan' name='d'> Perempuan
+                    </div>
+                  <?php } else { ?>
+                    <div class="col-sm-6">
+                      <input type='radio' value='Laki-laki' name='d'> &nbsp; Laki-laki
+                      <input class="ml-3" type='radio' value='Perempuan' name='d' checked> &nbsp; Perempuan
+                    </div>
+                  <?php }
+                  ?>
+                </div>
+                <!-- <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                  <div class="col-sm-3">
                     <input class='datepicker form-control' type='text' name='e' value='<?= $row['tgl_lahir']; ?>' required>
                   </div>
-
-                  <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <br>
-                    <?php
-                    if ($row['jenis_kelamin'] == 'Laki-laki') { ?>
-                      <div class="form-check-inline single-ship">
-                        <input class="mr-2" type='radio' value='Laki-laki' name='d' checked> Laki-laki
-                        <input class="mr-2 ml-5" type='radio' value='Perempuan' name='d'> Perempuan
-                      </div>
-                    <?php } else { ?>
-                      <div class="form-check-inline single-ship">
-                        <input type='radio' value='Laki-laki' name='d'> &nbsp; Laki-laki
-                        <input class="ml-3" type='radio' value='Perempuan' name='d' checked> &nbsp; Perempuan
-                      </div>
-                    <?php }
-                    ?>
-
+                </div> -->
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">No. Telp</label>
+                  <div class="col-sm-6">
+                    <input type='number' class='form-control' name='f' value='<?= $row['no_telp'] ?>'>
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class='number form-control' type='number' name='l' min="0" minlength="10" value='<?= $row['no_telp']; ?>' required>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Ganti Foto</label>
+                  <div class="col-sm-6">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFileLangHTML" name="g">
+                      <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih foto...</label>
+                    </div>
                   </div>
+                </div>
 
-                  <div class="form-group mt-5 mb-0">
-                    <button class="btn btn-primary" type="submit" name="submit">Simpan</button>
+                <?php
+                if ($row['foto'] != '') { ?>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Foto Saat Ini</label>
+                    <div class="col-sm-6">
+                      <img src="<?= base_url('assets/images/user/') . $row['foto'] ?>" alt="" style="height: 150px">
+                    </div>
                   </div>
-
-                </form>
-
+                <?php } ?>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-6">
+                    <button type='submit' name='submit' class='btn btn-primary btn-sm'>Perbarui</button>
+                    <a href='<?= base_url('main/profile'); ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Batal</button></a>
+                  </div>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>

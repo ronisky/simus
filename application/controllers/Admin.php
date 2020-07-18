@@ -9,9 +9,7 @@ class Admin extends CI_Controller
 		$this->load->model('model_app');
 		$this->load->model('model_main');
 		$this->load->model('model_menu');
-		$this->load->model('model_members');
 		$this->load->model('model_laporan');
-		$this->load->model('model_rekening');
 		$this->load->model('model_berita');
 		$this->load->model('model_halaman');
 		$this->load->model('model_artikel');
@@ -33,479 +31,14 @@ class Admin extends CI_Controller
 		if (!empty($this->session->userdata())) {
 
 			$data['title'] = 'Admin - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$data['grap'] = $this->model_main->grafik_kunjungan();
+			$data['grapweb'] = $this->model_main->grafik_kunjungan_web();
+			$data['grappengunjung'] = $this->model_main->grafik_kunjungan_museum();
 
 			$this->template->load('template/template', 'admin/view_dashboard', $data);
 		} else {
 			redirect('admin');
 		}
 	}
-
-	function kategori_produk()
-	{
-
-		$data['title'] = 'Kategori Produk - Zamanet Store';
-		$data['record'] = $this->model_app->view_ordering('tb_toko_kategoriproduk', 'id_kategori_produk', 'DESC');
-
-		$this->template->load('admin/template', 'admin/kategori_produk/view_kategori_produk', $data);
-	}
-
-	function tambah_kategori_produk()
-	{
-
-		if (isset($_POST['submit'])) {
-			$data = array('nama_kategori' => $this->input->post('a'), 'kategori_seo' => seo_title($this->input->post('a')));
-			$this->model_app->insert('tb_toko_kategoriproduk', $data);
-			redirect('admin/kategori_produk');
-		} else {
-
-			$data['title'] = 'Tambah Kategori Produk - Zamanet Store';
-			$this->template->load('admin/template', 'admin/kategori_produk/view_kategori_produk_tambah', $data);
-		}
-	}
-
-	function edit_kategori_produk()
-	{
-
-		$id = $this->uri->segment(3);
-		if (isset($_POST['submit'])) {
-			$data = array('nama_kategori' => $this->input->post('a'), 'kategori_seo' => seo_title($this->input->post('a')));
-			$where = array('id_kategori_produk' => $this->input->post('id'));
-			$this->model_app->update('tb_toko_kategoriproduk', $data, $where);
-			redirect('admin/kategori_produk');
-		} else {
-			$edit = $this->model_app->edit('tb_toko_kategoriproduk', array('id_kategori_produk' => $id))->row_array();
-			$data = array('rows' => $edit);
-
-			$data['title'] = 'Ubah Produk - Zamanet Store';
-			$this->template->load('admin/template', 'admin/kategori_produk/view_kategori_produk_edit', $data);
-		}
-	}
-
-	function delete_kategori_produk($id)
-	{
-		$where = array('id_kategori_produk' => $id);
-		$this->model_app->delete('tb_toko_kategoriproduk', $where);
-		echo json_encode(array("status" => TRUE));
-	}
-
-	function produk()
-	{
-		$data['title'] = 'Produk - Zamanet Store';
-		$data['record'] = $this->model_app->view_ordering('tb_toko_produk', 'nama_produk', 'ACS');
-		$this->template->load('admin/template', 'admin/produk/view_produk', $data);
-	}
-
-	function tambah_produk()
-	{
-
-		if (isset($_POST['submit'])) {
-			$config['upload_path'] = 'assets/images/produk/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['max_size'] = '5000'; // kb
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('g');
-			$hasil = $this->upload->data();
-			if ($hasil['file_name'] == '') {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'keterangan' => $this->input->post('ff'),
-					'waktu_input' => date('Y-m-d H:i:s'),
-
-				);
-			} else {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'gambar' => $hasil['file_name'],
-					'keterangan' => $this->input->post('ff'),
-					'waktu_input' => date('Y-m-d H:i:s'),
-
-				);
-			}
-			$this->model_app->insert('tb_toko_produk', $data);
-			redirect('admin/produk');
-		} else {
-
-			$data['title'] = 'Tambah Produk - Zamanet Store';
-			$data['record'] = $this->model_app->view_ordering('tb_toko_kategoriproduk', 'id_kategori_produk', 'DESC');
-			$data['supp'] = $this->model_app->view_ordering('tb_toko_supplier', 'id_supplier', 'DESC');
-			$this->template->load('admin/template', 'admin/produk/view_produk_tambah', $data);
-		}
-	}
-
-	function edit_produk()
-	{
-
-		$id = $this->uri->segment(3);
-		if (isset($_POST['submit'])) {
-			$config['upload_path'] = 'assets/images/produk/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['max_size'] = '5000'; // kb
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('g');
-			$hasil = $this->upload->data();
-			if ($hasil['file_name'] == '') {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'keterangan' => $this->input->post('ff'),
-				);
-			} else {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'gambar' => $hasil['file_name'],
-					'keterangan' => $this->input->post('ff')
-				);
-				$query = $this->db->get_where('tb_toko_produk', array('id_produk' => $this->input->post('id')));
-				$row = $query->row();
-				$foto = $row->gambar;
-				$path = "assets/images/produk/";
-				unlink($path . $foto);
-			}
-
-			$where = array('id_produk' => $this->input->post('id'));
-			$this->model_app->update('tb_toko_produk', $data, $where);
-			redirect('admin/produk');
-		} else {
-
-			$data['title'] = 'Edit - Zamanet Store';
-			$data['supp'] = $this->model_app->view_ordering('tb_toko_supplier', 'id_supplier', 'DESC');
-			$data['record'] = $this->model_app->view_ordering('tb_toko_kategoriproduk', 'id_kategori_produk', 'DESC');
-			$data['rows'] = $this->model_app->edit('tb_toko_produk', array('id_produk' => $id))->row_array();
-			$this->template->load('admin/template', 'admin/produk/view_produk_edit', $data);
-		}
-	}
-
-	function delete_produk($id)
-	{
-		$where = array('id_produk' => $id);
-		$this->model_app->delete('tb_toko_produk', $where);
-		echo json_encode(array("status" => TRUE));
-	}
-
-
-	function rekening()
-	{
-
-		$data['title'] = 'Rekening - Zamanet Store';
-		$data['record'] = $this->model_rekening->rekening();
-		$this->template->load('admin/template', 'admin/rekening/view_rekening', $data);
-	}
-
-
-	function tambah_rekening()
-	{
-
-		if (isset($_POST['submit'])) {
-			$this->model_rekening->rekening_tambah();
-			redirect('admin/rekening');
-		} else {
-
-			$data['title'] = 'Tambah Rekening - Zamanet Store';
-			//$this->load->view('admin/rekening/view_rekening_tambah');
-			$this->template->load('admin/template', 'admin/rekening/view_rekening_tambah');
-		}
-	}
-
-	function edit_rekening()
-	{
-
-		$id = $this->uri->segment(3);
-		if (isset($_POST['submit'])) {
-			$this->model_rekening->rekening_update();
-			redirect('admin/rekening');
-		} else {
-
-			$data['title'] = 'Edit Rekening - Zamanet Store';
-			$data['rows'] = $this->model_rekening->rekening_edit($id)->row_array();
-			$this->template->load('admin/template', 'admin/rekening/view_rekening_edit', $data);
-		}
-	}
-
-	function delete_rekening($id)
-	{
-		$this->model_rekening->rekening_delete($id);
-		echo json_encode(array("status" => TRUE));
-	}
-
-
-	function tracking()
-	{
-		cek_session();
-		if ($this->uri->segment(3) != '') {
-			$kode_transaksi = filter($this->uri->segment(3));
-			$data['title'] = 'Tracking Order ' . $kode_transaksi;
-			$data['rows'] = $this->db->query("SELECT * FROM tb_toko_penjualan a JOIN tb_pengguna b ON a.id_pembeli=b.id_pengguna JOIN tb_alamat c ON b.id_alamat=c.id_alamat JOIN tb_kota d ON c.id_kota=d.kota_id where a.kode_transaksi='$kode_transaksi'")->row_array();
-			$data['record'] = $this->db->query("SELECT a.kode_transaksi, b.*, c.nama_produk, c.satuan, c.berat, c.diskon, c.produk_seo FROM `tb_toko_penjualan` a JOIN tb_toko_penjualandetail b ON a.id_penjualan=b.id_penjualan JOIN tb_toko_produk c ON b.id_produk=c.id_produk where a.kode_transaksi='" . $kode_transaksi . "'");
-			$data['total'] = $this->db->query("SELECT a.id_penjualan, a.kode_transaksi, a.kurir, a.resi, a.service, a.proses, a.ongkir, sum((b.harga_jual*b.jumlah)-(c.diskon*b.jumlah)) as total, sum(c.berat*b.jumlah) as total_berat FROM `tb_toko_penjualan` a JOIN tb_toko_penjualandetail b ON a.id_penjualan=b.id_penjualan JOIN tb_toko_produk c ON b.id_produk=c.id_produk where a.kode_transaksi='" . $kode_transaksi . "'")->row_array();
-
-			$this->template->load('admin/template', 'admin/penjualan/view_tracking', $data);
-		}
-	}
-
-
-	function supplier()
-	{
-
-		$data['title'] = 'Supplier - Zamanet Store';
-		$pengguna = $this->session->id_pengguna;
-		$data['record'] = $this->model_app->view_ordering('tb_toko_supplier', 'id_supplier', 'DESC');
-		$this->template->load('admin/template', 'admin/supplier/view_supplier', $data);
-	}
-
-	function tambah_supplier()
-	{
-
-		if (isset($_POST['submit'])) {
-			$data = array(
-				'nama_supplier' => $this->input->post('a'),
-				'kontak_person' => $this->input->post('b'),
-				'alamat_lengkap' => $this->input->post('c'),
-				'alamat_email' => $this->input->post('e'),
-				'kode_pos' => $this->input->post('f'),
-				'no_telpon' => $this->input->post('g'),
-				'fax' => $this->input->post('h'),
-				'katerangan' => $this->input->post('i'),
-				'id_pengguna' => $this->session->id_pengguna
-			);
-			$this->model_app->insert('tb_toko_supplier', $data);
-			redirect('admin/supplier');
-		} else {
-
-			$data['title'] = 'Tambah Supplier - Zamanet Store';
-			$this->template->load('admin/template', 'admin/supplier/view_supplier_tambah', $data);
-		}
-	}
-
-	function edit_supplier()
-	{
-
-		$id = $this->uri->segment(3);
-		if (isset($_POST['submit'])) {
-			$data = array(
-				'nama_supplier' => $this->input->post('a'),
-				'kontak_person' => $this->input->post('b'),
-				'alamat_lengkap' => $this->input->post('c'),
-				'alamat_email' => $this->input->post('e'),
-				'kode_pos' => $this->input->post('f'),
-				'no_telpon' => $this->input->post('g'),
-				'fax' => $this->input->post('h'),
-				'katerangan' => $this->input->post('i')
-			);
-			$where = array('id_supplier' => $this->input->post('id'));
-			$this->model_app->update('tb_toko_supplier', $data, $where);
-			redirect('admin/supplier');
-		} else {
-
-			$data['title'] = 'Edit Supplier - Zamanet Store';
-			$proses = $this->model_app->edit('tb_toko_supplier', array('id_supplier' => $id))->row_array();
-			$data = array('rows' => $proses);
-			$this->template->load('admin/template', 'admin/supplier/view_supplier_edit', $data);
-		}
-	}
-
-	function delete_supplier($id)
-	{
-
-		$where = array('id_supplier' => $id);
-		$this->model_app->delete('tb_toko_supplier', $where);
-		echo json_encode(array("status" => TRUE));
-	}
-
-	function konsumen()
-	{
-		$data['title'] = 'Konsumen - Zamanet Store';
-		$data['record'] = $this->model_app->view_where_ordering('tb_pengguna', "level='2'", 'id_pengguna', 'ASC');
-		$this->template->load('admin/template', 'admin/konsumen/view_konsumen', $data);
-	}
-
-	function edit_konsumen()
-	{
-
-		$id = $this->uri->segment(3);
-		if (isset($_POST['submit'])) {
-			$this->model_members->profile_update($this->input->post('id'));
-			redirect('admin/konsumen');
-		} else {
-
-			$data['title'] = 'Ubah Konsumen - Zamanet Store';
-			$data['row'] = $this->model_app->profile_konsumen($id)->row_array();
-			$data['kota'] = $this->model_app->view('tb_kota');
-			$this->template->load('admin/template', 'admin/konsumen/view_konsumen_edit', $data);
-		}
-	}
-
-	function detail_konsumen()
-	{
-
-		$id = $this->uri->segment(3);
-		$record = $this->model_app->orders_report($id);
-		$edit = $this->model_app->profile_konsumen($id)->row_array();
-		$data = array('rows' => $edit, 'record' => $record);
-		$data['title'] = 'Detail Konsumen - Zamanet Store';
-		$this->template->load('admin/template', 'admin/konsumen/view_konsumen_detail', $data);
-	}
-
-	function delete_konsumen($id)
-	{
-
-		$where = array('id_konsumen' => $id);
-		$this->model_app->delete('tb_toko_konsumen', $where);
-		echo json_encode(array("status" => TRUE));
-	}
-
-
-	function pesanan()
-	{
-
-
-		$data['title'] = 'Laporan Pesanan Masuk';
-
-		$data['record'] = $this->model_app->orders_report_all();
-
-		$this->template->load('admin/template', 'admin/penjualan/view_pesanan_laporan', $data);
-	}
-
-	function print_pesanan()
-	{
-		cek_session();
-		$data['title'] = 'Laporan Pesanan Masuk';
-		$data['record'] = $this->model_app->orders_report_all();
-		$data['iden'] = $this->model_main->identitas()->row_array();
-		$this->load->view('admin/penjualan/view_orders_report_print', $data);
-	}
-
-	function konfirmasi()
-	{
-		cek_session();
-		$data['title'] = 'Konfirmasi Pembayaran Pesanan';
-		$data['record'] = $this->model_app->konfirmasi_bayar();
-		$this->template->load('admin/template', 'admin/penjualan/view_konfirmasi_bayar', $data);
-	}
-
-	function pesanan_status()
-	{
-
-
-		$data = array('proses' => $this->uri->segment(4));
-		$where = array('id_penjualan' => $this->uri->segment(3));
-		$this->model_app->update('tb_toko_penjualan', $data, $where);
-		redirect('admin/pesanan');
-	}
-
-	function pesanan_status2()
-	{
-
-		$kode = $this->uri->segment(5);
-		$data = array('proses' => $this->uri->segment(4));
-		$where = array('id_penjualan' => $this->uri->segment(3));
-		$this->model_app->update('tb_toko_penjualan', $data, $where);
-		redirect('admin/tracking/' . $kode);
-	}
-
-	function pesanan_dikirim()
-	{
-		$data = array('proses' => $this->uri->segment(4));
-		$where = array('id_penjualan' => $this->uri->segment(3));
-		$this->model_app->update('tb_toko_penjualan', $data, $where);
-		$data['title'] = 'Input Resi';
-		$query = $this->model_app->edit('tb_toko_penjualan', array('id_penjualan' => $this->uri->segment(3)))->row_array();
-		$data = array('rows' => $query);
-
-
-		$data['title'] = 'Masukan Resi - Zamanet Store';
-		$this->template->load('admin/template', 'admin/penjualan/view_resi', $data);
-	}
-
-	function pesanan_dikirim2()
-	{
-
-		$data = array('proses' => $this->uri->segment(4));
-		$where = array('id_penjualan' => $this->uri->segment(3));
-		$this->model_app->update('tb_toko_penjualan', $data, $where);
-		$data['title'] = 'Input Resi';
-		$query = $this->model_app->edit('tb_toko_penjualan', array('id_penjualan' => $this->uri->segment(3)))->row_array();
-		$data = array('rows' => $query);
-
-		$data['title'] = 'Masukan Resi - Zamanet Store';
-		$this->template->load('admin/template', 'admin/penjualan/view_resi', $data);
-	}
-
-	function resi()
-	{
-
-		$kode = $this->input->post('kode');
-		$uri2 = $this->input->post('uri2');
-		$id = $this->input->post('id');
-		if (isset($_POST['submit'])) {
-			$data = array('resi' => $this->input->post('resi'));
-			$where = array('id_penjualan' => $id);
-			$this->model_app->update('tb_toko_penjualan', $data, $where);
-
-			$data1 = array(
-				'proses'    => '3'
-			);
-			$this->db->where('id_penjualan', $id);
-			$this->db->update('tb_toko_penjualan', $data1);
-
-			if ($uri2 == 'pesanan_dikirim2') {
-				redirect('admin/tracking/' . $kode);
-			} else {
-				redirect('admin/pesanan');
-			}
-		}
-	}
-
-	function logout()
-	{
-		$this->session->sess_destroy();
-		redirect(base_url());
-	}
-
-	public function download_file()
-	{
-		$name = $this->uri->segment(3);
-		$data = file_get_contents("assets/images/bukti/" . $name);
-		force_download($name, $data);
-	}
-
 
 	// Modul Web
 	function website()
@@ -949,152 +482,29 @@ class Admin extends CI_Controller
 		}
 	}
 
-	// Profile 
-
-	function profile()
-	{
-		$id = $this->session->id_pengguna;
-		$data['title'] = 'Profile Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$row = $this->db->get_where('tb_pengguna', "id_pengguna='$id'")->row_array();
-		$data['record'] = $row;
-		$id_alamat = $row['id_alamat'];
-		$data['rows'] = $this->model_app->alamat_konsumen($id_alamat)->row_array();
-		$this->template->load('template/template', 'admin/profile/view_profile', $data);
-	}
-
-	function edit_profile()
-	{
-		if (isset($_POST['submit'])) {
-			$config['upload_path'] = 'assets/images/user/';
-			$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
-			$config['max_size'] = '1000'; // kb
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('g');
-			$hasil = $this->upload->data();
-
-			if ($hasil['file_name'] != '') {
-				$data = array(
-					'username' => $this->db->escape_str(strip_tags($this->input->post('a'))),
-					'nama_lengkap' => $this->db->escape_str(strip_tags($this->input->post('b'))),
-					'email' => $this->db->escape_str(strip_tags($this->input->post('aa'))),
-					'jenis_kelamin' => $this->db->escape_str($this->input->post('d')),
-					'tgl_lahir' => $this->db->escape_str($this->input->post('e')),
-					'no_telp' => $this->db->escape_str(strip_tags($this->input->post('f'))),
-					'foto' => $hasil['file_name'],
-				);
-			} else {
-				$data = array(
-					'username' => $this->db->escape_str(strip_tags($this->input->post('a'))),
-					'nama_lengkap' => $this->db->escape_str(strip_tags($this->input->post('b'))),
-					'email' => $this->db->escape_str(strip_tags($this->input->post('aa'))),
-					'jenis_kelamin' => $this->db->escape_str($this->input->post('d')),
-					'tgl_lahir' => $this->db->escape_str($this->input->post('e')),
-					'no_telp' => $this->db->escape_str(strip_tags($this->input->post('f')))
-				);
-			}
-			$where = array('username' => $this->input->post('id'));
-			$this->model_app->update('tb_pengguna', $data, $where);
-
-			$this->session->set_flashdata('message', '
-				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Profile berhasil diperbaharui</center>
-          		</div>');
-
-			redirect('admin/profile/');
-		} else {
-			$data['title'] = 'Ubah Profil Saya';
-			$data['breadcrumb'] = 'Ubah Profil';
-			$data['row'] = $this->model_app->profile_konsumen($this->session->id_pengguna)->row_array();
-			$data['kota'] = $this->model_app->view('tb_kota');
-			$this->template->load('template/template', 'admin/profile/view_profile_edit', $data);
-		}
-	}
-
-	function edit_alamat()
-	{
-		$row = $this->db->get_where('tb_pengguna', array('id_pengguna' => $this->session->id_pengguna))->row_array();
-		$id_alamat = $row['id_alamat'];
-		if (isset($_POST['submit'])) {
-
-			$data = array(
-				'alamat' => $this->db->escape_str(strip_tags($this->input->post('alamat'))),
-				'id_kota' => $this->db->escape_str(strip_tags($this->input->post('kab'))),
-				'kecamatan' => $this->db->escape_str(strip_tags($this->input->post('kec'))),
-				'kode_pos' => $this->db->escape_str(strip_tags($this->input->post('kode_pos')))
-			);
-			$this->model_app->alamat_update(decrypt_url($this->input->post('id')), $data);
-			$this->session->set_flashdata('message', '
-				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Alamat berhasil diperbaharui</center>
-          		</div>');
-			redirect('admin/profile/');
-		} else {
-			$data['title'] = 'Ubah Alamat Saya - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$data['row'] = $this->db->get_where('tb_alamat', array('id_alamat' => $id_alamat))->row_array();
-			$data['kota'] = $this->model_app->view('tb_kota');
-			$this->template->load('template/template', 'admin/profile/view_alamat', $data);
-		}
-	}
-
-	function password()
-	{
-		$id = $this->session->id_pengguna;
-		$pass = $this->input->post('pass');
-		$pass_new = $this->input->post('pass1');
-
-		$this->form_validation->set_rules('pass1', 'Password', 'required|trim|min_length[6]', [
-			'min_length' => 'Password terlalu pendek',
-			'required' => 'Password baru wajib diisi'
-		]);
-
-		$this->form_validation->set_rules('pass2', 'Password', 'required|trim|matches[pass1]', [
-			'matches' => 'Password tidak sama',
-			'required' => 'Konfirmasi password baru wajib diisi'
-		]);
-
-		$this->form_validation->set_rules('pass', 'Password', 'required|trim', [
-			'required' => 'Password saat ini wajib diisi'
-		]);
-
-		if ($this->form_validation->run() == FALSE) {
-
-			$data['title'] = 'Ganti Password - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$this->template->load('template/template', 'admin/profile/view_password', $data);
-		} else {
-
-			$this->db->from('tb_pengguna');
-			$this->db->where("(tb_pengguna.id_pengguna = '$id')");
-			$user = $this->db->get()->row_array();
-
-			if (password_verify($pass, $user['password'])) {
-				$data = array('password' => password_hash($pass_new, PASSWORD_DEFAULT));
-				$where = array('id_pengguna' => $id);
-				$this->model_app->update('tb_pengguna', $data, $where);
-				$this->session->set_flashdata('message', '
-				<div class="alert alert-success col-sm-12" role="alert">
-            	<center>Profile berhasil diperbaharui</center>
-          		</div>');
-				redirect('admin/password');
-			} else {
-				$this->session->set_flashdata('message1', '
-				<div class="alert alert-danger col-sm-12" role="alert">
-            	<center>Password salah</center>
-				</div>');
-				redirect('admin/password');
-			}
-		}
-	}
 
 	function saranMasukan()
 	{
 		$data['title'] = 'Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id DESC")->result_array();
-		$this->template->load('template/template', 'admin/saranMasukan/view_saran_masukan', $data);
+		$data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id_saran_masukan DESC")->result_array();
+		$this->template->load('template/template', 'admin/saran_masukan/view_saran_masukan', $data);
+	}
+	function detail_saran_masukan()
+	{
+		$id = $this->uri->segment(3);
+		$data['title'] = 'Detail Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_app->edit('tb_saran_masukan', array('id_saran_masukan' => $id))->row_array();
+		$this->template->load('template/template', 'admin/saran_masukan/view_saran_masukan_detail', $data);
+	}
+
+	function delete_saran_masukan($id)
+	{
+		$where = array('id_saran_masukan' => $id);
+		$this->model_app->delete('tb_saran_masukan', $where);
+		echo json_encode(array("status" => TRUE));
 	}
 
 	// Modul Berita
-
 	function newsletter()
 	{
 
@@ -1273,5 +683,41 @@ class Admin extends CI_Controller
 		$data['title'] = 'Laporan Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
 		$data['record'] = $this->model_laporan->laporanPengguna360();
 		$this->template->load('template/template', 'admin/laporan/view_lap_pengguna', $data);
+	}
+
+	// Saran Masukan 
+	function laporanSaranMasukan()
+	{
+		$data['title'] = 'Laporan Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_laporan->laporanSaranMasukan();
+		$this->template->load('template/template', 'admin/laporan/view_lap_saran_masukan', $data);
+	}
+
+	function laporanSaranMasukan_hari()
+	{
+		$data['title'] = 'Laporan Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_laporan->laporanSaranMasukan1();
+		$this->template->load('template/template', 'admin/laporan/view_lap_saran_masukan', $data);
+	}
+
+	function laporanSaranMasukan_minggu()
+	{
+		$data['title'] = 'Laporan Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_laporan->laporanSaranMasukan7();
+		$this->template->load('template/template', 'admin/laporan/view_lap_saran_masukan', $data);
+	}
+
+	function laporanSaranMasukan_bulan()
+	{
+		$data['title'] = 'Laporan Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_laporan->laporanSaranMasukan30();
+		$this->template->load('template/template', 'admin/laporan/view_lap_saran_masukan', $data);
+	}
+
+	function laporanSaranMasukan_tahun()
+	{
+		$data['title'] = 'Laporan Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['record'] = $this->model_laporan->laporanSaranMasukan360();
+		$this->template->load('template/template', 'admin/laporan/view_lap_saran_masukan', $data);
 	}
 }

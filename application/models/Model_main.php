@@ -300,9 +300,13 @@ class Model_main extends CI_model
         $this->email->initialize($config);
     }
 
-    function grafik_kunjungan()
+    function grafik_kunjungan_web()
     {
         return $this->db->query("SELECT count(*) as jumlah, tanggal FROM tb_statistik GROUP BY tanggal ORDER BY tanggal DESC LIMIT 10");
+    }
+    function grafik_kunjungan_museum()
+    {
+        return $this->db->query("SELECT count(*) as jumlah, tanggal FROM tb_pengunjung GROUP BY tanggal ORDER BY tanggal DESC LIMIT 10");
     }
 
     function kunjungan()
@@ -322,24 +326,5 @@ class Model_main extends CI_model
             $this->db->where($array);
             $this->db->update('tb_statistik', $datadb);
         }
-    }
-
-
-    function kirim_Pesan()
-    {
-        $nama           = $this->input->post('a');
-        $email           = $this->input->post('b');
-        $subjek         = $this->input->post('c');
-        $pesan         = $this->input->post('d');
-        $datadb = array(
-            'nama' => $nama,
-            'email' => $email,
-            'subjek' => $subjek,
-            'pesan' => $pesan,
-            'tanggal' => date('Y-m-d'),
-            'jam' => date('H:i:s'),
-            'dibaca' => 'N'
-        );
-        $this->db->insert('hubungi', $datadb);
     }
 }
