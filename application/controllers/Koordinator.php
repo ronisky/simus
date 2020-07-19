@@ -6,15 +6,8 @@ class Koordinator extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('model_app');
         $this->load->model('model_main');
-        $this->load->model('model_menu');
-        $this->load->model('model_members');
-        $this->load->model('model_laporan');
-        $this->load->model('model_rekening');
-        $this->load->model('model_berita');
-        $this->load->model('model_halaman');
-        $this->load->model('model_artikel');
+        $this->load->model('model_app');
         cek_session_koordinator();
     }
 
@@ -34,10 +27,10 @@ class Koordinator extends CI_Controller
 
             $data['title'] = 'Koordinator - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['grapweb'] = $this->model_main->grafik_kunjungan_web();
-
+            $data['grappengunjung'] = $this->model_main->grafik_kunjungan_museum();
             $this->template->load('template/template', 'admin/view_dashboard', $data);
         } else {
-            redirect('admin');
+            redirect('koordinator');
         }
     }
 
@@ -52,7 +45,30 @@ class Koordinator extends CI_Controller
     function saranMasukan()
     {
         $data['title'] = 'Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id ASC")->result_array();
+        $data['record'] = $this->db->query("SELECT * FROM tb_saran_masukan ORDER BY id_saran_masukan ASC")->result_array();
         $this->template->load('template/template', 'koordinator/saran_masukan/view_saran_masukan', $data);
+    }
+
+    function pengunjung()
+    {
+        if (!empty($this->session->userdata())) {
+            $data['title'] = 'Pengunjung Museum - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
+            $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
+            $data['record'] = $this->db->query("SELECT * FROM tb_pengunjung ORDER BY id_pengunjung DESC")->result_array();
+            $this->template->load('template/template', 'koordinator/pengunjung/view_pengunjung', $data);
+        } else {
+            redirect('koordinator', 'refresh');
+        }
+    }
+
+    function detail_pengunjung()
+    {
+        $id = $this->uri->segment(3);
+        $data['title'] = 'Detail Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
+        $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
+        $data['rows'] = $this->model_app->edit('tb_pengunjung', array('id_pengunjung' => $id))->row_array();
+        $this->template->load('template/template', 'koordinator/pengunjung/view_detail_pengunjung', $data);
     }
 }

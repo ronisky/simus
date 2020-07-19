@@ -78,15 +78,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-          <?php include 'grafik_pengunjung_web.php'; ?>
-        </div>
-        <div class="col-md-6">
           <?php include 'grafik_pengunjung.php'; ?>
         </div>
+
         <div class="col-md-6">
           <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Produk Paling Banyak Terjual</h3>
+              <h3 class="card-title">Klasifikasi Jumlah Pengunjung Museum Berdasarkan Kategori</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -94,26 +92,16 @@
               </div>
             </div>
             <div class="card-body">
-
               <?php
-
-              $data = $this->db->select('tb_toko_penjualandetail.id_produk,tb_toko_penjualan.proses, tb_toko_produk.nama_produk, SUM(tb_toko_penjualandetail.jumlah) as total')
-                ->from('tb_toko_penjualandetail')
-                ->join('tb_toko_penjualan', 'tb_toko_penjualan.id_penjualan=tb_toko_penjualandetail.id_penjualan')
-                ->join('tb_toko_produk', 'tb_toko_produk.id_produk=tb_toko_penjualandetail.id_produk')
-                ->where(array('tb_toko_penjualan.proses' => '3'))
-                ->order_by('total', 'desc')
-                ->limit(5)
-                ->group_by('tb_toko_penjualandetail.id_produk')
-                ->get();
-
+              $data = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_kategori_pengunjung AS k ON p.kategori = k.id_kategori_pengunjung");
               ?>
-
               <canvas id="pieChart" style="height:250px; min-height:250px"></canvas>
             </div>
           </div>
         </div>
-
+        <div class="col-md-6">
+          <?php include 'grafik_pengunjung_web.php'; ?>
+        </div>
       </div>
     </div>
   </section>
@@ -124,8 +112,8 @@
 <?php
 
 foreach ($data->result() as $pie) {
-  $nama[] = $pie->nama_produk;
-  $total[] = (float) $pie->total;
+  $nama[] = $pie->nama_kategori;
+  $total[] = (float) $pie->jumlah;
 }
 
 

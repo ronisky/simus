@@ -9,7 +9,7 @@
             </div>
             <?= $this->session->flashdata('message') ?>
 
-            <form action="<?= base_url('main/password') ?>" method="post">
+            <form action="<?= base_url('home/password') ?>" method="post">
               <div class="card-body">
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Password Baru</label>

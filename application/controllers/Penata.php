@@ -34,7 +34,7 @@ class Penata extends CI_Controller
     {
 
         if (isset($_POST['submit'])) {
-            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')));
+            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')), 'kategori_seo' => seo_title(htmlspecialchars($this->input->post('a'))));
             $this->model_app->insert('tb_kategori_koleksi', $data);
             $this->session->set_flashdata('message', '
 				<div class="alert alert-success col-sm-12" role="alert">
@@ -51,7 +51,7 @@ class Penata extends CI_Controller
     {
         $id = $this->uri->segment(3);
         if (isset($_POST['submit'])) {
-            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')));
+            $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')), 'kategori_seo' => seo_title(htmlspecialchars($this->input->post('a'))));
             $where = array('id_kategori_koleksi' => $this->input->post('id'));
             $this->model_app->update('tb_kategori_koleksi', $data, $where);
             $this->session->set_flashdata('message', '
@@ -109,6 +109,7 @@ class Penata extends CI_Controller
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
                     'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
@@ -131,6 +132,7 @@ class Penata extends CI_Controller
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
                     'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
@@ -182,6 +184,7 @@ class Penata extends CI_Controller
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
                     'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
@@ -204,6 +207,7 @@ class Penata extends CI_Controller
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
                     'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),

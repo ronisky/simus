@@ -30,7 +30,7 @@ class Admin extends CI_Controller
 	{
 		if (!empty($this->session->userdata())) {
 
-			$data['title'] = 'Admin - Museum Monumen Perjuangan Rakyat Jawa Barat';
+			$data['title'] = 'Administrator - Museum Monumen Perjuangan Rakyat Jawa Barat';
 			$data['grapweb'] = $this->model_main->grafik_kunjungan_web();
 			$data['grappengunjung'] = $this->model_main->grafik_kunjungan_museum();
 

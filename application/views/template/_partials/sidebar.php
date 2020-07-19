@@ -234,7 +234,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= base_url('koordinator/') ?>" class="nav-link">
+            <a href="<?= base_url('koordinator/pengujung') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>View Pengunjung</p>
             </a>
@@ -287,11 +287,30 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('resepsionis/kategori_pengunjung') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Kategori Pengunjung</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-clipboard fa-fw"></i>
+          <p>
+            Modul Reservasi
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
             <a href="<?= base_url('resepsionis/reservasi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Reservasi Kunjungan</p>
             </a>
           </li>
+
         </ul>
       </li>
 
@@ -412,13 +431,13 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="<?= base_url('main/profile') ?>" class="nav-link">
+          <a href="<?= base_url('home/profile') ?>" class="nav-link">
             <i class="far fa-circle nav-icon text-sm"></i>
             <p>My Profile</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('main/password') ?>" class="nav-link">
+          <a href="<?= base_url('home/password') ?>" class="nav-link">
             <i class="far fa-circle nav-icon text-sm"></i>
             <p>Password</p>
           </a>

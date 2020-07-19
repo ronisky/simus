@@ -9,6 +9,15 @@ function cek_session()
     }
 }
 
+function cek_session_home()
+{
+    $ci = &get_instance();
+    $session = $ci->session->userdata('level');
+    if (empty($session)) {
+        redirect('error404');
+    }
+}
+
 function cek_session_admin()
 {
     $ci = &get_instance();

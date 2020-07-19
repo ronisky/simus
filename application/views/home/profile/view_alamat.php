@@ -8,7 +8,7 @@
               <h3 class="card-title">Ubah Alamat</h3>
             </div>
             <?= $this->session->flashdata('message') ?>
-            <form action="<?= base_url('main/edit_alamat') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?= base_url('home/edit_alamat') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
               <input type="hidden" name="id" value="<?= encrypt_url($row['id_alamat']) ?>">
               <div class="card-body">
                 <div class="form-group row">
@@ -53,7 +53,7 @@
                   <label class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-6">
                     <button type='submit' name='submit' class='btn btn-primary btn-sm'>Perbarui</button>
-                    <a href='<?= base_url('main/profile'); ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Batal</button></a>
+                    <a href='<?= base_url('home/profile'); ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Batal</button></a>
                   </div>
                 </div>
               </div>

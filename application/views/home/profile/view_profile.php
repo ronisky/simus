@@ -23,7 +23,7 @@ if (trim($record['foto']) == '') {
                                 <img src="<?= base_url('assets/images/user/') . $foto_user ?>" class="foto-image" style="height: 300px">
                             </div>
                             <div class="mt-2">
-                                <a href="<?= base_url('main/edit_profile') ?>" class="btn btn-secondary btn-sm">Ubah Profile</a>
+                                <a href="<?= base_url('home/edit_profile') ?>" class="btn btn-secondary btn-sm">Ubah Profile</a>
                             </div>
                         </div>
                         <div class="col-sm-6 ml-5">
@@ -62,7 +62,7 @@ if (trim($record['foto']) == '') {
                                 </div>
                             <?php } ?>
                             <div class="profile-card__edit mt-2">
-                                <a href="<?= base_url('main/edit_alamat') ?>" class="btn btn-primary btn-sm">Ubah Alamat</a>
+                                <a href="<?= base_url('home/edit_alamat') ?>" class="btn btn-primary btn-sm">Ubah Alamat</a>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ class Produk extends CI_Controller
 
 	function index()
 	{
+
 		$jumlah = $this->model_app->view('tb_toko_produk')->num_rows();
 		$config['base_url'] = base_url() . 'produk/index';
 		$config['total_rows'] = $jumlah;

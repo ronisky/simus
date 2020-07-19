@@ -122,19 +122,19 @@ class Model_app extends CI_model
         return $this->db->get();
     }
 
-    function cari_produk($kata)
+    function cari_koleksi($kata)
     {
         $pisah_kata = explode(" ", $kata);
         $jml_katakan = (int) count($pisah_kata);
         $jml_kata = $jml_katakan - 1;
-        $cari = "SELECT * FROM tb_toko_produk WHERE ";
+        $cari = "SELECT * FROM tb_koleksi WHERE ";
         for ($i = 0; $i <= $jml_kata; $i++) {
-            $cari .= " nama_produk LIKE '%" . $pisah_kata[$i] . "%'";
+            $cari .= " nama LIKE '%" . $pisah_kata[$i] . "%'";
             if ($i < $jml_kata) {
                 $cari .= " OR ";
             }
         }
-        $cari .= " ORDER BY id_produk ASC";
+        $cari .= " ORDER BY id_koleksi ASC";
         return $this->db->query($cari);
     }
 

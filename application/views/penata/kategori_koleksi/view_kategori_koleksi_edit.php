@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tambah Kategori Koleksi</h3>
+              <h3 class="card-title">Edit Kategori Koleksi</h3>
             </div>
 
             <form action="<?= base_url('penata/edit_kategori_koleksi') ?>" method="post" class="form-horizontal">
