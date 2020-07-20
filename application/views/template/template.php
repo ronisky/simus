@@ -35,14 +35,16 @@
       $foto = $log['foto'];
     }
     echo "<div class='user-panel mt-3 pb-3 mb-3 d-flex'>
+            <a href=" . base_url('home/profile') . ">
               <div class='image'>
                 <img src='" . base_url() . "assets/images/user/$foto' class='img-circle elevation-2' alt='User Image'>
               </div>
               <div class='info text-center'>
-                <a class='d-block'>$log[username]</a>
+                <a href=" . base_url('home/profile') . " class='d-block'>$log[username]</a>
                 <a class='d-block text-xs mt-1'><i class='fa fa-circle text-success'></i> Online</a>
               </div>
-            </div>";
+            </div>
+            </a>";
     ?>
 
 

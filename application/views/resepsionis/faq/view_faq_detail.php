@@ -12,7 +12,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                                 <div class="col-sm-6">
-                                    <input name="nama" class="form-control" value="<?= $record['nama']; ?>" readonly required></input>
+                                    <input name="nama" class="form-control" value="<?= $record['nama']; ?>" readonly readonly></input>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -24,13 +24,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Petanyaan</label>
                                 <div class="col-sm-6">
-                                    <textarea name="tanya" class="form-control" rows="6" required><?= $record['pertanyaan']; ?></textarea>
+                                    <textarea name="tanya" class="form-control" rows="6" readonly><?= $record['pertanyaan']; ?></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Jawaban</label>
                                 <div class="col-sm-6">
-                                    <textarea name="jawab" class="form-control" rows="6" required><?= $record['jawaban']; ?></textarea>
+                                    <textarea name="jawab" class="form-control" rows="6" readonly><?= $record['jawaban']; ?></textarea>
                                 </div>
                             </div>
 

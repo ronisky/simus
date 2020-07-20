@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tambah Menu Website</h3>
+              <h3 class="card-title">Edit Menu Website</h3>
             </div>
 
             <form action="<?= base_url('admin/edit_halaman') ?>" method="post" enctype="multipart">

@@ -29,7 +29,7 @@ class Model_halaman extends CI_model
                 'judul' => $this->db->escape_str($this->input->post('a')),
                 'judul_seo' => seo_title($this->input->post('a')),
                 'isi_halaman' => $this->input->post('b'),
-                'tgl_artikel' => date('Y-m-d'),
+                'tgl_posting' => date('Y-m-d'),
                 'username' => $this->session->username,
                 'dibaca' => '0',
                 'jam' => date('H:i:s'),
@@ -40,7 +40,7 @@ class Model_halaman extends CI_model
                 'judul' => $this->db->escape_str($this->input->post('a')),
                 'judul_seo' => seo_title($this->input->post('a')),
                 'isi_halaman' => $this->input->post('b'),
-                'tgl_artikel' => date('Y-m-d'),
+                'tgl_posting' => date('Y-m-d'),
                 'gambar' => $hasil['file_name'],
                 'username' => $this->session->username,
                 'dibaca' => '0',
@@ -69,7 +69,7 @@ class Model_halaman extends CI_model
                 'judul' => $this->db->escape_str($this->input->post('a')),
                 'judul_seo' => seo_title($this->input->post('a')),
                 'isi_halaman' => $this->input->post('b'),
-                'tgl_artikel' => date('Y-m-d'),
+                'tgl_posting' => date('Y-m-d'),
                 'username' => $this->session->username,
                 'dibaca' => '0',
                 'jam' => date('H:i:s'),
@@ -80,7 +80,7 @@ class Model_halaman extends CI_model
                 'judul' => $this->db->escape_str($this->input->post('a')),
                 'judul_seo' => seo_title($this->input->post('a')),
                 'isi_halaman' => $this->input->post('b'),
-                'tgl_artikel' => date('Y-m-d'),
+                'tgl_posting' => date('Y-m-d'),
                 'gambar' => $hasil['file_name'],
                 'username' => $this->session->username,
                 'dibaca' => '0',
@@ -95,17 +95,5 @@ class Model_halaman extends CI_model
     function halaman_delete($id)
     {
         return $this->db->query("DELETE FROM tb_web_halaman where id_halaman='$id'");
-    }
-
-
-    function template_update()
-    {
-        $temp = array(
-            'warna' => $this->input->post('warna'),
-            //'header' => $this->input->post('header'),
-        );
-
-        $this->db->where('id_template', $this->input->post('id'));
-        $this->db->update('tb_web_template', $temp);
     }
 }

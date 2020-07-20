@@ -1,6 +1,10 @@
 <?php
 class Model_artikel extends CI_model
 {
+    function info_terbaru($limit)
+    {
+        return $this->db->query("SELECT * FROM tb_blog_artikel left join tb_pengguna on tb_blog_artikel.username=tb_pengguna.username left join tb_blog_kategori on tb_blog_artikel.id_kategori=tb_blog_kategori.id_kategori ORDER BY id_artikel DESC LIMIT 0,$limit");
+    }
 
     function tag_artikel()
     {

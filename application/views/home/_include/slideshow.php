@@ -10,18 +10,18 @@
                         $slide = $this->db->query("SELECT * FROM tb_web_slide ORDER BY id_slide DESC");;
                         foreach ($slide->result_array() as $row) {
                         ?>
-                            <a class="block-slideshow__slide" href="<?= base_url() . $row['link']; ?>">
+                            <a class="block-slideshow__slide" href="<?= $row['link']; ?>">
                                 <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url('<?= base_url('assets/images/slider/') . $row['gambar_besar']; ?>')"></div>
                                 <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url('<?= base_url('assets/images/slider/') . $row['gambar_kecil']; ?>')"></div>
                                 <div class="block-slideshow__slide-content">
-                                    <div class="block-slideshow__slide-title text-justify">
+                                    <div class="block-slideshow__slide-title text-light text-justify">
                                         <?= $row['judul']; ?>
                                     </div>
-                                    <div class="block-slideshow__slide-text text-justify" style="width: 450px">
+                                    <div class="block-slideshow__slide-text text-light text-justify" style="width: 450px">
                                         <?= $row['ket']; ?>
                                     </div>
                                     <div class="block-slideshow__slide-button">
-                                        <span class="btn btn-primary btn-lg">
+                                        <span class="btn btn-primary btn-outline-white">
                                             Selengkapnya
                                         </span>
                                     </div>

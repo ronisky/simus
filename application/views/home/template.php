@@ -36,6 +36,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/default-skin/default-skin.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/select2/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>css/style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>css/style.scss">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>fonts/stroyka/stroyka.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/css/'); ?>sweetalert2/sweetalert2.min.css">
@@ -159,16 +160,10 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
         </div>
 
 
-        <?php
-        //include '_include/modal2.php';
-        if ($this->uri->segment(2) == 'dashboard') {
-            include '_include/modal1.php';
-        } ?>
+
         <!-- footer -->
         <?php include '_include/footer.php'; ?>
     </div>
-
-    <?php include '_include/keranjang-offcanvas.php' ?>
 
     <?php if ($this->uri->segment(1) == 'produk' && $this->uri->segment(2) == 'detail') { ?>
         <!-- photoswipe -->
@@ -228,6 +223,27 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
             autoplay: true,
             autoplayTimeout: 5000,
             autoplayHoverPause: true
+        });
+
+        // magnific popup
+        $('.image-popup').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+            },
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300 // don't foget to change the duration also in CSS
+            }
         });
     </script>
 </body>

@@ -12,31 +12,43 @@
               <form action="<?= base_url('penata/edit_koleksi') ?>" method="post" enctype="multipart/form-data">
 
                 <input type='hidden' name='id' value='<?= $rows['id_koleksi'] ?>'>
+                <?php
+                foreach ($uk as $u) {
+                  if ($rows['id_ukuran'] == $u['id_ukuran']) {
+                    $ukur = $u['id_ukuran'];
+                    $ting = $u['tinggi'];
+                    $pan = $u['panjang'];
+                    $leb = $u['lebar'];
+                    $diam = $u['diameter'];
+                    $ber = $u['berat'];
+                  }
+                } ?>
+                <input type='hidden' name='idU' value='<?= $ukur ?>'>
 
                 <div class="card-body">
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pencatat</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['nama_pencatat'] ?>" required>
+                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['nama_pencatat'] ?>" readonly>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nomor Registrasi</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['no_registrasi'] ?>" required>
+                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['no_registrasi'] ?>" readonly>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Tanggal Pencatatan</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['tanggal_pencatatan'] ?>" required>
+                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['tanggal_pencatatan'] ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Koleksi</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='nama_kol' value="<?= $rows['nama_koleksi'] ?>" required>
+                      <input type='text' class='form-control' name='nama_kol' value="<?= $rows['nama_koleksi'] ?>" readonly>
                       <?= form_error('nama_kol', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                     </div>
                   </div>
@@ -45,7 +57,7 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Kategori Koleksi</label>
                     <div class="col-sm-6">
-                      <select name='a' class='form-control' required>
+                      <select name='a' class='form-control' readonly>
                         <option value='' selected>- Pilih Kategori Koleksi -</option>
                         <?php
                         foreach ($record as $row) {
@@ -62,69 +74,59 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Asal Koleksi</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='asal_kol' value="<?= $rows['asal_koleksi'] ?>">
+                      <input type='text' class='form-control' name='asal_kol' value="<?= $rows['asal_koleksi'] ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Pemilik Asal</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='pemilik_asal' value="<?= $rows['pemilik_asal'] ?>">
+                      <input type='text' class='form-control' name='pemilik_asal' value="<?= $rows['pemilik_asal'] ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cara Perolehan</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='cara_peroleh' value="<?= $rows['cara_perolehan'] ?>">
+                      <input type='text' class='form-control' name='cara_peroleh' value="<?= $rows['cara_perolehan'] ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Sumber Pusaka</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='sumber' value="<?= $rows['sumber_pusaka'] ?>">
+                      <input type='text' class='form-control' name='sumber' value="<?= $rows['sumber_pusaka'] ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Ukuran</label>
                     <div class="col-sm-2">
-                      <label for=""> Tinggi</label>
-                      <input type='text' class='form-control' name='tg' value="<?= $uk['tinggi'] ?>">
+                      <label for=""> Tinggi (cm) </label>
+                      <input type='text' class='form-control' name='tg' value="<?= $ting ?>" readonly>
                     </div>
                     <div class="col-sm-2">
-                      <label for=""> Panjang</label>
-                      <input type='text' class='form-control' name='pjg' value="<?= $uk['panjang'] ?>">
+                      <label for=""> Panjang (cm)</label>
+                      <input type='text' class='form-control' name='pjg' value="<?= $pan ?>" readonly>
                     </div>
                     <div class="col-sm-2">
-                      <label for=""> Lebar</label>
-                      <input type='text' class='form-control' name='lb' value="<?= $uk['lebar'] ?>">
+                      <label for=""> Lebar (cm)</label>
+                      <input type='text' class='form-control' name='lb' value="<?= $leb ?>" readonly>
                     </div>
                     <div class="col-sm-2">
-                      <label for=""> Diameter</label>
-                      <input type='text' class='form-control' name='dia' value="<?= $uk['diameter'] ?>">
+                      <label for=""> Diameter (cm)</label>
+                      <input type='text' class='form-control' name='dia' value="<?= $diam ?>" readonly>
                     </div>
                     <div class="col-sm-2">
-                      <label for=""> Berat</label>
-                      <input type='text' class='form-control' name='br' value="<?= $uk['berat'] ?>">
+                      <label for=""> Berat (kg)</label>
+                      <input type='text' class='form-control' name='br' value="<?= $ber ?>" readonly>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Deskripsi Koleksi</label>
                     <div class="col-sm-10">
-                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi' value="<?= $rows['deskripsi'] ?>"></textarea>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Gambar</label>
-                    <div class="col-sm-6">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFileLangHTML" name="foto">
-                        <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
-                      </div>
+                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi' value="<?= $rows['deskripsi'] ?>" readonly></textarea>
                     </div>
                   </div>
 

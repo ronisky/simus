@@ -20,7 +20,7 @@
                 $no = 1;
                 foreach ($artikel->result_array() as $row) {
                     $isi_artikel = strip_tags($row['isi_artikel']);
-                    $isi = substr($isi_artikel, 0, 70);
+                    $isi = substr($isi_artikel, 0, 100);
                     $isi = substr($isi_artikel, 0, strrpos($isi, " "));
                     $tanggal = tgl_indo($row['tanggal']);
                     if ($row['gambar'] == '') {
@@ -32,11 +32,11 @@
                 ?>
 
                     <div class="post-card">
-                        <div class="post-card__image"><a href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><img src="<?= base_url('assets/images/artikel/') . $foto  ?>" alt=""></a>
+                        <div class="post-card__image"><a href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><img style="height: 200px;" src="<?= base_url('assets/images/artikel/') . $foto  ?>" alt=""></a>
                         </div>
                         <div class="post-card__info">
                             <div class="post-card__category"><a href="#"></a></div>
-                            <div class="post-card__name"><a href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><?= $row['judul'] ?></a></div>
+                            <div class="post-card__name"><a style="font-size: medium; font-weight: bold; color:#192a56;" href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><?= $row['judul'] ?></a></div>
                             <div class="post-card__date"><?= $row['hari'] . ", " . $tanggal ?></div>
                             <div class="post-card__content"><?= $isi ?>..</div>
 

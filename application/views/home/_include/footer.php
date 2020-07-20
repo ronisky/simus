@@ -37,7 +37,7 @@
 
                     <div class="col-6 col-md-6 col-lg-4">
                         <div class="site-footer__widget footer-links text-left pl-2">
-                            <h5 class="footer-links__title">Informasi</h5>
+                            <h5 class="footer-contacts__title">Informasi</h5>
                             <ul class="footer-links__list">
                                 <?php
                                 $menu = $this->model_menu->menu_bawah();
@@ -58,7 +58,7 @@
 
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="site-footer__widget footer-newsletter">
-                            <h5 class="footer-newsletter__title">Newsletter</h5>
+                            <h5 class="footer-contacts__title">Newsletter</h5>
                             <div class="footer-newsletter__text">Berlangganan sekarang, dan dapatkan informasi terbaru dari kami.</div>
                             <form action="<?= base_url('subscribe') ?>" method="POST" class="footer-newsletter__form">
                                 <label class="sr-only" for="footer-newsletter-address">Alamat Email</label>

@@ -1,5 +1,6 @@
         <!-- mobile site__header -->
-        <header class="site__header d-lg-none">
+        <header class="site__header d-lg-none ">
+
             <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
             <div class="mobile-header mobile-header--sticky" data-sticky-mode="pullToShow">
                 <div class="mobile-header__panel">
@@ -18,61 +19,11 @@
                             }
                             ?>
 
-
-                            <div class="search search--location--mobile-header mobile-header__search">
-                                <div class="search__body">
-                                    <form class="search__form" action="<?= base_url('cari') ?>" method="POST">
-                                        <input class="search__input" name="cari" placeholder="Saya ingin mencari.." aria-label="Site search" type="text" autocomplete="off">
-                                        <button class="search__button search__button--type--submit" type="submit" name="submit">
-                                            <svg width="20px" height="20px">
-                                                <use xlink:href="images/sprite.svg#search-20"></use>
-                                            </svg>
-                                        </button>
-                                        <button class="search__button search__button--type--close" type="button">
-                                            <svg width="20px" height="20px">
-                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#cross-20"></use>
-                                            </svg>
-                                        </button>
-                                        <div class="search__border"></div>
-                                    </form>
-                                </div>
-                            </div>
-
                             <div class="mobile-header__indicators">
-                                <div class="indicator indicator--mobile-search indicator--mobile d-sm-none">
-                                    <button class="indicator__button">
-                                        <span class="indicator__area">
-                                            <svg width="20px" height="20px">
-                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#search-20"></use>
-                                            </svg>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <div class="indicator indicator--mobile">
-                                    <a href="#" class="indicator__button" data-open="offcanvas-cart">
-                                        <span class="indicator__area"><svg width="20px" height="20px">
-                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#cart-20"></use>
-                                            </svg>
-
-                                            <?php
-                                            $this->db->where('session', $this->session->idp);
-                                            $num_rows = $this->db->count_all_results('tb_toko_penjualantemp');
-                                            $isi_keranjang = $num_rows;
-                                            ?>
-
-                                            <?php if (empty($isi_keranjang)) {
-                                                echo '';
-                                            } else { ?>
-                                                <span class="indicator__value"><?= $isi_keranjang; ?></span>
-                                            <?php } ?>
-                                        </span>
-                                    </a>
-                                </div>
 
                                 <div class="indicator indicator--mobile">
 
-                                    <a href="<?= base_url('members/dashboard') ?>" class="indicator__button">
+                                    <a href="<?= base_url('auth/login') ?>" class="indicator__button">
                                         <span class="indicator__area">
                                             <svg width="20px" height="20px">
                                                 <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#person-20"></use>
@@ -91,7 +42,7 @@
         </header>
 
         <header class="site__header d-lg-block d-none">
-            <div class="site-header">
+            <div class="site-header" id="ftco-navbar">
                 <!-- .topbar -->
                 <?php
                 $menu = $this->model_menu->menu_topbar();
@@ -127,11 +78,10 @@
                                         }
                                         ?>
                                     </a>
-                                </div><!-- .nav-links -->
+                                </div>
 
-                                <div class="nav-panel__nav-links nav-links">
+                                <div class="nav-panel__indicators">
                                     <ul class="nav-links__list">
-
                                         <?php
                                         $menu = $this->model_menu->menu_main();
                                         foreach ($menu->result_array() as $row) {
@@ -182,59 +132,6 @@
                                         } ?>
 
                                     </ul>
-                                </div><!-- .nav-links / end -->
-
-
-
-                                <div class="nav-panel__indicators">
-
-                                    <div class="indicator indicator--trigger--click">
-                                        <button type="button" class="indicator__button">
-                                            <span class="indicator__area">
-                                                <svg class="indicator__icon" width="20px" height="20px">
-                                                    <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#search-20"></use>
-                                                </svg>
-                                                <svg class="indicator__icon indicator__icon--open" width="20px" height="20px">
-                                                    <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#cross-20"></use>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="indicator__dropdown">
-                                            <div class="search search--location--indicator">
-                                                <div class="search__body">
-                                                    <form class="search__form" action="<?= base_url('cari') ?>" method="POST">
-                                                        <input class="search__input" name="cari" placeholder="Sayang ingin mencari.." aria-label="Site search" type="text" autocomplete="off">
-                                                        <button class="search__button search__button--type--submit" type="submit">
-                                                            <svg width="20px" height="20px">
-                                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#search-20"></use>
-                                                            </svg>
-                                                        </button>
-                                                        <div class="search__border"></div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="indicator">
-                                        <a href="#" class="indicator__button" data-open="offcanvas-cart">
-                                            <span class="indicator__area">
-                                                <svg width="20px" height="20px">
-                                                    <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#cart-20"></use>
-                                                </svg>
-
-                                                <?php if (empty($isi_keranjang)) {
-                                                    echo '';
-                                                } else {
-                                                    echo "<span class='indicator__value'>";
-                                                    echo $isi_keranjang;
-                                                    echo "</span>";
-                                                }; ?>
-
-                                            </span>
-                                        </a>
-
-                                    </div> -->
 
                                     <div class="indicator indicator--trigger--click">
 
@@ -331,9 +228,6 @@
                                     </div>
 
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>

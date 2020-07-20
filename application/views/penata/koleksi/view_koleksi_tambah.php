@@ -71,23 +71,23 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Ukuran</label>
                   <div class="col-sm-2">
-                    <label for=""> Tinggi</label>
+                    <label for=""> Tinggi (cm)</label>
                     <input type='text' class='form-control' name='tg' value="">
                   </div>
                   <div class="col-sm-2">
-                    <label for=""> Panjang</label>
+                    <label for=""> Panjang (cm)</label>
                     <input type='text' class='form-control' name='pjg' value="">
                   </div>
                   <div class="col-sm-2">
-                    <label for=""> Lebar</label>
+                    <label for=""> Lebar (cm)</label>
                     <input type='text' class='form-control' name='lb' value="">
                   </div>
                   <div class="col-sm-2">
-                    <label for=""> Diameter</label>
+                    <label for=""> Diameter (cm)</label>
                     <input type='text' class='form-control' name='dia' value="">
                   </div>
                   <div class="col-sm-2">
-                    <label for=""> Berat</label>
+                    <label for=""> Berat (kg)</label>
                     <input type='text' class='form-control' name='br' value="">
                   </div>
                 </div>
