@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_sitemap extends CI_Model
 {
 
-    function produk()
+    function koleksi()
     {
-        return $this->db->order_by('waktu_input', 'desc')->get('tb_toko_produk')->result_array();
+        return $this->db->order_by('id_koleksi', 'desc')->get('tb_koleksi')->result_array();
     }
 
     function artikel()

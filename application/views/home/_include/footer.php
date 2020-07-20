@@ -80,6 +80,15 @@
                     </div>
                 </div>
             </div>
+            <?php
+            $this->db->where('id_identitas', '1');
+            $ident = $this->db->get('tb_web_identitas');
+
+            foreach ($ident->result() as $ids) {
+                $nomer = $ids->no_telp;
+            }
+            ?>
+
 
 
             <div class="site-footer__bottom">
@@ -92,10 +101,19 @@
             <div class="totop__body">
                 <div class="totop__start"></div>
                 <div class="totop__container container"></div>
-                <div class="totop__end"><button type="button" class="totop__button"><svg width="13px" height="8px">
+                <div class="totop__end">
+                    <button type="button" class="totop__button"><svg width="13px" height="8px">
                             <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#arrow-rounded-up-13x8"></use>
-                        </svg></button></div>
+                        </svg>
+                    </button>
+                    <button type="button" class="totop__button-wa">
+                        <a href="https://api.whatsapp.com/send?phone=<?= $nomer ?>" target=" _blank" title="Tanyakan Stok">
+                            <img style="width: 170px;" src="<?= base_url('assets/images/icon/wa.png') ?>" alt="">
+                        </a>
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 </footer>

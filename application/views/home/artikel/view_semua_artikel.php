@@ -25,7 +25,7 @@
                             <div class="posts-list__item shadow-lg p-3 bg-white rounded">
                                 <div class="post-card post-card--layout--grid post-card--size--nl">
                                     <a href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>">
-                                        <div class="post-card__image"><img src="<?= base_url('assets/images/artikel/') . $foto  ?>" alt=""></div>
+                                        <div class="post-card__image"><img style="max-height: 300px;" src="<?= base_url('assets/images/artikel/') . $foto  ?>" alt=""></div>
                                     </a>
                                     <div class="post-card__info">
                                         <div class="post-card__category"><?= $title ?></div>

@@ -1,141 +1,29 @@
-        <!-- mobile site__header -->
-        <header class="site__header d-lg-none ">
+            <!-- mobile site__header -->
+            <header class="site__header d-lg-none ">
 
-            <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
-            <div class="mobile-header mobile-header--sticky" data-sticky-mode="pullToShow">
-                <div class="mobile-header__panel">
-                    <div class="container">
-                        <div class="mobile-header__body">
-                            <button class="mobile-header__menu-button">
-                                <svg width="18px" height="14px">
-                                    <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#menu-18x14"></use>
-                                </svg>
-                            </button>
+                <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
+                <div class="mobile-header mobile-header--sticky" data-sticky-mode="pullToShow">
+                    <div class="mobile-header__panel">
+                        <div class="container">
+                            <div class="mobile-header__body">
+                                <button class="mobile-header__menu-button">
+                                    <svg width="18px" height="14px">
+                                        <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#menu-18x14"></use>
+                                    </svg>
+                                </button>
 
-                            <?php
-                            $logo = $this->model_app->view_ordering_limit('tb_web_logo', 'id_logo', 'DESC', 0, 1);
-                            foreach ($logo->result_array() as $row) {
-                                echo "<a href='" . base_url() . "' class='mobile-header__logo'><img height='40px' src='" . base_url() . "assets/images/logo/$row[gambar]'/></a>";
-                            }
-                            ?>
-
-                            <div class="mobile-header__indicators">
-
-                                <div class="indicator indicator--mobile">
-
-                                    <a href="<?= base_url('auth/login') ?>" class="indicator__button">
-                                        <span class="indicator__area">
-                                            <svg width="20px" height="20px">
-                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#person-20"></use>
-                                            </svg>
-                                        </span>
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <header class="site__header d-lg-block d-none">
-            <div class="site-header" id="ftco-navbar">
-                <!-- .topbar -->
-                <?php
-                $menu = $this->model_menu->menu_topbar();
-                if ($menu->num_rows() > 0) { ?>
-
-                    <div class="site-header__topbar topbar">
-                        <div class="topbar__container container">
-                            <div class="topbar__row">
                                 <?php
-                                foreach ($menu->result_array() as $rowx) {
+                                $logo = $this->model_app->view_ordering_limit('tb_web_logo', 'id_logo', 'DESC', 0, 1);
+                                foreach ($logo->result_array() as $row) {
+                                    echo "<a href='" . base_url() . "' class='mobile-header__logo'><img height='40px' src='" . base_url() . "assets/images/logo/$row[gambar]'/></a>";
+                                }
                                 ?>
-                                    <div class="topbar__item topbar__item--link"><a class="topbar-link" href="<?= base_url() . $rowx['link']; ?>"><?= $rowx['nama_menu']; ?></a></div>
-                                <?php } ?>
-                                <div class="topbar__spring"></div>
-                            </div>
-                        </div>
-                    </div>
 
-                <?php } ?>
-                <!-- .topbar / end -->
-                <div class="site-header__nav-panel">
-                    <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
-                    <div class="nav-panel nav-panel--sticky" data-sticky-mode="pullToShow">
-                        <div class="nav-panel__container container">
-                            <div class="nav-panel__row">
+                                <div class="mobile-header__indicators">
 
-                                <div class="nav-panel__logo mr-2">
-                                    <a href="<?= base_url() ?>">
-                                        <?php
-                                        $logo = $this->model_app->view_ordering_limit('tb_web_logo', 'id_logo', 'DESC', 0, 1);
-                                        foreach ($logo->result_array() as $row) {
-                                            echo "<a href='" . base_url() . "'><img height='40px' src='" . base_url() . "assets/images/logo/$row[gambar]'/></a>";
-                                        }
-                                        ?>
-                                    </a>
-                                </div>
+                                    <div class="indicator indicator--mobile">
 
-                                <div class="nav-panel__indicators">
-                                    <ul class="nav-links__list">
-                                        <?php
-                                        $menu = $this->model_menu->menu_main();
-                                        foreach ($menu->result_array() as $row) {
-                                            $dropdown = $this->model_menu->dropdown_menu($row['id_menu'])->num_rows();
-                                            if ($dropdown == 0) {
-                                        ?>
-                                                <li class="nav-links__item">
-                                                    <a class="nav-links__item-link" href="<?= base_url() . $row['link']; ?>">
-                                                        <div class="nav-links__item-body"><?= $row['nama_menu']; ?></div>
-                                                    </a>
-                                                </li>
-
-                                            <?php } else { ?>
-
-                                                <li class="nav-links__item nav-links__item--has-submenu">
-                                                    <a class="nav-links__item-link" href="#">
-                                                        <div class="nav-links__item-body"><?= $row['nama_menu']; ?>
-                                                            <svg class="nav-links__item-arrow" width="9px" height="6px">
-                                                                <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#arrow-rounded-down-9x6">
-                                                                </use>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <div class="nav-links__submenu nav-links__submenu--type--menu">
-                                                        <!-- .menu -->
-                                                        <div class="menu menu--layout--classic">
-                                                            <div class="menu__submenus-container"></div>
-                                                            <ul class="menu__list">
-                                                                <?php
-                                                                $dropmenu = $this->model_menu->dropdown_menu($row['id_menu']);
-                                                                foreach ($dropmenu->result_array() as $row) { ?>
-
-                                                                    <li class="menu__item">
-                                                                        <div class="menu__item-submenu-offset"></div>
-                                                                        <a class="menu__item-link" href="<?= base_url() . $row['link']; ?>">
-                                                                            <?= $row['nama_menu']; ?>
-                                                                        </a>
-                                                                    </li>
-
-                                                                <?php } ?>
-
-                                                            </ul>
-                                                        </div><!-- .menu / end -->
-                                                    </div>
-                                                </li>
-
-                                        <?php }
-                                        } ?>
-
-                                    </ul>
-
-                                    <div class="indicator indicator--trigger--click">
-
-                                        <a href="account-login.html" class="indicator__button">
+                                        <a href="<?= base_url('auth/login') ?>" class="indicator__button">
                                             <span class="indicator__area">
                                                 <svg width="20px" height="20px">
                                                     <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#person-20"></use>
@@ -143,94 +31,215 @@
                                             </span>
                                         </a>
 
-                                        <div class="indicator__dropdown">
-                                            <div class="account-menu">
-
-                                                <?php
-                                                if (empty($this->session->id_pengguna)) { ?>
-
-                                                    <form class="account-menu__form" action="<?= base_url('login') ?>" method="POST">
-                                                        <div class="account-menu__form-title">Masuk untuk petugas</div>
-                                                        <div class="form-group">
-                                                            <label for="header-signin-email" class="sr-only">Email / Username</label>
-                                                            <input name="user_email" id="header-signin-email" type="text" class="form-control form-control-sm" placeholder="Email / Username">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="header-signin-password" class="sr-only">Password</label>
-                                                            <div class="account-menu__form-forgot">
-                                                                <input name="password" id="header-signin-password" type="password" class="form-control form-control-sm" placeholder="Password">
-                                                                <a href="<?= base_url('auth/lupa_password') ?>" class="account-menu__form-forgot-link">Lupa?</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group account-menu__form-button">
-                                                            <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
-                                                        </div>
-                                                        <!-- <div class="account-menu__form-link">
-                                                            <a href="<?= base_url('register') ?>">Buat akun baru</a>
-                                                        </div> -->
-                                                    </form>
-                                                    <div class="account-menu__divider"></div>
-
-                                                <?php } ?>
-
-                                                <?php
-                                                if (!empty($this->session->id_pengguna)) { ?>
-
-                                                    <?php
-                                                    $id = $this->session->id_pengguna;
-                                                    $this->db->where("id_pengguna='$id'");
-                                                    $peng = $this->db->get('tb_pengguna')->row_array();
-                                                    if (empty($peng['nama_lengkap'])) {
-                                                        $nama = $peng['username'];
-                                                    } else {
-                                                        $nama = $peng['nama_lengkap'];
-                                                    }
-
-                                                    if (empty($peng['foto'])) {
-                                                        $foto = 'default.jpg';
-                                                    } else {
-                                                        $foto = $peng['foto'];
-                                                    }
-                                                    ?>
-
-                                                    <a href="<?= base_url('members/dashboard') ?>" class="account-menu__user">
-                                                        <div class="account-menu__user-avatar"><img src="<?= base_url('assets/images/user/' . $foto) ?>" alt=""></div>
-                                                        <div class="account-menu__user-info">
-                                                            <div class="account-menu__user-name"><?= $nama ?></div>
-                                                            <div class="account-menu__user-email"><?= $peng['email'] ?></div>
-                                                        </div>
-                                                    </a>
-                                                    <div class="account-menu__divider"></div>
-                                                    <ul class="account-menu__links">
-                                                        <?php
-                                                        $id = $this->session->id_pengguna;
-                                                        $this->db->where("id_pengguna='$id'");
-                                                        $peng = $this->db->get('tb_pengguna')->row_array();
-                                                        $lv = $peng['level'];
-                                                        if ($lv == 1) {
-                                                            $profile = '<a href=' . base_url('admin/profile') . '>Profil</a>';
-                                                        } elseif ($lv == 2) {
-                                                            $profile = '<a href=' . base_url('koordinator/profile') . '>Profil</a>';
-                                                        } elseif ($lv == 3) {
-                                                            $profile = '<a href=' . base_url('resepsionis/profile') . '>Profil</a>';
-                                                        } else {
-                                                            $profile = '<a href=' . base_url('penata/profile') . '>Profil</a>';
-                                                        }
-                                                        ?>
-                                                        <li><?= $profile; ?></li>
-                                                        <li><a class="mt-2" href="javascript:void(0)" onclick="logout()">Keluar</a></li>
-                                                    </ul>
-
-                                                <?php } ?>
-
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+
+            <header class="site__header d-lg-block d-none">
+                <div class="site-header">
+                    <!-- .topbar -->
+                    <?php
+                    $menu = $this->model_menu->menu_topbar();
+                    if ($menu->num_rows() > 0) { ?>
+
+                        <div class="site-header__topbar topbar">
+                            <div class="topbar__container container">
+                                <div class="topbar__row">
+                                    <?php
+                                    foreach ($menu->result_array() as $rowx) {
+                                    ?>
+                                        <div class="topbar__item topbar__item--link"><a class="topbar-link" href="<?= base_url() . $rowx['link']; ?>"><?= $rowx['nama_menu']; ?></a></div>
+                                    <?php } ?>
+                                    <div class="topbar__spring"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+                    <!-- .topbar / end -->
+                    <div class="site-header__nav-panel">
+                        <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] -->
+                        <div class="nav-panel nav-panel--sticky" data-sticky-mode="pullToShow">
+                            <div class="nav-panel__container container">
+                                <div class="nav-panel__row">
+
+                                    <div class="nav-panel__logo mr-2">
+                                        <a href="<?= base_url() ?>">
+                                            <?php
+                                            $logo = $this->model_app->view_ordering_limit('tb_web_logo', 'id_logo', 'DESC', 0, 1);
+                                            foreach ($logo->result_array() as $row) {
+                                                echo "<a href='" . base_url() . "'><img height='40px' src='" . base_url() . "assets/images/logo/$row[gambar]'/></a>";
+                                            }
+                                            ?>
+                                        </a>
+                                    </div><!-- .nav-links -->
+
+
+
+
+                                    <div class="nav-panel__indicators">
+                                        <div class="nav-panel__nav-links nav-links">
+                                            <ul class="nav-links__list">
+
+                                                <?php
+                                                $menu = $this->model_menu->menu_main();
+                                                foreach ($menu->result_array() as $row) {
+                                                    $dropdown = $this->model_menu->dropdown_menu($row['id_menu'])->num_rows();
+                                                    if ($dropdown == 0) {
+                                                ?>
+                                                        <li class="nav-links__item">
+                                                            <a class="nav-links__item-link" href="<?= base_url() . $row['link']; ?>">
+                                                                <div class="nav-links__item-body"><?= $row['nama_menu']; ?></div>
+                                                            </a>
+                                                        </li>
+
+                                                    <?php } else { ?>
+
+                                                        <li class="nav-links__item nav-links__item--has-submenu">
+                                                            <a class="nav-links__item-link" href="#">
+                                                                <div class="nav-links__item-body"><?= $row['nama_menu']; ?>
+                                                                    <svg class="nav-links__item-arrow" width="9px" height="6px">
+                                                                        <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#arrow-rounded-down-9x6">
+                                                                        </use>
+                                                                    </svg>
+                                                                </div>
+                                                            </a>
+                                                            <div class="nav-links__submenu nav-links__submenu--type--menu">
+                                                                <!-- .menu -->
+                                                                <div class="menu menu--layout--classic">
+                                                                    <div class="menu__submenus-container"></div>
+                                                                    <ul class="menu__list">
+                                                                        <?php
+                                                                        $dropmenu = $this->model_menu->dropdown_menu($row['id_menu']);
+                                                                        foreach ($dropmenu->result_array() as $row) { ?>
+
+                                                                            <li class="menu__item">
+                                                                                <div class="menu__item-submenu-offset"></div>
+                                                                                <a class="menu__item-link" href="<?= base_url() . $row['link']; ?>">
+                                                                                    <?= $row['nama_menu']; ?>
+                                                                                </a>
+                                                                            </li>
+
+                                                                        <?php } ?>
+
+                                                                    </ul>
+                                                                </div><!-- .menu / end -->
+                                                            </div>
+                                                        </li>
+
+                                                <?php }
+                                                } ?>
+
+                                            </ul>
+                                        </div><!-- .nav-links / end -->
+
+                                        <div class="indicator indicator--trigger--click">
+
+                                            <a href="account-login.html" class="indicator__button">
+                                                <span class="indicator__area">
+                                                    <svg width="20px" height="20px">
+                                                        <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#person-20"></use>
+                                                    </svg>
+                                                </span>
+                                            </a>
+
+                                            <div class="indicator__dropdown">
+                                                <div class="account-menu">
+
+                                                    <?php
+                                                    if (empty($this->session->id_pengguna)) { ?>
+
+                                                        <form class="account-menu__form" action="<?= base_url('login') ?>" method="POST">
+                                                            <div class="account-menu__form-title">Masuk ke akun Anda</div>
+                                                            <div class="form-group">
+                                                                <label for="header-signin-email" class="sr-only">Email / Username</label>
+                                                                <input name="user_email" id="header-signin-email" type="text" class="form-control form-control-sm" placeholder="Email / Username">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="header-signin-password" class="sr-only">Password</label>
+                                                                <div class="account-menu__form-forgot">
+                                                                    <input name="password" id="header-signin-password" type="password" class="form-control form-control-sm" placeholder="Password">
+                                                                    <a href="<?= base_url('auth/lupa_password') ?>" class="account-menu__form-forgot-link">Lupa?</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group account-menu__form-button">
+                                                                <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+                                                            </div>
+                                                            <div class="account-menu__form-link">
+                                                                <a href="<?= base_url('register') ?>">Buat akun baru</a>
+                                                            </div>
+                                                        </form>
+                                                        <div class="account-menu__divider"></div>
+
+                                                    <?php } ?>
+
+                                                    <?php
+                                                    if (!empty($this->session->id_pengguna)) { ?>
+
+                                                        <?php
+                                                        $id = $this->session->id_pengguna;
+                                                        $this->db->where("id_pengguna='$id'");
+                                                        $peng = $this->db->get('tb_pengguna')->row_array();
+                                                        if (empty($peng['nama_lengkap'])) {
+                                                            $nama = $peng['username'];
+                                                        } else {
+                                                            $nama = $peng['nama_lengkap'];
+                                                        }
+
+                                                        if (empty($peng['foto'])) {
+                                                            $foto = 'default.jpg';
+                                                        } else {
+                                                            $foto = $peng['foto'];
+                                                        }
+                                                        ?>
+
+                                                        <a href="<?= base_url('members/dashboard') ?>" class="account-menu__user">
+                                                            <div class="account-menu__user-avatar"><img src="<?= base_url('assets/images/user/' . $foto) ?>" alt=""></div>
+                                                            <div class="account-menu__user-info">
+                                                                <div class="account-menu__user-name"><?= $nama ?></div>
+                                                                <div class="account-menu__user-email"><?= $peng['email'] ?></div>
+                                                            </div>
+                                                        </a>
+                                                        <div class="account-menu__divider"></div>
+                                                        <ul class="account-menu__links">
+                                                            <?php
+                                                            $id = $this->session->id_pengguna;
+                                                            $this->db->where("id_pengguna='$id'");
+                                                            $peng = $this->db->get('tb_pengguna')->row_array();
+                                                            $lv = $peng['level'];
+                                                            if ($lv == 1) {
+                                                                $profile = '<a href=' . base_url('admin/profile') . '>Profil</a>';
+                                                            } elseif ($lv == 2) {
+                                                                $profile = '<a href=' . base_url('koordinator/profile') . '>Profil</a>';
+                                                            } elseif ($lv == 3) {
+                                                                $profile = '<a href=' . base_url('resepsionis/profile') . '>Profil</a>';
+                                                            } else {
+                                                                $profile = '<a href=' . base_url('penata/profile') . '>Profil</a>';
+                                                            }
+                                                            ?>
+                                                            <li><?= $profile; ?></li>
+                                                            <li><a class="mt-2" href="javascript:void(0)" onclick="logout()">Keluar</a></li>
+                                                        </ul>
+
+                                                    <?php } ?>
+
+                                                </div>
+                                            </div>
+                                            </>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </header>

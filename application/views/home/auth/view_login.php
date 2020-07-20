@@ -17,9 +17,6 @@
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
                 <a class="btn btn-default mt-4 float-right" href='<?= base_url('auth/lupa_password') ?>'>Lupa password ?</a><br>
 
-                <div class="text-center mt-5">
-                    <p>Petugas museum belum punya akun? <a href='<?= base_url() ?>'>Hubungi Admin</a></p>
-                </div>
             </form>
         </div>
     </div>

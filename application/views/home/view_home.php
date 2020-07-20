@@ -17,11 +17,11 @@ if ($this->uri->segment(2) == 'kategori') {
                     <span class="wrap"></span>
                 </strong>
             </h1>
-            <p class="text-secondary"><b> Reservasi dapat dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. Dengan reservasi bisa mempermudahkan untuk masuk ke Museum, jadi Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri.</b></p>
+            <p class="text-secondary"><b> Reservasi dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. <br> Dengan reservasi bisa mempermudahkan untuk masuk museum. <br> Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri. <br><br> Download Aplikasi dan Reservasi Sekarang juga.</b></p>
             <a href="">
                 <div>
                     <span class="btn btn-primary btn-outline">
-                        Reservasi Sekarang
+                        Downliad Now
                     </span>
                 </div>
             </a>
