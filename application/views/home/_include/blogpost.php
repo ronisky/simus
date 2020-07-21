@@ -36,7 +36,7 @@
                         </div>
                         <div class="post-card__info">
                             <div class="post-card__category"><a href="#"></a></div>
-                            <div class="post-card__name"><a style="font-size: medium; font-weight: bold; color:#192a56;" href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><?= $row['judul'] ?></a></div>
+                            <div class="post-card__name"><a style="font-size: medium; font-weight: bold; color:#353b48;" href="<?= base_url('artikel/detail/') . $row['judul_seo'] ?>"><?= $row['judul'] ?></a></div>
                             <div class="post-card__date"><?= $row['hari'] . ", " . $tanggal ?></div>
                             <div class="post-card__content"><?= $isi ?>..</div>
 

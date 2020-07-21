@@ -13,15 +13,15 @@ if ($this->uri->segment(2) == 'kategori') {
     <div class="row slider-text align-items-center justify-content-center my-5">
         <div class="col-md-10 text-center">
             <h1 class="mb-4">
-                <strong class="typewrite" style="color: #2980b9;" data-period="4000" data-type='[ "Hayu ke Museum.","Museum Monumen Perjuangan Rakyat Jawa Barat","Hayu Reservasi."]'>
+                <strong class="typewrite" style="color: #0abde3;" data-period="4000" data-type='[ "Hayu ke Museum.","Museum Monumen Perjuangan Rakyat Jawa Barat","Hayu Reservasi."]'>
                     <span class="wrap"></span>
                 </strong>
             </h1>
-            <p class="text-secondary"><b> Reservasi dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. <br> Dengan reservasi bisa mempermudahkan untuk masuk museum. <br> Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri. <br><br> Download Aplikasi dan Reservasi Sekarang juga.</b></p>
+            <p style="color: #353b48;"><b> Reservasi dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. <br> Dengan reservasi bisa mempermudahkan untuk masuk museum. <br> Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri. <br><br> Download Aplikasi dan Reservasi Sekarang juga.</b></p>
             <a href="">
                 <div>
                     <span class="btn btn-primary btn-outline">
-                        Downliad Now
+                        Downliad Sekarang
                     </span>
                 </div>
             </a>
@@ -31,8 +31,9 @@ if ($this->uri->segment(2) == 'kategori') {
 <div class="row mt-3">
     <div class="col-12">
         <div class="block">
-            <h3 class="block-header__title mb-2">Koleksi Museum</h3>
-            <div class="products-view">
+            <h3 class="block-header__title mb-1">Gallery Museum</h3>
+            <div class="block-header__divider"></div>
+            <div class="products-view mt-3">
                 <div class="products-view__list products-list" data-layout="grid-4-full" data-with-features="false">
                     <div class="products-list__body">
                         <?php
@@ -54,7 +55,7 @@ if ($this->uri->segment(2) == 'kategori') {
                                             <img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi; ?>" style="height: 200px; display: block; " alt=""></a></div>
                                     <div class="post-card__info mx-3">
                                         <div class="post-card__content"><?= $des ?>...</div>
-                                        <div class="post-card__name mt-1" style="font-size: medium; color: #192a56; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
+                                        <div class="post-card__name mt-1" style="font-size: medium; color: #353b48; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
                                     </div>
                                 </div>
                             </div>
