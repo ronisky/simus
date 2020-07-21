@@ -25,7 +25,6 @@ if ($this->uri->segment(2) == 'kategori') {
                     </span>
                 </div>
             </a>
-
         </div>
     </div>
 </div>

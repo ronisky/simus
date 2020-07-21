@@ -107,7 +107,7 @@
                         </svg>
                     </button>
                     <button type="button" class="totop__button-wa">
-                        <a href="https://api.whatsapp.com/send?phone=<?= $nomer ?>" target=" _blank" title="Tanyakan Stok">
+                        <a href="https://api.whatsapp.com/send?phone=<?= $nomer ?>&text=Mohon%20maaf%20mengganggu%20ada%20yang%20ingin%20saya%20tanyakan," target=" _blank" title="Tanyakan Stok">
                             <img style="width: 170px;" src="<?= base_url('assets/images/icon/wa.png') ?>" alt="">
                         </a>
                     </button>

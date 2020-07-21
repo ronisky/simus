@@ -147,4 +147,23 @@ class Home extends CI_Controller
             }
         }
     }
+
+
+    function reservasi()
+    {
+        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
+    }
+
+    function sejarah()
+    {
+        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $this->template->load('home/template', 'home/tentang/view_sejarah', $data);
+    }
+
+    function profile_museum()
+    {
+        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $this->template->load('home/template', 'home/tentang/view_profile', $data);
+    }
 }
