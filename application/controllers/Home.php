@@ -20,7 +20,7 @@ class Home extends CI_Controller
         $row = $this->db->get_where('tb_pengguna', "id_pengguna='$id'")->row_array();
         $data['record'] = $row;
         $id_alamat = $row['id_alamat'];
-        $data['rows'] = $this->model_app->alamat_konsumen($id_alamat)->row_array();
+        $data['rows'] = $this->model_app->alamat_user($id_alamat)->row_array();
         $this->template->load('template/template', 'home/profile/view_profile', $data);
     }
 
@@ -146,24 +146,5 @@ class Home extends CI_Controller
                 redirect('home/password');
             }
         }
-    }
-
-
-    function reservasi()
-    {
-        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
-    }
-
-    function sejarah()
-    {
-        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $this->template->load('home/template', 'home/tentang/view_sejarah', $data);
-    }
-
-    function profile_museum()
-    {
-        $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $this->template->load('home/template', 'home/tentang/view_profile', $data);
     }
 }

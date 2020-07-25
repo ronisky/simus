@@ -15,6 +15,10 @@ class ComposerStaticInitbeca9e696aaeb760e188d261b7bb838c
         array (
             'setasign\\Fpdi\\' => 14,
         ),
+        'c' => 
+        array (
+            'chriskacerguis\\RestServer\\' => 26,
+        ),
         'S' => 
         array (
             'Svg\\' => 4,
@@ -42,6 +46,10 @@ class ComposerStaticInitbeca9e696aaeb760e188d261b7bb838c
         'setasign\\Fpdi\\' => 
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
+        'chriskacerguis\\RestServer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chriskacerguis/codeigniter-restserver/src',
         ),
         'Svg\\' => 
         array (

@@ -1,18 +1,10 @@
 <?php
 class Model_app extends CI_model
 {
+
     public function view($table)
     {
         return $this->db->get($table);
-    }
-
-    public function get_by_id($id)
-    {
-        $this->db->from('tb_toko_produk');
-        $this->db->where('id_produk', $id);
-        $query = $this->db->get();
-
-        return $query->row();
     }
 
     public function insert($table, $data)
@@ -148,32 +140,6 @@ class Model_app extends CI_model
         return $this->db->query("SELECT count(*) as jumlah, tanggal FROM tb_statistik GROUP BY tanggal ORDER BY tanggal DESC LIMIT 10");
     }
 
-    function orders_report($id)
-    {
-        return $this->db->query("SELECT * FROM `tb_toko_penjualan` a where a.id_pembeli='$id' ORDER BY a.id_penjualan DESC");
-    }
-
-    function konfirmasi_bayar()
-    {
-        return $this->db->query("SELECT b.kode_transaksi, a.*, c.* FROM `tb_toko_konfirmasi` a JOIN tb_toko_penjualan b ON a.id_penjualan=b.id_penjualan JOIN tb_toko_rekening c ON a.id_rekening=c.id_rekening ORDER BY a.id_konfirmasi_pembayaran DESC");
-    }
-
-    function orders_report_all()
-    {
-        return $this->db->query("SELECT * FROM `tb_toko_penjualan` a ORDER BY a.id_penjualan DESC");
-    }
-
-
-    function orders_report_packing()
-    {
-        return $this->db->query("SELECT * FROM `tb_toko_penjualan` a where a.proses='3' ORDER BY a.id_penjualan DESC");
-    }
-
-    function orders_report_home($limit)
-    {
-        return $this->db->query("SELECT * FROM `tb_toko_penjualan` a ORDER BY a.id_penjualan DESC LIMIT $limit");
-    }
-
     function profile_konsumen($id)
     {
         $this->db->join('tb_alamat', 'tb_alamat.id_alamat = tb_pengguna.id_alamat');
@@ -181,7 +147,7 @@ class Model_app extends CI_model
         return $this->db->get_where('tb_pengguna', "tb_pengguna.id_pengguna='$id'");
     }
 
-    function alamat_konsumen($id)
+    function alamat_user($id)
     {
         $this->db->join('tb_kota', 'tb_kota.kota_id = tb_alamat.id_kota');
         return $this->db->get_where('tb_alamat', "id_alamat='$id'");
@@ -200,14 +166,73 @@ class Model_app extends CI_model
         return $sendTo;
     }
 
-    public function insertCek($data)
-    {
-        return $this->db->insert('tb_kdregis', $data);
-    }
-
     function alamat_update($id, $data)
     {
         $this->db->where('id_alamat', $id);
         $this->db->update('tb_alamat', $data);
+    }
+
+    // Api Server Model
+    public function get_koleksi($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_koleksi')->result_array();
+        } else {
+            return $this->db->get_where('tb_koleksi', ['id_koleksi' => $id])->result_array();
+        }
+    }
+
+    public function get_koleksiUkuran($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_ukuran_koleksi')->result_array();
+        } else {
+            return $this->db->get_where('tb_ukuran_koleksi', ['id_ukuran' => $id])->result_array();
+        }
+    }
+
+    public function get_koleksiKategori($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_kategori_koleksi')->result_array();
+        } else {
+            return $this->db->get_where('tb_kategori_koleksi', ['id_kategori_koleksi' => $id])->result_array();
+        }
+    }
+
+    public function get_postingan($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_blog_artikel')->result_array();
+        } else {
+            return $this->db->get_where('tb_blog_artikel', ['id_artikel' => $id])->result_array();
+        }
+    }
+
+    public function get_postinganKategori($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_blog_kategori')->result_array();
+        } else {
+            return $this->db->get_where('tb_blog_kategori', ['id_kategori' => $id])->result_array();
+        }
+    }
+
+    public function get_faq($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_faq')->result_array();
+        } else {
+            return $this->db->get_where('tb_faq', ['id_faq' => $id])->result_array();
+        }
+    }
+
+    public function get_kuota($id = null)
+    {
+        if ($id === null) {
+            return $this->db->get('tb_kuota')->result_array();
+        } else {
+            return $this->db->get_where('tb_kuota', ['id_kuota' => $id])->result_array();
+        }
     }
 }

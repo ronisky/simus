@@ -203,61 +203,6 @@ class Model_main extends CI_model
         $this->db->update('tb_web_identitas', $datadb);
     }
 
-    function keterangan()
-    {
-        return $this->db->query("SELECT * FROM t_keterangan ORDER BY id_keterangan DESC LIMIT 1");
-    }
-
-    function keterangan_update()
-    {
-        $datadb = array(
-            'keterangan' => $this->input->post('a'),
-            'tanggal_artikel' => date('Y-m-d')
-        );
-        $this->db->where('id_keterangan', 1);
-        $this->db->update('t_keterangan', $datadb);
-    }
-
-
-    function pesan_masuk()
-    {
-        return $this->db->query("SELECT * FROM hubungi ORDER BY id_hubungi DESC");
-    }
-
-    function pesan_baru($limit)
-    {
-        return $this->db->query("SELECT * FROM hubungi ORDER BY id_hubungi DESC LIMIT $limit");
-    }
-
-    function pesan_masuk_view($id)
-    {
-        return $this->db->query("SELECT * FROM hubungi where id_hubungi='$id'");
-    }
-
-    function pesan_masuk_kirim()
-    {
-        $nama           = $this->input->post('a');
-        $email           = $this->input->post('b');
-        $subject         = $this->input->post('c');
-        $message         = $this->input->post('isi') . " <br><hr><br> " . $this->input->post('d');
-
-        $this->email->from('robby.prihandaya@gmail.com', 'PHPMU.COM');
-        $this->email->to($email);
-        $this->email->cc('');
-        $this->email->bcc('');
-
-        $this->email->subject($subject);
-        $this->email->message($message);
-        $this->email->set_mailtype("html");
-        $this->email->send();
-
-        $config['protocol'] = 'sendmail';
-        $config['mailpath'] = '/usr/sbin/sendmail';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = TRUE;
-        $config['mailtype'] = 'html';
-        $this->email->initialize($config);
-    }
 
     function grafik_kunjungan_web()
     {

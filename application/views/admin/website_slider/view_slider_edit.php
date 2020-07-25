@@ -40,7 +40,7 @@
                     <div class="custom-file">
                       <input type='file' class='custom-file-input' name="file1">
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
-                      <small><span class="text-danger">*</span>Rekomendasi ukuran 840 px &#10005; 395 px</small><br>
+                      <small><span class="text-danger">*</span>Rekomendasi ukuran 1110 px &#10005; 480 px</small><br>
                     </div>
                   </div>
                 </div>

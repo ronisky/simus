@@ -67,6 +67,43 @@
           </li>
         </ul>
       </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users fa-fw"></i>
+          <p>
+            Modul Pengguna
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/users') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Manajemen Pengguna</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-comments fa-fw"></i>
+          <p>
+            Saran dan Masukan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('admin/saranMasukan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Lihat Saran Masukan</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-globe-asia fa-fw"></i>
@@ -112,42 +149,6 @@
             </a>
           </li>
 
-        </ul>
-      </li>
-
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users fa-fw"></i>
-          <p>
-            Modul Pengguna
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('admin/users') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Manajemen Pengguna</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-comments fa-fw"></i>
-          <p>
-            Saran dan Masukan
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('admin/saranMasukan') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Lihat Saran Masukan</p>
-            </a>
-          </li>
         </ul>
       </li>
 

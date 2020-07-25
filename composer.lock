@@ -4,8 +4,41 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4eb8b6908db5ba53816b92c15345ed52",
+    "content-hash": "a6052308e7fb024ad3d866accd1da8f5",
     "packages": [
+        {
+            "name": "chriskacerguis/codeigniter-restserver",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chriskacerguis/codeigniter-restserver.git",
+                "reference": "6ced70d12c7e8d207eaded3f208a201330950b57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chriskacerguis/codeigniter-restserver/zipball/6ced70d12c7e8d207eaded3f208a201330950b57",
+                "reference": "6ced70d12c7e8d207eaded3f208a201330950b57",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "chriskacerguis\\RestServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Kacerguis",
+                    "email": "chriskacerguis@gmail.com"
+                }
+            ],
+            "description": "CI Rest Server",
+            "time": "2019-11-12T15:39:34+00:00"
+        },
         {
             "name": "dompdf/dompdf",
             "version": "v0.8.4",
