@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>&copy; <?= date('Y') ?> <a href="https://zamanet.com" target="_BLANK">Museum Monumen Perjuangan Rakyat Jawa Barat</a></strong>
+    <strong>&copy; <?= date('Y') ?> <a href="https://ronisky.com" target="_BLANK">Museum Monumen Perjuangan Rakyat Jawa Barat</a></strong>
     <div class="float-right d-none d-sm-inline-block">
 
     </div>

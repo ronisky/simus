@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Postingan</h3>
-              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_artikel'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tulis Artikle</a>
+              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_artikel'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tulis Artikel</a>
             </div>
 
             <div class="card-body">

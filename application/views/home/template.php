@@ -142,6 +142,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
                     </div>
                 </div>
             <?php } ?>
+
             <!-- slideshow -->
             <?php
             if ($this->uri->segment(1) == '' or $this->uri->segment(1) == 'main') {

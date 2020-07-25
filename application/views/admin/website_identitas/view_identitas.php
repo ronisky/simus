@@ -36,13 +36,6 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">No. Rekening</label>
-                    <div class="col-sm-6">
-                      <input type='text' class='form-control' name='rek' value="<?= $record['rekening'] ?>">
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
                     <label class="col-sm-2 col-form-label">No. Telp</label>
                     <div class="col-sm-6">
                       <input type='text' class='form-control' name='telp' value="<?= $record['no_telp'] ?>">

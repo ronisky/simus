@@ -13,16 +13,15 @@ if ($this->uri->segment(2) == 'kategori') {
     <div class="row slider-text align-items-center justify-content-center my-5">
         <div class="col-md-10 text-center">
             <h1 class="mb-4">
-                <strong class="typewrite" style="color: #0abde3;" data-period="4000" data-type='[ "Hayu ke Museum.","Museum Monumen Perjuangan Rakyat Jawa Barat","Hayu Reservasi."]'>
+                <strong class="typewrite" style="color: #1999D7; font-size: 26px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" data-period="4000" data-type='[ "Hayu ke Museum.","Museum Monumen Perjuangan Rakyat Jawa Barat","Hayu Reservasi."]'>
                     <span class="wrap"></span>
                 </strong>
             </h1>
-            <p style="color: #353b48;"><b> Reservasi dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. <br> Dengan reservasi bisa mempermudahkan untuk masuk museum. <br> Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri. <br><br> Download Aplikasi dan Reservasi Sekarang juga.</b></p>
+            <p style="color: #353b48; "><b> Reservasi dilakukan melalui aplikasi Museum Monumen Perjuangan Rakyat Jawa Barat. <br> Dengan reservasi bisa mempermudahkan untuk masuk museum. <br> Sahabat Museum tidak perlu ribet mengeluarkan KTP dan tidak perlu mengantri.</b><br><br></p>
             <a href="">
                 <div>
-                    <span class="btn btn-primary btn-outline">
-                        Downliad Sekarang
-                    </span>
+                    <p><strong>Download Aplikasi dan Reservasi Sekarang</strong></p>
+                    <img src="<?= base_url('assets/images/icon/googleplay.png') ?>" alt="Google Play" style="width: 200px;">
                 </div>
             </a>
         </div>
@@ -55,7 +54,7 @@ if ($this->uri->segment(2) == 'kategori') {
                                             <img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi; ?>" style="height: 200px; display: block; " alt=""></a></div>
                                     <div class="post-card__info mx-3">
                                         <div class="post-card__content"><?= $des ?>...</div>
-                                        <div class="post-card__name mt-1" style="font-size: medium; color: #353b48; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
+                                        <div class="post-card__name mt-1 mb-3" style="font-size: medium; color: #353b48; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
                                     </div>
                                 </div>
                             </div>

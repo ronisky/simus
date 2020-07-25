@@ -31,18 +31,21 @@ class Page extends CI_Controller
 	function reservasi()
 	{
 		$data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['breadcrumb'] = 'Reservasi Kunjungan';
 		$this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
 	}
 
 	function sejarah_museum()
 	{
-		$data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['title'] = 'Sejarah Musuem - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['breadcrumb'] = 'Sejarah Musuem';
 		$this->template->load('home/template', 'home/tentang/view_sejarah', $data);
 	}
 
 	function profile_museum()
 	{
-		$data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['title'] = 'Profile Museum- Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['breadcrumb'] = 'Profile Museum';
 		$this->template->load('home/template', 'home/tentang/view_profile', $data);
 	}
 }

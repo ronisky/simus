@@ -214,13 +214,13 @@
                                                             $peng = $this->db->get('tb_pengguna')->row_array();
                                                             $lv = $peng['level'];
                                                             if ($lv == 1) {
-                                                                $profile = '<a href=' . base_url('admin/profile') . '>Profil</a>';
+                                                                $profile = '<a href=' . base_url('home/profile') . '>Profil</a>';
                                                             } elseif ($lv == 2) {
-                                                                $profile = '<a href=' . base_url('koordinator/profile') . '>Profil</a>';
+                                                                $profile = '<a href=' . base_url('home/profile') . '>Profil</a>';
                                                             } elseif ($lv == 3) {
-                                                                $profile = '<a href=' . base_url('resepsionis/profile') . '>Profil</a>';
+                                                                $profile = '<a href=' . base_url('home/profile') . '>Profil</a>';
                                                             } else {
-                                                                $profile = '<a href=' . base_url('penata/profile') . '>Profil</a>';
+                                                                $profile = '<a href=' . base_url('home/profile') . '>Profil</a>';
                                                             }
                                                             ?>
                                                             <li><?= $profile; ?></li>

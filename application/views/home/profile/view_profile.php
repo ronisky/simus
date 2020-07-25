@@ -18,7 +18,7 @@ if (trim($record['foto']) == '') {
                     </div>
                     <?= $this->session->flashdata('message') ?>
                     <div class="row col-sm-10 mx-5 my-5">
-                        <div class="col-sm-4 mr-4">
+                        <div class="col-sm-5 mr-4">
                             <div class="foto-container">
                                 <img src="<?= base_url('assets/images/user/') . $foto_user ?>" class="foto-image" style="height: 300px">
                             </div>

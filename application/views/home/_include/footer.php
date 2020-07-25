@@ -29,6 +29,12 @@
                                         <td> <?= $iden['no_telp'] ?></td>
                                     </tr>
                                 </table>
+                                <a href="https://ronisky.com/">
+                                    <div>
+                                        <p><strong>Download Aplikasi Sekarang</strong></p>
+                                        <img src="<?= base_url('assets/images/icon/googleplay.png') ?>" alt="Google Play" style="width: 150px; height: auto;">
+                                    </div>
+                                </a>
                             </ul>
 
                         </div>
@@ -37,7 +43,7 @@
 
                     <div class="col-6 col-md-6 col-lg-4">
                         <div class="site-footer__widget footer-links text-left pl-2">
-                            <!-- <h5 class="footer-contacts__title">Informasi</h5> -->
+                            <h5 class="footer-contacts__title">Informasi</h5>
                             <ul class="footer-links__list">
                                 <?php
                                 $menu = $this->model_menu->menu_bawah();
@@ -92,7 +98,7 @@
 
 
             <div class="site-footer__bottom">
-                <div class="site-footer__copyright">&copy; <?= date('Y') ?> <a href="<?= base_url() ?>" target="_BLANK">Museum Monumen Perjuangan Rakyat Jawa Barat</a></div>
+                <div class="site-footer__copyright">&copy; <?= date('Y') ?> <a href="<?= base_url() ?>">Museum Monumen Perjuangan Rakyat Jawa Barat</a></div>
             </div>
         </div>
 

@@ -28,14 +28,14 @@ class Subscribe extends CI_Controller
                     $this->model_app->update('tb_subs', $data1, $where);
                     $this->session->set_flashdata('message', "<div class='alert alert-success' role='alert'>
                     <center><b>Berhasil!</b><br>
-                    Kami akan mengirimkan informasi yang terbaru seputar produk dan promo menarik dari Zamanet Store.
+                    Kami akan mengirimkan informasi yang terbaru seputar Museum Monumen Perjuangan Rakyat Jawa Barat.
                     </center>
                     </div>");
                     redirect('subscribe');
                 } else {
                     $this->session->set_flashdata('message', "<div class='alert alert-success' role='alert'>
                     <center><b>Berhasil!</b><br>
-                    Kami akan mengirimkan informasi yang terbaru seputar produk dan promo menarik dari Zamanet Store.
+                    Kami akan mengirimkan informasi yang terbaru seputar Museum Monumen Perjuangan Rakyat Jawa Barat.
                     </center>
                     </div>");
                     redirect('subscribe');
@@ -48,7 +48,7 @@ class Subscribe extends CI_Controller
                 $this->db->insert('tb_subs', $data);
                 $this->session->set_flashdata('message', "<div class='alert alert-success' role='alert'>
                             <center><b>Berhasil!</b><br>
-                            Kami akan mengirimkan informasi yang terbaru seputar produk dan promo menarik dari Zamanet Store.
+                            Kami akan mengirimkan informasi yang terbaru seputar Museum Monumen Perjuangan Rakyat Jawa Barat.
                             </center>
                             </div>");
                 redirect('subscribe');
