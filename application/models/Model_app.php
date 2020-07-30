@@ -182,6 +182,17 @@ class Model_app extends CI_model
         }
     }
 
+    public function get_koleksiLimit($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_koleksi", "desc");
+            $this->db->limit(5);
+            $query = $this->db->get('tb_koleksi');
+
+            return $query->result();;
+        }
+    }
+
     public function get_koleksiUkuran($id = null)
     {
         if ($id === null) {

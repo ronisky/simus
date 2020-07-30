@@ -202,11 +202,11 @@ class Model_main extends CI_model
     }
 
 
-    function grafik_kunjungan_web()
+    function grafik_web()
     {
         return $this->db->query("SELECT count(*) as jumlah, tanggal FROM tb_statistik GROUP BY tanggal ORDER BY tanggal DESC LIMIT 10");
     }
-    function grafik_kunjungan_museum()
+    function grafik_kunjungan()
     {
         return $this->db->query("SELECT count(*) as jumlah, tanggal FROM tb_pengunjung GROUP BY tanggal ORDER BY tanggal DESC LIMIT 10");
     }

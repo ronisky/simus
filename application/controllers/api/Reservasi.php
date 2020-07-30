@@ -15,6 +15,8 @@ class Reservasi extends RestController
 
     public function index_post()
     {
+        $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = substr(str_shuffle($set), 0, 6);
         $data = [
             'tanggal' => $this->post('tanggal'),
             'waktu' => $this->post('waktu'),
@@ -32,8 +34,8 @@ class Reservasi extends RestController
             'email' => $this->post('email'),
             'no_telp' => $this->post('no_telp'),
             'foto_id' => $this->post('foto_id'),
-            'kd_reservasi' => $this->post('kd_reservasi'),
-            'status' => $this->post('status')
+            'kd_reservasi' => $code,
+            'status' => 'Pengajuan'
         ];
 
         if ($this->model->insert('tb_reservasi', $data) > 0) {

@@ -31,8 +31,8 @@ class Admin extends CI_Controller
 		if (!empty($this->session->userdata())) {
 
 			$data['title'] = 'Administrator - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$data['grapweb'] = $this->model_main->grafik_kunjungan_web();
-			$data['grappengunjung'] = $this->model_main->grafik_kunjungan_museum();
+			$data['grappengunjung'] = $this->model_main->grafik_kunjungan();
+			$data['grap'] = $this->model_main->grafik_web();
 
 			$this->template->load('template/template', 'admin/view_dashboard', $data);
 		} else {

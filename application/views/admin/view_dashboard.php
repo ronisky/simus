@@ -77,10 +77,17 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
-          <?php include 'grafik_pengunjung.php'; ?>
-        </div>
 
+        <div class='col-md-6'>
+          <?php
+          if ($this->session->level == 1) {
+            $g = 'grafik_pengunjung_web.php';
+          } else {
+            $g = 'grafik_pengunjung.php';
+          }
+          ?>
+          <?php include $g ?>
+        </div>
         <div class="col-md-6">
           <div class="card card-info">
             <div class="card-header">
@@ -93,18 +100,16 @@
             </div>
             <div class="card-body">
               <?php
-              $data = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_kategori_pengunjung AS k ON p.kategori = k.id_kategori_pengunjung");
+              $data = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_kategori_pengunjung AS k ON p.kategori = k.id_kategori_pengunjung GROUP BY k.nama_kategori");
               ?>
               <canvas id="pieChart" style="height:250px; min-height:250px"></canvas>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <?php include 'grafik_pengunjung_web.php'; ?>
-        </div>
       </div>
     </div>
-  </section>
+</div>
+</section>
 
 </div>
 
@@ -118,7 +123,6 @@ foreach ($data->result() as $pie) {
 
 
 ?>
-
 <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/chart.js/Chart.min.js"></script>
 <script>
   $(function() {

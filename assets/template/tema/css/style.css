@@ -6632,8 +6632,6 @@ screen and (-ms-high-contrast:active) {
 
 .totop__button-wa {
     pointer-events: auto;
-    width: 39px;
-    height: 39px;
     border-radius: 19.5px;
     display: -ms-flexbox;
     display: flex;
@@ -6650,7 +6648,7 @@ screen and (-ms-high-contrast:active) {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     transition: background-color .15s, color .15s;
-    margin-right: 60px;
+    margin-top: -15px;
 }
 
 .totop__button:focus {

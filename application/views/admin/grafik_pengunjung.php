@@ -1,6 +1,6 @@
-<div class="card card-success">
+<div class="card card-info">
     <div class="card-header">
-        <h3 class="card-title">Grafik Pengunjung Museum Terdaftar</h3>
+        <h3 class="card-title">Grafik Pengunjung Museum</h3>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -18,9 +18,9 @@
 
 <?php
 
-foreach ($grappengunjung->result() as $grap) {
-    $tanggal[] = $grap->tanggal;
-    $jumlah[] = (float) $grap->jumlah;
+foreach ($grappengunjung->result() as $grapp) {
+    $tanggal[] = $grapp->tanggal;
+    $jumlah[] = (float) $grapp->jumlah;
 }
 
 

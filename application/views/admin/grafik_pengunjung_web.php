@@ -1,6 +1,6 @@
-<div class="card card-warning">
+<div class="card card-success">
     <div class="card-header">
-        <h3 class="card-title">Grafik Pengunjung Website</h3>
+        <h3 class="card-title">Grafik Pengunjung Webiste</h3>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -18,15 +18,16 @@
 
 <?php
 
-foreach ($grapweb->result() as $grap) {
+foreach ($grap->result() as $grap) {
     $tanggal[] = $grap->tanggal;
     $jumlah[] = (float) $grap->jumlah;
 }
 
-
 ?>
+
 <script>
     $(function() {
+
         var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
         var stackedBarChartData = {
             labels: <?php echo json_encode($tanggal); ?>,
