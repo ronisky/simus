@@ -122,7 +122,6 @@ class Admin extends CI_Controller
 			$this->model_main->slide_tambah();
 			redirect('admin/slider');
 		} else {
-			$data['record'] = $this->model_app->view('tb_toko_produk');
 
 			$data['title'] = 'Tambah Slider - Museum Monumen Perjuangan Rakyat Jawa Barat';
 			$this->template->load('template/template', 'admin/website_slider/view_slider_tambah', $data);
@@ -139,7 +138,6 @@ class Admin extends CI_Controller
 
 			$data['title'] = 'Edit Slider - Museum Monumen Perjuangan Rakyat Jawa Barat';
 			$data['rows'] = $this->model_main->slide_edit($id)->row_array();
-			$data['record'] = $this->model_app->view('tb_toko_produk');
 			$this->template->load('template/template', 'admin/website_slider/view_slider_edit', $data);
 		}
 	}
