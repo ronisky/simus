@@ -443,7 +443,7 @@ class Resepsionis extends CI_Controller
                     <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
                     <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
                 </div>
-                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $day . '' . $bulan . '' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $day . '/' . $bulan . '/' . $tahun . '</p>
                     <p style="line-height: 10px;font-size: 12px;">Laporan Rekap Pengunjung</p>
             </div>
         </div>
@@ -621,7 +621,7 @@ class Resepsionis extends CI_Controller
                     <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
                 </div>
                     <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $cetak . '</p>
-                    <p style="line-height: 10px;font-size: 12px;">Laporan Harian : ' . $day . '' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Harian : ' . $day . '/' . $nama_bulan . '/' . $tahun . '</p>
             </div>
         </div>
         <hr size="5px">
@@ -799,7 +799,7 @@ class Resepsionis extends CI_Controller
                     <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
                 </div>
                     <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $cetak . '</p>
-                    <p style="line-height: 10px;font-size: 12px;">Laporan Bulan : ' . $nama_bulan . ' ' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Bulan : ' . $nama_bulan . '' . $tahun . '</p>
             </div>
         </div>
         <hr size="5px">

@@ -275,4 +275,166 @@ class Penata extends CI_Controller
         $data['record'] = $this->model_laporan->laporanKoleksi();
         $this->template->load('template/template', 'penata/laporan/view_lap_koleksi', $data);
     }
+
+    function cetak_koleksi()
+    {
+        $no = $this->input->post('no');
+        $tanggalKol = $this->input->post('tanggal');
+        $namaKol = $this->input->post('nama');
+        $tinggi = $this->input->post('tinggi');
+        $panjang = $this->input->post('panjang');
+        $lebar = $this->input->post('lebar');
+        $diameter = $this->input->post('diameter');
+        $berat = $this->input->post('berat');
+        $asal = $this->input->post('asal');
+        $pemilik = $this->input->post('pemilik');
+        $cara = $this->input->post('cara');
+        $sumber = $this->input->post('sumber');
+        $no_regis = $this->input->post('no_regis');
+        // $foto = $this->input->post('foto');
+        // $imagepath = getenv("DOCUMENT_ROOT") . '/assets/images/koleksi/' . $foto;
+        $nama               = "Laporan Data Koleksi Museum";
+        $bulan              = date('m');
+        $tahun              = date('Y');
+        $cetak              = date('d/m/Y');
+        $day                = date('d');
+        $nama_bulan         = date("F", strtotime('00-' . $bulan . '-01'));
+        $nama_pdf           = "Loporan-Koleksi-Museum";
+        $mpdf               = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
+        $mpdf->SetWatermarkImage('assets/images/logo/logomini.png', 0.2, array(120, 150), '');
+        $mpdf->showWatermarkImage = true;
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->SetHTMLHeader('
+        <div  style="display: table;clear: both; ">
+            <div  style="float: left;width: 10%; margin-right: 10%; padding-right: 10px;">
+                <img src="assets/images/logo/logomini.png" alt="LOGO" width="70px" height="100px">
+            </div>
+            <div  style="float: left;width: 80%;">
+                <div class="col-col-sm-12">
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">DATA KOLEKSI</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">MUSEUM MONUMEN PERJUANGAN RAKYAT JAWA BARAT</p>
+                    <p style="line-height: 10px;font-size: 18px;font-weight: bold;">JAWA BARAT</p>
+                </div>
+                    <p style="line-height: 10px;font-size: 13px;">Dicetak : ' . $day . '/' . $bulan . '/' . $tahun . '</p>
+                    <p style="line-height: 10px;font-size: 12px;">Laporan Rekap Pengunjung</p>
+            </div>
+        </div>
+        <hr size="5px">
+        ');
+        $html               = '<!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>' . $nama . '</title>
+        <style>
+        table.tabel2 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            text-align :left;
+        }
+        
+        table.table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table.tabel2 td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+            text-align: left;
+        }
+        
+        table.tabel3 {
+            font-family: arial, sans-serif;
+            border: 0px solid #dddddd;
+            margin-left: 30px;
+            margin-right: auto;
+            margin-top: 10%;
+        }
+        table.tabel3 td,
+        th{
+            text-align: left;
+            padding: 5px;
+            text-align: center;
+        }
+
+    </style>
+    </head>
+    <body>    
+        <table class="tabel2">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Nama Koleksi</th>
+                    <th scope="col">Tinggi</th>
+                    <th scope="col">Panjang</th>
+                    <th scope="col">Lebar</th>
+                    <th scope="col">Diameter</th>
+                    <th scope="col">Berat</th>
+                    <th scope="col">Asal Koleksi</th>
+                    <th scope="col">Pemilik Asal</th>
+                    <th scope="col">Cara Perlehan</th>
+                    <th scope="col">Sumber Pusaka</th>
+                    <th scope="col">No Registrasi</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td>' . $no . '</td>
+                    <td>' . $tanggalKol . '</td>
+                    <td>' . $namaKol . '</td>
+                    <td>' . $tinggi . '</td>
+                    <td>' . $panjang . '</td>
+                    <td>' . $lebar . '</td>
+                    <td>' . $diameter . '</td>
+                    <td>' . $berat . '</td>
+                    <td>' . $asal . '</td>
+                    <td>' . $pemilik . '</td>
+                    <td>' . $cara . '</td>
+                    <td>' . $sumber . '</td>
+                    <td>' . $no_regis . '</td>
+                </tr>
+                
+            </tbody>
+               
+        </table>
+
+        
+        <table class="tabel3">
+            <thead>
+                <tr>
+                    <th scope="col">Tanda Tanggan </th>
+                    <td width="300px"></td>
+                    <td> Note </td>
+                    <td>.............................................................</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" height="100px"></th>
+                </tr>
+                <tr>
+                    <td scope="col" height="40px">.....................................</td>
+                </tr>
+            </tbody>
+        </table>       
+        </body>
+        </html>';
+        // Write some HTML code:
+        $mpdf->WriteHTML($html);
+
+        // Output a PDF file directly to the browser
+        $mpdf->Output($nama_pdf, \Mpdf\Output\Destination::INLINE);
+    }
 }
