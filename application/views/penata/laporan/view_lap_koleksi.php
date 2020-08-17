@@ -18,7 +18,7 @@
                                 <div>
                                     <button class="btn btn-sm btn-success mb-2" type="submit" href="">Expor to PDF</button>
                                 </div>
-                                <table id="laptabel" class="table table-sm table-borderless" style="width:100%">
+                                <table id="laptabel" class="table table-sm table-borderless table-responsive" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%">No</th>

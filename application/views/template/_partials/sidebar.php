@@ -182,7 +182,7 @@
           <li class="nav-item">
             <a href="<?= base_url('admin/laporanSaranMasukan') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Lap Saran dan Masukan</p>
+              <p>Saran dan Masukan </p>
             </a>
           </li>
         </ul>

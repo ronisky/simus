@@ -41,7 +41,7 @@
                 </div>
             </header>
 
-            <header class="site__header d-lg-block d-none">
+            <header class="site__header d-lg-block d-none" style="font-family: 'Quicksand', sans-serif;">
                 <div class="site-header">
                     <!-- .topbar -->
                     <?php

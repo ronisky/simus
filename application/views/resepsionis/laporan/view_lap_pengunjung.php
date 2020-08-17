@@ -14,7 +14,7 @@
                             <div>
                             </div>
                             <label for="">Aksi Tabel</label>
-                            <table id="laptabel" class="table table-sm table-borderless" style="width:100%">
+                            <table id="laptabel" class="table table-sm table-borderless table-responsive" style="width:100%">
                                 <thead>
                                     <tr>
                                         <td colspan="2">

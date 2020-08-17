@@ -30,6 +30,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
 
     <link rel="icon" type="image/png" href="<?= base_url('assets/images/favicon/') ?><?= $iden['favicon']; ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/owl-carousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/photoswipe.css">
@@ -156,7 +157,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
             <!-- artikel -->
             <?php
             if ($this->uri->segment(1) == '' or $this->uri->segment(1) == 'main') {
-                include '_include/blogpost.php';
+                include '_include/postingan.php';
             } ?>
         </div>
 

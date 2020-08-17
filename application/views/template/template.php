@@ -7,7 +7,7 @@
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-light-primary elevation-4">
+<aside class="main-sidebar sidebar-light-primary elevation-4" style="font-family: 'Quicksand', sans-serif; font-weight: 300;">
   <!-- Brand Logo -->
   <!-- Brand Logo -->
   <div class="bg-primary brand-link">
