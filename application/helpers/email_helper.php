@@ -7,15 +7,15 @@ function kirim_email($email, $subject, $message)
     $config = [
         'protocol'  => 'smtp',
         'smtp_host' => 'ssl://smtp.hostinger.co.id',
-        'smtp_user' => 'info@ronisky.com',
-        'smtp_pass' => 'nQdeo|0K',
+        'smtp_user' => 'monpera@ronisky.com',
+        'smtp_pass' => 'c~7!SE#V~K',
         'smtp_port' => 465,
         'mailtype'  => 'html',
         'charset'   => 'utf-8',
         'newline'   => "\r\n"
     ];
     $ci->email->initialize($config);
-    $ci->email->from('info@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
+    $ci->email->from('monpera@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
     $ci->email->to("$email");
     $ci->email->subject("$subject");
     $ci->email->message("$message");

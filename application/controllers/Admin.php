@@ -523,15 +523,15 @@ class Admin extends CI_Controller
 			$config = [
 				'protocol'  => 'smtp',
 				'smtp_host' => 'ssl://smtp.hostinger.co.id',
-				'smtp_user' => 'info@ronisky.com',
-				'smtp_pass' => 'nQdeo|0K',
+				'smtp_user' => 'monpera@ronisky.com',
+				'smtp_pass' => 'c~7!SE#V~K',
 				'smtp_port' => 465,
 				'mailtype'  => 'html',
 				'charset'   => 'utf-8',
 				'newline'   => "\r\n"
 			];
 			$ci->email->initialize($config);
-			$ci->email->from('info@ronisky.com', "Newsletter Museum Monumen Perjuangan Rakyat Jawa Barat");
+			$ci->email->from('monpera@ronisky.com', "Newsletter Museum Monumen Perjuangan Rakyat Jawa Barat");
 			$ci->email->to($this->model_app->emailsend());
 			$ci->email->subject("$judul");
 			$ci->email->message("$isi");

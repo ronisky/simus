@@ -1,4 +1,4 @@
-<div class="card card-success">
+<div class="card card-info">
     <div class="card-header">
         <h3 class="card-title">Grafik Pengunjung Webiste</h3>
 
@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
         <div class="chart">
-            <canvas id="stackedBarChart" style="height:250px; min-height:250px"></canvas>
+            <canvas id="stackedBarChartWeb" style="height:250px; min-height:250px"></canvas>
         </div>
     </div>
     <!-- /.card-body -->
@@ -19,8 +19,8 @@
 <?php
 
 foreach ($grap->result() as $grap) {
-    $tanggal[] = $grap->tanggal;
-    $jumlah[] = (float) $grap->jumlah;
+    $tanggalWeb[] = $grap->tanggal;
+    $jumlahWeb[] = (float) $grap->jumlah;
 }
 
 ?>
@@ -28,9 +28,9 @@ foreach ($grap->result() as $grap) {
 <script>
     $(function() {
 
-        var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+        var stackedBarChartCanvas = $('#stackedBarChartWeb').get(0).getContext('2d')
         var stackedBarChartData = {
-            labels: <?php echo json_encode($tanggal); ?>,
+            labels: <?php echo json_encode($tanggalWeb); ?>,
             datasets: [{
                     label: 'Jumlah Pengunjung',
                     backgroundColor: 'rgba(60,141,188,0.9)',
@@ -40,7 +40,7 @@ foreach ($grap->result() as $grap) {
                     pointStrokeColor: 'rgba(60,141,188,1)',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: <?php echo json_encode($jumlah); ?>
+                    data: <?php echo json_encode($jumlahWeb); ?>
                 },
 
             ]

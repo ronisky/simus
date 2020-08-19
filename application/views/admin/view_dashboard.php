@@ -79,17 +79,11 @@
       <div class="row">
 
         <div class='col-md-6'>
-          <?php
-          if ($this->session->level == 1) {
-            $g = 'grafik_pengunjung_web.php';
-          } else {
-            $g = 'grafik_pengunjung.php';
-          }
-          ?>
-          <?php include $g ?>
+          <?php include 'grafik_pengunjung.php' ?>
         </div>
+
         <div class="col-md-6">
-          <div class="card card-info">
+          <div class="card card-success">
             <div class="card-header">
               <h3 class="card-title">Klasifikasi Jumlah Pengunjung Museum Berdasarkan Kategori</h3>
 
@@ -106,14 +100,37 @@
             </div>
           </div>
         </div>
+
+        <div class="col-md-6">
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title ">Klasifikasi Jumlah Pengunjung Museum Berdasarkan Negara Asal</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool " data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <?php
+              $dataNegara = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_negara AS n ON p.negara = n.id_negara GROUP BY n.id_negara");
+              ?>
+              <canvas id="pieChart1" style="height:250px; min-height:250px"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class='col-md-6'>
+          <?php include 'grafik_pengunjung_web.php' ?>
+        </div>
+
       </div>
     </div>
+
 </div>
 </section>
 
 </div>
-
-
 <?php
 
 foreach ($data->result() as $pie) {
@@ -131,6 +148,42 @@ foreach ($data->result() as $pie) {
       labels: <?php echo json_encode($nama); ?>,
       datasets: [{
         data: <?php echo json_encode($total); ?>,
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
+      }]
+    }
+    var pieOptions = {
+      maintainAspectRatio: !0,
+      responsive: !0,
+      legend: {
+        display: !0,
+        position: 'right'
+      }
+    }
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
+    })
+  })
+</script>
+
+<?php
+
+foreach ($dataNegara->result() as $pie) {
+  $namaNegara[] = $pie->nama;
+  $totalNegara[] = (float) $pie->jumlah;
+}
+
+
+?>
+<script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/chart.js/Chart.min.js"></script>
+<script>
+  $(function() {
+    var pieChartCanvas = $('#pieChart1').get(0).getContext('2d')
+    var pieData = {
+      labels: <?php echo json_encode($namaNegara); ?>,
+      datasets: [{
+        data: <?php echo json_encode($totalNegara); ?>,
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
       }]
     }

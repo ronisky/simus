@@ -246,4 +246,15 @@ class Model_app extends CI_model
             return $this->db->get_where('tb_kuota', ['id_kuota' => $id])->result_array();
         }
     }
+
+    public function get_postinganLimit($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_artikel", "desc");
+            $this->db->limit(5);
+            $query = $this->db->get('tb_blog_artikel');
+
+            return $query->result();;
+        }
+    }
 }
