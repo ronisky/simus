@@ -1,4 +1,4 @@
-<div class="card card-success">
+<div class="card card-info">
     <div class="card-header">
         <h3 class="card-title">Grafik Pengunjung Museum</h3>
 
