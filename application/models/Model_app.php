@@ -176,20 +176,13 @@ class Model_app extends CI_model
     public function get_koleksi($id = null)
     {
         if ($id === null) {
-            return $this->db->get('tb_koleksi')->result_array();
-        } else {
-            return $this->db->get_where('tb_koleksi', ['id_koleksi' => $id])->result_array();
-        }
-    }
-
-    public function get_koleksiLimit($id = null)
-    {
-        if ($id === null) {
             $this->db->order_by("id_koleksi", "desc");
-            $this->db->limit(5);
             $query = $this->db->get('tb_koleksi');
-
-            return $query->result();;
+            return $query->result_array();
+        } else {
+            $this->db->order_by("id_koleksi", "desc");
+            $query = $this->db->get_where('tb_koleksi', ['id_koleksi' => $id]);
+            return $query->result_array();
         }
     }
 
@@ -214,9 +207,13 @@ class Model_app extends CI_model
     public function get_postingan($id = null)
     {
         if ($id === null) {
-            return $this->db->get('tb_blog_artikel')->result_array();
+            $this->db->order_by("id_artikel", "desc");
+            $query = $this->db->get('tb_blog_artikel');
+            return $query->result_array();
         } else {
-            return $this->db->get_where('tb_blog_artikel', ['id_artikel' => $id])->result_array();
+            $this->db->order_by("id_artikel", "desc");
+            $query = $this->db->get_where('tb_blog_artikel', ['id_artikel' => $id]);
+            return $query->result_array();
         }
     }
 
@@ -235,26 +232,6 @@ class Model_app extends CI_model
             return $this->db->get('tb_faq')->result_array();
         } else {
             return $this->db->get_where('tb_faq', ['id_faq' => $id])->result_array();
-        }
-    }
-
-    public function get_kuota($id = null)
-    {
-        if ($id === null) {
-            return $this->db->get('tb_kuota')->result_array();
-        } else {
-            return $this->db->get_where('tb_kuota', ['id_kuota' => $id])->result_array();
-        }
-    }
-
-    public function get_postinganLimit($id = null)
-    {
-        if ($id === null) {
-            $this->db->order_by("id_artikel", "desc");
-            $this->db->limit(5);
-            $query = $this->db->get('tb_blog_artikel');
-
-            return $query->result();;
         }
     }
 }
