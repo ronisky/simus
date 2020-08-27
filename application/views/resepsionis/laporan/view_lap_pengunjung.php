@@ -35,7 +35,7 @@
                                         <th>Kategori</th>
                                         <th>Jumlah</th>
                                         <th>Negara</th>
-                                        <th>Wilayah Bagian</th>
+                                        <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>alamat</th>
                                     </tr>
@@ -51,7 +51,7 @@
                                             <td><?= $row['kategori'] ?></td>
                                             <td><?= $row['jumlah']; ?></td>
                                             <td><?= $row['negara'] ?></td>
-                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
                                             <td><?= $row['alamat']; ?></td>
                                         </tr>

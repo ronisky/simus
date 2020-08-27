@@ -103,9 +103,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Wilayah Bagian</label>
+                                <label class="col-sm-2 col-form-label">Provinsi</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='wilayah_bagian' placeholder="misal: Jawa Barat" value="<?= $rows['wilayah_bagian']; ?>">
+                                    <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= $rows['provinsi']; ?>">
                                 </div>
                             </div>
 

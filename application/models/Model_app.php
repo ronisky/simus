@@ -172,6 +172,20 @@ class Model_app extends CI_model
         $this->db->update('tb_alamat', $data);
     }
 
+    function cekIdUkuran()
+    {
+        $query = $this->db->query("SELECT MAX(id_ukuran) as idukuran from tb_ukuran_koleksi");
+        $hasil = $query->row();
+        return $hasil->idukuran;
+    }
+    function cekIdReservasi()
+    {
+        $query = $this->db->query("SELECT MAX(id_reservasi) as kdreservasi from tb_reservasi");
+        $hasil = $query->row();
+        return $hasil->kdreservasi;
+    }
+
+
     // Api Server Model
     public function get_koleksi($id = null)
     {
@@ -232,6 +246,58 @@ class Model_app extends CI_model
             return $this->db->get('tb_faq')->result_array();
         } else {
             return $this->db->get_where('tb_faq', ['id_faq' => $id])->result_array();
+        }
+    }
+
+    public function get_slide($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_slide", "desc");
+            $query = $this->db->get('tb_web_slide');
+            return $query->result_array();
+        } else {
+            $this->db->order_by("id_slide", "desc");
+            $query = $this->db->get_where('tb_web_slide', ['id_slide' => $id]);
+            return $query->result_array();
+        }
+    }
+
+    public function get_fasilitas($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_fasilitas", "desc");
+            $query = $this->db->get('tb_fasilitas');
+            return $query->result_array();
+        } else {
+            $this->db->order_by("id_fasilitas", "desc");
+            $query = $this->db->get_where('tb_fasilitas', ['id_fasilitas' => $id]);
+            return $query->result_array();
+        }
+    }
+
+    public function get_kategori($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_kategori_pengunjung");
+            $query = $this->db->get('tb_kategori_pengunjung');
+            return $query->result_array();
+        } else {
+            $this->db->order_by("id_kategori_pengunjung");
+            $query = $this->db->get_where('tb_kategori_pengunjung', ['id_kategori_pengunjung' => $id]);
+            return $query->result_array();
+        }
+    }
+
+    public function get_negara($id = null)
+    {
+        if ($id === null) {
+            $this->db->order_by("id_negara");
+            $query = $this->db->get('tb_negara');
+            return $query->result_array();
+        } else {
+            $this->db->order_by("id_negara");
+            $query = $this->db->get_where('tb_negara', ['id_negara' => $id]);
+            return $query->result_array();
         }
     }
 }

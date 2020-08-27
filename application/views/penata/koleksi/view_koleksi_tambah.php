@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tambah Produk</h3>
+              <h3 class="card-title">Tambah Koleski</h3>
             </div>
 
             <?= $this->session->flashdata('message') ?>
@@ -70,6 +70,7 @@
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Ukuran</label>
+                  <input type="hidden" name="id" value="<?= $id ?>">
                   <div class="col-sm-2">
                     <label for=""> Tinggi (cm)</label>
                     <input type='text' class='form-control' name='tg' value="">
@@ -103,7 +104,7 @@
                   <label class="col-sm-2 col-form-label">Gambar</label>
                   <div class="col-sm-6">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFileLangHTML" name="foto">
+                      <input type="file" class="custom-file-input" id="customFileLangHTML" name="foto" required>
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
                     </div>
                   </div>

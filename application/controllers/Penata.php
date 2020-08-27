@@ -83,7 +83,6 @@ class Penata extends CI_Controller
 
     function tambah_koleksi()
     {
-
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/koleksi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -92,32 +91,9 @@ class Penata extends CI_Controller
             $this->load->library('upload', $config);
             $this->upload->do_upload('foto');
             $hasil = $this->upload->data();
-            if ($hasil['file_name'] == '') {
+            if ($hasil['file_name'] != '') {
                 $ukuran = array(
-                    'tinggi'    => htmlspecialchars($this->input->post('tg')),
-                    'panjang'   => htmlspecialchars($this->input->post('pjg')),
-                    'lebar'     => htmlspecialchars($this->input->post('lb')),
-                    'diameter'  => htmlspecialchars($this->input->post('dia')),
-                    'berat'     => htmlspecialchars($this->input->post('br'))
-                );
-
-                $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
-                $data = array(
-                    'id_ukuran'             => $this->input->post('idU'),
-                    'id_kategori_koleksi'   => $this->input->post('kategori'),
-                    'nama_pencatat'         => $this->session->username,
-                    'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
-                    'tanggal_pencatatan'    => date('Y-m-d'),
-                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
-                    'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
-                    'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
-                    'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
-                    'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
-                    'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
-                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
-                );
-            } else {
-                $ukuran = array(
+                    'id_ukuran' => htmlspecialchars($this->input->post('id')),
                     'tinggi'    => htmlspecialchars($this->input->post('tg')),
                     'panjang'   => htmlspecialchars($this->input->post('pjg')),
                     'lebar'     => htmlspecialchars($this->input->post('lb')),
@@ -126,7 +102,7 @@ class Penata extends CI_Controller
                 );
                 $this->model_app->insert('tb_ukuran_koleksi', $ukuran);
                 $data = array(
-                    'id_ukuran'             => $this->db->insert_id(),
+                    'id_ukuran'             => htmlspecialchars($this->input->post('id')),
                     'id_kategori_koleksi'   => $this->input->post('kategori'),
                     'nama_pencatat'         => $this->session->username,
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
@@ -149,8 +125,14 @@ class Penata extends CI_Controller
           		</div>');
             redirect('penata/koleksi');
         } else {
+            $dariDB = $this->model_app->cekIdUkuran();
+            $nourut = substr($dariDB, 3, 4);
+            $kode1 =  $nourut + 1;
+            $kodenya = sprintf("%04s", $kode1);
+            $Id = 'UK' . $kodenya;
 
-            $data['title'] = 'Tambah Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['title']  = 'Tambah Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['id']     = $Id;
             $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
             $this->template->load('template/template', 'penata/koleksi/view_koleksi_tambah', $data);
         }

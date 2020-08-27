@@ -53,8 +53,8 @@ if ($this->uri->segment(2) == 'kategori') {
                                     <div class="product-card__image"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>">
                                             <img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi; ?>" style="height: 200px; display: block; " alt=""></a></div>
                                     <div class="post-card__info mx-3">
-                                        <div class="post-card__content"><?= $des ?>...</div>
                                         <div class="post-card__name mt-1 mb-3" style="font-size: medium; color: #353b48; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
+                                        <div class="post-card__content"><?= $des ?>...</div>
                                     </div>
                                 </div>
                             </div>

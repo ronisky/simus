@@ -73,24 +73,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Kebangsaan</label>
+                                    <label class="col-sm-2 col-form-label">Provinsi</label>
                                     <div class="col-sm-6">
-                                        <select name="kebangsaan" class='form-control select2' required>
-                                            <option value=""></option>
-                                            <?php $qnegara = $this->db->get('tb_negara');
-                                            foreach ($qnegara->result_array() as $negara) { ?>
-                                                <option value="<?= $negara['id_negara'] ?>"><?= $negara['nama'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <?= form_error('kebangsaan', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Wilayah Bagian</label>
-                                    <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='wilayah_bagian' placeholder="misal: Jawa Barat" value="<?= set_value('wilayah_bagian'); ?>">
-                                        <?= form_error('wilayah_bagian', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                        <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= set_value('provinsi'); ?>">
+                                        <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
 

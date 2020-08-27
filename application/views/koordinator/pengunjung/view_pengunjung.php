@@ -23,7 +23,7 @@
                                         <th>Nama</th>
                                         <th>ID Card</th>
                                         <th>Kebangsaan</th>
-                                        <th>Wilayah Bagian</th>
+                                        <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>Alamat</th>
                                         <th>Aksi</th>
@@ -55,7 +55,7 @@
                                                     }
                                                 } ?>
                                             </td>
-                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
                                             <td><?= $row['alamat']; ?></td>
                                             <td>

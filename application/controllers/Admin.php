@@ -523,8 +523,8 @@ class Admin extends CI_Controller
 			$config = [
 				'protocol'  => 'smtp',
 				'smtp_host' => 'ssl://smtp.hostinger.co.id',
-				'smtp_user' => 'monpera@ronisky.com',
-				'smtp_pass' => 'c~7!SE#V~K',
+				'smtp_user' => 'museummonpera@ronisky.com',
+				'smtp_pass' => 'a5[AFwN~OWPA',
 				'smtp_port' => 465,
 				'mailtype'  => 'html',
 				'charset'   => 'utf-8',

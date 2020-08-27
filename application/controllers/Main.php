@@ -16,7 +16,7 @@ class Main extends CI_Controller
 		$jumlah = $this->model_app->view('tb_koleksi')->num_rows();
 		$config['base_url'] = base_url() . 'koleksi/index';
 		$config['total_rows'] = $jumlah;
-		$config['per_page'] = 12;
+		$config['per_page'] = 8;
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = FALSE;

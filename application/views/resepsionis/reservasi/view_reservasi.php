@@ -26,7 +26,7 @@
                                         <th>Email</th>
                                         <th>No. Telp</th>
                                         <th>Kebangsaan</th>
-                                        <th>Wilayah Bagian</th>
+                                        <th>Provinsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -46,7 +46,7 @@
                                             <td><?= $row['email']; ?></td>
                                             <td><?= $row['no_telp']; ?></td>
                                             <td><?= $row['kebangsaan'] ?></td>
-                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['provinsi']; ?></td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . $row['id_reservasi']; ?>"><i class="fas fa-eye fa-fw"></i></a>
                                                 <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-edit fa-fw'></i></a>

@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Pengunjung Musuem</h3>
-                            <a class='float-right btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Pengguna</a>
+                            <a class='float-right btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Pengunjung</a>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -22,8 +22,8 @@
                                         <th>Jumlah</th>
                                         <th>Nama</th>
                                         <th>ID Card</th>
-                                        <th>Kebangsaan</th>
-                                        <th>Wilayah Bagian</th>
+                                        <th>Negara</th>
+                                        <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>Alamat</th>
                                         <th>Aksi</th>
@@ -55,7 +55,7 @@
                                                     }
                                                 } ?>
                                             </td>
-                                            <td><?= $row['wilayah_bagian']; ?></td>
+                                            <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
                                             <td><?= $row['alamat']; ?></td>
                                             <td>

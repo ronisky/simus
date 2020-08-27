@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Semua Koleksi</h3>
-              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('penata/tambah_koleksi'); ?>'>Tambah Produk</a>
+              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('penata/tambah_koleksi'); ?>'>Tambah Koleksi</a>
             </div>
             <?= $this->session->flashdata('message') ?>
             <div class="card-body">

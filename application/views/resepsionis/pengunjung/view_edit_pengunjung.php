@@ -105,10 +105,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Wilayah Bagian</label>
+                                    <label class="col-sm-2 col-form-label">Provinsi</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='wilayah_bagian' placeholder="misal: Jawa Barat" value="<?= $rows['wilayah_bagian']; ?>">
-                                        <?= form_error('wilayah_bagian', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                        <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= $rows['provinsi']; ?>">
+                                        <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
 
