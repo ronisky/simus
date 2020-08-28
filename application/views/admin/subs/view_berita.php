@@ -9,6 +9,7 @@
               <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_newsletter'); ?>'><i class="fas fa-plus fa-fw mr-1"></i> Kirim Berita</a>
             </div>
 
+            <?= $this->session->flashdata('message') ?>
             <div class="card-body">
               <table id="table1" class="table table-sm table-borderless display nowrap" style="width:100%">
 

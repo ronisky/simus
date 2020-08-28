@@ -88,26 +88,18 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Kebangsaan</label>
-                                    <div class="col-sm-6">
-                                        <select name="kebangsaan" class='form-control select2' required>
-                                            <option value='' selected>- Pilih Kebangsaan -</option>
-                                            <?php
-                                            foreach ($negara as $k) {
-                                                if ($rows['kebangsaan'] == $k['id_negara']) {
-                                                    echo "<option value='$k[id_negara]' selected>$k[nama]</option>";
-                                                }
-                                                echo "<option value='$k[id_negara]'>$k[nama]</option>";
-                                            } ?>
-                                        </select>
-                                    </div>
-                                    <?= form_error('kebangsaan', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Provinsi</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= $rows['provinsi']; ?>">
+                                        <select name='provinsi' class='form-control'>
+                                            <option value='' selected>- Pilih Provinsi -</option>
+                                            <?php
+                                            foreach ($provinsi as $prov) {
+                                                if ($rows['provinsi'] == $prov['provinsi_id']) {
+                                                    echo "<option value='$prov[provinsi_id]' selected>$prov[nama_provinsi]</option>";
+                                                }
+                                                echo "<option value='$prov[provinsi_id]'>$prov[nama_provinsi]</option>";
+                                            } ?>
+                                        </select>
                                         <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -115,7 +107,16 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Kota</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='kota' value="<?= $rows['kota']; ?>" required>
+                                        <select name='kota' class='form-control'>
+                                            <option value='' selected>- Pilih Kota -</option>
+                                            <?php
+                                            foreach ($kota as $kota) {
+                                                if ($rows['kota'] == $kota['kota_id']) {
+                                                    echo "<option value='$kota[kota_id]' selected>$kota[nama_kota]</option>";
+                                                }
+                                                echo "<option value='$kota[kota_id]'>$kota[nama_kota]</option>";
+                                            } ?>
+                                        </select>
                                         <?= form_error('kota', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -123,7 +124,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Alamat</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='alamat' value="<?= $rows['alamat']; ?>" required>
+                                        <textarea rows="2" type='text' class='form-control' name='alamat' required><?= $rows['alamat']; ?></textarea>
                                         <?= form_error('alamat', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>

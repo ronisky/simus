@@ -40,11 +40,21 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>css/style.scss">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>fonts/stroyka/stroyka.css">
-    <link rel="stylesheet" href="<?= base_url('assets/template/css/'); ?>sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>sweetalert2/bootstrap-4.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/adminlte3/'); ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/gijgo/css/gijgo.min.css') ?>">
     <script src="<?= base_url('assets/template/tema/') ?>vendor/jquery/jquery.min.js"></script>
-    <script src="<?= base_url('assets/template/js/header.js') ?>"></script>
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>magnific-popup.css">
+    <!-- date picekr  -->
+    <link rel=" stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- time picker  -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>jquery.timepicker.css">
+
+    <!-- end picker  -->
+    <script src=" <?= base_url('assets/template/js/header.js') ?>">
+    </script>
     <script>
         var site_url = '<?= base_url() ?>';
     </script>
@@ -216,6 +226,15 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/datatables/jquery.dataTables.js"></script>
     <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <script src="<?= base_url('assets/template/gijgo/js/gijgo.min.js') ?>"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="<?= base_url('assets/template/js/') ?>jquery.magnific-popup.js"></script>
+    <!-- date time picker  -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- time picker  -->
+    <script src="<?= base_url('assets/template/js/'); ?>jquery.timepicker.js"></script>
+
+    <!-- end piscker -->
     <script src="<?= base_url('assets/template/js/footer.js') ?>"></script>
     <script>
         var owl = $('#MainSlider');
@@ -228,7 +247,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
         });
 
         // magnific popup
-        $('.image-popup').magnificPopup({
+        $('.image-popup-zoom').magnificPopup({
             type: 'image',
             closeOnContentClick: true,
             closeBtnInside: false,
@@ -246,6 +265,51 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
                 enabled: true,
                 duration: 300 // don't foget to change the duration also in CSS
             }
+        });
+
+        $(document).ready(function() {
+            $('.image-popup-detail').magnificPopup({
+                type: 'image'
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+
+        // <!-- date piicker  -->
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.timepicker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 30,
+                minTime: '9',
+                maxTime: '2:30pm',
+                defaultTime: '9',
+                startTime: '09:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                $("#datepicker").datepicker({
+                    dateFormat: "dd-mm-yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    minDate: 0,
+                    maxDate: "+2Y",
+                    beforeShowDay: $.datepicker.noWeekends
+                });
+            });
         });
     </script>
 </body>

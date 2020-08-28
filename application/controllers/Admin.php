@@ -19,11 +19,11 @@ class Admin extends CI_Controller
 	function index()
 	{
 
-		if ($this->session->level == 1) {
-			redirect('admin/home');
-		} else {
-			redirect('error404');
-		}
+		// if ($this->session->level == 1) {
+		redirect('admin/home');
+		// } else {
+		// 	redirect('error404');
+		// }
 	}
 
 	function home()
@@ -425,7 +425,7 @@ class Admin extends CI_Controller
 				$kode = substr(str_shuffle($set), 0, 6);
 				$data['password'] = $kode;
 				$data['title'] = 'Tambah Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
-				$this->template->load('admin/template', 'admin/users/view_users_tambah', $data);
+				$this->template->load('template/template', 'admin/users/view_users_tambah', $data);
 			} else {
 				$set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 				$code = substr(str_shuffle($set), 0, 6);
@@ -448,6 +448,18 @@ class Admin extends CI_Controller
 					'kode_resetpassword' 	=> $code2,
 					'tgl_daftar' 			=> date('Y-m-d H:i:s'),
 				];
+
+				// siapkan token
+				$token = base64_encode(random_bytes(32));
+				$pengguna_token = [
+					'email' => htmlspecialchars($this->input->post('email', true)),
+					'token' => $token,
+					'dibuat' => time()
+				];
+
+				$this->model_app->insert('tb_pengguna', $data);
+				$this->model_app->insert('tb_pengguna_token', $pengguna_token);
+
 				$pass = $this->input->post('password1');
 				$uname = $this->input->post('username');
 				$email = $this->input->post('email');
@@ -459,17 +471,16 @@ class Admin extends CI_Controller
 						<p>Username: " . $uname . "</p>
 						<p>Password: " . $pass . "</p>
 						<p>Silakan klik tautan di bawah ini untuk mengaktifkan akun Anda.</p>
-						<a href='" . base_url() . "c?q=" . $code . "'>Aktivasi Akun</a>
+						<a href=" . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . ">Aktivasi Akun</a>
 					";
 
 				kirim_email($email, $subject, $message);
-				$this->model_app->insert('tb_pengguna', $data);
-				$this->session->set_flashdata('message', '<div class="alert alert-success col-sm-8" role="alert">
+				$this->session->set_flashdata('message', '<div class="alert alert-success col-sm-12" role="alert">
             <center>Berhasil mendaftar!<br>
             Silahkan cek email untuk aktivasi pendaftaran.
             </center>
           </div>');
-				redirect(base_url('admin/tambah_user'));
+				redirect(base_url('admin/users'));
 			}
 		} else {
 			$set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -479,7 +490,6 @@ class Admin extends CI_Controller
 			$this->template->load('template/template', 'admin/users/view_users_tambah', $data);
 		}
 	}
-
 
 	function saranMasukan()
 	{
@@ -515,29 +525,33 @@ class Admin extends CI_Controller
 	{
 
 		if (isset($_POST['submit'])) {
+
 			$judul = $this->input->post('judul');
 			$isi = $this->input->post('berita');
 
 			$ci = get_instance();
 			$ci->load->library('email');
-			$config = [
-				'protocol'  => 'smtp',
-				'smtp_host' => 'ssl://smtp.hostinger.co.id',
-				'smtp_user' => 'museummonpera@ronisky.com',
-				'smtp_pass' => 'a5[AFwN~OWPA',
-				'smtp_port' => 465,
-				'mailtype'  => 'html',
-				'charset'   => 'utf-8',
-				'newline'   => "\r\n"
-			];
+			$config['protocol'] = "smtp";
+			$config['smtp_host'] = "smtp.hostinger.co.id";
+			$config['smtp_crypto'] = "ssl";
+			$config['smtp_port'] = "465";
+			$config['smtp_user'] = "admin@ronisky.com";
+			$config['smtp_pass'] = 's?0WRb3pX';
+			$config['charset'] = "iso-8859-1";
+			$config['mailtype'] = "html";
+			$config['newline'] = "\r\n";
 			$ci->email->initialize($config);
-			$ci->email->from('monpera@ronisky.com', "Newsletter Museum Monumen Perjuangan Rakyat Jawa Barat");
+			$ci->email->from('admin@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
 			$ci->email->to($this->model_app->emailsend());
 			$ci->email->subject("$judul");
 			$ci->email->message("$isi");
 			$ci->email->send();
 
 			$this->model_berita->list_berita_tambah();
+			$this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Berita berhasil dikirim</center>
+          		</div>');
 			redirect('admin/newsletter');
 		} else {
 			$data['title'] = 'Kirim News Letter - Museum Monumen Perjuangan Rakyat Jawa Barat';

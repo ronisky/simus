@@ -37,7 +37,7 @@ class Reservasi extends RestController
         $email          = $_POST['email'];
         $no_telp        = $_POST['no_telp'];
         $fotos           = $_POST['foto'];
-        $status         = "Pengajuan";
+        $status         = 1;
 
         // email 
         $code = "https://ronisky.com/";

@@ -62,6 +62,7 @@ $route = array(
     'main'                  => 'main',
     'page'                  => 'page',
     'koleksi'               => 'koleksi',
+    'reservasi'             => 'reservasi',
     'login'                 => 'auth/login',
     'register'              => 'auth/register',
     'logout'                => 'auth/logout',

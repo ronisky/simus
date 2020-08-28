@@ -9,12 +9,12 @@
                         </div>
                         <?= $this->session->flashdata('message') ?>
                         <form action="<?= base_url('resepsionis/tambah_pengunjung') ?>" method="post">
-                            <div class="card-body">
+                            <div class="card-body col-md-12">
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Kategori</label>
                                     <?= form_error('kategori', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 ">
                                         <select name="kategori" class='form-control select2' required>
                                             <option value=""></option>
                                             <?php $kategori = $this->db->get('tb_kategori_pengunjung');
@@ -75,7 +75,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Provinsi</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= set_value('provinsi'); ?>">
+                                        <select name="provinsi" class='form-control select2' required>
+                                            <option value=""></option>
+                                            <?php $qnegara = $this->db->get('tb_provinsi');
+                                            foreach ($qnegara->result_array() as $negara) { ?>
+                                                <option value="<?= $negara['provinsi_id'] ?>"><?= $negara['nama_provinsi'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                         <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -83,7 +89,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Kota</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='kota' value="<?= set_value('kota'); ?>" required>
+                                        <select name="kota" class='form-control select2' required>
+                                            <option value=""></option>
+                                            <?php $qnegara = $this->db->get('tb_kota');
+                                            foreach ($qnegara->result_array() as $negara) { ?>
+                                                <option value="<?= $negara['kota_id'] ?>"><?= $negara['nama_kota'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                         <?= form_error('kota', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -91,7 +103,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Alamat</label>
                                     <div class="col-sm-6">
-                                        <input type='text' class='form-control' name='alamat' value="<?= set_value('alamat'); ?>" required>
+                                        <textarea type='text' class='form-control' name='alamat' required></textarea>
                                         <?= form_error('alamat', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -99,7 +111,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Kode Pos</label>
                                     <div class="col-sm-6">
-                                        <input type='number' class='form-control' name='kode_ps' value="<?= set_value('kode_ps'); ?>">
+                                        <input type='number' class='form-control' name='kode_pos' value="<?= set_value('kode_pos'); ?>">
                                     </div>
                                 </div>
 

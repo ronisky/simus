@@ -222,16 +222,6 @@ class Penata extends CI_Controller
         }
     }
 
-    function detail_koleksi()
-    {
-        $id = $this->uri->segment(3);
-        $data['title'] = 'Edit - Museum Monumen Perjuangan Rakyat Jawa Barat';
-        $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
-        $data['uk'] = $this->model_app->view_ordering('tb_ukuran_koleksi', 'id_ukuran', 'DESC');
-        $data['rows'] = $this->model_app->edit('tb_koleksi', array('id_koleksi' => $id))->row_array();
-        $this->template->load('template/template', 'penata/koleksi/view_koleksi_detail', $data);
-    }
-
     function delete_koleksi($id)
     {
         $query = $this->db->get_where('tb_koleksi', array('id_koleksi' => $id));

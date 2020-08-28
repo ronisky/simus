@@ -29,7 +29,7 @@
                                         <td> <?= $iden['no_telp'] ?></td>
                                     </tr>
                                 </table>
-                                <a href="https://ronisky.com/">
+                                <a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp">
                                     <div>
                                         <p><strong>Download Aplikasi Sekarang</strong></p>
                                         <img src="<?= base_url('assets/images/icon/googleplay.png') ?>" alt="Google Play" style="width: 150px; height: auto;">

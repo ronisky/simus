@@ -196,7 +196,7 @@
                                 ?>
                                         <div class="widget-products__item">
                                             <input clas='post' id="id_koleksi" name="id_koleksi" type="hidden" value="<?= $rowz['id_koleksi'] ?>">
-                                            <div class="widget-products__image"><a href="<a href=" <?= base_url('koleksi/detail/') . $rowz['koleksi_seo']; ?>"><img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi1; ?>" alt=""></a></div>
+                                            <div class="widget-products__image"><a href="<?= base_url('koleksi/detail/') . $rowz['koleksi_seo']; ?>"><img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi1; ?>" alt=""></a></div>
                                             <div class="widget-products__info">
                                                 <div class="widget-products__name">
                                                     <a href="<?= base_url('koleksi/detail/') . $rowz['koleksi_seo']; ?>">

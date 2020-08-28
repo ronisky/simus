@@ -10,8 +10,8 @@ class Error404 extends CI_Controller
 
         $session = $this->session->userdata('level');
 
-        if ($session == 1) {
-            $this->template->load('admin/template', 'admin/error', $data);
+        if ($session == 1 || $session == 2 || $session == 3 || $session == 4) {
+            $this->template->load('template/template', 'admin/error', $data);
         } else {
             $this->template->load('home/template', 'home/error', $data);
         }

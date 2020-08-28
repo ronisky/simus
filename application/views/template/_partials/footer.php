@@ -24,7 +24,16 @@
 <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/moment/moment.min.js"></script>
 <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="<?= base_url('assets/template/gijgo/js/gijgo.min.js') ?>"></script>
-<script src="<?= base_url('assets/template/js/'); ?>sweetalert2.min.js"></script>
+<script src="<?= base_url('assets/template/js/') ?>sweetalert2.min.js"></script>
+<script src="<?= base_url('assets/template/js/') ?>jquery.magnific-popup.js"></script>
+
+<!-- date time picker  -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- time picker  -->
+<script src="<?= base_url('assets/template/js/'); ?>jquery.timepicker.js"></script>
+
+<!-- end piscker -->
+
 <script>
     function logout() {
         let timerInterval;
@@ -137,7 +146,63 @@
         height: 500
     });
 </script>
+<script>
+    $('.image-popup').magnificPopup({
+        type: 'image',
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        fixedContentPos: true,
+        mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+        },
+        image: {
+            verticalFit: true
+        },
+        zoom: {
+            enabled: true,
+            duration: 300 // don't foget to change the duration also in CSS
+        }
+    });
 
+    $(document).ready(function() {
+        $('.image-popup-detail').magnificPopup({
+            type: 'image'
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '9',
+            maxTime: '2:30pm',
+            defaultTime: '9',
+            startTime: '09:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function() {
+            $("#datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+                minDate: 0,
+                maxDate: "+2Y",
+                beforeShowDay: $.datepicker.noWeekends
+            });
+        });
+    });
+</script>
 
 
 

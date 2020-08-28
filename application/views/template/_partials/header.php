@@ -24,12 +24,21 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/template/adminlte3/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="icon" type="image/png" href="<?= base_url('assets/images/favicon/') ?><?= $iden['favicon']; ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/template/css/'); ?>sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>magnific-popup.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= base_url('assets/template/adminlte3/'); ?>plugins/select2/css/select2.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/adminlte3/'); ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.css">
     <!-- Select2 -->
     <script src="<?= base_url('assets/template/adminlte3/'); ?>plugins/select2/js/select2.full.js"></script>
+    <!-- date picekr  -->
+    <link rel=" stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- time picker  -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>jquery.timepicker.css">
+
+    <!-- end picker  -->
+
     <script>
         var site_url = "<?= base_url() ?>";
     </script>

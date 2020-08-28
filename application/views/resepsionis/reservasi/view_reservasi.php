@@ -16,37 +16,52 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Res.</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
-                                        <th>Jam</th>
-                                        <th>Kategori</th>
-                                        <th>Jumlah</th>
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>No. Telp</th>
-                                        <th>Kebangsaan</th>
-                                        <th>Provinsi</th>
+                                        <th>Tanggal</th>
+                                        <th>Jam</th>
+                                        <th>Jumlah</th>
+                                        <th>Gambar</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    foreach ($record as $row) { ?>
+
+                                    foreach ($record as $row) {
+
+                                        $status = $row['status'];
+                                        if ($status == 1) {
+                                            $s = "<label class='text-warning'>Pengajuan</label>";
+                                        } else if ($status == 2) {
+                                            $s = "<label class='text-success'>Diterima</label>";
+                                        } else if ($status == 3) {
+                                            $s = "<label class='text-danger'>Ditolak</label>";
+                                        }
+                                    ?>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $row['kd_reservasi'] ?></td>
-                                            <td><?= $row['status'] ?></td>
-                                            <td><?= $row['tanggal'] ?></td>
-                                            <td><?= $row['waktu'] ?></td>
-                                            <td><?= $row['kategori']; ?></td>
-                                            <td><?= $row['jumlah'] ?></td>
+                                            <td>
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-outline-secondary sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $s ?></button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item sm" href="#">Terima</a>
+                                                        <div role="separator" class="dropdown-divider"></div>
+                                                        <a class="dropdown-item sm" href="#">Tolak</a>
+                                                    </div>
+                                            </td>
                                             <td><?= $row['nama']; ?></td>
                                             <td><?= $row['email']; ?></td>
                                             <td><?= $row['no_telp']; ?></td>
-                                            <td><?= $row['kebangsaan'] ?></td>
-                                            <td><?= $row['provinsi']; ?></td>
+                                            <td><?= $row['tanggal'] ?></td>
+                                            <td><?= $row['waktu'] ?></td>
+                                            <td><?= $row['jumlah'] ?></td>
+                                            <td class="image-popup-detail" href="<?= base_url('assets/images/reservasi/') . $row['foto']; ?>">
+                                                <img src="<?= base_url('assets/images/reservasi/') . $row['foto']; ?>" height="60">
+                                            </td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . $row['id_reservasi']; ?>"><i class="fas fa-eye fa-fw"></i></a>
                                                 <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-edit fa-fw'></i></a>
@@ -68,19 +83,6 @@
 </div>
 
 <script>
-    $(document).on("click", ".detailFaq", function() {
-        let Id = $(this).data('id');
-        let nama = $(this).data('nama');
-        let email = $(this).data('email');
-        let pertanyaan = $(this).data('pertanyaan');
-        let jawaban = $(this).data('jawaban');
-        $("#id").val(Id);
-        $("#nm").val(nama);
-        $("#em").val(email);
-        $("#tanya").val(pertanyaan);
-        $("#jawab").val(jawaban);
-    });
-
     function confirmation(ev) {
         ev.preventDefault();
         var data_id = ev.currentTarget.getAttribute('data-id');

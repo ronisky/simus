@@ -28,12 +28,7 @@ class Page extends CI_Controller
 		$this->template->load('home/template', 'home/halaman/view_page', $data);
 	}
 
-	function reservasi()
-	{
-		$data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$data['breadcrumb'] = 'Reservasi Kunjungan';
-		$this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
-	}
+
 
 	function sejarah_museum()
 	{

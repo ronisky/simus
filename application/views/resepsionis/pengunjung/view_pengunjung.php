@@ -55,8 +55,22 @@
                                                     }
                                                 } ?>
                                             </td>
-                                            <td><?= $row['provinsi']; ?></td>
-                                            <td><?= $row['kota'] ?></td>
+                                            <td>
+                                                <?php
+                                                foreach ($provinsi as $p) {
+                                                    if ($row['provinsi'] == $p['provinsi_id']) {
+                                                        echo "$p[nama_provinsi]";
+                                                    }
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                foreach ($kota as $k) {
+                                                    if ($row['kota'] == $k['kota_id']) {
+                                                        echo "$k[nama_kota]";
+                                                    }
+                                                } ?>
+                                            </td>
                                             <td><?= $row['alamat']; ?></td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_pengunjung/') . $row['id_pengunjung']; ?>"><i class="fas fa-eye fa-fw"></i></a>

@@ -23,16 +23,29 @@ class Auth extends CI_Controller
 			$data['judul'] = 'Login' . " - " . title();
 			$this->template->load('home/template', 'home/auth/view_lupass', $data);
 		} else {
+			$email = $this->input->post('email');
+			$user = $this->db->get_where('tb_pengguna', ['email' => $email, 'aktif' => 1])->row_array();
 
-			$email = strip_tags($this->input->post('email'));
-			$cek = $this->db->query("SELECT * FROM tb_pengguna where email='" . $this->db->escape_str($email) . "'");
-			$row = $cek->row_array();
-			$total = $cek->num_rows();
+			if ($user) {
 
-			if ($total > 0) {
+				$token = base64_encode(random_bytes(32));
+				$user_token = [
+					'email' => $email,
+					'token' => $token,
+					'dibuat' => time()
+				];
+
+				$this->db->insert('tb_pengguna_token', $user_token);
+
+				// $email = strip_tags($this->input->post('email'));
+				// $cek = $this->db->query("SELECT * FROM tb_pengguna where email='" . $this->db->escape_str($email) . "'");
+				// $row = $cek->row_array();
+				// $total = $cek->num_rows();
+
+				// if ($total > 0) {
 
 
-				$kode = $row['kode_resetpassword'];
+				// $kode = $row['kode_resetpassword'];
 
 				$subject      = 'Permintaan Reset Password';
 
@@ -40,7 +53,7 @@ class Auth extends CI_Controller
 						<p>Akun Anda:</p>
 						<p>Email: " . $email . "</p><br>
 						<p>Silakan klik tautan di bawah ini untuk mereset password Anda.</p>
-						<a href='" . base_url() . "auth/p?q=" . $kode . "'>Reset Password</a>
+						<a href='" . base_url() . "auth/p?q=" . urlencode($token) . "'>Reset Password</a>
 					";
 
 				kirim_email($email, $subject, $message);
@@ -238,6 +251,42 @@ class Auth extends CI_Controller
 			}
 		}
 	}
+	public function verify()
+	{
+		$email = $this->input->get('email');
+		$token = $this->input->get('token');
+
+		$user = $this->db->get_where('tb_pengguna', ['email' => $email])->row_array();
+
+		if ($user) {
+			$user_token = $this->db->get_where('tb_pengguna_token', ['token' => $token])->row_array();
+
+			if ($user_token) {
+				if (time() - $user_token['dibuat'] < (60 * 60 * 24)) {
+					$this->db->set('aktif', 1);
+					$this->db->where('email', $email);
+					$this->db->update('tb_pengguna');
+
+					$this->db->delete('tb_pengguna_token', ['email' => $email]);
+
+					$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' telah aktif! Silahkan login.</div>');
+					redirect('login');
+				} else {
+					$this->db->delete('tb_pengguna', ['email' => $email]);
+					$this->db->delete('tb_pengguna_token', ['email' => $email]);
+
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pendaftaran Gagal! Token sudah kadaluarsa.</div>');
+					redirect('login');
+				}
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Aktivasi gagal! Token salah.</div>');
+				redirect('login');
+			}
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Aktivasi gagal! Email salah.</div>');
+			redirect('login');
+		}
+	}
 
 	public function logout()
 	{
@@ -249,7 +298,7 @@ class Auth extends CI_Controller
 	{
 		$code = $_GET['q'];
 
-		$query = $this->model_app->view_where('tb_pengguna', "kode_resetpassword='$code'");
+		$query = $this->model_app->view_where('tb_pengguna_token', "token='$code'");
 		$row = $query->row();
 
 		if (!empty($row)) {

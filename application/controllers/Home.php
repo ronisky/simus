@@ -8,7 +8,7 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_app');
-        cek_session_home();
+        // cek_session_home();
     }
 
     // Profile 
@@ -98,7 +98,55 @@ class Home extends CI_Controller
             $this->template->load('template/template', 'home/profile/view_alamat', $data);
         }
     }
+    function reservasi()
+    {
+        $dariDB = $this->model_app->cekIdReservasi();
+        $nourut = substr($dariDB, 3, 4);
+        $kode1 =  $nourut + 1;
+        $kodenya = sprintf("%04s", $kode1);
+        $Id = 'RM' . $kodenya;
+        if (isset($_POST['submit'])) {
+            $config['upload_path'] = 'assets/images/reservasi/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = '5000'; // kb
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('file');
+            $hasil = $this->upload->data();
+            if ($hasil['file_name'] != '') {
+                $data = array(
+                    'id_reservasi'     => $Id,
+                    'tanggal'        => htmlspecialchars($this->input->post('tanggal')),
+                    'waktu'            => htmlspecialchars($this->input->post('waktu')),
+                    'kategori'        => htmlspecialchars($this->input->post('kategori')),
+                    'jumlah'        => htmlspecialchars($this->input->post('jumlah')),
+                    'nama'            => htmlspecialchars($this->input->post('nama')),
+                    'id_card'        => htmlspecialchars($this->input->post('id_card')),
+                    'no_id'            => htmlspecialchars($this->input->post('no_id')),
+                    'negara'        => htmlspecialchars($this->input->post('negara')),
+                    'provinsi'        => htmlspecialchars($this->input->post('provinsi')),
+                    'kota'            => htmlspecialchars($this->input->post('kota')),
+                    'alamat'        => htmlspecialchars($this->input->post('alamat')),
+                    'kode_pos'        => htmlspecialchars($this->input->post('kode_pos')),
+                    'email'            => htmlspecialchars($this->input->post('email')),
+                    'no_telp'        => htmlspecialchars($this->input->post('no_telp')),
+                    'foto'            => $hasil['file_name'],
+                    'status'        => "Pengajuan"
+                );
+            }
+            $this->model_app->insert('tb_reservasi', $data);
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Terima kasih, pengajuan reservasi berhasil dikirim</center>
+          		</div>');
+            $this->template->load('home/template', 'home/reservasi');
+        } else {
 
+            $data['title'] = 'Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['breadcrumb'] = 'Reservasi Kunjungan';
+            $this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
+        }
+    }
     function password()
     {
         $id = $this->session->id_pengguna;

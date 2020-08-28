@@ -115,6 +115,8 @@ class Resepsionis extends CI_Controller
             $data['title'] = 'Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
             $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
+            $data['provinsi'] = $this->db->query("SELECT * FROM tb_provinsi")->result_array();
+            $data['kota'] = $this->db->query("SELECT * FROM tb_kota")->result_array();
             $data['record'] = $this->db->query("SELECT * FROM tb_pengunjung ORDER BY id_pengunjung DESC")->result_array();
             $this->template->load('template/template', 'resepsionis/pengunjung/view_pengunjung', $data);
         } else {
@@ -159,7 +161,7 @@ class Resepsionis extends CI_Controller
         if (isset($_POST['submit'])) {
             $petugas = $this->session->username;
             $data = [
-                'tanggal'       => date('Y-m-d'),
+                'tanggal'       => date('d-m-Y'),
                 'waktu'         => date('H:i:s'),
                 'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
                 'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
@@ -167,8 +169,7 @@ class Resepsionis extends CI_Controller
                 'id_card'       => htmlspecialchars($this->input->post('id_card', true)),
                 'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
                 'negara'        => htmlspecialchars($this->input->post('negara', true)),
-                'kebangsaan'    => htmlspecialchars($this->input->post('kebangsaan', true)),
-                'provinsi' => htmlspecialchars($this->input->post('provinsi', true)),
+                'provinsi'      => htmlspecialchars($this->input->post('provinsi', true)),
                 'kota'          => htmlspecialchars($this->input->post('kota', true)),
                 'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
                 'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
@@ -186,6 +187,8 @@ class Resepsionis extends CI_Controller
             $data['title'] = 'Edit Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['record'] = $this->model_app->view_ordering('tb_kategori_pengunjung', 'id_kategori_pengunjung', 'DESC');
             $data['negara'] = $this->model_app->view_ordering('tb_negara', 'id_negara',  'DESC');
+            $data['provinsi'] = $this->db->query("SELECT * FROM tb_provinsi")->result_array();
+            $data['kota'] = $this->db->query("SELECT * FROM tb_kota")->result_array();
             $data['rows'] = $this->model_app->edit('tb_pengunjung', array('id_pengunjung' => $id))->row_array();
             $this->template->load('template/template', 'resepsionis/pengunjung/view_edit_pengunjung', $data);
         }
@@ -197,6 +200,8 @@ class Resepsionis extends CI_Controller
         $data['title'] = 'Detail Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
         $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
+        $data['provinsi'] = $this->db->query("SELECT * FROM tb_provinsi")->result_array();
+        $data['kota'] = $this->db->query("SELECT * FROM tb_kota")->result_array();
         $data['rows'] = $this->model_app->edit('tb_pengunjung', array('id_pengunjung' => $id))->row_array();
         $this->template->load('template/template', 'resepsionis/pengunjung/view_detail_pengunjung', $data);
     }
@@ -219,6 +224,46 @@ class Resepsionis extends CI_Controller
         }
     }
 
+    function edit_reservasi()
+    {
+        $id = $this->uri->segment(3);
+        if (isset($_POST['submit'])) {
+            $petugas = $this->session->username;
+            $data = [
+                'tanggal'       => date('d-m-Y'),
+                'waktu'         => date('H:i:s'),
+                'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
+                'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
+                'nama'          => htmlspecialchars($this->input->post('nama', true)),
+                'id_card'       => htmlspecialchars($this->input->post('id_card', true)),
+                'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
+                'negara'        => htmlspecialchars($this->input->post('negara', true)),
+                'provinsi'      => htmlspecialchars($this->input->post('provinsi', true)),
+                'kota'          => htmlspecialchars($this->input->post('kota', true)),
+                'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
+                'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
+                'petugas'       => $petugas
+            ];
+
+            $where = array('id_pengunjung' =>  $this->input->post('id'));
+            $this->model_app->update('tb_pengunjung', $data, $where);
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Data berhasil diperbaharui</center>
+          		</div>');
+            redirect('resepsionis/pengunjung', 'refresh');
+        } else {
+            $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['record'] = $this->model_app->view_ordering('tb_kategori_pengunjung', 'id_kategori_pengunjung', 'DESC');
+            $data['negara'] = $this->model_app->view_ordering('tb_negara', 'id_negara',  'DESC');
+            $data['provinsi'] = $this->db->query("SELECT * FROM tb_provinsi")->result_array();
+            $data['kota'] = $this->db->query("SELECT * FROM tb_kota")->result_array();
+            $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_edit_reservasi', $data);
+        }
+    }
+
+
     function detail_reservasi()
     {
         $id = $this->uri->segment(3);
@@ -226,7 +271,18 @@ class Resepsionis extends CI_Controller
         $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
         $this->template->load('template/template', 'resepsionis/reservasi/view_detail_reservasi', $data);
     }
+    function delete_reservasi($id)
+    {
+        $query = $this->db->get_where('tb_reservasi', array('id_reservasi' => $id));
+        $row = $query->row();
+        $gambar = $row->foto;
+        $path = "assets/images/reservasi/";
+        unlink($path . $gambar);
 
+        $this->db->query("DELETE FROM tb_reservasi where id_reservasi='$id'");
+
+        echo json_encode(array("status" => TRUE));
+    }
     function kategori_pengunjung()
     {
 
