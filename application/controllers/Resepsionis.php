@@ -228,36 +228,24 @@ class Resepsionis extends CI_Controller
     {
         $id = $this->uri->segment(3);
         if (isset($_POST['submit'])) {
-            $petugas = $this->session->username;
-            $data = [
-                'tanggal'       => date('d-m-Y'),
-                'waktu'         => date('H:i:s'),
-                'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
-                'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
-                'nama'          => htmlspecialchars($this->input->post('nama', true)),
-                'id_card'       => htmlspecialchars($this->input->post('id_card', true)),
-                'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
-                'negara'        => htmlspecialchars($this->input->post('negara', true)),
-                'provinsi'      => htmlspecialchars($this->input->post('provinsi', true)),
-                'kota'          => htmlspecialchars($this->input->post('kota', true)),
-                'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
-                'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
-                'petugas'       => $petugas
-            ];
 
-            $where = array('id_pengunjung' =>  $this->input->post('id'));
-            $this->model_app->update('tb_pengunjung', $data, $where);
+            $id = htmlspecialchars($this->input->post('id'));
+            $tanggal    = htmlspecialchars($this->input->post('tanggal'));
+            $waktu      = htmlspecialchars($this->input->post('waktu'));
+
+            $data = [
+                'tanggal'   => $tanggal,
+                'waktu'     => $waktu
+            ];
+            $where = array('id_reservasi' =>  $id);
+            $this->model_app->update('tb_reservasi', $data, $where);
             $this->session->set_flashdata('message', '
 				<div class="alert alert-success col-sm-12" role="alert">
             	<center>Data berhasil diperbaharui</center>
           		</div>');
-            redirect('resepsionis/pengunjung', 'refresh');
+            redirect('resepsionis/reservasi', 'refresh');
         } else {
             $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['record'] = $this->model_app->view_ordering('tb_kategori_pengunjung', 'id_kategori_pengunjung', 'DESC');
-            $data['negara'] = $this->model_app->view_ordering('tb_negara', 'id_negara',  'DESC');
-            $data['provinsi'] = $this->db->query("SELECT * FROM tb_provinsi")->result_array();
-            $data['kota'] = $this->db->query("SELECT * FROM tb_kota")->result_array();
             $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_edit_reservasi', $data);
         }
@@ -282,6 +270,123 @@ class Resepsionis extends CI_Controller
         $this->db->query("DELETE FROM tb_reservasi where id_reservasi='$id'");
 
         echo json_encode(array("status" => TRUE));
+    }
+
+    function tolak_reservasi()
+    {
+        if (isset($_POST['submit'])) {
+            $id = htmlspecialchars($this->input->post('id'));
+            $tanggal = htmlspecialchars($this->input->post('tanggal'));
+            $waktu = htmlspecialchars($this->input->post('waktu'));
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $email = htmlspecialchars($this->input->post('email'));
+            $no_telp = htmlspecialchars($this->input->post('no_telp'));
+            $status = htmlspecialchars($this->input->post('status'));
+            $ket = htmlspecialchars($this->input->post('keterangan'));
+            if ($status != 3) {
+                $data = [
+                    'status'     => 3,
+                    'keterangan' => $ket
+                ];
+                $where = array('id_reservasi' => $id);
+                $this->model_app->update('tb_reservasi', $data, $where);
+
+                // email 
+                $code = "https://ronisky.com/";
+                $subject = "Penolakan Reservasi";
+                $message = "
+                            <h2>Mohon maaf pengajuan reservasi kunjungan anda di tolak.</h2>
+                            <p>Detail Data Reservasi:</p>
+                            
+                            <p>Nama: " . $nama . "</p>
+                            <p>email: " . $email . "</p>
+                            <p>No Telepon: " . $no_telp . "</p>
+                            <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
+                            <p>Status reservasi : <b> Ditolak</b></p><br>
+                            <p>Alasan Penolakan : <b> .$ket.</b></p>
+                            <br>
+                            <p>Silahkan hubungi petugas untuk langkah lebih lanjut!</p>
+                            <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
+                        ";
+
+                kirim_email($email, $subject, $message);
+
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-success col-sm-12" role="alert">
+                <center>Penolakan reservasi berhasil dikirim</center>
+                  </div>');
+                redirect('resepsionis/reservasi', 'refresh');
+            } else {
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-warning col-sm-12" role="alert">
+                <center>Maaf, data reservasi sudah ditolak</center>
+                  </div>');
+                redirect('resepsionis/reservasi', 'refresh');
+            }
+        }
+    }
+    function terima_reservasi()
+    {
+        if (isset($_POST['submit'])) {
+            $id = htmlspecialchars($this->input->post('id'));
+            $tanggal = htmlspecialchars($this->input->post('tanggal'));
+            $waktu = htmlspecialchars($this->input->post('waktu'));
+            $kategori = htmlspecialchars($this->input->post('kategori'));
+            $jumlah = htmlspecialchars($this->input->post('jumlah'));
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $id_card = htmlspecialchars($this->input->post('id_card'));
+            $no_id = htmlspecialchars($this->input->post('no_id'));
+            $negara = htmlspecialchars($this->input->post('negara'));
+            $provinsi = htmlspecialchars($this->input->post('provinsi'));
+            $kota = htmlspecialchars($this->input->post('kota'));
+            $alamat = htmlspecialchars($this->input->post('alamat'));
+            $kode_pos = htmlspecialchars($this->input->post('kode_pos'));
+            $email = htmlspecialchars($this->input->post('email'));
+            $no_telp = htmlspecialchars($this->input->post('no_telp'));
+            $foto = htmlspecialchars($this->input->post('foto'));
+            $status = htmlspecialchars($this->input->post('status'));
+            $ket = htmlspecialchars($this->input->post('keterangan'));
+            if ($status != 2) {
+                $data = [
+                    'status'     => 2,
+                    'keterangan' => $ket
+                ];
+                $where = array('id_reservasi' => $id);
+                $this->model_app->update('tb_reservasi', $data, $where);
+
+                // email 
+                $code = "https://ronisky.com/";
+                $subject = "Penolakan Reservasi";
+                $message = "
+                            <h2>Mohon maaf pengajuan reservasi kunjungan anda di tolak.</h2>
+                            <p>Detail Data Reservasi:</p>
+                            
+                            <p>Nama: " . $nama . "</p>
+                            <p>email: " . $email . "</p>
+                            <p>No Telepon: " . $no_telp . "</p>
+                            <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
+                            <p>Status reservasi : <b> Ditolak</b></p><br>
+                            <p>Alasan Penolakan : <b> .$ket.</b></p>
+                            <br>
+                            <p>Silahkan hubungi petugas untuk langkah lebih lanjut!</p>
+                            <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
+                        ";
+
+                kirim_email($email, $subject, $message);
+
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-success col-sm-12" role="alert">
+                <center>Penolakan reservasi berhasil dikirim</center>
+                  </div>');
+                redirect('resepsionis/reservasi', 'refresh');
+            } else {
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-warning col-sm-12" role="alert">
+                <center>Maaf, data reservasi sudah ditolak</center>
+                  </div>');
+                redirect('resepsionis/reservasi', 'refresh');
+            }
+        }
     }
     function kategori_pengunjung()
     {

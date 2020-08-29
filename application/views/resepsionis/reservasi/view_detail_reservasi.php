@@ -107,7 +107,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-8 col-form-label"></label>
+                                <label class="col-sm-2 col-form-label">Keterangan Reservasi</label>
+                                <div class="col-sm-6">
+                                    <textarea type='text' rows="3" class='form-control' name='keterangan' readonly><?= $rows['keterangan']; ?></textarea>
+                                </div>
                                 <div class="col-sm-1 ">
                                     <a href='<?= base_url('resepsionis/reservasi') ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Kembali</button></a>
                                 </div>
