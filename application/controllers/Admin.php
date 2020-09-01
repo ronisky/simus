@@ -517,7 +517,7 @@ class Admin extends CI_Controller
 	{
 
 		$data['record'] = $this->model_berita->list_berita();
-		$data['title'] = 'Newsletter - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['title'] = 'Berita - Museum Monumen Perjuangan Rakyat Jawa Barat';
 		$this->template->load('template/template', 'admin/subs/view_berita', $data);
 	}
 
