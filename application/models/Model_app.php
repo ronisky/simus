@@ -6,6 +6,13 @@ class Model_app extends CI_model
     {
         return $this->db->get($table);
     }
+    public function get_list($table, $where = FALSE)
+    {
+        if ($where) {
+            $this->db->where($where);
+        }
+        return $this->db->get($table)->result();
+    }
 
     public function insert($table, $data)
     {

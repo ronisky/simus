@@ -145,7 +145,7 @@ class Resepsionis extends CI_Controller
 
             $this->model_app->insert('tb_pengunjung', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success col-sm-12" role="alert">
-            <center>Data berhasil ditambahkan</center>
+            <center>Data pengunjung baru berhasil ditambahkan</center>
           </div>');
             redirect('resepsionis/pengunjung', 'refresh');
         } else {
@@ -161,7 +161,7 @@ class Resepsionis extends CI_Controller
         if (isset($_POST['submit'])) {
             $petugas = $this->session->username;
             $data = [
-                'tanggal'       => date('d-m-Y'),
+                'tanggal'       => date('Y-m-d'),
                 'waktu'         => date('H:i:s'),
                 'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
                 'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
@@ -217,10 +217,66 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['record'] = $this->db->query("SELECT * FROM tb_reservasi")->result_array();
+            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 1 OR status = 3')->result_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi', $data);
         } else {
             redirect('resepsionis');
+        }
+    }
+
+    function reservasi_diterima()
+    {
+        if (!empty($this->session->userdata())) {
+            $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 2 OR status =4 ')->result_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi_diterima', $data);
+        } else {
+            redirect('resepsionis');
+        }
+    }
+
+    function reservasi_kirim()
+    {
+        if (isset($_POST['submit'])) {
+            $petugas = $this->session->username;
+            $id_reservasi = htmlspecialchars($this->input->post('id'));
+            $status = htmlspecialchars($this->input->post('status'));
+            if ($status != 4) {
+                $data = [
+                    'tanggal'       => date('Y-m-d'),
+                    'waktu'         => date('H:i:s'),
+                    'kategori'      => htmlspecialchars($this->input->post('kategori', true)),
+                    'jumlah'        => htmlspecialchars($this->input->post('jumlah', true)),
+                    'nama'          => htmlspecialchars($this->input->post('nama', true)),
+                    'id_card'       => htmlspecialchars($this->input->post('id_card', true)),
+                    'no_id'         => htmlspecialchars($this->input->post('no_id', true)),
+                    'negara'        => htmlspecialchars($this->input->post('negara', true)),
+                    'provinsi'      => htmlspecialchars($this->input->post('provinsi', true)),
+                    'kota'          => htmlspecialchars($this->input->post('kota', true)),
+                    'alamat'        => htmlspecialchars($this->input->post('alamat', true)),
+                    'kode_pos'      => htmlspecialchars($this->input->post('kode_pos', true)),
+                    'petugas'       => $petugas
+                ];
+                $reservasi = [
+                    'status'    => 4
+                ];
+
+                $this->model_app->insert('tb_pengunjung', $data);
+
+                $where = array('id_reservasi' =>  $id_reservasi);
+                $this->model_app->update('tb_reservasi', $reservasi, $where);
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success col-sm-12" role="alert">
+                <center>Data pengunjung baru berhasil ditambahkan</center>
+                </div>');
+                redirect('resepsionis/pengunjung', 'refresh');
+            } else {
+                $this->session->set_flashdata('message', '
+            <div class="alert alert-warning col-sm-12" role="alert">
+            <center>Opps! Reservasi sudah selesai</center>
+              </div>');
+                redirect('resepsionis/reservasi_diterima', 'refresh');
+            }
         }
     }
 
@@ -319,7 +375,7 @@ class Resepsionis extends CI_Controller
             } else {
                 $this->session->set_flashdata('message', '
                 <div class="alert alert-warning col-sm-12" role="alert">
-                <center>Maaf, data reservasi sudah ditolak</center>
+                <center>Opps! Maaf data reservasi sudah ditolak</center>
                   </div>');
                 redirect('resepsionis/reservasi', 'refresh');
             }
@@ -327,67 +383,94 @@ class Resepsionis extends CI_Controller
     }
     function terima_reservasi()
     {
+
+        $id = $this->uri->segment(3);
         if (isset($_POST['submit'])) {
-            $id = htmlspecialchars($this->input->post('id'));
-            $tanggal = htmlspecialchars($this->input->post('tanggal'));
-            $waktu = htmlspecialchars($this->input->post('waktu'));
-            $kategori = htmlspecialchars($this->input->post('kategori'));
-            $jumlah = htmlspecialchars($this->input->post('jumlah'));
-            $nama = htmlspecialchars($this->input->post('nama'));
-            $id_card = htmlspecialchars($this->input->post('id_card'));
-            $no_id = htmlspecialchars($this->input->post('no_id'));
-            $negara = htmlspecialchars($this->input->post('negara'));
-            $provinsi = htmlspecialchars($this->input->post('provinsi'));
-            $kota = htmlspecialchars($this->input->post('kota'));
-            $alamat = htmlspecialchars($this->input->post('alamat'));
-            $kode_pos = htmlspecialchars($this->input->post('kode_pos'));
-            $email = htmlspecialchars($this->input->post('email'));
-            $no_telp = htmlspecialchars($this->input->post('no_telp'));
-            $foto = htmlspecialchars($this->input->post('foto'));
-            $status = htmlspecialchars($this->input->post('status'));
-            $ket = htmlspecialchars($this->input->post('keterangan'));
-            if ($status != 2) {
-                $data = [
-                    'status'     => 2,
-                    'keterangan' => $ket
-                ];
-                $where = array('id_reservasi' => $id);
-                $this->model_app->update('tb_reservasi', $data, $where);
 
-                // email 
-                $code = "https://ronisky.com/";
-                $subject = "Penolakan Reservasi";
-                $message = "
-                            <h2>Mohon maaf pengajuan reservasi kunjungan anda di tolak.</h2>
-                            <p>Detail Data Reservasi:</p>
-                            
-                            <p>Nama: " . $nama . "</p>
-                            <p>email: " . $email . "</p>
-                            <p>No Telepon: " . $no_telp . "</p>
-                            <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
-                            <p>Status reservasi : <b> Ditolak</b></p><br>
-                            <p>Alasan Penolakan : <b> .$ket.</b></p>
-                            <br>
-                            <p>Silahkan hubungi petugas untuk langkah lebih lanjut!</p>
-                            <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
-                        ";
+            $id         = htmlspecialchars($this->input->post('id'));
+            $tanggal    = htmlspecialchars($this->input->post('tanggal'));
+            $waktustart = htmlspecialchars($this->input->post('waktu'));
+            $waktuend   = htmlspecialchars($this->input->post('waktuakhir'));
+            $nama       = $this->input->post('nama');
+            $kategori   = $this->input->post('kategori');
+            $jumlah     = $this->input->post('jumlah');
+            $alamat     = $this->input->post('alamat');
+            $email      = $this->input->post('email');
+            $timestart  = "$tanggal $waktustart";
+            $timeend    = "$tanggal $waktuend";
+            $data = [
+                'status'   => 2
+            ];
 
-                kirim_email($email, $subject, $message);
+            $jadwal = [
+                'id_reservasi'  => $id,
+                'start_time'    => $timestart,
+                'end_time'      => $timeend,
+                'kategori'      => $kategori,
+                'jumlah'        => $jumlah,
+                'nama'          => $nama,
+                'alamat'        => $alamat
+            ];
 
-                $this->session->set_flashdata('message', '
-                <div class="alert alert-success col-sm-12" role="alert">
-                <center>Penolakan reservasi berhasil dikirim</center>
-                  </div>');
-                redirect('resepsionis/reservasi', 'refresh');
-            } else {
-                $this->session->set_flashdata('message', '
-                <div class="alert alert-warning col-sm-12" role="alert">
-                <center>Maaf, data reservasi sudah ditolak</center>
-                  </div>');
-                redirect('resepsionis/reservasi', 'refresh');
-            }
+            $where = array('id_reservasi' =>  $id);
+            $this->model_app->update('tb_reservasi', $data, $where);
+
+            $this->db->insert('tb_jadwal', $jadwal);
+            $code = "https://ronisky.com/";
+            $subject = "Penolakan Reservasi";
+            $message = "
+                                <h2>Selamat pengajuan reservasi kunjungan anda di diterima.</h2><br>
+                                <p>Dimohon untuk datang tepat waktu, terima kasih</p>
+                                <p>Detail Data Reservasi:</p>
+    
+                                <p>Nama: " . $nama . "</p>
+                                <p>email: " . $email . "</p>
+                                <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktustart . "</p><br>
+                                <p>Status reservasi : Diterima</p><br>
+                                <p>Kode Reservasi : <b> $id</b></p><br>
+                                <br>
+                                <p>Tunjukan kode reservasi kepada petugas ketika melakukan pendaftaran ulang!</p><br>
+                                <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
+                            ";
+
+            kirim_email($email, $subject, $message);
+
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Data berhasil ditambahakan pada jadwal kalender</center>
+          		</div>');
+            redirect('resepsionis/reservasi', 'refresh');
+        } else {
+            $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_terima_reservasi', $data);
         }
     }
+
+    // Jadwal Calenda 
+    public function jadwal()
+    {
+        $data_calendar = $this->model_app->get_list('tb_jadwal');
+
+        $calendar = array();
+        foreach ($data_calendar as $key => $val) {
+            $calendar[] = array(
+                'calender_id' => $val->id,
+                'id'     => $val->id_reservasi,
+                'title' => $val->nama,
+                'start' => date_format(date_create($val->start_time), "Y-m-d H:i:s"),
+                'end'     => date_format(date_create($val->end_time), "Y-m-d H:i:s"),
+                'kategori' => $val->kategori,
+                'jumlah' => $val->jumlah,
+                'alamat' => $val->alamat,
+            );
+        }
+
+        $data = array();
+        $data['get_data']  = json_encode($calendar);
+        $this->template->load('template/template', 'resepsionis/jadwal/view_jadwal', $data);
+    }
+
     function kategori_pengunjung()
     {
 

@@ -114,7 +114,7 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Deskripsi Koleksi</label>
                     <div class="col-sm-10">
-                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi' value="<?= $rows['deskripsi'] ?>"></textarea>
+                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi'><?= $rows['deskripsi'] ?></textarea>
                     </div>
                   </div>
 

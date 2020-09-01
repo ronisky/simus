@@ -27,14 +27,15 @@
                                  <label class="col-sm-2 col-form-label">Kategori</label>
                                  <?= form_error('kategori', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                  <div class="col-sm-6">
-                                     <select name='kategori' class='form-control'>
+                                     <input type='text' class='form-control' name='kode_ps' value="<?= $rows['kategori']; ?>">
+                                     <!-- <select name='kategori' class='form-control'>
                                          <?php
                                             foreach ($kt as $row) {
                                                 if ($rows['kategori'] == $row['id_kategori_pengunjung']) {
                                                     echo "<option value='$row[id_kategori_pengunjung]' selected>$row[nama_kategori]</option>";
                                                 }
                                             } ?>
-                                     </select>
+                                     </select> -->
                                  </div>
                              </div>
 
@@ -83,7 +84,8 @@
                              <div class="form-group row">
                                  <label class="col-sm-2 col-form-label">Negara</label>
                                  <div class="col-sm-6">
-                                     <select name='negara' class='form-control'>
+                                     <input type='text' class='form-control' name='kode_ps' value="<?= $rows['negara']; ?>">
+                                     <!-- <select name='negara' class='form-control'>
                                          <option value='' selected>- Pilih Negara -</option>
                                          <?php
                                             foreach ($negara as $n) {
@@ -92,7 +94,7 @@
                                                 }
                                                 echo "<option value='$n[id_negara]'>$n[nama]</option>";
                                             } ?>
-                                     </select>
+                                     </select> -->
                                  </div>
                                  <?= form_error('negara', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                              </div>
@@ -100,7 +102,8 @@
                              <div class="form-group row">
                                  <label class="col-sm-2 col-form-label">Provinsi</label>
                                  <div class="col-sm-6">
-                                     <select name='provinsi' class='form-control'>
+                                     <input type='text' class='form-control' name='kode_ps' value="<?= $rows['provinsi']; ?>">
+                                     <!-- <select name='provinsi' class='form-control'>
                                          <option value='' selected>- Pilih Provinsi -</option>
                                          <?php
                                             foreach ($provinsi as $prov) {
@@ -109,7 +112,7 @@
                                                 }
                                                 echo "<option value='$prov[provinsi_id]'>$prov[nama_provinsi]</option>";
                                             } ?>
-                                     </select>
+                                     </select> -->
                                      <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                  </div>
                              </div>
@@ -117,7 +120,8 @@
                              <div class="form-group row">
                                  <label class="col-sm-2 col-form-label">Kota</label>
                                  <div class="col-sm-6">
-                                     <select name='kota' class='form-control'>
+                                     <input type='text' class='form-control' name='kode_ps' value="<?= $rows['kota']; ?>">
+                                     <!-- <select name='kota' class='form-control'>
                                          <option value='' selected>- Pilih Kota -</option>
                                          <?php
                                             foreach ($kota as $kota) {
@@ -126,7 +130,7 @@
                                                 }
                                                 echo "<option value='$kota[kota_id]'>$kota[nama_kota]</option>";
                                             } ?>
-                                     </select>
+                                     </select> -->
                                      <?= form_error('kota', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                  </div>
                              </div>

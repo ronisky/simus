@@ -26,7 +26,7 @@
                         <div class="form-group col-sm-4">
                             <label for="tanggal">Tanggal kunjungan</label>
                             <div class="input-group">
-                                <input type="text" name="tanggal" class="form-control" id="datepicker" required>
+                                <input type="text" name="tanggal" class="form-control" id="datepickeruser" required>
                                 <div class=" input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </div>
@@ -35,7 +35,7 @@
                         <div class="form-group col-sm-4">
                             <label>Jam kunjungan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control timepicker" id="timepicker" name="waktu" required>
+                                <input type="text" class="form-control timepickeruser" id="timepickeruser" name="waktu" required>
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </div>
@@ -164,3 +164,30 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.timepickeruser').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '9',
+            maxTime: '2:30pm',
+            defaultTime: '9',
+            startTime: '09:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+    $(document).ready(function() {
+        $(function() {
+            $("#datepickeruser").datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+                minDate: 3,
+                maxDate: "+2Y",
+                beforeShowDay: $.datepicker.noWeekends
+            });
+        });
+    });
+</script>

@@ -36,8 +36,15 @@
     <!-- time picker  -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>jquery.timepicker.css">
-
     <!-- end picker  -->
+    <!-- Calendar  -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url() . 'assets/template/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'; ?>"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.css" />
+
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>jquery.datetimepicker.min.css">
+    <script src="<?= base_url('assets/template/js/') ?>jquery.datetimepicker.full.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
 
     <script>
         var site_url = "<?= base_url() ?>";

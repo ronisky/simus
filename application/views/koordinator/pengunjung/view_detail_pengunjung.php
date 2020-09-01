@@ -12,44 +12,46 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-6">
-                                    <input type='date' class='form-control' name='jumlah' value="<?= $rows['tanggal'] ?>" required>
-                                    <?= form_error('jumlah', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                    <input type='date' class='form-control' name='jumlah' value="<?= $rows['tanggal'] ?>">
+
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Jam</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='jumlah' value="<?= $rows['waktu'] ?>" required>
-                                    <?= form_error('jumlah', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                    <input type='text' class='form-control' name='jumlah' value="<?= $rows['waktu'] ?>">
+
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Kategori</label>
                                 <?= form_error('kategori', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 <div class="col-sm-6">
-                                    <select name='kategori' class='form-control' required>
+                                    <input type='text' class='form-control' name='kode_ps' value="<?= $rows['kategori']; ?>">
+                                    <!-- <select name='kategori' class='form-control'>
+                                        <option value=""><?= $row['kategori'] ?></option>
                                         <?php
                                         foreach ($kt as $row) {
                                             if ($rows['kategori'] == $row['id_kategori_pengunjung']) {
                                                 echo "<option value='$row[id_kategori_pengunjung]' selected>$row[nama_kategori]</option>";
                                             }
                                         } ?>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Jumlah</label>
                                 <div class="col-sm-6">
-                                    <input type='number' class='form-control' name='jumlah' value="<?= $rows['jumlah'] ?>" required>
-                                    <?= form_error('jumlah', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                                    <input type='number' class='form-control' name='jumlah' value="<?= $rows['jumlah'] ?>">
+
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nama lengkap</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='nama' value="<?= $rows['nama'] ?>" required>
+                                    <input type='text' class='form-control' name='nama' value="<?= $rows['nama'] ?>">
                                     <?= form_error('nama', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -75,7 +77,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nomor Id Card</label>
                                 <div class="col-sm-6">
-                                    <input type='number' class='form-control' name='no_id' value="<?= $rows['no_id'] ?>" required>
+                                    <input type='number' class='form-control' name='no_id' value="<?= $rows['no_id'] ?>">
                                     <?= form_error('no_id', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -83,7 +85,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Negara</label>
                                 <div class="col-sm-6">
-                                    <select name='negara' class='form-control' required>
+                                    <input type='text' class='form-control' name='kode_ps' value="<?= $rows['negara']; ?>">
+                                    <!-- <select name='negara' class='form-control'>
                                         <option value='' selected>- Pilih Negara -</option>
                                         <?php
                                         foreach ($negara as $n) {
@@ -92,32 +95,25 @@
                                             }
                                             echo "<option value='$n[id_negara]'>$n[nama]</option>";
                                         } ?>
-                                    </select>
+                                    </select> -->
                                 </div>
                                 <?= form_error('negara', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Kebangsaan</label>
-                                <div class="col-sm-6">
-                                    <select name="kebangsaan" class='form-control' required>
-                                        <option value='' selected>- Pilih Kebangsaan -</option>
-                                        <?php
-                                        foreach ($negara as $k) {
-                                            if ($rows['kebangsaan'] == $k['id_negara']) {
-                                                echo "<option value='$k[id_negara]' selected>$k[nama]</option>";
-                                            }
-                                            echo "<option value='$k[id_negara]'>$k[nama]</option>";
-                                        } ?>
-                                    </select>
-                                </div>
-                                <?= form_error('kebangsaan', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
-                            </div>
-
-                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Provinsi</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='provinsi' placeholder="misal: Jawa Barat" value="<?= $rows['provinsi']; ?>">
+                                    <input type='text' class='form-control' name='kode_ps' value="<?= $rows['provinsi']; ?>">
+                                    <!-- <select name='provinsi' class='form-control'>
+                                        <option value='' selected>- Pilih Provinsi -</option>
+                                        <?php
+                                        foreach ($provinsi as $prov) {
+                                            if ($rows['provinsi'] == $prov['provinsi_id']) {
+                                                echo "<option value='$prov[provinsi_id]' selected>$prov[nama_provinsi]</option>";
+                                            }
+                                            echo "<option value='$prov[provinsi_id]'>$prov[nama_provinsi]</option>";
+                                        } ?>
+                                    </select> -->
                                     <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -125,7 +121,17 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Kota</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='kota' value="<?= $rows['kota']; ?>" required>
+                                    <input type='text' class='form-control' name='kode_ps' value="<?= $rows['kota']; ?>">
+                                    <!-- <select name='kota' class='form-control'>
+                                        <option value='' selected>- Pilih Kota -</option>
+                                        <?php
+                                        foreach ($kota as $kota) {
+                                            if ($rows['kota'] == $kota['kota_id']) {
+                                                echo "<option value='$kota[kota_id]' selected>$kota[nama_kota]</option>";
+                                            }
+                                            echo "<option value='$kota[kota_id]'>$kota[nama_kota]</option>";
+                                        } ?>
+                                    </select> -->
                                     <?= form_error('kota', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -133,7 +139,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Alamat</label>
                                 <div class="col-sm-6">
-                                    <input type='text' class='form-control' name='alamat' value="<?= $rows['alamat']; ?>" required>
+                                    <textarea rows="2" type='text' class='form-control' name='alamat'><?= $rows['alamat']; ?></textarea>
                                     <?= form_error('alamat', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -147,7 +153,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-7 col-form-label"></label>
                                 <div class="col-sm-1 ">
-                                    <a href='<?= base_url('koordinator/pengunjung') ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Kembali</button></a>
+                                    <a href='<?= base_url('resepsionis/pengunjung') ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Kembali</button></a>
                                 </div>
                             </div>
                         </div>

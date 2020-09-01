@@ -71,4 +71,29 @@ class Koordinator extends CI_Controller
         $data['rows'] = $this->model_app->edit('tb_pengunjung', array('id_pengunjung' => $id))->row_array();
         $this->template->load('template/template', 'koordinator/pengunjung/view_detail_pengunjung', $data);
     }
+
+    function koleksi()
+    {
+        $data['title'] = 'Koleksi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_koleksi', 'id_koleksi', 'DESC');
+        $this->template->load('template/template', 'koordinator/koleksi/view_koleksi', $data);
+    }
+
+    function detail_koleksi()
+    {
+        $id = $this->uri->segment(3);
+        $data['title'] = 'Detail - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
+        $data['uk'] = $this->model_app->view_ordering('tb_ukuran_koleksi', 'id_ukuran', 'DESC');
+        $data['rows'] = $this->model_app->edit('tb_koleksi', array('id_koleksi' => $id))->row_array();
+        $this->template->load('template/template', 'koordinator/koleksi/view_koleksi_detail', $data);
+    }
+
+    // Modul Blog
+    function postingan()
+    {
+        $data['title'] = 'Postingan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_artikel->list_artikel();
+        $this->template->load('template/template', 'koordinator/blog_artikel/view_artikel', $data);
+    }
 }

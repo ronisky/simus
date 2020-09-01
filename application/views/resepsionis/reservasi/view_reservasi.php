@@ -48,10 +48,11 @@
                                                 <div class="input-group-prepend">
                                                     <button class="btn btn-outline-secondary small dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $s ?></button>
                                                     <div class="dropdown-menu">
-                                                        <button class="dropdown-item text-success terimaReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-kategori="<?= $row['kategori'] ?>" data-jumlah="<?= $row['jumlah'] ?>" data-nama="<?= $row['nama'] ?>" data-id="<?= $row['id_card'] ?>" data-card="<?= $row['no_id'] ?>" data-negara="<?= $row['negara'] ?>" data-provinsi="<?= $row['provinsi'] ?>" data-kota="<?= $row['kota'] ?>" data-alamat="<?= $row['alamat'] ?>" data-pos="<?= $row['kode_pos'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-foto="<?= $row['foto'] ?>" data-status="<?= $row['status'] ?>" data-keterangan="<?= $row['keterangan'] ?>" data-toggle="modal" data-target="#terimaModal">Terima</button>
+                                                        <a class='dropdown-item text-success' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-check fa-fw mr-2'></i>Terima</a>
                                                         <div role="separator" class="dropdown-divider"></div>
-                                                        <button class="dropdown-item text-danger tolakReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-nama="<?= $row['nama'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-status="<?= $row['status'] ?>" data-toggle="modal" data-target="#tolakModal">Tolak</button>
+                                                        <button class="dropdown-item text-danger tolakReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-nama="<?= $row['nama'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-status="<?= $row['status'] ?>" data-toggle="modal" data-target="#tolakModal"><i class='fas fa-times fa-fw mr-2'></i>Tolak</button>
                                                     </div>
+                                                </div>
                                             </td>
                                             <td><?= $row['nama']; ?></td>
                                             <td><?= $row['email']; ?></td>
@@ -101,6 +102,7 @@
                     <input type="hidden" class="form-control" id="email" name="email">
                     <input type="hidden" class="form-control" id="no_telp" name="no_telp">
                     <input type="hidden" class="form-control" id="status" name="status">
+
                     <textarea type="text" rows="3" name="keterangan" class="form-control" placeholder="Alasan Penolakan?" required></textarea>
 
                 </div>
@@ -112,50 +114,6 @@
         </div>
     </div>
 </div>
-
-
-<!-- Modal Terima -->
-<div class="modal fade" id="terimaModal" tabindex="-1" role="dialog" aria-labelledby="terimaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content col-lg">
-            <div class="modal-header">
-                <h5 class="modal-title" id="terimaModalLabel">Konfirmasi Penerimaan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('resepsionis/terima_reservasi') ?>" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input type="hidden" class="form-control" id="id" name="id">
-                    <input type="hidden" class="form-control" id="tanggal" name="tanggal">
-                    <input type="hidden" class="form-control" id="waktu" name="waktu">
-                    <input type="hidden" class="form-control" id="kategori" name="kategori">
-                    <input type="hidden" class="form-control" id="jumlah" name="jumlah">
-                    <input type="hidden" class="form-control" id="nama" name="nama">
-                    <input type="hidden" class="form-control" id="id_card" name="id_card">
-                    <input type="hidden" class="form-control" id="no_id" name="no_id">
-                    <input type="hidden" class="form-control" id="negara" name="negara">
-                    <input type="hidden" class="form-control" id="provinsi" name="provinsi">
-                    <input type="hidden" class="form-control" id="kota" name="kota">
-                    <input type="hidden" class="form-control" id="alamat" name="alamat">
-                    <input type="hidden" class="form-control" id="kode_pos" name="kode_pos">
-                    <input type="hidden" class="form-control" id="email" name="email">
-                    <input type="hidden" class="form-control" id="no_telp" name="no_telp">
-                    <input type="hidden" class="form-control" id="foto" name="foto">
-                    <input type="hidden" class="form-control" id="status" name="status">
-                    <input type="hidden" class="form-control" id="keterangan" name="keterangan">
-                    <span for="">Apakah anda yakin untuk <strong>Menerima Pengajuan Reservasi ?</strong></span>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" name="submit" class="btn btn-success">Terima Pengajuan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 
 <script>
@@ -215,45 +173,5 @@
         $(".modal-body #email").val(email);
         $(".modal-body #no_telp").val(no);
         $(".modal-body #status").val(status);
-    });
-    // Terima Modal
-    $(document).on("click", ".terimaReservasi", function() {
-        var id = $(this).data('id');
-        var tgl = $(this).data('tanggal');
-        var jam = $(this).data('waktu');
-        var kategori = $(this).data('kategori');
-        var jumlah = $(this).data('jumlah');
-        var nama = $(this).data('nama');
-        var idCard = $(this).data('card');
-        var noId = $(this).data('id');
-        var negara = $(this).data('negara');
-        var provinsi = $(this).data('provinsi');
-        var kota = $(this).data('kota');
-        var alamat = $(this).data('alamat');
-        var kodePos = $(this).data('pos');
-        var email = $(this).data('email');
-        var no = $(this).data('hp');
-        var foto = $(this).data('foto');
-        var status = $(this).data('status');
-        var keterangan = $(this).data('keterangan');
-
-        $(".modal-body #id").val(id);
-        $(".modal-body #tanggal").val(tgl);
-        $(".modal-body #waktu").val(jam);
-        $(".modal-body #kategori").val(kategori);
-        $(".modal-body #jumlah").val(jumlah);
-        $(".modal-body #nama").val(nama);
-        $(".modal-body #id_card").val(idCard);
-        $(".modal-body #no_id").val(noId);
-        $(".modal-body #negara").val(negara);
-        $(".modal-body #provinsi").val(provinsi);
-        $(".modal-body #kota").val(kota);
-        $(".modal-body #alamat").val(alamat);
-        $(".modal-body #kode_pos").val(kodePos);
-        $(".modal-body #email").val(email);
-        $(".modal-body #no_telp").val(no);
-        $(".modal-body #foto").val(foto);
-        $(".modal-body #status").val(status);
-        $(".modal-body #keterangan").val(keterangan);
     });
 </script>

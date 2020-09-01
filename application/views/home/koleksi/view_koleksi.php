@@ -292,7 +292,7 @@
 
                                         <div class="product-card__actions">
                                             <div class="product-card__prices">
-                                                <p><?= $des ?>...</p>
+                                                <?= $des = str_ireplace('<p>', '', $des); ?>
                                             </div>
                                         </div>
                                     </div>

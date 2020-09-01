@@ -6,7 +6,10 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Pengunjung Musuem</h3>
-                            <a class='float-right btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Pengunjung</a>
+                            <a class='float-right ml-3 mt-3 btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Pengunjung Baru</a>
+                        </div>
+                        <div class="col-sm-12">
+                            <a class='float-right mr-3 mt-2 btn btn-success btn-sm' href='<?= base_url('resepsionis/reservasi_diterima'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Sudah Reservasi</a>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -18,14 +21,14 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal</th>
+                                        <th>Waktu</th>
                                         <th>Kategori</th>
                                         <th>Jumlah</th>
                                         <th>Nama</th>
-                                        <th>ID Card</th>
                                         <th>Negara</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Alamat</th>
+                                        <th>Kode Pos</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,42 +39,21 @@
                                         <tr>
                                             <td><?= $no; ?></td>
                                             <td><?= $row['tanggal'] ?></td>
-                                            <td>
-                                                <?php
-                                                foreach ($kt as $r) {
-                                                    if ($row['kategori'] == $r['id_kategori_pengunjung']) {
-                                                        echo "$r[nama_kategori]";
-                                                    }
-                                                } ?>
-                                            </td>
+                                            <td><?= $row['waktu']; ?></td>
+                                            <td><?= $row['kategori'] ?></td>
                                             <td><?= $row['jumlah']; ?></td>
-                                            <td><?= $row['nama'] ?></td>
-                                            <td><?= $row['id_card']; ?></td>
-                                            <td>
-                                                <?php
-                                                foreach ($negara as $n) {
-                                                    if ($row['negara'] == $n['id_negara']) {
-                                                        echo "$n[nama]";
-                                                    }
-                                                } ?>
+                                            <td><?= $row['nama']; ?></td>
+                                            <td><?= $row['negara']; ?></td>
+                                            <td><?= $row['provinsi']; ?></td>
+                                            <td><?= $row['kota']; ?>
+                                                <!-- <?php
+                                                        foreach ($kota as $k) {
+                                                            if ($row['kota'] == $k['nama_kota']) {
+                                                                echo "$k[nama_kota]";
+                                                            }
+                                                        } ?> -->
                                             </td>
-                                            <td>
-                                                <?php
-                                                foreach ($provinsi as $p) {
-                                                    if ($row['provinsi'] == $p['provinsi_id']) {
-                                                        echo "$p[nama_provinsi]";
-                                                    }
-                                                } ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                foreach ($kota as $k) {
-                                                    if ($row['kota'] == $k['kota_id']) {
-                                                        echo "$k[nama_kota]";
-                                                    }
-                                                } ?>
-                                            </td>
-                                            <td><?= $row['alamat']; ?></td>
+                                            <td><?= $row['kode_pos']; ?></td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_pengunjung/') . $row['id_pengunjung']; ?>"><i class="fas fa-eye fa-fw"></i></a>
                                                 <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_pengunjung/') . $row['id_pengunjung']; ?>'><i class='fas fa-edit fa-fw'></i></a>

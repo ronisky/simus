@@ -83,6 +83,7 @@ class Penata extends CI_Controller
 
     function tambah_koleksi()
     {
+
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/koleksi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -136,6 +137,16 @@ class Penata extends CI_Controller
             $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
             $this->template->load('template/template', 'penata/koleksi/view_koleksi_tambah', $data);
         }
+    }
+
+    function detail_koleksi()
+    {
+        $id = $this->uri->segment(3);
+        $data['title'] = 'Detail - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
+        $data['uk'] = $this->model_app->view_ordering('tb_ukuran_koleksi', 'id_ukuran', 'DESC');
+        $data['rows'] = $this->model_app->edit('tb_koleksi', array('id_koleksi' => $id))->row_array();
+        $this->template->load('template/template', 'penata/koleksi/view_koleksi_detail', $data);
     }
 
     function edit_koleksi()
@@ -231,10 +242,8 @@ class Penata extends CI_Controller
         $path = "assets/images/koleksi/";
         unlink($path . $gambar);
 
-        $sql = "DELETE tb_koleksi,tb_ukuran_koleksi
-        FROM tb_koleksi,tb_ukuran_koleksi
-        WHERE tb_koleksi.id_ukuran=tb_ukuran_koleksi.id_ukuran
-        AND tb_koleksi.id_ukuran= $q";
+        $sql = "DELETE tb_koleksi , tb_ukuran_koleksi  FROM tb_koleksi INNER JOIN tb_ukuran_koleksi  
+        WHERE tb_koleksi.id_ukuran= tb_ukuran_koleksi.id_ukuran and tb_koleksi.id_ukuran = '$q'";
 
         $this->db->query($sql, array($id));
 

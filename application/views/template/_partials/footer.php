@@ -34,6 +34,10 @@
 
 <!-- end piscker -->
 
+<!-- Calendar  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url() . 'assets/template/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'; ?>"></script> -->
+
 <script>
     function logout() {
         let timerInterval;
@@ -77,14 +81,7 @@
     $('.datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
-
-
-    function setDatePicker() {
-        $(".datepicker").datetimepicker({
-            format: "YYYY-MM-DD",
-            useCurrent: false
-        })
-    }
+    $('.datetimePicker').datetimepicker();
 </script>
 
 
@@ -176,7 +173,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.timepicker').timepicker({
+        $('.timepickeradmin').timepicker({
             timeFormat: 'h:mm p',
             interval: 30,
             minTime: '9',
@@ -192,11 +189,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(function() {
-            $("#datepicker").datepicker({
+            $("#datepickeradmin").datepicker({
                 dateFormat: "dd-mm-yy",
                 changeMonth: true,
                 changeYear: true,
-                minDate: 0,
+                minDate: 3,
                 maxDate: "+2Y",
                 beforeShowDay: $.datepicker.noWeekends
             });
@@ -204,7 +201,43 @@
     });
 </script>
 
+<!-- Calendar  -->
+<script type="text/javascript">
+    var get_data = '<?php echo $get_data; ?>';
+    var backend_url = '<?php echo base_url(); ?>';
 
+    $(document).ready(function() {
+        $('.date-picker').datepicker();
+        $('#calendarIO').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            defaultDate: moment().format('YYYY-MM-DD'),
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            selectable: true,
+            selectHelper: true,
+            eventClick: function(event, element) {
+                deteil(event);
+            },
+            events: JSON.parse(get_data)
+        });
+    });
+
+    function deteil(event) {
+        $('#create_modal input[name=id_reservasi]').val(event.id);
+        $('#create_modal input[name=start_time]').val(event.start);
+        $('#create_modal input[name=end_time]').val(event.end);
+        $('#create_modal input[name=title]').val(event.title);
+        $('#create_modal textarea[name=alamat]').val(event.alamat);
+        $('#create_modal input[name=jumlah]').val(event.jumlah);
+        $('#create_modal input[name=kategori]').val(event.kategori);
+        $('#create_modal .delete_calendar').show();
+        $('#create_modal').modal('show');
+    }
+</script>
 
 <!-- Statistik -->
 <?php $this->model_main->kunjungan(); ?>

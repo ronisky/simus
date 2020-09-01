@@ -235,9 +235,43 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="<?= base_url('koordinator/pengujung') ?>" class="nav-link">
+            <a href="<?= base_url('koordinator/pengunjung') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>View Pengunjung</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users fa-fw"></i>
+          <p>
+            Modul Koleksi
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/koleksi') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>View Koleksi</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users fa-fw"></i>
+          <p>
+            Modul Postingan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/postingan') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>View Postingan</p>
             </a>
           </li>
         </ul>
@@ -309,6 +343,30 @@
             <a href="<?= base_url('resepsionis/reservasi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Reservasi Kunjungan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/reservasi_diterima') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Reservasi Diterima</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-calendar fa-fw"></i>
+          <p>
+            Modul Jadwal
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/jadwal') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Kalender Jadwal</p>
             </a>
           </li>
 

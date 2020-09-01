@@ -18,14 +18,14 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal</th>
+                                        <th>Waktu</th>
                                         <th>Kategori</th>
                                         <th>Jumlah</th>
                                         <th>Nama</th>
-                                        <th>ID Card</th>
-                                        <th>Kebangsaan</th>
+                                        <th>Negara</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Alamat</th>
+                                        <th>Kode Pos</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,28 +36,14 @@
                                         <tr>
                                             <td><?= $no; ?></td>
                                             <td><?= $row['tanggal'] ?></td>
-                                            <td>
-                                                <?php
-                                                foreach ($kt as $r) {
-                                                    if ($row['kategori'] == $r['id_kategori_pengunjung']) {
-                                                        echo "$r[nama_kategori]";
-                                                    }
-                                                } ?>
-                                            </td>
+                                            <td><?= $row['waktu']; ?></td>
+                                            <td><?= $row['kategori'] ?></td>
                                             <td><?= $row['jumlah']; ?></td>
                                             <td><?= $row['nama'] ?></td>
-                                            <td><?= $row['id_card']; ?></td>
-                                            <td>
-                                                <?php
-                                                foreach ($negara as $n) {
-                                                    if ($row['negara'] == $n['id_negara']) {
-                                                        echo "$n[nama]";
-                                                    }
-                                                } ?>
-                                            </td>
+                                            <td><?= $row['negara']; ?></td>
                                             <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
-                                            <td><?= $row['alamat']; ?></td>
+                                            <td><?= $row['kode_pos']; ?></td>
                                             <td>
                                                 <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('koordinator/detail_pengunjung/') . $row['id_pengunjung']; ?>"><i class="fas fa-eye fa-fw"></i></a>
                                             </td>

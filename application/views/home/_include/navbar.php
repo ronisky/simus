@@ -199,7 +199,7 @@
                                                         }
                                                         ?>
 
-                                                        <a href="<?= base_url('members/dashboard') ?>" class="account-menu__user">
+                                                        <a href="<?= base_url('home/profile') ?>" class="account-menu__user">
                                                             <div class="account-menu__user-avatar"><img src="<?= base_url('assets/images/user/' . $foto) ?>" alt=""></div>
                                                             <div class="account-menu__user-info">
                                                                 <div class="account-menu__user-name"><?= $nama ?></div>

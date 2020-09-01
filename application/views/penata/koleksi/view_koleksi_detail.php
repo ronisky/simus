@@ -29,26 +29,26 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pencatat</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['nama_pencatat'] ?>" readonly>
+                      <input type='text' class='form-control' name='no_regis' value="<?= $rows['nama_pencatat'] ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nomor Registrasi</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['no_registrasi'] ?>" readonly>
+                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['no_registrasi'] ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Tanggal Pencatatan</label>
                     <div class="col-sm-6">
-                      <input type='number' class='form-control' name='no_regis' value="<?= $rows['tanggal_pencatatan'] ?>" readonly>
+                      <input type='text' class='form-control' name='no_regis' value="<?= $rows['tanggal_pencatatan'] ?>">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Koleksi</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='nama_kol' value="<?= $rows['nama_koleksi'] ?>" readonly>
+                      <input type='text' class='form-control' name='nama_kol' value="<?= $rows['nama_koleksi'] ?>">
                       <?= form_error('nama_kol', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                     </div>
                   </div>
@@ -57,7 +57,7 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Kategori Koleksi</label>
                     <div class="col-sm-6">
-                      <select name='a' class='form-control' readonly>
+                      <select name='a' class='form-control'>
                         <option value='' selected>- Pilih Kategori Koleksi -</option>
                         <?php
                         foreach ($record as $row) {
@@ -74,28 +74,28 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Asal Koleksi</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='asal_kol' value="<?= $rows['asal_koleksi'] ?>" readonly>
+                      <input type='text' class='form-control' name='asal_kol' value="<?= $rows['asal_koleksi'] ?>">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Pemilik Asal</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='pemilik_asal' value="<?= $rows['pemilik_asal'] ?>" readonly>
+                      <input type='text' class='form-control' name='pemilik_asal' value="<?= $rows['pemilik_asal'] ?>">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cara Perolehan</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='cara_peroleh' value="<?= $rows['cara_perolehan'] ?>" readonly>
+                      <input type='text' class='form-control' name='cara_peroleh' value="<?= $rows['cara_perolehan'] ?>">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Sumber Pusaka</label>
                     <div class="col-sm-6">
-                      <input type='text' class='form-control' name='sumber' value="<?= $rows['sumber_pusaka'] ?>" readonly>
+                      <input type='text' class='form-control' name='sumber' value="<?= $rows['sumber_pusaka'] ?>">
                     </div>
                   </div>
 
@@ -103,30 +103,30 @@
                     <label class="col-sm-2 col-form-label">Ukuran</label>
                     <div class="col-sm-2">
                       <label for=""> Tinggi (cm) </label>
-                      <input type='text' class='form-control' name='tg' value="<?= $ting ?>" readonly>
+                      <input type='text' class='form-control' name='tg' value="<?= $ting ?>">
                     </div>
                     <div class="col-sm-2">
                       <label for=""> Panjang (cm)</label>
-                      <input type='text' class='form-control' name='pjg' value="<?= $pan ?>" readonly>
+                      <input type='text' class='form-control' name='pjg' value="<?= $pan ?>">
                     </div>
                     <div class="col-sm-2">
                       <label for=""> Lebar (cm)</label>
-                      <input type='text' class='form-control' name='lb' value="<?= $leb ?>" readonly>
+                      <input type='text' class='form-control' name='lb' value="<?= $leb ?>">
                     </div>
                     <div class="col-sm-2">
                       <label for=""> Diameter (cm)</label>
-                      <input type='text' class='form-control' name='dia' value="<?= $diam ?>" readonly>
+                      <input type='text' class='form-control' name='dia' value="<?= $diam ?>">
                     </div>
                     <div class="col-sm-2">
                       <label for=""> Berat (kg)</label>
-                      <input type='text' class='form-control' name='br' value="<?= $ber ?>" readonly>
+                      <input type='text' class='form-control' name='br' value="<?= $ber ?>">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Deskripsi Koleksi</label>
                     <div class="col-sm-10">
-                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi' value="<?= $rows['deskripsi'] ?>" readonly></textarea>
+                      <textarea rows="5" id="summernote" class='form-control' name='deskripsi'><?= $rows['deskripsi'] ?></textarea>
                     </div>
                   </div>
 

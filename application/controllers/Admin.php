@@ -535,13 +535,23 @@ class Admin extends CI_Controller
 			$config['smtp_host'] = "smtp.hostinger.co.id";
 			$config['smtp_crypto'] = "ssl";
 			$config['smtp_port'] = "465";
-			$config['smtp_user'] = "admin@ronisky.com";
-			$config['smtp_pass'] = 's?0WRb3pX';
+			$config['smtp_user'] = "email@ronisky.com";
+			$config['smtp_pass'] = 'SimusApp2020';
 			$config['charset'] = "iso-8859-1";
 			$config['mailtype'] = "html";
 			$config['newline'] = "\r\n";
+			// $config = [
+			// 	'protocol'  => 'smtp',
+			// 	'smtp_host' => 'ssl://smtp.googlemail.com',
+			// 	'smtp_user' => 'simusmonpera@gmail.com',
+			// 	'smtp_pass' => 'monpera2020',
+			// 	'smtp_port' => 465,
+			// 	'mailtype'  => 'html',
+			// 	'charset'   => 'utf-8',
+			// 	'newline'   => "\r\n"
+			// ];
 			$ci->email->initialize($config);
-			$ci->email->from('admin@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
+			$ci->email->from('email@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
 			$ci->email->to($this->model_app->emailsend());
 			$ci->email->subject("$judul");
 			$ci->email->message("$isi");

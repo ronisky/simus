@@ -19,8 +19,8 @@ if ($this->uri->segment(2) == 'kategori') {
             </h1>
             <p style="color: #353b48; ">
                 <b>Dengan melakukan reservasi anda nantinya tinggal menunjukan kode reservasi yang sahabat dapatkan, kepada petugas resepsionis / penerima tamu.
-                    <b> Reservasi juga dapat dilakukan melalui aplikasi android Museum Monumen Perjuangan Rakyat Jawa Barat, yang dapat di download di <a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp"> Play Store</a> <br><br>
-                        Sahabat, Mari ke museum. <br><br>
+                    Reservasi juga dapat dilakukan melalui aplikasi android Museum Monumen Perjuangan Rakyat Jawa Barat, yang dapat di download di <strong><a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp"> Play Store</a></strong> <br><br>
+                    Sahabat, Mari ke museum. <br><br>
             </p>
             <a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp">
                 <div>

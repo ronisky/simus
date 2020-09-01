@@ -19,10 +19,10 @@
                                             <option value='' selected>- Pilih Kategori Pengunjung -</option>
                                             <?php
                                             foreach ($record as $row) {
-                                                if ($rows['kategori'] == $row['id_kategori_pengunjung']) {
-                                                    echo "<option value='$row[id_kategori_pengunjung]' selected>$row[nama_kategori]</option>";
+                                                if ($rows['kategori'] == $row['nama_kategori']) {
+                                                    echo "<option value='$row[nama_kategori]' selected>$row[nama_kategori]</option>";
                                                 }
-                                                echo "<option value='$row[id_kategori_pengunjung]'>$row[nama_kategori]</option>";
+                                                echo "<option value='$row[nama_kategori]'>$row[nama_kategori]</option>";
                                             } ?>
                                         </select>
                                     </div>
@@ -77,10 +77,10 @@
                                             <option value='' selected>- Pilih Negara -</option>
                                             <?php
                                             foreach ($negara as $n) {
-                                                if ($rows['negara'] == $n['id_negara']) {
-                                                    echo "<option value='$n[id_negara]' selected>$n[nama]</option>";
+                                                if ($rows['negara'] == $n['nama']) {
+                                                    echo "<option value='$n[nama]' selected>$n[nama]</option>";
                                                 }
-                                                echo "<option value='$n[id_negara]'>$n[nama]</option>";
+                                                echo "<option value='$n[nama]'>$n[nama]</option>";
                                             } ?>
                                         </select>
                                     </div>
@@ -94,10 +94,10 @@
                                             <option value='' selected>- Pilih Provinsi -</option>
                                             <?php
                                             foreach ($provinsi as $prov) {
-                                                if ($rows['provinsi'] == $prov['provinsi_id']) {
-                                                    echo "<option value='$prov[provinsi_id]' selected>$prov[nama_provinsi]</option>";
+                                                if ($rows['provinsi'] == $prov['nama_provinsi']) {
+                                                    echo "<option value='$prov[nama_provinsi]' selected>$prov[nama_provinsi]</option>";
                                                 }
-                                                echo "<option value='$prov[provinsi_id]'>$prov[nama_provinsi]</option>";
+                                                echo "<option value='$prov[nama_provinsi]'>$prov[nama_provinsi]</option>";
                                             } ?>
                                         </select>
                                         <?= form_error('provinsi', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
@@ -111,10 +111,10 @@
                                             <option value='' selected>- Pilih Kota -</option>
                                             <?php
                                             foreach ($kota as $kota) {
-                                                if ($rows['kota'] == $kota['kota_id']) {
-                                                    echo "<option value='$kota[kota_id]' selected>$kota[nama_kota]</option>";
+                                                if ($rows['kota'] == $kota['nama_kota']) {
+                                                    echo "<option value='$kota[nama_kota]' selected>$kota[nama_kota]</option>";
                                                 }
-                                                echo "<option value='$kota[kota_id]'>$kota[nama_kota]</option>";
+                                                echo "<option value='$kota[nama_kota]'>$kota[nama_kota]</option>";
                                             } ?>
                                         </select>
                                         <?= form_error('kota', '<small class="font-italic text-danger ml-1">', '</small>'); ?>

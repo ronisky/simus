@@ -31,13 +31,13 @@
                                     <tr>
                                         <th style="width: 5%">No</th>
                                         <th>Tanggal</th>
-                                        <th>Jam</th>
+                                        <th>Waktu</th>
                                         <th>Kategori</th>
                                         <th>Jumlah</th>
                                         <th>Negara</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>alamat</th>
+                                        <th>Kode Pos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,7 +53,7 @@
                                             <td><?= $row['negara'] ?></td>
                                             <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
-                                            <td><?= $row['alamat']; ?></td>
+                                            <td><?= $row['kode_pos']; ?></td>
                                         </tr>
                                     <?php
                                         $no++;
