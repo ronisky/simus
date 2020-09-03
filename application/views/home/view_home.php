@@ -18,9 +18,9 @@ if ($this->uri->segment(2) == 'kategori') {
                 </strong>
             </h1>
             <p style="color: #353b48; ">
-                <b>Dengan melakukan reservasi anda nantinya tinggal menunjukan kode reservasi yang sahabat dapatkan, kepada petugas resepsionis / penerima tamu.
-                    Reservasi juga dapat dilakukan melalui aplikasi android Museum Monumen Perjuangan Rakyat Jawa Barat, yang dapat di download di <strong><a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp"> Play Store</a></strong> <br><br>
-                    Sahabat, Mari ke museum. <br><br>
+                Dengan melakukan reservasi anda nantinya tinggal menunjukan kode reservasi yang sahabat dapatkan, kepada petugas resepsionis / penerima tamu.
+                Reservasi juga dapat dilakukan melalui aplikasi android Museum Monumen Perjuangan Rakyat Jawa Barat, yang dapat di download di <strong><a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp"> Play Store</a></strong> <br><br>
+                Sahabat, Mari ke museum. <br><br>
             </p>
             <a href="https://play.google.com/store/apps/details?id=com.pesantech.simusapp">
                 <div>
@@ -47,9 +47,6 @@ if ($this->uri->segment(2) == 'kategori') {
                             } else {
                                 $foto_koleksi = $row['foto'];
                             }
-                            $deskripsi = strip_tags($row['deskripsi']);
-                            $des = substr($deskripsi, 0, 50);
-                            $des = substr($deskripsi, 0, strrpos($des, " "));
                         ?>
                             <div class="products-list__item">
                                 <div class="product-card">
@@ -57,8 +54,7 @@ if ($this->uri->segment(2) == 'kategori') {
                                     <div class="product-card__image"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>">
                                             <img src="<?= base_url('assets/images/koleksi/') . $foto_koleksi; ?>" style="height: 200px; display: block; " alt=""></a></div>
                                     <div class="post-card__info mx-3">
-                                        <div class="post-card__name mt-1 mb-3" style="font-size: medium; color: #353b48; font-weight: bold;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
-                                        <div class="post-card__content"><?= $des ?>...</div>
+                                        <div class="post-card__name mt-1 mb-3" style="font-size: medium; color: #353b48;"><a href="<?= base_url('koleksi/detail/') . $row['koleksi_seo']; ?>"><?= $row['nama_koleksi']; ?></a></div>
                                     </div>
                                 </div>
                             </div>

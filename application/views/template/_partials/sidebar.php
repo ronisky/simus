@@ -244,7 +244,7 @@
       </li>
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users fa-fw"></i>
+          <i class="nav-icon fas fa-file-image fa-fw"></i>
           <p>
             Modul Koleksi
             <i class="right fas fa-angle-left"></i>
@@ -261,7 +261,7 @@
       </li>
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-users fa-fw"></i>
+          <i class="nav-icon fas fa-newspaper fa-fw"></i>
           <p>
             Modul Postingan
             <i class="right fas fa-angle-left"></i>
@@ -274,6 +274,24 @@
               <p>View Postingan</p>
             </a>
           </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-calendar fa-fw"></i>
+          <p>
+            Kalender Reservasi
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/jadwal') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Kalender Jadwal</p>
+            </a>
+          </li>
+
         </ul>
       </li>
       <li class="nav-item has-treeview">
@@ -342,7 +360,7 @@
           <li class="nav-item">
             <a href="<?= base_url('resepsionis/reservasi') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Reservasi Kunjungan</p>
+              <p>Reservasi Pengajuan</p>
             </a>
           </li>
           <li class="nav-item">
@@ -404,6 +422,12 @@
             <a href="<?= base_url('resepsionis/laporanPengunjung') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Laporan Pengunjung</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/laporanReservasi') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Laporan Reservasi</p>
             </a>
           </li>
           <li class="nav-item">

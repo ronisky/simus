@@ -218,6 +218,7 @@ class Resepsionis extends CI_Controller
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['record'] = $this->db->get_where('tb_reservasi', 'status = 1 OR status = 3')->result_array();
+            $data['identitas'] = $this->db->get_where('tb_web_identitas', 'id_identitas=1')->row_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi', $data);
         } else {
             redirect('resepsionis');
@@ -260,12 +261,12 @@ class Resepsionis extends CI_Controller
                 $reservasi = [
                     'status'    => 4
                 ];
-
                 $this->model_app->insert('tb_pengunjung', $data);
 
                 $where = array('id_reservasi' =>  $id_reservasi);
                 $this->model_app->update('tb_reservasi', $reservasi, $where);
 
+                $this->model_app->delete('tb_jadwal', $where);
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-sm-12" role="alert">
                 <center>Data pengunjung baru berhasil ditambahkan</center>
                 </div>');
@@ -338,6 +339,7 @@ class Resepsionis extends CI_Controller
             $email = htmlspecialchars($this->input->post('email'));
             $no_telp = htmlspecialchars($this->input->post('no_telp'));
             $status = htmlspecialchars($this->input->post('status'));
+            $kontak = htmlspecialchars($this->input->post('kontak'));
             $ket = htmlspecialchars($this->input->post('keterangan'));
             if ($status != 3) {
                 $data = [
@@ -358,11 +360,11 @@ class Resepsionis extends CI_Controller
                             <p>email: " . $email . "</p>
                             <p>No Telepon: " . $no_telp . "</p>
                             <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
-                            <p>Status reservasi : <b> Ditolak</b></p><br>
-                            <p>Alasan Penolakan : <b> .$ket.</b></p>
-                            <br>
-                            <p>Silahkan hubungi petugas untuk langkah lebih lanjut!</p>
-                            <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
+                            <p>Status reservasi : <b> Ditolak</b></p>
+                            <p>Alasan Penolakan : <b> $ket</b></p><br>
+                            <p>Silahkan hubungi petugas untuk solusi lebih lanjut!</p>
+                            <p>Kontak :$kontak </p>
+                            <p>Salam Hangat. <a href=' $code '>Museum Dihatiku</a></p>
                         ";
 
                 kirim_email($email, $subject, $message);
@@ -417,20 +419,20 @@ class Resepsionis extends CI_Controller
 
             $this->db->insert('tb_jadwal', $jadwal);
             $code = "https://ronisky.com/";
-            $subject = "Penolakan Reservasi";
+            $subject = "Reservasi Kunjungan Diterima";
             $message = "
-                                <h2>Selamat pengajuan reservasi kunjungan anda di diterima.</h2><br>
-                                <p>Dimohon untuk datang tepat waktu, terima kasih</p>
+                                <h2>Selamat pengajuan reservasi kunjungan anda telah disetujui.</h2><br>
+                                <p><b>Dimohon untuk datang tepat waktu, terima kasih</b></p>
                                 <p>Detail Data Reservasi:</p>
     
                                 <p>Nama: " . $nama . "</p>
                                 <p>email: " . $email . "</p>
                                 <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktustart . "</p><br>
-                                <p>Status reservasi : Diterima</p><br>
+                                <p>Status reservasi :<b> Diterima</b></p><br>
                                 <p>Kode Reservasi : <b> $id</b></p><br>
                                 <br>
                                 <p>Tunjukan kode reservasi kepada petugas ketika melakukan pendaftaran ulang!</p><br>
-                                <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
+                                <p>Salam Hangat. <a href=' $code '>Museum Dihatiku</a></p>
                             ";
 
             kirim_email($email, $subject, $message);
@@ -441,7 +443,7 @@ class Resepsionis extends CI_Controller
           		</div>');
             redirect('resepsionis/reservasi', 'refresh');
         } else {
-            $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['title'] = 'Reservasi Kunjungan - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_terima_reservasi', $data);
         }
@@ -560,6 +562,44 @@ class Resepsionis extends CI_Controller
         $data['record'] = $this->model_laporan->laporanPengunjung360();
         $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
     }
+
+
+    // Laporan reservasi
+    function laporanReservasi()
+    {
+        $data['title'] = 'Laporan Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanReservasi();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_reservasi', $data);
+    }
+
+    function laporanReservasi_hari()
+    {
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanReservasi1();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanReservasi_minggu()
+    {
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanReservasi7();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanReservasi_bulan()
+    {
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanReservasi30();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
+    function laporanReservasi_tahun()
+    {
+        $data['title'] = 'Laporan Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_laporan->laporanReservasi360();
+        $this->template->load('template/template', 'resepsionis/laporan/view_lap_pengunjung', $data);
+    }
+
 
     // Laporan Rekapitulasi
     function laporanRekapitulasi()

@@ -36,39 +36,56 @@ class Auth extends CI_Controller
 				];
 
 				$this->db->insert('tb_pengguna_token', $user_token);
-
-				// $email = strip_tags($this->input->post('email'));
-				// $cek = $this->db->query("SELECT * FROM tb_pengguna where email='" . $this->db->escape_str($email) . "'");
-				// $row = $cek->row_array();
-				// $total = $cek->num_rows();
-
-				// if ($total > 0) {
-
-
-				// $kode = $row['kode_resetpassword'];
-
-				$subject      = 'Permintaan Reset Password';
-
-				$message = "
-						<p>Akun Anda:</p>
-						<p>Email: " . $email . "</p><br>
-						<p>Silakan klik tautan di bawah ini untuk mereset password Anda.</p>
-						<a href='" . base_url() . "auth/p?q=" . urlencode($token) . "'>Reset Password</a>
-					";
-
-				kirim_email($email, $subject, $message);
+				$this->_sendEmail($token, 'lupa');
 				$this->session->set_flashdata('message', '
-				<div class="alert alert-success" role="alert">
-            	<center>Berhasil, Silahkan cek email Anda</center>
-          		</div>');
-				redirect(base_url('login'));
+					<div class="alert alert-success" role="alert">
+			    	<center>Berhasil, Silahkan cek email Anda</center>
+					  </div>');
+				redirect(base_url('auth/lupa_password'));
 			} else {
 				$this->session->set_flashdata('message', '
-				<div class="alert alert-danger" role="alert">
-            	<center>Email tidak terdaftar</center>
-          		</div>');
-				redirect(base_url('login'));
+						<div class="alert alert-danger" role="alert">
+				    	<center>Email tidak terdaftar</center>
+				  		</div>');
+				redirect(base_url('auth/lupa_password'));
 			}
+		}
+	}
+
+	private function _sendEmail($token, $type)
+	{
+		$config = [
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_user' => 'simusmonpera@gmail.com',
+			'smtp_pass' => 'monpera2020',
+			'smtp_port' => 465,
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'newline'   => "\r\n"
+		];
+
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+
+		$this->email->from('simusmonpera@gmail.com', 'Museum Monumen Perjuangan Rakyat Jawa Barat');
+		$this->email->to($this->input->post('email'));
+		$message = "
+						<p>Akun Anda:</p>
+						<p>Email: " . $this->input->post('email') . "</p><br>
+						<p>Silakan klik tautan di bawah ini untuk mereset password Anda.</p>
+						<a href=" . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . ">Reset Password</a>
+					";
+		if ($type == 'lupa') {
+			$this->email->subject('Reset Password');
+			$this->email->message($message);
+		}
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+			die;
 		}
 	}
 
@@ -256,13 +273,13 @@ class Auth extends CI_Controller
 		$email = $this->input->get('email');
 		$token = $this->input->get('token');
 
-		$user = $this->db->get_where('tb_pengguna', ['email' => $email])->row_array();
+		$pengguna = $this->db->get_where('tb_pengguna', ['email' => $email])->row_array();
 
-		if ($user) {
-			$user_token = $this->db->get_where('tb_pengguna_token', ['token' => $token])->row_array();
+		if ($pengguna) {
+			$pengguna_token = $this->db->get_where('tb_pengguna_token', ['token' => $token])->row_array();
 
-			if ($user_token) {
-				if (time() - $user_token['dibuat'] < (60 * 60 * 24)) {
+			if ($pengguna_token) {
+				if (time() - $pengguna_token['dibuat'] < (60 * 60 * 24)) {
 					$this->db->set('aktif', 1);
 					$this->db->where('email', $email);
 					$this->db->update('tb_pengguna');
@@ -294,66 +311,63 @@ class Auth extends CI_Controller
 		redirect('login');
 	}
 
-	public function ganti_password()
+	public function resetPassword()
 	{
-		$code = $_GET['q'];
+		$email = $this->input->get('email');
+		$token = $this->input->get('token');
 
-		$query = $this->model_app->view_where('tb_pengguna_token', "token='$code'");
-		$row = $query->row();
+		$pengguna = $this->db->get_where('tb_pengguna', ['email' => $email])->row_array();
 
-		if (!empty($row)) {
+		if ($pengguna) {
+			$pengguna_token = $this->db->get_where('tb_pengguna_token', ['token' => $token])->row_array();
 
-			if ($row->aktif == 1) {
-
-				if ($row->kode_resetpassword == $code) {
-
-					$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]', [
-						'min_length' => 'Password terlalu pendek',
-						'required' => 'Password wajib diisi'
-					]);
-
-					$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
-						'matches' => 'Password tidak sama',
-						'required' => 'Konfirmasi password wajib diisi'
-					]);
-
-					if ($this->form_validation->run() == FALSE) {
-
-						$data['title'] = 'Ganti Password';
-						$data['breadcrumb'] = 'Ganti Password';
-						$data['email'] = $row->email;
-						$data['code'] = $row->kode_resetpassword;
-						$this->template->load('home/template', 'home/auth/view_gantipass', $data);
-					} else {
-
-
-						$set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-						$kodereset = substr(str_shuffle($set), 0, 6);
-
-						$email = $row->email;
-
-						$datapass = [
-							'password'      		=> password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-							'kode_resetpassword' 	=> $kodereset,
-
-						];
-
-						$this->db->where('email', $email);
-						$this->db->update('tb_pengguna', $datapass);
-						$this->session->set_flashdata('message', '
-						<div class="alert alert-success" role="alert">
-            			<center>Ganti password berhasil.</center>
-						</div>');
-						redirect('login');
-					}
-				} else {
-					redirect(base_url());
-				}
+			if ($pengguna_token) {
+				$this->session->set_userdata('reset_email', $email);
+				$this->ubahPassword();
 			} else {
-				redirect(base_url());
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Reset password gagal! Token salah.</div>');
+				redirect("base_url('login')");
 			}
 		} else {
-			redirect(base_url('error404'));
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Reset password gagal! Email salah.</div>');
+			redirect("base_url('login')");
+		}
+	}
+
+	public function ubahPassword()
+	{
+		if (!$this->session->userdata('reset_email')) {
+			redirect('auth');
+		}
+
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]', [
+			'min_length' => 'Password terlalu pendek',
+			'required' => 'Password wajib diisi'
+		]);
+
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
+			'matches' => 'Password tidak sama',
+			'required' => 'Konfirmasi password wajib diisi'
+		]);
+
+		if ($this->form_validation->run() == false) {
+			$data['title'] = 'Ganti Password';
+			$data['breadcrumb'] = 'Ganti Password';
+			$this->template->load('home/template', 'home/auth/view_gantipass', $data);
+		} else {
+			$password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+			$email = $this->session->userdata('reset_email');
+
+			$this->db->set('password', $password);
+			$this->db->where('email', $email);
+			$this->db->update('tb_pengguna');
+
+			$this->session->unset_userdata('reset_email');
+
+			$this->db->delete('tb_pengguna_token', ['email' => $email]);
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password berhasil dirubah! Silahkan login.</div>');
+			redirect('login');
 		}
 	}
 }

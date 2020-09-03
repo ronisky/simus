@@ -96,4 +96,28 @@ class Koordinator extends CI_Controller
         $data['record'] = $this->model_artikel->list_artikel();
         $this->template->load('template/template', 'koordinator/blog_artikel/view_artikel', $data);
     }
+
+    // jadwal reservasi 
+    public function jadwal()
+    {
+        $data_calendar = $this->model_app->get_list('tb_jadwal');
+
+        $calendar = array();
+        foreach ($data_calendar as $key => $val) {
+            $calendar[] = array(
+                'calender_id' => $val->id,
+                'id'     => $val->id_reservasi,
+                'title' => $val->nama,
+                'start' => date_format(date_create($val->start_time), "Y-m-d H:i:s"),
+                'end'     => date_format(date_create($val->end_time), "Y-m-d H:i:s"),
+                'kategori' => $val->kategori,
+                'jumlah' => $val->jumlah,
+                'alamat' => $val->alamat,
+            );
+        }
+
+        $data = array();
+        $data['get_data']  = json_encode($calendar);
+        $this->template->load('template/template', 'resepsionis/jadwal/view_jadwal', $data);
+    }
 }

@@ -87,7 +87,7 @@ class Penata extends CI_Controller
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/koleksi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '5000'; // kb
+            // $config['max_size'] = '5000'; // kb
             $config['encrypt_name'] = TRUE;
             $this->load->library('upload', $config);
             $this->upload->do_upload('foto');
@@ -108,14 +108,14 @@ class Penata extends CI_Controller
                     'nama_pencatat'         => $this->session->username,
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
-                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'nama_koleksi'          => $this->db->escape_str($this->input->post('nama_kol')),
                     'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
                     'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
-                    'foto'                => $hasil['file_name'],
-                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
+                    'foto'                  => $hasil['file_name'],
+                    'deskripsi'             => $this->db->escape_str($this->input->post('deskripsi'))
                 );
             }
 
@@ -156,7 +156,7 @@ class Penata extends CI_Controller
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/koleksi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '5000'; // kb
+            // $config['max_size'] = '5000'; // kb
             $config['encrypt_name'] = TRUE;
             $this->load->library('upload', $config);
             $this->upload->do_upload('foto');
@@ -175,13 +175,13 @@ class Penata extends CI_Controller
                     'nama_pencatat'         => $this->session->username,
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
-                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'nama_koleksi'          => $this->db->escape_str($this->input->post('nama_kol')),
                     'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
                     'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
-                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
+                    'deskripsi'             => $this->db->escape_str($this->input->post('deskripsi'))
                 );
             } else {
                 $ukuran = array(
@@ -196,14 +196,14 @@ class Penata extends CI_Controller
                     'nama_pencatat'         => $this->session->username,
                     'no_registrasi'         => htmlspecialchars($this->input->post('no_regis')),
                     'tanggal_pencatatan'    => date('Y-m-d'),
-                    'nama_koleksi'          => htmlspecialchars($this->input->post('nama_kol')),
+                    'nama_koleksi'          => $this->db->escape_str($this->input->post('nama_kol')),
                     'koleksi_seo'           => $this->db->escape_str(seo_title($this->input->post('nama_kol'))),
                     'asal_koleksi'          => htmlspecialchars($this->input->post('asal_kol')),
                     'pemilik_asal'          => htmlspecialchars($this->input->post('pemilik_asal')),
                     'cara_perolehan'        => htmlspecialchars($this->input->post('cara_peroleh')),
                     'sumber_pusaka'         => htmlspecialchars($this->input->post('sumber')),
                     'foto'                  => $hasil['file_name'],
-                    'deskripsi'             => htmlspecialchars($this->input->post('deskripsi'))
+                    'deskripsi'             => $this->db->escape_str($this->input->post('deskripsi'))
                 );
 
                 $query = $this->db->get_where('tb_koleksi', array('id_koleksi' => $this->input->post('id')));

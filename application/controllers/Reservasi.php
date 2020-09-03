@@ -27,7 +27,7 @@ class Reservasi extends CI_Controller
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/reservasi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '5112'; // kb
+            // $config['max_size'] = '5112'; // kb
             $config['encrypt_name'] = TRUE;
             $this->load->library('upload', $config);
             $this->upload->do_upload('file');

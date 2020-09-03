@@ -177,7 +177,7 @@
             timeFormat: 'h:mm p',
             interval: 30,
             minTime: '9',
-            maxTime: '2:30pm',
+            maxTime: '3pm',
             defaultTime: '9',
             startTime: '09:00',
             dynamic: false,

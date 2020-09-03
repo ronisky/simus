@@ -16,7 +16,7 @@ $tanggal = tgl_indo($record['tanggal']);
             <div class="post__featured"><a href="#"><img src="<?= base_url('assets/images/artikel/') . $record['gambar'] ?>" alt=""></a></div>
             <div class="post__content typography">
 
-                <?= $record['isi_artikel'] ?>;
+                <?= $record['isi_artikel'] ?>
 
             </div>
         </div>

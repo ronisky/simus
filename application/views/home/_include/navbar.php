@@ -171,9 +171,9 @@
                                                             <div class="form-group account-menu__form-button">
                                                                 <button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
                                                             </div>
-                                                            <div class="account-menu__form-link">
+                                                            <!-- <div class="account-menu__form-link">
                                                                 <a href="<?= base_url('register') ?>">Buat akun baru</a>
-                                                            </div>
+                                                            </div> -->
                                                         </form>
                                                         <div class="account-menu__divider"></div>
 

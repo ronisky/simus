@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Kunjungan Musuem Diterima</h3>
+                            <h3 class="card-title">Reservasi Kunjungan Musuem</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -92,9 +92,6 @@
             <form action="<?= base_url('resepsionis/reservasi_kirim') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" class="form-control" id="id" name="id">
-                    <input type="hidden" class="form-control" id="kategori" name="kategori">
-                    <input type="hidden" class="form-control" id="jumlah" name="jumlah">
-                    <input type="hidden" class="form-control" id="nama" name="nama">
                     <input type="hidden" class="form-control" id="id_card" name="id_card">
                     <input type="hidden" class="form-control" id="no_id" name="no_id">
                     <input type="hidden" class="form-control" id="negara" name="negara">
@@ -103,6 +100,20 @@
                     <input type="hidden" class="form-control" id="alamat" name="alamat">
                     <input type="hidden" class="form-control" id="kode_pos" name="kode_pos">
                     <input type="hidden" class="form-control" id="status" name="status">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span for="nama">Nama Pengunjung</span>
+                            <input type="text" class="form-control mt-2" id="nama" name="nama" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <span for="kategori"> Kategori Pengunjung</span>
+                            <input type="text" class="form-control mt-2" id="kategori" name="kategori" readonly>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <span for="jumlah">Jumlah Pengunjung</span>
+                            <input type="text" class="form-control mt-2 mb-2" id="jumlah" name="jumlah">
+                        </div>
+                    </div>
                     <span class="text-warning"><strong>*Pastikan data pengunjung sudah benar!</strong></span> <br><br>
                     <span>Apakah anda yakin akan menambahkan data baru pengunjung museum?</span>
 

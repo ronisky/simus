@@ -96,7 +96,7 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Deskripsi Koleksi</label>
                   <div class="col-sm-10">
-                    <textarea rows="5" id="summernote" class='form-control' name='deskripsi' value=""></textarea>
+                    <textarea id="summernote" class='form-control' name='deskripsi' style='height:350px' required></textarea>
                   </div>
                 </div>
 

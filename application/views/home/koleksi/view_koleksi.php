@@ -289,10 +289,9 @@
 
                                             </ul>
                                         </div>
-
                                         <div class="product-card__actions">
-                                            <div class="product-card__prices">
-                                                <?= $des = str_ireplace('<p>', '', $des); ?>
+                                            <div class="mt-2">
+                                                <?= $des ?>
                                             </div>
                                         </div>
                                     </div>

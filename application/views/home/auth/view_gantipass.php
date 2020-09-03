@@ -4,7 +4,7 @@
             <h3 class="card-title">Ganti Password</h3>
             <?= $this->session->flashdata('message') ?>
 
-            <form action="<?= base_url("auth/ganti_password?q=$code") ?>" method="post">
+            <form action="<?= base_url("auth/ubahpassword") ?>" method="post">
                 <div class=" form-group"><label>Password Baru</label>
                     <input type="password" name="password1" class="form-control">
                     <?= form_error('password1', '<small class="text-danger ml-1">', '</small>'); ?>

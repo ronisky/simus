@@ -41,7 +41,8 @@ foreach ($uk as $u) {
                         if ($row['id_kategori_koleksi'] == $s['id_kategori_koleksi']) {
                             echo "<h6 class='my-3'>$s[nama_kategori]</h6>";
                         }
-                    } ?>
+                    }
+                    ?>
                 </div>
 
                 <div class="mt-3">

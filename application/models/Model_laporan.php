@@ -154,13 +154,13 @@ class Model_laporan extends CI_model
     // Start laporan resepsionis 
     function laporanPengunjung()
     {
-        return $this->db->query("SELECT * FROM `tb_pengunjung` ORDER BY tanggal DESC");
+        return $this->db->query("SELECT * FROM `tb_pengunjung` ORDER BY tanggal ASC");
     }
     function laporanPengunjung1()
     {
         $hari = date('Y-m-d');
         $this->db->where("tanggal='$hari'");
-        $this->db->order_by('id_pengunjung', 'desc');
+        $this->db->order_by('id_pengunjung', 'asc');
         return $this->db->get('tb_pengunjung');
     }
 
@@ -186,6 +186,45 @@ class Model_laporan extends CI_model
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
         $this->db->order_by('id_pengunjung', 'asc');
         return $this->db->get('tb_pengunjung');
+    }
+
+    // Laporan Reservasi 
+    function laporanReservasi()
+    {
+        $this->db->where("status='4'");
+        $this->db->order_by('id_reservasi', 'asc');
+        return $this->db->get('tb_reservasi');
+    }
+    function laporanReservasi1()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal='$hari'");
+        $this->db->order_by('id_reservasi', 'asc');
+        return $this->db->get('tb_reservasi');
+    }
+
+    function laporanReservasi7()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
+        $this->db->order_by('id_reservasi', 'asc');
+        return $this->db->get('tb_reservasi');
+    }
+
+    function laporanReservasi30()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
+        $this->db->order_by('id_reservasi', 'asc');
+        return $this->db->get('tb_reservasi');
+    }
+
+    function laporanReservasi360()
+    {
+        $hari = date('Y-m-d');
+        $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
+        $this->db->order_by('id_reservasi', 'asc');
+        return $this->db->get('tb_reservasi');
     }
 
     // Jumlah

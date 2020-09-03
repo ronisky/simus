@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Kunjungan Musuem</h3>
+                            <h3 class="card-title">Reservasi Penajuan Kunjungan Musuem</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -30,7 +30,9 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-
+                                    // foreach ($identitas as $iden) {
+                                    //     $iden['no_telp'];
+                                    // };
                                     foreach ($record as $row) {
 
                                         $status = $row['status'];
@@ -50,7 +52,7 @@
                                                     <div class="dropdown-menu">
                                                         <a class='dropdown-item text-success' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-check fa-fw mr-2'></i>Terima</a>
                                                         <div role="separator" class="dropdown-divider"></div>
-                                                        <button class="dropdown-item text-danger tolakReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-nama="<?= $row['nama'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-status="<?= $row['status'] ?>" data-toggle="modal" data-target="#tolakModal"><i class='fas fa-times fa-fw mr-2'></i>Tolak</button>
+                                                        <button class="dropdown-item text-danger tolakReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-nama="<?= $row['nama'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-kontak="<?= $identitas['no_telp'] ?>" data-status="<?= $row['status'] ?>" data-toggle="modal" data-target="#tolakModal"><i class='fas fa-times fa-fw mr-2'></i>Tolak</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -101,6 +103,7 @@
                     <input type="hidden" class="form-control" id="nama" name="nama">
                     <input type="hidden" class="form-control" id="email" name="email">
                     <input type="hidden" class="form-control" id="no_telp" name="no_telp">
+                    <input type="hidden" class="form-control" id="kontak" name="kontak">
                     <input type="hidden" class="form-control" id="status" name="status">
 
                     <textarea type="text" rows="3" name="keterangan" class="form-control" placeholder="Alasan Penolakan?" required></textarea>
@@ -164,6 +167,7 @@
         var nama = $(this).data('nama');
         var email = $(this).data('email');
         var no = $(this).data('hp');
+        var kontak = $(this).data('kontak');
         var status = $(this).data('status');
 
         $(".modal-body #id").val(id);
@@ -172,6 +176,7 @@
         $(".modal-body #nama").val(nama);
         $(".modal-body #email").val(email);
         $(".modal-body #no_telp").val(no);
+        $(".modal-body #kontak").val(kontak);
         $(".modal-body #status").val(status);
     });
 </script>

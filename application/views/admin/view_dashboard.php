@@ -90,7 +90,8 @@
             </div>
             <div class="card-body">
               <?php
-              $data = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_kategori_pengunjung AS k ON p.kategori = k.id_kategori_pengunjung GROUP BY k.nama_kategori");
+
+              $data = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_kategori_pengunjung AS k ON p.kategori = k.nama_kategori GROUP BY k.nama_kategori");
               ?>
               <canvas id="pieChart" style="height:250px; min-height:250px"></canvas>
             </div>
