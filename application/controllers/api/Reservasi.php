@@ -39,27 +39,6 @@ class Reservasi extends RestController
         $fotos           = $_POST['foto'];
         $status         = 1;
 
-        // email 
-        $code = "https://ronisky.com/";
-        $subject = "Pengajuan Reservasi";
-        $message = "
-						<h2>Terima kasih telah melakukan reservasi kunjungan.</h2>
-                        <p>Detail Data Reservasi:</p>
-                        
-						<p>Nama: " . $nama . "</p>
-						<p>email: " . $email . "</p>
-                        <p>No Telepon: " . $no_telp . "</p>
-                        <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
-                        <p>Status reservasi : <b> dalam proses peninjauan</b></p>
-                        <p>Kode Reservasi :<b> " . $id . "</b></p>
-                        <br>
-                        <p>Petugas akan segera memeriksa pengajuan Anda,</p>
-                        <p>Anda akan mendapatkan update status pengajuan Anda.</p>
-                        <br>
-                        <p>Salam Hangat. <a href=' $code '>Museum Dihati Ku</a></p>
-					";
-
-        kirim_email($email, $subject, $message);
 
 
         $foto = $fotos;
@@ -99,5 +78,26 @@ class Reservasi extends RestController
             ], RestController::HTTP_BAD_REQUEST);
             // }
         }
+        // email 
+        $code = "https://ronisky.com/";
+        $subject = "Pengajuan Reservasi";
+        $message = "
+                        <h2>Terima kasih telah melakukan reservasi kunjungan.</h2>
+                        <p>Detail Data Reservasi:</p>
+                        
+                        <p>Nama: " . $nama . "</p>
+                        <p>email: " . $email . "</p>
+                        <p>No Telepon: " . $no_telp . "</p>
+                        <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktu . "</p>
+                        <p>Status reservasi : <b> dalam proses peninjauan</b></p>
+                        <p>Kode Reservasi :<b> " . $id . "</b></p>
+                        <br>
+                        <p>Petugas akan segera memeriksa pengajuan Anda,</p>
+                        <p>Anda akan mendapatkan update status pengajuan Anda.</p>
+                        <br>
+                        <p>Salam Hangat. <a href=' $code '>Museum Dihatiku</a></p>
+                    ";
+
+        kirim_email($email, $subject, $message);
     }
 }

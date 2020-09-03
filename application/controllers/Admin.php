@@ -211,7 +211,7 @@ class Admin extends CI_Controller
 
 	function edit_artikel()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$this->model_artikel->list_artikel_update();
 			redirect('admin/artikel');
@@ -309,7 +309,7 @@ class Admin extends CI_Controller
 	// Mod Managment User
 	function edit_user()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$config['upload_path'] = 'assets/images/user/';
 			$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';

@@ -35,8 +35,7 @@ $tanggal = tgl_indo($record['tanggal']);
                         ?>
                             <li class="widget-categories__item" data-collapse-item>
                                 <div class="widget-categories__row"><a href="<?= base_url('artikel/kategori/') . $row['kategori_seo']; ?>"><svg class="widget-categories__arrow" width="6px" height="9px">
-                                            <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#arrow-rounded-right-6x9">
-                                            </use>
+                                            <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#arrow-rounded-right-6x9"></use>
                                         </svg> <?= $row['nama_kategori']; ?></a></div>
                             </li>
 

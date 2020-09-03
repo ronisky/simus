@@ -101,7 +101,7 @@
         <div class="col-md-6">
           <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title ">Klasifikasi Jumlah Pengunjung Museum Berdasarkan Negara Asal</h3>
+              <h3 class="card-title ">Klasifikasi Jumlah Pengunjung Museum Berdasarkan Negara</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool " data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -110,7 +110,7 @@
             </div>
             <div class="card-body">
               <?php
-              $dataNegara = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_negara AS n ON p.negara = n.id_negara GROUP BY n.id_negara");
+              $dataNegara = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_negara AS n ON p.negara = n.nama GROUP BY n.nama");
               ?>
               <canvas id="pieChart1" style="height:250px; min-height:250px"></canvas>
             </div>

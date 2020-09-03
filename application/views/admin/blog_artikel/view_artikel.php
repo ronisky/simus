@@ -33,7 +33,7 @@
                               <td>$row[judul]</td>
                               <td>$tgl_artikel</td>
                               <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_artikel/$row[id_artikel]'><i class='fas fa-edit fa-fw'></i></a>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_artikel/" . encrypt_url($row['id_artikel']) . "'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_artikel]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                              </td>
                           </tr>";

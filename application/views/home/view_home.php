@@ -34,7 +34,7 @@ if ($this->uri->segment(2) == 'kategori') {
 <div class="row mt-3">
     <div class="col-12">
         <div class="block">
-            <h3 class="block-header__title mb-1" style="font-family: 'Quicksand', sans-serif;">Gallery Museum</h3>
+            <h3 class="block-header__title mb-1">Gallery Museum</h3>
             <div class="block-header__divider"></div>
             <div class="products-view mt-3">
                 <div class="products-view__list products-list" data-layout="grid-4-full" data-with-features="false">

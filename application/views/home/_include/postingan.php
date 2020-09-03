@@ -1,7 +1,7 @@
 <div class="block block-posts block-posts--layout--list-sm" data-layout="list-sm">
     <div class="container">
         <div class="block-header">
-            <h3 class="block-header__title" style="font-family: 'Quicksand', sans-serif;">Artikel Terbaru</h3>
+            <h3 class="block-header__title">Artikel Terbaru</h3>
             <div class="block-header__divider"></div>
             <div class="block-header__arrows-list">
                 <button class="block-header__arrow block-header__arrow--left" type="button">

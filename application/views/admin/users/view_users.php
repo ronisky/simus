@@ -56,9 +56,9 @@
                       <td><?= $lv; ?></td>
                       <td>
                         <?php if ($row['level'] == 1 && $row['username'] == 'admin') { ?>
-                          <a class='btn btn-success btn-xs' title='Edit user' data-id="<?= $row['username'] ?>" href="<?= base_url('admin/edit_user/') . $row['username'] ?>"><i class="fas fa-edit fa-fw"></i></a>
+                          <a class='btn btn-success btn-xs' title='Edit user' data-id="<?= $row['username'] ?>" href="<?= base_url('admin/edit_user/') . encrypt_url($row['username']) ?>"><i class="fas fa-edit fa-fw"></i></a>
                         <?php } else { ?>
-                          <a class='btn btn-success btn-xs' title='Edit user' data-id="<?= $row['username'] ?>" href="<?= base_url('admin/edit_user/') . $row['username'] ?>"><i class="fas fa-edit fa-fw"></i></a>
+                          <a class='btn btn-success btn-xs' title='Edit user' data-id="<?= $row['username'] ?>" href="<?= base_url('admin/edit_user/') . encrypt_url($row['username']) ?>"><i class="fas fa-edit fa-fw"></i></a>
                           <button class='btn btn-danger btn-xs' title='Hapus' data-id="<?= $row['username'] ?>" onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
                         <?php } ?>
                       </td>
