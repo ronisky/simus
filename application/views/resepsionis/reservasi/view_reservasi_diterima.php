@@ -5,13 +5,13 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Kunjungan Musuem</h3>
+                            <h3 class="card-title">Reservasi Kunjungan Musuem (Diterima)</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
                         <div class="card-body">
                             <?= $this->session->flashdata('message') ?>
-                            <table id="table1" class="table table-sm table-borderless display nowrap" style="width:100%">
+                            <table id="table1" class="table table-sm table-borderless display nowrap" style="width:100%;height:90px ">
 
                                 <thead>
                                     <tr>
@@ -59,8 +59,8 @@
                                                 <?= $s ?>
                                             </td>
                                             <td>
-                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . $row['id_reservasi']; ?>"><i class="fas fa-eye fa-fw"></i></a>
-                                                <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-edit fa-fw'></i></a>
+                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . encrypt_url($row['id_reservasi']); ?>"><i class="fas fa-eye fa-fw"></i></a>
+                                                <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_reservasi/') . encrypt_url($row['id_reservasi']); ?>'><i class='fas fa-edit fa-fw'></i></a>
                                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id="<?= $row['id_reservasi'] ?>" onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
                                             </td>
                                         </tr>

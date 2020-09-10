@@ -16,8 +16,8 @@
                     <th style="width: 5%">No</th>
                     <th>Nama Kategori</th>
                     <th>Link</th>
-                    <th>Posisi</th>
-                    <th>Aktif</th>
+                    <!-- <th>Posisi</th>
+                    <th>Aktif</th> -->
                     <th style='width:10%;'>Aksi</th>
                   </tr>
                 </thead>
@@ -28,10 +28,9 @@
                     echo "<tr><td>$no</td>
                               <td>$row[nama_kategori]</td>
                               <td><a target='_BLANK' href='" . base_url() . "artikel/kategori/$row[kategori_seo]'>artikel/kategori/$row[kategori_seo]</a></td>
-                              <td>$row[sidebar]</td>
-                              <td>$row[aktif]</td>
+                             
                               <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_kategori_artikel/$row[id_kategori]'><i class='fas fa-edit fa-fw'></i></a>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_kategori_artikel/" . encrypt_url($row['id_kategori']) . "'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_kategori]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                              </td>
                           </tr>";

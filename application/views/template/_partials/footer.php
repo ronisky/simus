@@ -31,12 +31,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- time picker  -->
 <script src="<?= base_url('assets/template/js/'); ?>jquery.timepicker.js"></script>
-
 <!-- end piscker -->
 
 <!-- Calendar  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-<!-- <script type="text/javascript" src="<?php echo base_url() . 'assets/template/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'; ?>"></script> -->
 
 <script>
     function logout() {
@@ -66,7 +64,6 @@
         })
     }
 </script>
-
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -75,15 +72,12 @@
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 
-
-
 <script>
     $('.datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
     $('.datetimePicker').datetimepicker();
 </script>
-
 
 <script>
     $(document).ready(function() {
@@ -178,7 +172,7 @@
             interval: 30,
             minTime: '9',
             maxTime: '3pm',
-            defaultTime: '9',
+            // defaultTime: '9',
             startTime: '09:00',
             dynamic: false,
             dropdown: true,
@@ -238,6 +232,59 @@
         $('#create_modal').modal('show');
     }
 </script>
+
+<!-- Notif reservasi -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        setInterval(function() {
+            $.ajax({
+                url: "<?php echo base_url() ?>resepsionis/notifikasi",
+                method: "POST",
+                success: function(data) {
+                    $(".notif_content").html(data);
+                }
+            });
+        }, 3000);
+
+        setInterval(function() {
+            $.ajax({
+                url: "<?php echo base_url() ?>resepsionis/jumlah_notifikasi",
+                method: "POST",
+                success: function(data) {
+                    $(".notif_jumlah").html(data);
+                }
+            });
+        }, 3000);
+
+    });
+</script>
+
+<!-- Notif saran -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        setInterval(function() {
+            $.ajax({
+                url: "<?php echo base_url() ?>admin/notifikasi_saran",
+                method: "POST",
+                success: function(data) {
+                    $(".notif_content_saran").html(data);
+                }
+            });
+        }, 3000);
+
+        setInterval(function() {
+            $.ajax({
+                url: "<?php echo base_url() ?>admin/jumlah_notifikasi_saran",
+                method: "POST",
+                success: function(data) {
+                    $(".notif_jumlah_saran").html(data);
+                }
+            });
+        }, 3000);
+
+    });
+</script>
+
 
 <!-- Statistik -->
 <?php $this->model_main->kunjungan(); ?>

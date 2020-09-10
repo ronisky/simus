@@ -75,7 +75,7 @@ class Admin extends CI_Controller
 
 	function edit_menu()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$this->model_menu->menu_website_update();
 			redirect('admin/menu');
@@ -130,7 +130,7 @@ class Admin extends CI_Controller
 
 	function edit_slider()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$this->model_main->slide_update();
 			redirect('admin/slider');
@@ -144,6 +144,14 @@ class Admin extends CI_Controller
 
 	function delete_slider($id)
 	{
+		$query = $this->db->get_where('tb_web_slide', array('id_slide' => $id));
+		$row = $query->row();
+		$gambar_besar = $row->gambar_besar;
+		$gambar_kecil = $row->gambar_kecil;
+		$path = "assets/images/slider/";
+		unlink($path . $gambar_besar);
+		unlink($path . $gambar_kecil);
+
 		$this->model_main->slide_delete($id);
 		echo json_encode(array("status" => TRUE));
 	}
@@ -170,7 +178,7 @@ class Admin extends CI_Controller
 
 	function edit_halaman()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$this->model_halaman->halaman_update();
 			redirect('admin/halaman');
@@ -226,7 +234,15 @@ class Admin extends CI_Controller
 
 	function delete_artikel($id)
 	{
+
+		$query = $this->db->get_where('tb_blog_artikel', array('id_artikel' => $id));
+		$row = $query->row();
+		$gambar = $row->gambar;
+		$path = "assets/images/artikel/";
+		unlink($path . $gambar);
+
 		$this->model_artikel->list_artikel_delete($id);
+
 		echo json_encode(array("status" => TRUE));
 	}
 
@@ -251,7 +267,7 @@ class Admin extends CI_Controller
 	function edit_kategori_artikel()
 	{
 		$data['title'] = 'Edit Kategori Artikel - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		if (isset($_POST['submit'])) {
 			$this->model_artikel->kategori_artikel_update();
 			redirect('admin/kategori_artikel');
@@ -427,10 +443,6 @@ class Admin extends CI_Controller
 				$data['title'] = 'Tambah Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
 				$this->template->load('template/template', 'admin/users/view_users_tambah', $data);
 			} else {
-				$set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-				$code = substr(str_shuffle($set), 0, 6);
-				$code2 = substr(str_shuffle($set), 0, 6);
-
 				$alamat = array(
 					'id_kota' 	=> $this->input->post('kota')
 				);
@@ -444,8 +456,6 @@ class Admin extends CI_Controller
 					'password'      		=> password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
 					'aktif'					=> 0,
 					'level'					=> htmlspecialchars($this->input->post('level', true)),
-					'kode_aktivasi' 		=> $code,
-					'kode_resetpassword' 	=> $code2,
 					'tgl_daftar' 			=> date('Y-m-d H:i:s'),
 				];
 
@@ -499,7 +509,7 @@ class Admin extends CI_Controller
 	}
 	function detail_saran_masukan()
 	{
-		$id = $this->uri->segment(3);
+		$id = decrypt_url($this->uri->segment(3));
 		$data['title'] = 'Detail Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
 		$data['record'] = $this->model_app->edit('tb_saran_masukan', array('id_saran_masukan' => $id))->row_array();
 		$this->template->load('template/template', 'admin/saran_masukan/view_saran_masukan_detail', $data);
@@ -517,8 +527,8 @@ class Admin extends CI_Controller
 	{
 
 		$data['record'] = $this->model_berita->list_berita();
-		$data['title'] = 'Berita - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$this->template->load('template/template', 'admin/subs/view_berita', $data);
+		$data['title'] = 'Newsletter - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$this->template->load('template/template', 'admin/subs/view_newsletter', $data);
 	}
 
 	function tambah_newsletter()
@@ -529,24 +539,24 @@ class Admin extends CI_Controller
 			$judul = $this->db->escape_str($this->input->post('judul'));
 			$isi = $this->db->escape_str($this->input->post('berita'));
 
-			$ci = get_instance();
-			$ci->load->library('email');
+			// $ci = get_instance();
 			$config = [
 				'protocol'  => 'smtp',
-				'smtp_host' => 'ssl://smtp.googlemail.com',
-				'smtp_user' => 'simusmonpera@gmail.com',
-				'smtp_pass' => 'monpera2020',
-				'smtp_port' => 465,
+				'smtp_host' => 'smtp.hostinger.co.id',
+				'smtp_user' => 'email@ronisky.com',
+				'smtp_pass' => 'Monpera2020',
+				'smtp_port' => 587,
 				'mailtype'  => 'html',
-				'charset'   => 'utf-8',
+				'charset'   => 'iso-8859-1',
 				'newline'   => "\r\n"
 			];
-			$ci->email->initialize($config);
-			$ci->email->from('simusmonpera@gmail.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
-			$ci->email->to($this->model_app->emailsend());
-			$ci->email->subject("$judul");
-			$ci->email->message("$isi");
-			$ci->email->send();
+			$this->load->library('email', $config);
+			$this->email->initialize($config);
+			$this->email->from('email@ronisky.com', "Museum Monumen Perjuangan Rakyat Jawa Barat");
+			$this->email->to($this->model_app->emailsend());
+			$this->email->subject($judul);
+			$this->email->message($isi);
+			$this->email->send();
 
 			$this->model_berita->list_berita_tambah();
 			$this->session->set_flashdata('message', '
@@ -556,18 +566,18 @@ class Admin extends CI_Controller
 			redirect('admin/newsletter');
 		} else {
 			$data['title'] = 'Kirim News Letter - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$this->template->load('template/template', 'admin/subs/view_berita_tambah', $data);
+			$this->template->load('template/template', 'admin/subs/view_newsletter_tambah', $data);
 		}
 	}
 
 	function lihat_newsletter()
 	{
 
-		$data['title'] = 'Detail Berita - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['title'] = 'Detail Newsletter - Museum Monumen Perjuangan Rakyat Jawa Barat';
 
 		$id = $this->uri->segment(3);
 		$data['rows'] = $this->model_berita->list_berita_edit($id)->row_array();
-		$this->template->load('template/template', 'admin/subs/view_berita_edit', $data);
+		$this->template->load('template/template', 'admin/subs/view_newsletter_edit', $data);
 	}
 
 	function delete_newsletter($id)
@@ -588,6 +598,40 @@ class Admin extends CI_Controller
 		$this->db->query("DELETE FROM tb_subs where id='$id'");
 		echo json_encode(array("status" => TRUE));
 	}
+
+	// notifikasi 
+	public function notifikasi_saran()
+	{
+		$query = $this->db->query("SELECT * FROM tb_saran_masukan WHERE status='1' ORDER BY id_saran_masukan DESC")->result();
+
+		$output = '';
+		foreach ($query as $q) {
+			$output .= '
+            <div class="dropdown-divider"></div>
+                <a href="' . base_url('admin/hapus_notif_saran/') . $q->id_saran_masukan . '" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> ' . $q->nama . '
+                    <span class="float-right text-muted text-sm">' . $q->subjek . '</span>
+                </a>
+            ';
+		}
+		echo $output;
+	}
+
+	public function jumlah_notifikasi_saran()
+	{
+		$query = $this->db->query("SELECT * FROM tb_saran_masukan WHERE status='1' ORDER BY id_saran_masukan ASC")->num_rows();
+
+		$output =  $query;
+
+		echo $output;
+	}
+
+	public function hapus_notif_saran($id)
+	{
+		$this->model_app->hapus_saran_notif($id);
+		redirect('admin/saranMasukan');
+	}
+
 
 	// Laporan
 	// Laporan Postingan 

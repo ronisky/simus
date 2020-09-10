@@ -16,7 +16,7 @@
                             <label for="">Aksi Tabel</label>
                             <form action="cetak_koleksi" method="POST">
                                 <div>
-                                    <button class="btn btn-sm btn-success mb-2" type="submit" href="">Expor to PDF</button>
+                                    <!-- <button class="btn btn-sm btn-success mb-2" type="submit" href="">Expor to PDF</button> -->
                                 </div>
                                 <table id="laptabel" class="table table-sm table-borderless table-responsive" style="width:100%">
                                     <thead>
@@ -29,12 +29,12 @@
                                             <th>Lebar</th>
                                             <th>Diameter</th>
                                             <th>Berat</th>
-                                            <th>Asal Koleksi</th>
+                                            <!-- <th>Asal Koleksi</th>
                                             <th>Pemilik Asal</th>
                                             <th>Cara Perolehan</th>
-                                            <th>Sumber Pusaka</th>
+                                            <th>Sumber Pusaka</th> -->
                                             <th>No Registrasi</th>
-                                            <th>Foto</th>
+                                            <!-- <th>Foto</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,15 +67,15 @@
                                                 <td><?= $row['lebar']; ?></td>
                                                 <td><?= $row['diameter']; ?></td>
                                                 <td><?= $row['berat']; ?></td>
-                                                <td><?= $row['asal_koleksi'] ?></td>
+                                                <!-- <td><?= $row['asal_koleksi'] ?></td>
                                                 <td><?= $row['pemilik_asal']; ?></td>
                                                 <td><?= $row['cara_perolehan'] ?></td>
-                                                <td><?= $row['sumber_pusaka']; ?></td>
+                                                <td><?= $row['sumber_pusaka']; ?></td> -->
                                                 <td><?= $row['no_registrasi']; ?></td>
 
-                                                <td>
+                                                <!-- <td>
                                                     <img src="<?= base_url('/assets/images/koleksi/') . $img ?>" alt="" style="width: 100px;">
-                                                </td>
+                                                </td> -->
 
                                             </tr>
                                         <?php
@@ -84,9 +84,8 @@
                                         ?>
                                     </tbody>
                                 </table>
+                            </form>
                         </div>
-
-                        </form>
                     </div>
 
                 </div>
@@ -103,7 +102,7 @@
             "bInfo": false,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'print'
+                'copy', 'csv', 'excel', 'print', 'pdf'
             ]
         });
     });

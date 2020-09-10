@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tambah Slider</h3>
+              <h3 class="card-title">Edit Slider</h3>
             </div>
 
             <form action="<?= base_url('admin/edit_slider') ?>" method="post" enctype="multipart/form-data">

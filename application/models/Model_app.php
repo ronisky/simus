@@ -250,9 +250,12 @@ class Model_app extends CI_model
     public function get_faq($id = null)
     {
         if ($id === null) {
-            return $this->db->get('tb_faq')->result_array();
+            return $this->db->get_where("tb_faq", "jawaban != 'null'")->result_array();
         } else {
-            return $this->db->get_where('tb_faq', ['id_faq' => $id])->result_array();
+            $this->db->where(['id_faq' => $id]);
+            $this->db->where("jawaban != 'null'");
+            return $this->db->get('tb_faq');
+            // return $this->db->get_where('tb_faq', ['id_faq' => $id])->result_array();
         }
     }
 
@@ -306,5 +309,19 @@ class Model_app extends CI_model
             $query = $this->db->get_where('tb_negara', ['id_negara' => $id]);
             return $query->result_array();
         }
+    }
+
+    public function hapus_reservasi_notif($id)
+    {
+        $this->db->set('status_notif', '0');
+        $this->db->where('id_reservasi', $id);
+        $this->db->update('tb_reservasi');
+    }
+
+    public function hapus_saran_notif($id)
+    {
+        $this->db->set('status', '0');
+        $this->db->where('id_saran_masukan', $id);
+        $this->db->update('tb_saran_masukan');
     }
 }

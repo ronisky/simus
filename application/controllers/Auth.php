@@ -56,19 +56,19 @@ class Auth extends CI_Controller
 	{
 		$config = [
 			'protocol'  => 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_user' => 'simusmonpera@gmail.com',
-			'smtp_pass' => 'monpera2020',
-			'smtp_port' => 465,
+			'smtp_host' => 'smtp.hostinger.co.id',
+			'smtp_user' => 'email@ronisky.com',
+			'smtp_pass' => 'Monpera2020',
+			'smtp_port' => 587,
 			'mailtype'  => 'html',
-			'charset'   => 'utf-8',
+			'charset'   => 'iso-8859-1',
 			'newline'   => "\r\n"
 		];
 
 		$this->load->library('email', $config);
 		$this->email->initialize($config);
 
-		$this->email->from('simusmonpera@gmail.com', 'Museum Monumen Perjuangan Rakyat Jawa Barat');
+		$this->email->from('email@ronisky.com', 'Museum Monumen Perjuangan Rakyat Jawa Barat');
 		$this->email->to($this->input->post('email'));
 		$message = "
 						<p>Akun Anda:</p>

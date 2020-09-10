@@ -15,6 +15,18 @@
                                 <div class="card-body col-md-8">
                                     <div class="row">
                                         <input type="hidden" class="form-control" id="id" name="id" value="<?= $rows['id_reservasi'] ?>">
+                                        <div class="form-group col-sm-6">
+                                            <label for="tanggal">Nama</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="<?= $rows['nama'] ?>" required readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="tanggal">Kategori</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="<?= $rows['kategori'] ?>" required readonly>
+                                            </div>
+                                        </div>
                                         <div class="form-group col-sm-4">
                                             <label for="tanggal">Tanggal kunjungan</label>
                                             <div class="input-group">
@@ -24,10 +36,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-6">
+                                        <div class="form-group col-sm-4">
                                             <label>Jam kunjungan</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control timepickeradmin" id="timepickeradmin" name="waktu" value="<?= $rows['waktu'] ?>" required>
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Jumlah</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="jumlah" value="<?= $rows['jumlah'] ?>" required>
                                                 <div class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                 </div>

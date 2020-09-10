@@ -38,7 +38,6 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-6">
-                                    <a class='btn btn-success btn-sm detailFaq' title='Ubah' href="<?php echo site_url('resepsionis/edit_faq/') . $record['id_faq']; ?>">Ubah Data<i class="fas fa-edit fa-fw ml-2"></i></a>
                                     <a href='<?= base_url('resepsionis/faq') ?>'><button type='button' class='btn btn-secondary btn-sm ml-1'>Batal</button></a>
                                 </div>
                             </div>

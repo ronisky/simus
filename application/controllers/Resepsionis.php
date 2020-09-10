@@ -34,7 +34,7 @@ class Resepsionis extends CI_Controller
 
     function edit_faq()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
 
         if (isset($_POST['submit'])) {
             $nama = strip_tags($this->input->post('nama'));
@@ -63,7 +63,7 @@ class Resepsionis extends CI_Controller
 
     function detail_faq()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail F.A.Q - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_app->edit('tb_faq', array('id_faq' => $id))->row_array();
         $this->template->load('template/template', 'resepsionis/faq/view_faq_detail', $data);
@@ -157,7 +157,7 @@ class Resepsionis extends CI_Controller
 
     function edit_pengunjung()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
             $petugas = $this->session->username;
             $data = [
@@ -196,7 +196,7 @@ class Resepsionis extends CI_Controller
 
     function detail_pengunjung()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
         $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
@@ -217,7 +217,7 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 1 OR status = 3')->result_array();
+            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 1')->result_array();
             $data['identitas'] = $this->db->get_where('tb_web_identitas', 'id_identitas=1')->row_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi', $data);
         } else {
@@ -229,8 +229,21 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            // $query = ("SELECT * FROM tb_reservasi WHERE status='2' OR status='4' GROUP BY status ASC");
+            // $data['record'] = $this->db->query($query)->result_array();
             $data['record'] = $this->db->get_where('tb_reservasi', 'status = 2 OR status =4 ')->result_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi_diterima', $data);
+        } else {
+            redirect('resepsionis');
+        }
+    }
+    function reservasi_ditolak()
+    {
+        if (!empty($this->session->userdata())) {
+            $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 3')->result_array();
+            $data['identitas'] = $this->db->get_where('tb_web_identitas', 'id_identitas=1')->row_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi_ditolak', $data);
         } else {
             redirect('resepsionis');
         }
@@ -283,16 +296,18 @@ class Resepsionis extends CI_Controller
 
     function edit_reservasi()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
 
             $id = htmlspecialchars($this->input->post('id'));
             $tanggal    = htmlspecialchars($this->input->post('tanggal'));
             $waktu      = htmlspecialchars($this->input->post('waktu'));
+            $jumlah      = htmlspecialchars($this->input->post('jumlah'));
 
             $data = [
                 'tanggal'   => $tanggal,
-                'waktu'     => $waktu
+                'waktu'     => $waktu,
+                'jumlah'    => $jumlah
             ];
             $where = array('id_reservasi' =>  $id);
             $this->model_app->update('tb_reservasi', $data, $where);
@@ -300,7 +315,7 @@ class Resepsionis extends CI_Controller
 				<div class="alert alert-success col-sm-12" role="alert">
             	<center>Data berhasil diperbaharui</center>
           		</div>');
-            redirect('resepsionis/reservasi', 'refresh');
+            redirect('resepsionis/reservasi_diterima', 'refresh');
         } else {
             $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
             $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
@@ -308,10 +323,39 @@ class Resepsionis extends CI_Controller
         }
     }
 
+    function edit_reservasi_ditolak()
+    {
+        $id = decrypt_url($this->uri->segment(3));
+        if (isset($_POST['submit'])) {
+
+            $id = htmlspecialchars($this->input->post('id'));
+            $tanggal    = htmlspecialchars($this->input->post('tanggal'));
+            $waktu      = htmlspecialchars($this->input->post('waktu'));
+            $jumlah      = htmlspecialchars($this->input->post('jumlah'));
+
+            $data = [
+                'tanggal'   => $tanggal,
+                'waktu'     => $waktu,
+                'jumlah'    => $jumlah
+            ];
+            $where = array('id_reservasi' =>  $id);
+            $this->model_app->update('tb_reservasi', $data, $where);
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Data berhasil diperbaharui</center>
+          		</div>');
+            redirect('resepsionis/reservasi_ditolak', 'refresh');
+        } else {
+            $data['title'] = 'Edit Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_edit_reservasi_ditolak', $data);
+        }
+    }
+
 
     function detail_reservasi()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail Reservasi - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
         $this->template->load('template/template', 'resepsionis/reservasi/view_detail_reservasi', $data);
@@ -448,6 +492,108 @@ class Resepsionis extends CI_Controller
             $this->template->load('template/template', 'resepsionis/reservasi/view_terima_reservasi', $data);
         }
     }
+
+    function terima_reservasi_ditolak()
+    {
+
+        $id = $this->uri->segment(3);
+        if (isset($_POST['submit'])) {
+
+            $id         = htmlspecialchars($this->input->post('id'));
+            $tanggal    = htmlspecialchars($this->input->post('tanggal'));
+            $waktustart = htmlspecialchars($this->input->post('waktu'));
+            $waktuend   = htmlspecialchars($this->input->post('waktuakhir'));
+            $nama       = $this->input->post('nama');
+            $kategori   = $this->input->post('kategori');
+            $jumlah     = $this->input->post('jumlah');
+            $alamat     = $this->input->post('alamat');
+            $email      = $this->input->post('email');
+            $timestart  = "$tanggal $waktustart";
+            $timeend    = "$tanggal $waktuend";
+            $data = [
+                'status'   => 2
+            ];
+
+            $jadwal = [
+                'id_reservasi'  => $id,
+                'start_time'    => $timestart,
+                'end_time'      => $timeend,
+                'kategori'      => $kategori,
+                'jumlah'        => $jumlah,
+                'nama'          => $nama,
+                'alamat'        => $alamat
+            ];
+
+            $where = array('id_reservasi' =>  $id);
+            $this->model_app->update('tb_reservasi', $data, $where);
+
+            $this->db->insert('tb_jadwal', $jadwal);
+            $code = "https://ronisky.com/";
+            $subject = "Reservasi Kunjungan Diterima";
+            $message = "
+                                <h2>Selamat pengajuan reservasi kunjungan anda telah disetujui.</h2><br>
+                                <p><b>Dimohon untuk datang tepat waktu, terima kasih</b></p>
+                                <p>Detail Data Reservasi:</p>
+    
+                                <p>Nama: " . $nama . "</p>
+                                <p>email: " . $email . "</p>
+                                <p>Tanggal kunjungan: " . $tanggal . ", Jam " . $waktustart . "</p><br>
+                                <p>Status reservasi :<b> Diterima</b></p><br>
+                                <p>Kode Reservasi : <b> $id</b></p><br>
+                                <br>
+                                <p>Tunjukan kode reservasi kepada petugas ketika melakukan pendaftaran ulang!</p><br>
+                                <p>Salam Hangat. <a href=' $code '>Museum Dihatiku</a></p>
+                            ";
+
+            kirim_email($email, $subject, $message);
+
+            $this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Data berhasil ditambahakan pada jadwal kalender</center>
+          		</div>');
+            redirect('resepsionis/reservasi_diterima', 'refresh');
+        } else {
+            $data['title'] = 'Reservasi Kunjungan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            $data['rows'] = $this->model_app->edit('tb_reservasi', array('id_reservasi' => $id))->row_array();
+            $this->template->load('template/template', 'resepsionis/reservasi/view_terima_reservasi_ditolak', $data);
+        }
+    }
+
+    // Notifikasi 
+    public function notifikasi()
+    {
+        $query = $this->db->query("SELECT * FROM tb_reservasi WHERE status_notif='1' ORDER BY id_reservasi DESC")->result();
+
+        $output = '';
+        foreach ($query as $q) {
+            $output .= '
+            <div class="dropdown-divider"></div>
+                <a href="' . base_url('resepsionis/hapus_notif/') . $q->id_reservasi . '" class="dropdown-item">
+                    <i class="fas fa-user mr-2"></i> ' . $q->nama . '
+                    <span class="float-right text-muted text-sm">' . $q->jumlah . '</span>
+                </a>
+            ';
+        }
+        echo $output;
+    }
+
+    public function jumlah_notifikasi()
+    {
+        $query = $this->db->query("SELECT * FROM tb_reservasi WHERE status_notif='1' ORDER BY id_reservasi ASC")->num_rows();
+
+        $output =  $query;
+
+        echo $output;
+    }
+
+    public function hapus_notif($id)
+    {
+        $this->model_app->hapus_reservasi_notif($id);
+        redirect('resepsionis/reservasi');
+    }
+
+
+
 
     // Jadwal Calenda 
     public function jadwal()

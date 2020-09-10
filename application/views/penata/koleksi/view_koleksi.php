@@ -37,14 +37,14 @@
                       <td>$row[pemilik_asal]</td>
                       <td>$row[cara_perolehan]</td>
                       <td>$row[sumber_pusaka]</td>
-                      <td>
-                      <img src='" . base_url('assets/images/koleksi/') . $row['foto'] . "' alt='Gambar' style='height: 50px'>
+                      <td class='image-popup-detail' href='" . base_url('assets/images/koleksi/') . $row['foto'] . "'>
+                      <img src='" . base_url('assets/images/koleksi/') . $row['foto'] . "' alt='Gambar' style='height: 60px'>
                       </td>
                       <td>$row[no_registrasi]</td>
                       <td>$row[tanggal_pencatatan]</td>
                       <td>
-                        <a class='btn btn-primary btn-xs' title='Detail' href='" . base_url() . "penata/detail_koleksi/$row[id_koleksi]'><i class='fas fa-eye fa-fw'></i></a>
-                        <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "penata/edit_koleksi/$row[id_koleksi]'><i class='fas fa-edit fa-fw'></i></a>
+                        <a class='btn btn-primary btn-xs' title='Detail' href='" . base_url() . "penata/detail_koleksi/" . encrypt_url($row['id_koleksi']) . "'><i class='fas fa-eye fa-fw'></i></a>
+                        <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "penata/edit_koleksi/" . encrypt_url($row['id_koleksi']) . "'><i class='fas fa-edit fa-fw'></i></a>
                         <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_koleksi]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                       </td>
                     </tr>";
@@ -83,6 +83,7 @@
           url: site_url + 'penata/delete_koleksi/' + data_id,
           type: "POST",
           dataType: "JSON",
+
           success: function(data) {
             Swal.fire({
               title: 'Dihapus!',

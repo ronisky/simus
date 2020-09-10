@@ -28,10 +28,14 @@
                     <tr>
                       <td><?= $no ?></td>
                       <td> <?= $row['judul'] ?></td>
-                      <td><a target='_BLANK' href='<?= base_url('assets/images/slider/') . $row['gambar_besar'] ?>'>Lihat Gambar</a></td>
-                      <td><a target='_BLANK' href='<?= base_url('assets/images/slider/') . $row['gambar_kecil'] ?>'>Lihat Gambar</a></td>
+                      <td class="image-popup-detail" href='<?= base_url('assets/images/slider/') . $row['gambar_besar'] ?>'>
+                        <img src="<?= base_url('assets/images/slider/') . $row['gambar_besar'] ?>" height="60">
+                      </td>
+                      <td class="image-popup-detail" href='<?= base_url('assets/images/slider/') . $row['gambar_kecil'] ?>'>
+                        <img src='<?= base_url('assets/images/slider/') . $row['gambar_kecil'] ?>' height="60">
+                      </td>
                       <td>
-                        <a class='btn btn-success btn-xs' title='Ubah' href='<?= base_url('admin/edit_slider/') . $row['id_slide'] ?>'><i class='fas fa-edit fa-fw'></i></a>
+                        <a class='btn btn-success btn-xs' title='Ubah' href='<?= base_url('admin/edit_slider/') . encrypt_url($row['id_slide']) ?>'><i class='fas fa-edit fa-fw'></i></a>
                         <button class='btn btn-danger btn-xs' title='Hapus' data-id='<?= $row['id_slide'] ?>' onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
                       </td>
                     </tr>

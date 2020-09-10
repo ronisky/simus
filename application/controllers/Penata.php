@@ -49,7 +49,7 @@ class Penata extends CI_Controller
 
     function edit_kategori_koleksi()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
             $data = array('nama_kategori' => htmlspecialchars($this->input->post('a')), 'kategori_seo' => seo_title(htmlspecialchars($this->input->post('a'))));
             $where = array('id_kategori_koleksi' => $this->input->post('id'));
@@ -141,7 +141,7 @@ class Penata extends CI_Controller
 
     function detail_koleksi()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
         $data['uk'] = $this->model_app->view_ordering('tb_ukuran_koleksi', 'id_ukuran', 'DESC');
@@ -152,7 +152,7 @@ class Penata extends CI_Controller
     function edit_koleksi()
     {
 
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
             $config['upload_path'] = 'assets/images/koleksi/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -238,14 +238,12 @@ class Penata extends CI_Controller
         $query = $this->db->get_where('tb_koleksi', array('id_koleksi' => $id));
         $row = $query->row();
         $gambar = $row->foto;
-        $q = $row->id_ukuran;
         $path = "assets/images/koleksi/";
         unlink($path . $gambar);
 
-        $sql = "DELETE tb_koleksi , tb_ukuran_koleksi  FROM tb_koleksi INNER JOIN tb_ukuran_koleksi  
-        WHERE tb_koleksi.id_ukuran= tb_ukuran_koleksi.id_ukuran and tb_koleksi.id_ukuran = '$q'";
+        $sql = "DELETE tb_koleksi.*, tb_ukuran_koleksi.* FROM tb_koleksi INNER JOIN tb_ukuran_koleksi ON tb_ukuran_koleksi.id_ukuran=tb_koleksi.id_ukuran WHERE id_koleksi =$id";
 
-        $this->db->query($sql, array($id));
+        $this->db->query($sql);
 
         echo json_encode(array("status" => TRUE));
     }

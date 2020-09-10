@@ -40,7 +40,7 @@
                               <td><a target='_BLANK' href='" . base_url() . "$row[link]'>$row[link]</a></td>
                               <td>$row[aktif]</td>
                               <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_menu/$row[id_menu]'><i class='fas fa-edit fa-fw'></i></a>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_menu/" . encrypt_url($row['id_menu']) . "'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_menu]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                               </td>
                           </tr>";

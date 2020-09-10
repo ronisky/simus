@@ -31,7 +31,7 @@
                               <td><a target='_BLANK' href='" . base_url() . "page/detail/$row[judul_seo]'>page/detail/$row[judul_seo]</a></td>
                               <td>$tgl_artikel</td>
                               <td><center>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_halaman/$row[id_halaman]'><i class='fas fa-edit fa-fw'></i></a>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_halaman/" . encrypt_url($row['id_halaman']) . "'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_halaman]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                               </center></td>
                           </tr>";

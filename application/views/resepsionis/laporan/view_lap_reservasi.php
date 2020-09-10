@@ -38,12 +38,24 @@
                                         <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>Kode Pos</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    foreach ($record->result_array() as $row) { ?>
+                                    foreach ($record->result_array() as $row) {
+                                        $status = $row['status'];
+                                        if ($status == 1) {
+                                            $s = "<label class='text-warning'>Pengajuan</label>";
+                                        } else if ($status == 2) {
+                                            $s = "<label class='text-success'>Diterima</label>";
+                                        } else if ($status == 3) {
+                                            $s = "<label class='text-danger'>Ditolak</label>";
+                                        } else {
+                                            $s = "<label class='text-info'>Selesai</label>";
+                                        }
+                                    ?>
                                         <tr>
                                             <td><?= $no ?> </td>
                                             <td><?= $row['tanggal'] ?></td>
@@ -54,6 +66,7 @@
                                             <td><?= $row['provinsi']; ?></td>
                                             <td><?= $row['kota'] ?></td>
                                             <td><?= $row['kode_pos']; ?></td>
+                                            <td><?= $s ?></td>
                                         </tr>
                                     <?php
                                         $no++;

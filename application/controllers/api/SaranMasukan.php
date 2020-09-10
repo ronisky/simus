@@ -22,9 +22,22 @@ class SaranMasukan extends RestController
             'email' => $email,
             'subjek' => $this->post('subjek'),
             'pesan' => $this->post('pesan'),
-            'status' => $this->post('status'),
+            'status' => 1,
         ];
 
+        // email 
+        $web = "https://ronisky.com/";
+        $subject = "Musuem Monpera Jawa Barat - Saran dan Masukan";
+        $message = "
+                    <h2>Terima kasih telah memberikan saran dan masukan</h2>
+                    <p>Saran dan Masukan anda sangat berati bagi kami untuk terus meningkatkan</>
+                    <p>pelayanan dan pengalaman Anda di Museum Monumen Perjuangan Rakyat Jawa Barat</p>
+                    <br>
+                    <p>Salam Hangat <a href=' $web'>Museum Dihatiku</a></p>
+                    
+                ";
+
+        kirim_email($email, $subject, $message);
 
         if ($this->model->insert('tb_saran_masukan', $data) > 0) {
             $this->response([
@@ -37,18 +50,5 @@ class SaranMasukan extends RestController
                 'message'   => "oops! Coba lagi!"
             ], RestController::HTTP_BAD_REQUEST);
         }
-        // email 
-        $web = "https://ronisky.com/";
-        $subject = "Musuem Monpera Jawa Barat - Saran dan Masukan";
-        $message = "
-                        <h2>Terima kasih telah memberikan saran dan masukan</h2>
-                        <p>Saran dan Masukan anda sangat berati bagi kami untuk terus meningkatkan</>
-                        <p>pelayanan dan pengalaman Anda di Museum Monumen Perjuangan Rakyat Jawa Barat</p>
-                        <br>
-                        <p>Salam Hangat <a href=' $web'>Museum Dihatiku</a></p>
-                        
-                    ";
-
-        kirim_email($email, $subject, $message);
     }
 }

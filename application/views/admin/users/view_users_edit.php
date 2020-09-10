@@ -26,14 +26,14 @@
                     <input type='username' class='form-control' name='a' value='<?= $rows['username'] ?>' readonly='on'>
                   </div>
                 </div>
-
+                <!-- 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Password</label>
                   <div class="col-sm-6">
                     <input type='password' class='form-control' name='b' onkeyup="nospaces(this)">
                     <small class="font-italic">Kosongkan jika tidak ingin ingin mengubahnya</small>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Nama Lengkap</label>
@@ -71,7 +71,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Ganti Foto</label>
                   <div class="col-sm-6">
                     <div class="custom-file">
@@ -79,7 +79,7 @@
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih foto...</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <?php
                 if ($rows['foto'] != '') { ?>

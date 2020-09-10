@@ -36,7 +36,7 @@ class Reservasi extends RestController
         $kode_pos       = $_POST['kode_pos'];
         $email          = $_POST['email'];
         $no_telp        = $_POST['no_telp'];
-        $fotos           = $_POST['foto'];
+        $fotos           = '';
         $status         = 1;
 
 
@@ -63,21 +63,9 @@ class Reservasi extends RestController
             'email' => $email,
             'no_telp' => $no_telp,
             'foto'      => " ",
-            'status' => $status
+            'status' => $status,
+            'status_notif'  => $status
         ];
-        if ($this->model->insert('tb_reservasi', $data)) {
-            // if (file_put_contents($upload_path, base64_decode($foto))) {
-            $this->response([
-                'status'    => true,
-                'message'   => "Selamat, Pengajuan reservasi berhasil dikirim"
-            ], RestController::HTTP_CREATED);
-        } else {
-            $this->response([
-                'status'    => false,
-                'message'   => "Oops! Data gagal dikirim"
-            ], RestController::HTTP_BAD_REQUEST);
-            // }
-        }
         // email 
         $code = "https://ronisky.com/";
         $subject = "Pengajuan Reservasi";
@@ -95,9 +83,29 @@ class Reservasi extends RestController
                         <p>Petugas akan segera memeriksa pengajuan Anda,</p>
                         <p>Anda akan mendapatkan update status pengajuan Anda.</p>
                         <br>
+                        <p>Ada pertanyaan?<a href=' $code '>hubungi</a>petugas </p>
                         <p>Salam Hangat. <a href=' $code '>Museum Dihatiku</a></p>
                     ";
 
         kirim_email($email, $subject, $message);
+
+
+
+
+
+
+        if ($this->model->insert('tb_reservasi', $data)) {
+            // if (file_put_contents($upload_path, base64_decode($foto))) {
+            $this->response([
+                'status'    => true,
+                'message'   => "Selamat, Pengajuan reservasi berhasil dikirim"
+            ], RestController::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status'    => false,
+                'message'   => "Oops! Data gagal dikirim"
+            ], RestController::HTTP_BAD_REQUEST);
+            // }
+        }
     }
 }

@@ -26,7 +26,7 @@
                     echo "<tr><td>$no</td>
                               <td>$row[nama_kategori]</td>
                               <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "penata/edit_kategori_koleksi/$row[id_kategori_koleksi]'><i class='fas fa-edit fa-fw'></i></a>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "penata/edit_kategori_koleksi/" . encrypt_url($row['id_kategori_koleksi']) . "'><i class='fas fa-edit fa-fw'></i></a>
                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_kategori_koleksi]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                               </td>
                           </tr>";

@@ -78,7 +78,7 @@
                 <div class="col-sm-6"></div>
                 <div class="form-group row">
                   <div class="col-sm-2"></div>
-                  <small class="font-bold text-primary ml-2">*Data pendaftaran akan dikirim ke email yang didaftarkan.</small>
+                  <small class="font-bold text-warning ml-2">*Data pendaftaran akan dikirim ke email yang didaftarkan.</small>
                 </div>
 
                 <div class="form-group row">

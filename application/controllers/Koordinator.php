@@ -49,6 +49,13 @@ class Koordinator extends CI_Controller
         $this->template->load('template/template', 'koordinator/saran_masukan/view_saran_masukan', $data);
     }
 
+    function detail_saran_masukan()
+    {
+        $id = decrypt_url($this->uri->segment(3));
+        $data['title'] = 'Detail Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['record'] = $this->model_app->edit('tb_saran_masukan', array('id_saran_masukan' => $id))->row_array();
+        $this->template->load('template/template', 'koordinator/saran_masukan/view_saran_masukan_detail', $data);
+    }
     function pengunjung()
     {
         if (!empty($this->session->userdata())) {

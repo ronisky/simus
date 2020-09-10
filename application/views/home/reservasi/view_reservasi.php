@@ -2,17 +2,19 @@
     <div class="col-md-12 mx-auto">
         <h4 class="card-title">Reservasi Kunjungan</h4>
 
-        <div class="card-body col-sm-10 " style="text-align: justify;">
-            <label>
-                <h5><b>Keuntungan melakukan reservasi dan ketentuan kunjungan Museum</b><br></h5>
-                1. Dengan melakukan reservasi anda nantinya tinggal menunjukan kode reservasi yang anda dapatkan kepada petugas resepsionis / penerima tamu.<br>
-                2. Dilarang membawa makanan ke dalam museum.<br>
-                3. Ikuti dan patuhi aturan yang ada di museum, ikuti sesuai arahan petugas di museum. <br>
-                4. <b>Reservasi dilakukan minimal 3 hari sebelum waktu kunjungan.</b> <br>
-                5. <b> Museum buka setiap hari Senin - Jumat, pukul 09.00 - 15.00,</b> pastikan anda melakukan reservasi pada jam buka museum.
+        <div class="row">
+            <div class="card-body col-sm-10 " style="text-align: justify;">
+                <label>
+                    <h5><b>Keuntungan melakukan reservasi dan ketentuan kunjungan Museum</b><br></h5>
+                    1. Dengan melakukan reservasi anda nantinya tinggal menunjukan kode reservasi yang anda dapatkan kepada petugas resepsionis / penerima tamu.<br>
+                    2. Dilarang membawa makanan ke dalam museum.<br>
+                    3. Ikuti dan patuhi aturan yang ada di museum, ikuti sesuai arahan petugas di museum. <br>
+                    4. <b>Reservasi dilakukan minimal 3 hari sebelum waktu kunjungan.</b> <br>
+                    5. <b> Museum buka setiap hari Senin - Jumat, pukul 09.00 - 15.00,</b> pastikan anda melakukan reservasi pada jam buka museum.
 
-                <br>
-            </label>
+                    <br>
+                </label>
+            </div>
         </div>
         <div class="card col-sm-10">
             <div class="card-header">
@@ -26,16 +28,16 @@
                         <div class="form-group col-sm-4">
                             <label for="tanggal">Tanggal kunjungan</label>
                             <div class="input-group">
-                                <input type="text" name="tanggal" class="form-control" id="datepickeruser" required>
+                                <input type="text" name="tanggal" class="form-control" id="datepickeruser" required placeholder="Tanggal">
                                 <div class=" input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
-                            <label>Jam kunjungan</label>
+                            <label>Waktu kunjungan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control timepickeruser" id="timepickeruser" name="waktu" required>
+                                <input type="text" class="form-control timepickeruser" id="timepickeruser" name="waktu" required placeholder="waktu">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </div>
@@ -55,12 +57,12 @@
 
                     <div class="form-group">
                         <label for="jumlah">Jumlah Pengunjung</label>
-                        <input type="number" class="form-control" id="jumlah" name="jumlah" required>
+                        <input type="number" class="form-control" id="jumlah" name="jumlah" required placeholder="jumlah pengujung">
                     </div>
 
                     <div class="form-group">
                         <label for="nama">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required>
+                        <input type="text" class="form-control" id="nama" name="nama" required placeholder="nama lengkap">
                     </div>
 
                     <div class="form-group row">
@@ -74,7 +76,7 @@
 
                     <div class="form-group">
                         <label for="no_id">Nomor ID</label>
-                        <input type="number" class="form-control" id="no_id" name="no_id" required>
+                        <input type="number" class="form-control" id="no_id" name="no_id" required placeholder="nomor ID Card">
                     </div>
 
                     <div class="form-group">
@@ -112,12 +114,12 @@
 
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" rows="2" required></textarea>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="2" required placeholder="alamat"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="kode_pos">Kode Pos</label>
-                        <input type="number" class="form-control" id="kode_pos" name="kode_pos" required>
+                        <input type="number" class="form-control" id="kode_pos" name="kode_pos" required placeholder="kode pos">
                     </div>
 
                     <label>Upload surat pengajuan</label>
@@ -135,16 +137,16 @@
 
                     <div class="form-group mt-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="email">
                     </div>
 
                     <div class="form-group">
                         <label for="no_telp">Nomor Telepon / Hp</label>
-                        <input type="number" class="form-control" id="no_telp" name="no_telp" required>
+                        <input type="number" class="form-control" id="no_telp" name="no_telp" required placeholder="nomor telp.">
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-primary"><i class='fas fa-save fa-fw mr-2'></i>Kirim Pengajuan Reservasi</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Kirim Pengajuan Reservasi</button>
                     </div>
                 </div>
             </form>
@@ -164,6 +166,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('.timepickeruser').timepicker({
@@ -171,7 +174,6 @@
             interval: 30,
             minTime: '9',
             maxTime: '2:30pm',
-            defaultTime: '9',
             startTime: '09:00',
             dynamic: false,
             dropdown: true,

@@ -369,6 +369,12 @@
               <p>Reservasi Diterima</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('resepsionis/reservasi_ditolak') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Reservasi Ditolak</p>
+            </a>
+          </li>
         </ul>
       </li>
 

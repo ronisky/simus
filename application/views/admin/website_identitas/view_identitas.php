@@ -43,7 +43,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Kota Toko</label>
+                    <label class="col-sm-2 col-form-label">Kota</label>
                     <div class="col-sm-6">
                       <select class='form-control select2' name='kota' required>
                         <option value=''>- Pilih -</option>

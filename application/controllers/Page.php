@@ -43,4 +43,29 @@ class Page extends CI_Controller
 		$data['breadcrumb'] = 'Profile Museum';
 		$this->template->load('home/template', 'home/tentang/view_profile', $data);
 	}
+
+	function faq()
+	{
+		$data['faq'] = $this->db->get_where("tb_faq", "jawaban != 'null'")->result_array();
+		$data['title'] = 'F.A.Q- Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$data['breadcrumb'] = 'F.A.Q';
+		$this->template->load('home/template', 'home/faq/view_faq', $data);
+	}
+	function kirimfaq()
+	{
+		if (isset($_POST['submit'])) {
+			$data = array(
+				'nama'	=> htmlspecialchars($this->input->post('nama')),
+				'email'	=> htmlspecialchars($this->input->post('email')),
+				'pertanyaan'	=> htmlspecialchars($this->input->post('pertanyaan')),
+				'jawaban'	=> 'null'
+			);
+			$this->model_app->insert('tb_faq', $data);
+			$this->session->set_flashdata('message', '
+				<div class="alert alert-success col-sm-12" role="alert">
+            	<center>Terima kasih, pertanyaan Anda berhasil dikirim</center>
+          		</div>');
+			redirect('page/faq', 'refresh');
+		}
+	}
 }

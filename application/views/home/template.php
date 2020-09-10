@@ -53,6 +53,9 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/css/') ?>jquery.timepicker.css">
     <!-- end picker  -->
+
+    <!-- Calendar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.css" />
     <script src=" <?= base_url('assets/template/js/header.js') ?>">
     </script>
     <script>
@@ -234,8 +237,12 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- time picker  -->
     <script src="<?= base_url('assets/template/js/'); ?>jquery.timepicker.js"></script>
-
     <!-- end piscker -->
+
+    <!-- Calendar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'assets/template/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'; ?>"></script>
+
     <script src="<?= base_url('assets/template/js/footer.js') ?>"></script>
     <script>
         var owl = $('#MainSlider');
@@ -282,6 +289,45 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
             $(this).next('.custom-file-label').addClass("selected").html(fileName);
         });
     </script>
+
+    <!-- Calendar  -->
+    <script type="text/javascript">
+        var get_data = '<?php echo $get_data; ?>';
+        var backend_url = '<?php echo base_url(); ?>';
+
+        $(document).ready(function() {
+            $('.date-picker').datepicker();
+            $('#calendarIO').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                },
+                defaultDate: moment().format('YYYY-MM-DD'),
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                selectable: true,
+                selectHelper: true,
+                eventClick: function(event, element) {
+                    deteil(event);
+                },
+                events: JSON.parse(get_data)
+            });
+        });
+
+        function deteil(event) {
+            $('#create_modal input[name=id_reservasi]').val(event.id);
+            $('#create_modal input[name=start_time]').val(event.start);
+            $('#create_modal input[name=end_time]').val(event.end);
+            $('#create_modal input[name=title]').val(event.title);
+            $('#create_modal textarea[name=alamat]').val(event.alamat);
+            $('#create_modal input[name=jumlah]').val(event.jumlah);
+            $('#create_modal input[name=kategori]').val(event.kategori);
+            $('#create_modal .delete_calendar').show();
+            $('#create_modal').modal('show');
+        }
+    </script>
+
 
 </body>
 

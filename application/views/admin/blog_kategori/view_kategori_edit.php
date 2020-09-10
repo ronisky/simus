@@ -20,7 +20,7 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Aktif</label>
                   <div class="col-sm-6">
                     <?php if ($rows['aktif'] == 'Y') {
@@ -29,14 +29,14 @@
                       echo "<input type='radio' name='b' value='Y'> Ya &nbsp; <input type='radio' name='b' value='N' checked> Tidak";
                     } ?>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Posisi</label>
                   <div class="col-sm-6">
                     <input type='text' class='form-control' name='c' value="<?= $rows['sidebar'] ?>">
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label"></label>

@@ -191,7 +191,7 @@ class Model_laporan extends CI_model
     // Laporan Reservasi 
     function laporanReservasi()
     {
-        $this->db->where("status='4'");
+        // $this->db->where("status='4'");
         $this->db->order_by('id_reservasi', 'asc');
         return $this->db->get('tb_reservasi');
     }

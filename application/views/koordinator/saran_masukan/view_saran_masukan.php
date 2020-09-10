@@ -19,6 +19,7 @@
                                         <th>Subjek</th>
                                         <th>Pesan</th>
                                         <th>Status</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -27,11 +28,8 @@
                                     foreach ($record as $row) {
                                         if ($row['status'] == 1) {
                                             $sts = '<span class="text-warning">Pesan Baru</span>';
-                                        } elseif ($row['stusus'] == 2) {
-                                            $sts = '<span class="text-info">Diteruskan</span>';
-                                        }
-                                        else {
-                                            $sts = '<span class="text-success">Diproses</span>';
+                                        } else {
+                                            $sts = '<span class="text-info">Sudah dibaca</span>';
                                         }
                                     ?>
                                         <tr>
@@ -41,6 +39,9 @@
                                             <td><?= $row['subjek']; ?></td>
                                             <td><?= $row['pesan']; ?></td>
                                             <td><?= $sts; ?></td>
+                                            <td>
+                                                <a class='btn btn-primary btn-xs' title='Detail' href=' <?= base_url('koordinator/detail_saran_masukan/') . encrypt_url($row['id_saran_masukan']) ?>'><i class='fas fa-eye fa-fw'></i></a>
+                                            </td>
                                         </tr>
                                     <?php
                                         $no++;
