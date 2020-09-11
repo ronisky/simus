@@ -156,6 +156,51 @@ class Admin extends CI_Controller
 		echo json_encode(array("status" => TRUE));
 	}
 
+	function fasilitas()
+	{
+		$data['record'] = $this->model_main->fasilitas();
+		$data['title'] = 'Fasilitas - Museum Monumen Perjuangan Rakyat Jawa Barat';
+		$this->template->load('template/template', 'admin/fasilitas/view_fasilitas', $data);
+	}
+	function tambah_fasilitas()
+	{
+
+		if (isset($_POST['submit'])) {
+			$this->model_artikel->tambah_fasilitas();
+			redirect('admin/fasilitas');
+		} else {
+			$data['title'] = 'Tambah Fasilitas - Museum Monumen Perjuangan Rakyat Jawa Barat';
+			$this->template->load('template/template', 'admin/fasilitas/view_fasilitas_tambah', $data);
+		}
+	}
+
+	function edit_fasilitas()
+	{
+		$id = decrypt_url($this->uri->segment(3));
+		if (isset($_POST['submit'])) {
+			$this->model_artikel->fasilitas_update();
+			redirect('admin/fasilitas');
+		} else {
+			$data['title'] = 'Edit Fasilitas - Museum Monumen Perjuangan Rakyat Jawa Barat';
+			$data['rows'] = $this->model_artikel->fasilitas_edit($id)->row_array();
+			$this->template->load('template/template', 'admin/fasilitas/view_fasilitas_edit', $data);
+		}
+	}
+
+	function delete_fasilitas($id)
+	{
+
+		$query = $this->db->get_where('tb_fasilitas', array('id_fasilitas' => $id));
+		$row = $query->row();
+		$gambar = $row->gambar;
+		$path = "assets/images/fasilitas/";
+		unlink($path . $gambar);
+
+		$this->model_artikel->fasilitas_delete($id);
+
+		echo json_encode(array("status" => TRUE));
+	}
+
 	function halaman()
 	{
 		$data['record'] = $this->model_halaman->halaman();

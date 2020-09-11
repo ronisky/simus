@@ -148,7 +148,12 @@
               <p>Slider</p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="<?= base_url('admin/fasilitas') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Fasilitas</p>
+            </a>
+          </li>
         </ul>
       </li>
 

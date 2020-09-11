@@ -90,18 +90,11 @@ class Model_artikel extends CI_model
     }
 
 
-
-
-
-
-
-
-
     function list_artikel_tambah()
     {
         $config['upload_path'] = 'assets/images/artikel/';
         $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
-        $config['max_size'] = '3000'; // kb
+        $config['max_size'] = '5000'; // kb
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         $this->upload->do_upload('gbr');
@@ -125,7 +118,7 @@ class Model_artikel extends CI_model
                 'id_kategori' => $this->db->escape_str($this->input->post('kat')),
                 'judul_seo' => seo_title($this->input->post('judul')),
                 'aktif' => "Y",
-                'isi_artikel' => $this->input->post('isi'),
+                'isi_artikel' => $this->db->escape_str($this->input->post('isi')),
                 'keterangan_gambar' => $this->db->escape_str($this->input->post('ketgbr')),
                 'hari' => hari_ini(date('w')),
                 'tanggal' => date('Y-m-d'),
@@ -142,7 +135,7 @@ class Model_artikel extends CI_model
                 'id_kategori' => $this->db->escape_str($this->input->post('kat')),
                 'judul_seo' => seo_title($this->input->post('judul')),
                 'aktif' => "Y",
-                'isi_artikel' => $this->input->post('isi'),
+                'isi_artikel' => $this->db->escape_str($this->input->post('isi')),
                 'keterangan_gambar' => $this->db->escape_str($this->input->post('ketgbr')),
                 'hari' => hari_ini(date('w')),
                 'tanggal' => date('Y-m-d'),
@@ -157,6 +150,68 @@ class Model_artikel extends CI_model
         $this->db->insert('tb_blog_artikel', $datadb);
     }
 
+    function tambah_fasilitas()
+    {
+        $config['upload_path'] = 'assets/images/fasilitas/';
+        $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+        $config['max_size'] = '5000'; // kb
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        $this->upload->do_upload('gambar');
+        $hasil = $this->upload->data();
+        if ($hasil['file_name'] != '') {
+            $data = array(
+                'nama' => $this->db->escape_str($this->input->post('nama')),
+                'rating' => $this->db->escape_str($this->input->post('rating')),
+                'deskripsi' => $this->db->escape_str($this->input->post('deskripsi')),
+                'gambar' => $hasil['file_name']
+            );
+        }
+        $this->db->insert('tb_fasilitas', $data);
+    }
+
+    function fasilitas_edit($id)
+    {
+        return $this->db->query("SELECT * FROM tb_fasilitas where id_fasilitas='$id'");
+    }
+
+    function fasilitas_update()
+    {
+        $config['upload_path'] = 'assets/images/fasilitas/';
+        $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+        $config['max_size'] = '5000'; // kb
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        $this->upload->do_upload('gambar');
+        $hasil = $this->upload->data();
+        if ($hasil['file_name'] == '') {
+            $data = array(
+                'nama' => $this->db->escape_str($this->input->post('nama')),
+                'rating' => $this->db->escape_str($this->input->post('rating')),
+                'deskripsi' => $this->db->escape_str($this->input->post('deskripsi'))
+            );
+        } else {
+            $data = array(
+                'nama' => $this->db->escape_str($this->input->post('nama')),
+                'rating' => $this->db->escape_str($this->input->post('rating')),
+                'deskripsi' => $this->db->escape_str($this->input->post('deskripsi')),
+                'gambar' => $hasil['file_name']
+            );
+
+            $query = $this->db->get_where('tb_fasilitas', array('id_fasilitas' => $this->input->post('id')));
+            $row = $query->row();
+            $foto = $row->gambar;
+            $path = "assets/images/fasilitas/";
+            unlink($path . $foto);
+        }
+        $this->db->where('id_fasilitas', $this->input->post('id'));
+        $this->db->update('tb_fasilitas', $data);
+    }
+
+    function fasilitas_delete($id)
+    {
+        return $this->db->query("DELETE FROM tb_fasilitas where id_fasilitas='$id'");
+    }
 
     function list_artikel_edit($id)
     {
@@ -167,7 +222,7 @@ class Model_artikel extends CI_model
     {
         $config['upload_path'] = 'assets/images/artikel/';
         $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
-        $config['max_size'] = '3000'; // kb
+        $config['max_size'] = '5000'; // kb
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
         $this->upload->do_upload('gbr');

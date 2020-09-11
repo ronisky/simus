@@ -147,6 +147,11 @@ class Model_main extends CI_model
         $this->db->delete('tb_web_slide');
     }
 
+    function fasilitas()
+    {
+        return $this->db->query("SELECT * FROM tb_fasilitas ORDER BY id_fasilitas DESC");
+    }
+
 
     function identitas()
     {

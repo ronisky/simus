@@ -5,8 +5,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Postingan</h3>
-              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_artikel'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tulis Artikel</a>
+              <h3 class="card-title">Fasilitas</h3>
+              <a class='float-right btn btn-primary btn-sm' href='<?= base_url('admin/tambah_fasilitas'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Tambah Fasilitas</a>
             </div>
 
             <div class="card-body">
@@ -14,8 +14,8 @@
                 <thead>
                   <tr>
                     <th style='width:5%'>No</th>
-                    <th>Judul Postingan</th>
-                    <th>Tgl Posting</th>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
                     <th>gambar</th>
                     <th style="width: 10%">Aksi</th>
                   </tr>
@@ -24,21 +24,15 @@
                   <?php
                   $no = 1;
                   foreach ($record->result_array() as $row) {
-                    $tgl_artikel = tgl_indo($row['tanggal']);
-                    if ($row['status'] == 'Y') {
-                      $status = '<span style="color:green">Published</span>';
-                    } else {
-                      $status = '<span style="color:red">Unpublished</span>';
-                    }
                     echo "<tr><td>$no</td>
-                              <td>$row[judul]</td>
-                              <td>$tgl_artikel</td>
-                              <td class='image-popup-detail' href='" . base_url('assets/images/artikel/') . $row['gambar'] . "'>
-                              <img src='" . base_url('assets/images/artikel/') . $row['gambar'] . "' alt='Gambar' style='height: 60px'>
+                              <td>$row[nama]</td>
+                              <td>$row[deskripsi]</td>
+                              <td class='image-popup-detail' href='" . base_url('assets/images/fasilitas/') . $row['gambar'] . "'>
+                              <img src='" . base_url('assets/images/fasilitas/') . $row['gambar'] . "' alt='Gambar' style='height: 60px'>
                               </td>
                               <td>
-                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_artikel/" . encrypt_url($row['id_artikel']) . "'><i class='fas fa-edit fa-fw'></i></a>
-                                <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_artikel]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
+                                <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_fasilitas/" . encrypt_url($row['id_fasilitas']) . "'><i class='fas fa-edit fa-fw'></i></a>
+                                <button class='btn btn-danger btn-xs' title='Hapus' data-id='$row[id_fasilitas]' onclick=\"confirmation(event)\"><i class='fas fa-times fa-fw'></i></button>
                              </td>
                           </tr>";
                     $no++;
@@ -72,7 +66,7 @@
     }).then((result) => {
       if (result.value) {
         $.ajax({
-          url: site_url + 'admin/delete_artikel/' + data_id,
+          url: site_url + 'admin/delete_fasilitas/' + data_id,
           type: "POST",
           dataType: "JSON",
           success: function(data) {
