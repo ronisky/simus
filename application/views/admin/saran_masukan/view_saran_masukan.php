@@ -18,7 +18,7 @@
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Subjek</th>
-                                        <th>Pesan</th>
+                                        <!-- <th>Pesan</th> -->
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -39,7 +39,7 @@
                                             <td><?= $row['nama']; ?></td>
                                             <td><?= $row['email']; ?></td>
                                             <td><?= $row['subjek']; ?></td>
-                                            <td><?= $row['pesan']; ?></td>
+                                            <!-- <td><?= $row['pesan']; ?></td> -->
                                             <td><?= $sts; ?></td>
                                             <td>
                                                 <a class='btn btn-primary btn-xs' title='Detail' href=' <?= base_url('admin/detail_saran_masukan/') . encrypt_url($row['id_saran_masukan']) ?>'><i class='fas fa-eye fa-fw'></i></a>

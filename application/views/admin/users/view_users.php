@@ -17,11 +17,12 @@
                 <thead>
                   <tr>
                     <th style='width:20px'>No</th>
+                    <th>Foto</th>
                     <th>Username</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
-                    <th>Foto</th>
                     <th>Level</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -45,15 +46,24 @@
                       $lv = 'Penata Pameran';
                     }
 
+                    if ($row['aktif'] == 1) {
+                      $a = "<span class='text-success'>Aktif</span>";
+                    } else {
+                      $a = "<span class='text-danger'>Tidak Aktif</span>";
+                    }
+
                   ?>
 
                     <tr>
                       <td><?= $no; ?></td>
+                      <td class="image-popup-detail" href="<?= base_url('assets/images/user/') . $foto ?>">
+                        <img style='border:1px solid #cecece' class="img-circle" src="<?= base_url('assets/images/user/') . $foto ?>" height="40px" width="40px">
+                      </td>
                       <td><?= $row['username'] ?></td>
                       <td><?= $row['nama_lengkap'] ?></td>
                       <td><?= $row['email'] ?></td>
-                      <td><img style='border:1px solid #cecece' width='40px' class='img-circle' src='<?= base_url('assets/images/user/') . $foto ?>'></td>
                       <td><?= $lv; ?></td>
+                      <td><?= $a ?></td>
                       <td>
                         <?php if ($row['level'] == 1 && $row['username'] == 'admin') { ?>
                           <a class='btn btn-success btn-xs' title='Edit user' data-id="<?= $row['username'] ?>" href="<?= base_url('admin/edit_user/') . encrypt_url($row['username']) ?>"><i class="fas fa-edit fa-fw"></i></a>

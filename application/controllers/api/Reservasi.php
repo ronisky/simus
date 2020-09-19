@@ -8,7 +8,6 @@ class Reservasi extends RestController
 
     function __construct()
     {
-        // Construct the parent class
         parent::__construct();
         $this->load->model('model_app', 'model');
     }
@@ -36,15 +35,10 @@ class Reservasi extends RestController
         $kode_pos       = $_POST['kode_pos'];
         $email          = $_POST['email'];
         $no_telp        = $_POST['no_telp'];
-        $fotos           = '';
+        $fotos           = $_POST['foto'];;
         $status         = 1;
 
-
-
-        $foto = $fotos;
-        $upload_path = base_url("assets/images/reservasi/$foto.jpeg");
-        $finalpath = $upload_path;
-
+        $upload_path = base_url('assets/images/reservasi/') . "$Id.jpg";
 
         $data = [
             'id_reservasi'  => $id,
@@ -62,7 +56,7 @@ class Reservasi extends RestController
             'kode_pos' => $kode_pos,
             'email' => $email,
             'no_telp' => $no_telp,
-            'foto'      => " ",
+            'foto'      => $upload_path,
             'status' => $status,
             'status_notif'  => $status
         ];
@@ -88,14 +82,9 @@ class Reservasi extends RestController
                     ";
 
         kirim_email($email, $subject, $message);
-
-
-
-
-
-
+        file_put_contents($upload_path, base64_decode($fotos));
+        // file_put_contents($upload_path, base64_decode($fotos));
         if ($this->model->insert('tb_reservasi', $data)) {
-            // if (file_put_contents($upload_path, base64_decode($foto))) {
             $this->response([
                 'status'    => true,
                 'message'   => "Selamat, Pengajuan reservasi berhasil dikirim"
@@ -105,7 +94,6 @@ class Reservasi extends RestController
                 'status'    => false,
                 'message'   => "Oops! Data gagal dikirim"
             ], RestController::HTTP_BAD_REQUEST);
-            // }
         }
     }
 }

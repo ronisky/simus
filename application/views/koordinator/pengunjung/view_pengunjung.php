@@ -45,7 +45,7 @@
                                             <td><?= $row['kota'] ?></td>
                                             <td><?= $row['kode_pos']; ?></td>
                                             <td>
-                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('koordinator/detail_pengunjung/') . $row['id_pengunjung']; ?>"><i class="fas fa-eye fa-fw"></i></a>
+                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('koordinator/detail_pengunjung/') . encrypt_url($row['id_pengunjung']); ?>"><i class="fas fa-eye fa-fw"></i></a>
                                             </td>
                                         </tr>
                                     <?php

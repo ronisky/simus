@@ -55,7 +55,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <!-- end picker  -->
 
     <!-- Calendar -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.css" /> -->
     <script src=" <?= base_url('assets/template/js/header.js') ?>">
     </script>
     <script>
@@ -240,8 +240,8 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <!-- end piscker -->
 
     <!-- Calendar -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() . 'assets/template/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'; ?>"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script> -->
+    <!-- <script type="text/javascript" src="<?php echo base_url() . 'assets/template/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'; ?>"></script> -->
 
     <script src="<?= base_url('assets/template/js/footer.js') ?>"></script>
     <script>

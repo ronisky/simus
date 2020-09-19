@@ -217,6 +217,7 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
+            // $data['record'] = $this->db->query("SELECT * FROM `tb_reservasi` WHERE status= 1 GROUP BY id_reservasi ASC ")->result_array();
             $data['record'] = $this->db->get_where('tb_reservasi', 'status = 1')->result_array();
             $data['identitas'] = $this->db->get_where('tb_web_identitas', 'id_identitas=1')->row_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi', $data);
@@ -229,9 +230,8 @@ class Resepsionis extends CI_Controller
     {
         if (!empty($this->session->userdata())) {
             $data['title'] = 'Reservasi Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
-            // $query = ("SELECT * FROM tb_reservasi WHERE status='2' OR status='4' GROUP BY status ASC");
-            // $data['record'] = $this->db->query($query)->result_array();
-            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 2 OR status =4 ')->result_array();
+            // $data['record'] = $this->db->query("SELECT * FROM tb_reservasi WHERE status='2' OR status='4' GROUP BY id_reservasi ASC")->result_array();
+            $data['record'] = $this->db->get_where('tb_reservasi', 'status = 2')->result_array();
             $this->template->load('template/template', 'resepsionis/reservasi/view_reservasi_diterima', $data);
         } else {
             redirect('resepsionis');
@@ -562,7 +562,7 @@ class Resepsionis extends CI_Controller
     // Notifikasi 
     public function notifikasi()
     {
-        $query = $this->db->query("SELECT * FROM tb_reservasi WHERE status_notif='1' ORDER BY id_reservasi DESC")->result();
+        $query = $this->db->query("SELECT * FROM tb_reservasi WHERE status_notif='1' ORDER BY id_reservasi ASC")->result();
 
         $output = '';
         foreach ($query as $q) {
@@ -624,7 +624,6 @@ class Resepsionis extends CI_Controller
 
         $data['title'] = 'Kategori Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_app->view_ordering('tb_kategori_pengunjung', 'id_kategori_pengunjung', 'DESC');
-
         $this->template->load('template/template', 'resepsionis/kategori_pengunjung/view_kategori_pengunjung', $data);
     }
 

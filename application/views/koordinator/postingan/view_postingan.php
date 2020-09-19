@@ -14,8 +14,11 @@
                 <thead>
                   <tr>
                     <th style='width:5%'>No</th>
-                    <th>Judul Postingan</th>
                     <th>Tgl Posting</th>
+                    <th>Penulis</th>
+                    <th>Gambar</th>
+                    <th>Judul Postingan</th>
+                    <th style="width: 10%">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,10 +32,16 @@
                       $status = '<span style="color:red">Unpublished</span>';
                     }
                     echo "<tr><td>$no</td>
-                              <td>$row[judul]</td>
-                              <td>$tgl_artikel</td>
-                             
-                          </tr>";
+                        <td>$tgl_artikel</td>
+                        <td>$row[username]</td>
+                        <td class='image-popup-detail' href='" . base_url('assets/images/artikel/') . $row['gambar'] . "'>
+                            <img src='" . base_url('assets/images/artikel/') . $row['gambar'] . "' alt='Gambar' style='width: 70px; height:50px;'>
+                        </td>
+                        <td>$row[judul]</td>
+                        <td>
+                            <a class='btn btn-success btn-xs' title='Detail' href='" . base_url() . "koordinator/detail_postingan/" . encrypt_url($row['id_artikel']) . "'><i class='fas fa-eye fa-fw'></i></a>
+                        </td>
+                        </tr>";
                     $no++;
                   }
                   ?>

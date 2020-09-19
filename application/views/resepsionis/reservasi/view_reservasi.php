@@ -63,10 +63,10 @@
                                             <td><?= $row['waktu'] ?></td>
                                             <td><?= $row['jumlah'] ?></td>
                                             <td class="image-popup-detail" href="<?= base_url('assets/images/reservasi/') . $row['foto']; ?>">
-                                                <img src="<?= base_url('assets/images/reservasi/') . $row['foto']; ?>" height="60">
+                                                <img src="<?= base_url('assets/images/reservasi/') . $row['foto']; ?>" height="50px" width="60px">
                                             </td>
                                             <td>
-                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . $row['id_reservasi']; ?>"><i class="fas fa-eye fa-fw"></i></a>
+                                                <a class='btn btn-success btn-xs detailFaq' title='Detail' href="<?php echo site_url('resepsionis/detail_reservasi/') . encrypt_url($row['id_reservasi']); ?>"><i class="fas fa-eye fa-fw"></i></a>
                                                 <!-- <a class='btn btn-success btn-xs' title='Ubah' href='<?php echo site_url('resepsionis/edit_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-edit fa-fw'></i></a> -->
                                                 <button class='btn btn-danger btn-xs' title='Hapus' data-id="<?= $row['id_reservasi'] ?>" onclick="confirmation(event)"><i class='fas fa-times fa-fw'></i></button>
                                             </td>

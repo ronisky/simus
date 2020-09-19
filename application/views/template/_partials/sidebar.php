@@ -2,18 +2,18 @@
   <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <!-- Admin    -->
     <?php if ($this->session->userdata('level') == 1) { ?>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="<?= base_url('admin/home') ?>" class="nav-link">
           <i class="fas fa-tachometer-alt fa-fw nav-icon"></i>
           <p>Dasboard</p>
         </a>
-      </li>
+      </li> -->
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon far fa-newspaper fa-fw"></i>
           <p>
-            Modul Postingan
+            Modul Artikel
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -22,7 +22,7 @@
           <li class="nav-item">
             <a href="<?= base_url('admin/artikel') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Postingan</p>
+              <p>Artikel</p>
             </a>
           </li>
 
@@ -121,19 +121,19 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url('admin/menu') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Menu</p>
             </a>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url('admin/halaman') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Halaman</p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a href="<?= base_url('admin/logo') ?>" class="nav-link">
@@ -148,6 +148,7 @@
               <p>Slider</p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="<?= base_url('admin/fasilitas') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
@@ -214,24 +215,6 @@
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user fa-fw"></i>
-          <p>
-            Modul Pengguna
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('koordinator/users') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>View Pengguna</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-users fa-fw"></i>
           <p>
             Modul Pengunjung
@@ -247,6 +230,25 @@
           </li>
         </ul>
       </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-calendar fa-fw"></i>
+          <p>
+            Model Reservasi
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/jadwal') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>Kalender Reservasi</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-file-image fa-fw"></i>
@@ -264,6 +266,7 @@
           </li>
         </ul>
       </li>
+
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-newspaper fa-fw"></i>
@@ -281,24 +284,7 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-calendar fa-fw"></i>
-          <p>
-            Kalender Reservasi
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="<?= base_url('koordinator/jadwal') ?>" class="nav-link">
-              <i class="far fa-circle nav-icon text-sm"></i>
-              <p>Kalender Jadwal</p>
-            </a>
-          </li>
 
-        </ul>
-      </li>
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-comments fa-fw"></i>
@@ -312,6 +298,24 @@
             <a href="<?= base_url('koordinator/saranMasukan') ?>" class="nav-link">
               <i class="far fa-circle nav-icon text-sm"></i>
               <p>Lihat Saran Masukan</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user fa-fw"></i>
+          <p>
+            Modul Pengguna
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="<?= base_url('koordinator/pengguna') ?>" class="nav-link">
+              <i class="far fa-circle nav-icon text-sm"></i>
+              <p>View Pengguna</p>
             </a>
           </li>
         </ul>

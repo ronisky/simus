@@ -40,7 +40,7 @@
                                             <td><?= $row['pesan']; ?></td>
                                             <td><?= $sts; ?></td>
                                             <td>
-                                                <a class='btn btn-primary btn-xs' title='Detail' href=' <?= base_url('koordinator/detail_saran_masukan/') . encrypt_url($row['id_saran_masukan']) ?>'><i class='fas fa-eye fa-fw'></i></a>
+                                                <a class='btn btn-success btn-xs' title='Detail' href=' <?= base_url('koordinator/detail_saran_masukan/') . encrypt_url($row['id_saran_masukan']) ?>'><i class='fas fa-eye fa-fw'></i></a>
                                             </td>
                                         </tr>
                                     <?php

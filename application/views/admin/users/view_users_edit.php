@@ -50,27 +50,48 @@
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Level</label>
+                  <?= form_error('level', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
                   <div class="col-sm-6">
                     <select name='level' class='form-control' required>
+                      <option value='' selected>- Pilih Level Pengguna -</option>
                       <?php
                       if ($rows['level'] == 1) {
-                        $lv = 'Administrator';
+                        echo "<option value='1' selected>Administrator</option>";
                       } elseif ($rows['level'] == 2) {
-                        $lv = 'Koordinator';
+                        echo "<option value='2' selected>Koordinator</option>";
                       } elseif ($rows['level'] == 3) {
-                        $lv = 'Resepsionis';
+                        echo "<option value='3' selected>Resepsionis</option>";
+                      } elseif ($rows['level'] == 4) {
+                        echo "<option value='4' selected>Penata Pameran</option>";
                       } else {
-                        $lv = 'Penata Pameran';
+                        echo "<option value='1' selected>Administrator</option>";
+                        echo "<option value='2' selected>Koordinator</option>";
+                        echo "<option value='3' selected>Resepsionis</option>";
+                        echo "<option value='4' selected>Penata Pameran</option>";
                       }
                       ?>
-                      <option value=""><?= $lv ?></option>
-                      <option value="1">Koordinator</option>
-                      <option value="2">Administrator</option>
-                      <option value="3">Resepsionis</option>
-                      <option value="4 ">Penata Pameran</option>
                     </select>
                   </div>
                 </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Status</label>
+                  <?= form_error('id_card', '<small class="font-italic text-danger ml-1">', '</small>'); ?>
+                  <?php
+                  if ($rows['aktif'] == '1') { ?>
+                    <div class="col-sm-6">
+                      <input class="mr-2" type='radio' value='1' name='aktif' checked> Aktif
+                      <input class="mr-2 ml-5" type='radio' value='0' name='aktif'> Tidak Aktif
+                    </div>
+                  <?php } else { ?>
+                    <div class="col-sm-6">
+                      <input type='radio' value='1' name='aktif'> &nbsp; Aktif
+                      <input class="ml-3" type='radio' value='0' name='aktif' checked> &nbsp; Tidak Aktif
+                    </div>
+                  <?php }
+                  ?>
+                </div>
+
                 <!-- <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Ganti Foto</label>
                   <div class="col-sm-6">

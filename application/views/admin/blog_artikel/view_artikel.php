@@ -14,8 +14,9 @@
                 <thead>
                   <tr>
                     <th style='width:5%'>No</th>
-                    <th>Judul Postingan</th>
                     <th>Tgl Posting</th>
+                    <th>Penulis</th>
+                    <th>Judul Postingan</th>
                     <th>gambar</th>
                     <th style="width: 10%">Aksi</th>
                   </tr>
@@ -31,10 +32,11 @@
                       $status = '<span style="color:red">Unpublished</span>';
                     }
                     echo "<tr><td>$no</td>
-                              <td>$row[judul]</td>
                               <td>$tgl_artikel</td>
+                              <td>$row[username]</td>
+                              <td>$row[judul]</td>
                               <td class='image-popup-detail' href='" . base_url('assets/images/artikel/') . $row['gambar'] . "'>
-                              <img src='" . base_url('assets/images/artikel/') . $row['gambar'] . "' alt='Gambar' style='height: 60px'>
+                              <img src='" . base_url('assets/images/artikel/') . $row['gambar'] . "' alt='Gambar' style='width: 60px; height:50px;'>
                               </td>
                               <td>
                                 <a class='btn btn-success btn-xs' title='Ubah' href='" . base_url() . "admin/edit_artikel/" . encrypt_url($row['id_artikel']) . "'><i class='fas fa-edit fa-fw'></i></a>

@@ -22,6 +22,7 @@ class Reservasi extends CI_Controller
         $data['id'] = $Id;
         $this->template->load('home/template', 'home/reservasi/view_reservasi', $data);
     }
+
     public function pengajuanReservasi()
     {
         if (isset($_POST['submit'])) {
@@ -58,7 +59,8 @@ class Reservasi extends CI_Controller
                     'email'             => $email,
                     'no_telp'           => $no_telp,
                     'foto'              => $hasil['file_name'],
-                    'status'            => 1
+                    'status'            => 1,
+                    'status_notif'      => 1
                 );
             }
             $this->model_app->insert('tb_reservasi', $data);
@@ -89,13 +91,7 @@ class Reservasi extends CI_Controller
 				<div class="alert alert-success col-sm-12" role="alert">
             	<center>Terima kasih, pengajuan reservasi berhasil dikirim</center>
           		</div>');
-            redirect('reservasi');
-        } else {
-            $this->session->set_flashdata('message', '
-				<div class="alert alert-danger col-sm-12" role="alert">
-            	<center>Pengajuan reservasi gagal dikirim</center>
-          		</div>');
-            redirect('reservasi');
+            $this->template->load('home/template', 'home/reservasi/view_reservasi');
         }
     }
 }

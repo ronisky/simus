@@ -20,7 +20,7 @@ class Admin extends CI_Controller
 	{
 
 		// if ($this->session->level == 1) {
-		redirect('admin/home');
+		redirect('admin/artikel');
 		// } else {
 		// 	redirect('error404');
 		// }
@@ -201,44 +201,44 @@ class Admin extends CI_Controller
 		echo json_encode(array("status" => TRUE));
 	}
 
-	function halaman()
-	{
-		$data['record'] = $this->model_halaman->halaman();
+	// function halaman()
+	// {
+	// 	$data['record'] = $this->model_halaman->halaman();
 
-		$data['title'] = 'Halaman - Museum Monumen Perjuangan Rakyat Jawa Barat';
-		$this->template->load('template/template', 'admin/website_halaman/view_halaman', $data);
-	}
+	// 	$data['title'] = 'Halaman - Museum Monumen Perjuangan Rakyat Jawa Barat';
+	// 	$this->template->load('template/template', 'admin/website_halaman/view_halaman', $data);
+	// }
 
-	function tambah_halaman()
-	{
-		if (isset($_POST['submit'])) {
-			$this->model_halaman->halaman_tambah();
-			redirect('admin/halaman');
-		} else {
+	// function tambah_halaman()
+	// {
+	// 	if (isset($_POST['submit'])) {
+	// 		$this->model_halaman->halaman_tambah();
+	// 		redirect('admin/halaman');
+	// 	} else {
 
-			$data['title'] = 'Tambah Halaman Baru - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$this->template->load('template/template', 'admin/website_halaman/view_halaman_tambah');
-		}
-	}
+	// 		$data['title'] = 'Tambah Halaman Baru - Museum Monumen Perjuangan Rakyat Jawa Barat';
+	// 		$this->template->load('template/template', 'admin/website_halaman/view_halaman_tambah');
+	// 	}
+	// }
 
-	function edit_halaman()
-	{
-		$id = decrypt_url($this->uri->segment(3));
-		if (isset($_POST['submit'])) {
-			$this->model_halaman->halaman_update();
-			redirect('admin/halaman');
-		} else {
-			$data['title'] = 'Ubah Halaman Baru - Museum Monumen Perjuangan Rakyat Jawa Barat';
-			$data['rows'] = $this->model_halaman->halaman_edit($id)->row_array();
-			$this->template->load('template/template', 'admin/website_halaman/view_halaman_edit', $data);
-		}
-	}
+	// function edit_halaman()
+	// {
+	// 	$id = decrypt_url($this->uri->segment(3));
+	// 	if (isset($_POST['submit'])) {
+	// 		$this->model_halaman->halaman_update();
+	// 		redirect('admin/halaman');
+	// 	} else {
+	// 		$data['title'] = 'Ubah Halaman Baru - Museum Monumen Perjuangan Rakyat Jawa Barat';
+	// 		$data['rows'] = $this->model_halaman->halaman_edit($id)->row_array();
+	// 		$this->template->load('template/template', 'admin/website_halaman/view_halaman_edit', $data);
+	// 	}
+	// }
 
-	function delete_halaman($id)
-	{
-		$this->model_halaman->halaman_delete($id);
-		echo json_encode(array("status" => TRUE));
-	}
+	// function delete_halaman($id)
+	// {
+	// 	$this->model_halaman->halaman_delete($id);
+	// 	echo json_encode(array("status" => TRUE));
+	// }
 
 	// Modul Blog
 	function artikel()
@@ -385,7 +385,8 @@ class Admin extends CI_Controller
 					'nama_lengkap' => $this->db->escape_str($this->input->post('c')),
 					'email' => $this->db->escape_str($this->input->post('d')),
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
-					'level' => $this->db->escape_str($this->input->post('level'))
+					'level' => $this->db->escape_str($this->input->post('level')),
+					'aktif'	=> $this->db->escape_str($this->input->post('aktif')),
 				);
 			} elseif ($hasil['file_name'] != '' and $this->input->post('b') == '') {
 				$data = array(
@@ -394,6 +395,7 @@ class Admin extends CI_Controller
 					'email' => $this->db->escape_str($this->input->post('d')),
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
 					'level' => $this->db->escape_str($this->input->post('level')),
+					'aktif'	=> $this->db->escape_str($this->input->post('aktif')),
 					'foto' => $hasil['file_name'],
 				);
 			} elseif ($hasil['file_name'] == '' and $this->input->post('b') != '') {
@@ -403,7 +405,8 @@ class Admin extends CI_Controller
 					'nama_lengkap' => $this->db->escape_str($this->input->post('c')),
 					'email' => $this->db->escape_str($this->input->post('d')),
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
-					'level' => $this->db->escape_str($this->input->post('level'))
+					'level' => $this->db->escape_str($this->input->post('level')),
+					'aktif'	=> $this->db->escape_str($this->input->post('aktif')),
 				);
 			} elseif ($hasil['file_name'] != '' and $this->input->post('b') != '') {
 				$data = array(
@@ -413,6 +416,7 @@ class Admin extends CI_Controller
 					'email' => $this->db->escape_str($this->input->post('d')),
 					'no_telp' => $this->db->escape_str($this->input->post('e')),
 					'level' => $this->db->escape_str($this->input->post('level')),
+					'aktif'	=> $this->db->escape_str($this->input->post('aktif')),
 					'foto' => $hasil['file_name'],
 				);
 			}

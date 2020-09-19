@@ -34,14 +34,21 @@ class Koordinator extends CI_Controller
         }
     }
 
-    function users()
+    function pengguna()
     {
         $data['title'] = 'Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->db->query("SELECT * FROM tb_pengguna ORDER BY level ASC,username ASC")->result_array();
-        $this->template->load('template/template', 'koordinator/users/view_users', $data);
+        $this->template->load('template/template', 'koordinator/pengguna/view_pengguna', $data);
     }
 
+    function detail_pengguna()
+    {
+        $id = decrypt_url($this->uri->segment(3));
 
+        $data['title'] = 'Detail Pengguna - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['rows'] = $this->model_app->edit('tb_pengguna', array('id_pengguna' => $id))->row_array();
+        $this->template->load('template/template', 'koordinator/pengguna/view_pengguna_detail', $data);
+    }
     function saranMasukan()
     {
         $data['title'] = 'Saran dan Masukan - Museum Monumen Perjuangan Rakyat Jawa Barat';
@@ -71,7 +78,7 @@ class Koordinator extends CI_Controller
 
     function detail_pengunjung()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail Pengunjung - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['kt'] = $this->db->query("SELECT * FROM tb_kategori_pengunjung")->result_array();
         $data['negara'] = $this->db->query("SELECT * FROM tb_negara")->result_array();
@@ -88,7 +95,7 @@ class Koordinator extends CI_Controller
 
     function detail_koleksi()
     {
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         $data['title'] = 'Detail - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_app->view_ordering('tb_kategori_koleksi', 'id_kategori_koleksi', 'DESC');
         $data['uk'] = $this->model_app->view_ordering('tb_ukuran_koleksi', 'id_ukuran', 'DESC');
@@ -101,7 +108,18 @@ class Koordinator extends CI_Controller
     {
         $data['title'] = 'Postingan - Museum Monumen Perjuangan Rakyat Jawa Barat';
         $data['record'] = $this->model_artikel->list_artikel();
-        $this->template->load('template/template', 'koordinator/blog_artikel/view_artikel', $data);
+        $this->template->load('template/template', 'koordinator/postingan/view_postingan', $data);
+    }
+
+    function detail_postingan()
+    {
+        $id = decrypt_url($this->uri->segment(3));
+
+        $data['title'] = 'Detail Postingan - Museum Monumen Perjuangan Rakyat Jawa Barat';
+        $data['tag'] = $this->model_artikel->tag_artikel();
+        $data['record'] = $this->model_artikel->kategori_artikel();
+        $data['rows'] = $this->model_artikel->list_artikel_edit($id)->row_array();
+        $this->template->load('template/template', 'koordinator/postingan/view_postingan_detail', $data);
     }
 
     // jadwal reservasi 

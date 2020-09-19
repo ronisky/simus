@@ -325,7 +325,7 @@ class Model_laporan extends CI_model
 
     function jumlahPengunjungTK()
     {
-        $kategori = 'TK';
+        $kategori = 'TK / PAUD';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("kategori='$kategori'");
         $this->db->from('tb_pengunjung');
@@ -335,7 +335,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungTK1()
     {
         $hari = date('Y-m-d');
-        $kategori = 'TK';
+        $kategori = 'TK / PAUD';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal='$hari'");
         $this->db->where("kategori='$kategori'");
@@ -346,7 +346,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungTK7()
     {
         $hari = date('Y-m-d');
-        $kategori = 'TK';
+        $kategori = 'TK / PAUD';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -357,7 +357,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungTK30()
     {
         $hari = date('Y-m-d');
-        $kategori = 'TK';
+        $kategori = 'TK / PAUD';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -368,7 +368,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungTK360()
     {
         $hari = date('Y-m-d');
-        $kategori = 'TK';
+        $kategori = 'TK / PAUD';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
         $this->db->where("kategori='$kategori'");
@@ -477,7 +477,7 @@ class Model_laporan extends CI_model
 
     function jumlahPengunjungSMA()
     {
-        $kategori = 'SMA';
+        $kategori = 'SMA / SMK';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("kategori='$kategori'");
         $this->db->from('tb_pengunjung');
@@ -486,7 +486,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungSMA1()
     {
         $hari = date('Y-m-d');
-        $kategori = 'SMA';
+        $kategori = 'SMA / SMK';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal='$hari'");
         $this->db->where("kategori='$kategori'");
@@ -496,7 +496,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungSMA7()
     {
         $hari = date('Y-m-d');
-        $kategori = 'SMA';
+        $kategori = 'SMA / SMK';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -506,7 +506,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungSMA30()
     {
         $hari = date('Y-m-d');
-        $kategori = 'SMA';
+        $kategori = 'SMA / SMK';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -516,7 +516,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungSMA360()
     {
         $hari = date('Y-m-d');
-        $kategori = 'SMA';
+        $kategori = 'SMA / SMK';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
         $this->db->where("kategori='$kategori'");
@@ -526,7 +526,7 @@ class Model_laporan extends CI_model
 
     function jumlahPengunjungUniv()
     {
-        $kategori = 'Universitas';
+        $kategori = 'Universitas / PT';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("kategori='$kategori'");
         $this->db->from('tb_pengunjung');
@@ -535,7 +535,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungUniv1()
     {
         $hari = date('Y-m-d');
-        $kategori = 'Universitas';
+        $kategori = 'Universitas / PT';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal='$hari'");
         $this->db->where("kategori='$kategori'");
@@ -545,7 +545,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungUniv7()
     {
         $hari = date('Y-m-d');
-        $kategori = 'Universitas';
+        $kategori = 'Universitas / PT';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 7 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -555,7 +555,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungUniv30()
     {
         $hari = date('Y-m-d');
-        $kategori = 'Universitas';
+        $kategori = 'Universitas / PT';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 30 DAY )");
         $this->db->where("kategori='$kategori'");
@@ -565,7 +565,7 @@ class Model_laporan extends CI_model
     function jumlahPengunjungUniv360()
     {
         $hari = date('Y-m-d');
-        $kategori = 'Universitas';
+        $kategori = 'Universitas / PT';
         $this->db->select('SUM(jumlah) as jumlah');
         $this->db->where("tanggal > DATE_SUB( '$hari' , INTERVAL 1 YEAR )");
         $this->db->where("kategori='$kategori'");

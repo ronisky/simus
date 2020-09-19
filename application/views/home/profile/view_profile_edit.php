@@ -47,12 +47,6 @@
                   <?php }
                   ?>
                 </div>
-                <!-- <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                  <div class="col-sm-3">
-                    <input class='datepicker form-control' type='text' name='e' value='<?= $row['tgl_lahir']; ?>' required>
-                  </div>
-                </div> -->
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">No. Telp</label>
                   <div class="col-sm-6">

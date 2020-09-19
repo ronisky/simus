@@ -14,10 +14,6 @@
                   <tr>
                     <th style="width: 5%">No</th>
                     <th>Nama Koleksi</th>
-                    <th>Asal Koleksi</th>
-                    <th>Pemilik Asal</th>
-                    <th>Cara Perolehan</th>
-                    <th>Sumber Pusaka</th>
                     <th>Gambar</th>
                     <th>No Regis</th>
                     <th>Pencatatan</th>
@@ -32,18 +28,13 @@
                     <tr>
                       <td>$no</td>
                       <td>$row[nama_koleksi]</td>
-                      <td>$row[asal_koleksi]</td>
-                      <td>$row[pemilik_asal]</td>
-                      <td>$row[cara_perolehan]</td>
-                      <td>$row[sumber_pusaka]</td>
-                      <td>
-                      <img src='" . base_url('assets/images/koleksi/') . $row['foto'] . "' alt='Gambar' style='height: 50px'>
+                      <td class='image-popup-detail' href='" . base_url('assets/images/koleksi/') . $row['foto'] . "'>
+                            <img src='" . base_url('assets/images/koleksi/') . $row['foto'] . "' alt='Gambar' style='width: 70px; height:50px;'>
                       </td>
                       <td>$row[no_registrasi]</td>
                       <td>$row[tanggal_pencatatan]</td>
                       <td>
-                        <a class='btn btn-primary btn-xs' title='Detail' href='" . base_url() . "koordinator/detail_koleksi/$row[id_koleksi]'><i class='fas fa-eye fa-fw'></i></a>
-                       
+                        <a class='btn btn-success btn-xs' title='Detail' href='" . base_url() . "koordinator/detail_koleksi/" . encrypt_url($row['id_koleksi']) . "'><i class='fas fa-eye fa-fw'></i></a>
                       </td>
                     </tr>";
                     $no++;

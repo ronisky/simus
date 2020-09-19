@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="card col-sm-10">
+            <?= $this->session->flashdata('message') ?>
             <div class="card-header">
                 <h5 class="card-title">Lengkapi Form Data Reservasi</h5>
             </div>
-            <?= $this->session->flashdata('message') ?>
             <form action="<?= base_url('reservasi/pengajuanReservasi') ?>" method="post" enctype="multipart/form-data">
                 <div class="card-body col-md-12">
                     <div class="row">
