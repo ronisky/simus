@@ -28,8 +28,6 @@ class Page extends CI_Controller
 		$this->template->load('home/template', 'home/halaman/view_page', $data);
 	}
 
-
-
 	function sejarah_museum()
 	{
 		$data['title'] = 'Sejarah Musuem - Museum Monumen Perjuangan Rakyat Jawa Barat';

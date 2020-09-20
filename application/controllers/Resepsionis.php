@@ -352,7 +352,6 @@ class Resepsionis extends CI_Controller
         }
     }
 
-
     function detail_reservasi()
     {
         $id = decrypt_url($this->uri->segment(3));
@@ -591,9 +590,6 @@ class Resepsionis extends CI_Controller
         $this->model_app->hapus_reservasi_notif($id);
         redirect('resepsionis/reservasi');
     }
-
-
-
 
     // Jadwal Calenda 
     public function jadwal()

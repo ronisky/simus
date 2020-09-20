@@ -110,7 +110,7 @@
             </div>
             <div class="card-body">
               <?php
-              $dataNegara = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_negara AS n ON p.negara = n.nama GROUP BY n.nama");
+              $dataNegara = $this->db->query("SELECT * FROM tb_pengunjung AS p INNER JOIN tb_negara AS n ON p.negara = n.nama GROUP BY p.id_pengunjung");
               ?>
               <canvas id="pieChart1" style="height:250px; min-height:250px"></canvas>
             </div>
@@ -130,9 +130,9 @@
 </div>
 <?php
 
-foreach ($data->result() as $pie) {
-  $nama[] = $pie->nama_kategori;
-  $total[] = (float) $pie->jumlah;
+foreach ($data->result() as $pie1) {
+  $nama[] = $pie1->nama_kategori;
+  $total[] = (float) $pie1->jumlah;
 }
 
 
