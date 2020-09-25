@@ -82,7 +82,7 @@
                     <div class="form-group">
                         <label for="negara">Negara</label>
                         <select class="form-control" id="negara" name="negara" required>
-                            <option value=""></option>
+                            <option value="Indonesia">Indonesia</option>
                             <?php $negara = $this->db->get('tb_negara');
                             foreach ($negara->result_array() as $k) { ?>
                                 <option value="<?= $k['nama'] ?>"><?= $k['nama'] ?></option>

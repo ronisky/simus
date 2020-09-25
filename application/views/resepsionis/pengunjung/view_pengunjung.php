@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Pengunjung Musuem</h3>
+                            <h3 class="card-title">Pengunjung Museum</h3>
                             <a class='float-right ml-3 mt-3 btn btn-primary btn-sm' href='<?= base_url('resepsionis/tambah_pengunjung'); ?>'><i class="fas fa-plus fa-fw mr-1"></i>Pengunjung Baru</a>
                         </div>
                         <div class="col-sm-12">

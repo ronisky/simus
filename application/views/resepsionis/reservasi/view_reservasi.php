@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Penajuan Kunjungan Musuem</h3>
+                            <h3 class="card-title">Reservasi Pengajuan Kunjungan Museum</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -44,13 +44,13 @@
                                             $s = "<label class='text-danger'>Ditolak</label>";
                                         }
                                     ?>
-                                        <tr>
+                                        <tr class="">
                                             <td><?= $no; ?></td>
                                             <td width="12%">
-                                                <div class="input-group-prepend">
+                                                <div class="input-group-prepend chkView" id="myBtn">
                                                     <button class="btn btn-outline-secondary small dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $s ?></button>
                                                     <div class="dropdown-menu">
-                                                        <a class='dropdown-item text-success' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi/') . $row['id_reservasi']; ?>'><i class='fas fa-check fa-fw mr-2'></i>Terima</a>
+                                                        <a class='dropdown-item text-success' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi/') . encrypt_url($row['id_reservasi']); ?>'><i class='fas fa-check fa-fw mr-2'></i>Terima</a>
                                                         <div role="separator" class="dropdown-divider"></div>
                                                         <button class="dropdown-item text-danger tolakReservasi" data-id="<?= $row['id_reservasi'] ?>" data-tanggal="<?= $row['tanggal'] ?>" data-waktu="<?= $row['waktu'] ?>" data-nama="<?= $row['nama'] ?>" data-email="<?= $row['email'] ?>" data-hp="<?= $row['no_telp'] ?>" data-kontak="<?= $identitas['no_telp'] ?>" data-status="<?= $row['status'] ?>" data-toggle="modal" data-target="#tolakModal"><i class='fas fa-times fa-fw mr-2'></i>Tolak</button>
                                                     </div>
@@ -72,6 +72,7 @@
                                             </td>
                                         </tr>
                                     <?php
+                                        break;
                                         $no++;
                                     }
                                     ?>
@@ -88,9 +89,9 @@
 <!-- Modal Tolak -->
 <div class="modal fade" id="tolakModal" tabindex="-1" role="dialog" aria-labelledby="tolakModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content col-lg">
+        <div class="modal-content col-sm-12">
             <div class="modal-header">
-                <h5 class="modal-title" id="tolakModalLabel">Konfirmasi Penolakan</h5>
+                <h5 class="modal-title" id="tolakModalLabel">Alasan Penolakan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -106,7 +107,16 @@
                     <input type="hidden" class="form-control" id="kontak" name="kontak">
                     <input type="hidden" class="form-control" id="status" name="status">
 
-                    <textarea type="text" rows="3" name="keterangan" class="form-control" placeholder="Alasan Penolakan?" required></textarea>
+                    <input type='radio' name='keterangan' value='Data pengajuan reservasi tidak lengkap'> Data pengajuan reservasi tidak lengkap &nbsp; <br><br>
+                    <input type='radio' name='keterangan' value='Foto Surat Tidak Sesuai'> Foto Surat Tidak Sesuai &nbsp; <br><br>
+                    <input type='radio' name='keterangan' value='Tanggal Kunjungan Penuh, hubungi petugas untuk perubahan tanggal kunjungan'> Tanggal Kunjungan Penuh, hubungi petugas untuk perubahan tanggal kunjungan&nbsp; <br><br>
+                    <input type='radio' name='keterangan' value='Jam Kunjungan Penuh, hubungi petugas untuk perubahan jam kunjungan'> Jam Kunjungan Penuh, hubungi petugas untuk perubahan jam kunjungan <br><br>
+                    <div data-toggle="collapse" data-target="#collapseExample">Alasan Lain? <i class="fas fa-chevron-down ml-2"></i></div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <textarea type="text" rows="3" name="keterangan" class="form-control" placeholder="Alasan Penolakan"></textarea>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -179,4 +189,8 @@
         $(".modal-body #kontak").val(kontak);
         $(".modal-body #status").val(status);
     });
+
+    function myFunction() {
+        document.getElementById("myBtn").disabled = true;
+    }
 </script>

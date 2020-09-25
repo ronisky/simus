@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Kunjungan Musuem (Ditolak)</h3>
+                            <h3 class="card-title">Reservasi Kunjungan Museum (Ditolak)</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
@@ -46,7 +46,7 @@
                                         <tr>
                                             <td><?= $no; ?></td>
                                             <td>
-                                                <a class='dropdown-item text-warning' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi_ditolak/') . $row['id_reservasi']; ?>'><i class='fas fa-sign-in-alt fa-fw'></i>Terima?</a>
+                                                <a class='dropdown-item text-warning' title='Terima' href='<?php echo site_url('resepsionis/terima_reservasi_ditolak/') . encrypt_url($row['id_reservasi']); ?>'><i class='fas fa-sign-in-alt fa-fw'></i>Terima?</a>
 
                                             </td>
 

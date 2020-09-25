@@ -387,6 +387,7 @@ class Resepsionis extends CI_Controller
             if ($status != 3) {
                 $data = [
                     'status'     => 3,
+                    'status_notif' => 0,
                     'keterangan' => $ket
                 ];
                 $where = array('id_reservasi' => $id);
@@ -429,7 +430,7 @@ class Resepsionis extends CI_Controller
     function terima_reservasi()
     {
 
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
 
             $id         = htmlspecialchars($this->input->post('id'));
@@ -444,7 +445,8 @@ class Resepsionis extends CI_Controller
             $timestart  = "$tanggal $waktustart";
             $timeend    = "$tanggal $waktuend";
             $data = [
-                'status'   => 2
+                'status'   => 2,
+                'status_notif' => 0
             ];
 
             $jadwal = [
@@ -495,7 +497,7 @@ class Resepsionis extends CI_Controller
     function terima_reservasi_ditolak()
     {
 
-        $id = $this->uri->segment(3);
+        $id = decrypt_url($this->uri->segment(3));
         if (isset($_POST['submit'])) {
 
             $id         = htmlspecialchars($this->input->post('id'));
@@ -587,7 +589,7 @@ class Resepsionis extends CI_Controller
 
     public function hapus_notif($id)
     {
-        $this->model_app->hapus_reservasi_notif($id);
+        // $this->model_app->hapus_reservasi_notif($id);
         redirect('resepsionis/reservasi');
     }
 

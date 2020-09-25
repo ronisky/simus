@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reservasi Kunjungan Musuem (Diterima)</h3>
+                            <h3 class="card-title">Reservasi Kunjungan Museum (Diterima)</h3>
                         </div>
                         <div class="col-md-12 mt-3 mx-3">
                         </div>
